@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/Hiredmaid_page.dart';
+
 class MaidDetail extends StatefulWidget {
   const MaidDetail({Key? key}) : super(key: key);
 
@@ -28,12 +30,12 @@ class _MaidDetailState extends State<MaidDetail> {
         child: Row(
           children: <Widget>[
             Align(
-              alignment: Alignment.topLeft, 
+              alignment: Alignment.topLeft,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(
                   Icons.person,
-                  size: 48, // ขนาดไปคอน
+                  size: 48, // ขนาดไอคอน
                 ),
               ),
             ),
@@ -53,13 +55,16 @@ class _MaidDetailState extends State<MaidDetail> {
               ),
             ),
             Align(
-              alignment:
-                  Alignment.bottomRight, 
+              alignment: Alignment.bottomRight,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => HiredMaidPage(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green,
