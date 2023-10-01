@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../screensMaid/Maid_Edit_Profile.dart';
+
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,14 @@ class SettingsPage extends StatelessWidget {
           ),
           Divider(height: 50),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        EditPage()), // Navigate to the EditPage
+              );
+            },
             leading: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(

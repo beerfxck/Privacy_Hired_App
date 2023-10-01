@@ -4,40 +4,46 @@ class UserDetailForHired extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment:
-          CrossAxisAlignment.start, // A
+      crossAxisAlignment: CrossAxisAlignment.start, // A
       children: [
         Text(
-          'รายละเอียดลูกบ้าน',
+          'รายละเอียดทำความสะอาด',
           style: TextStyle(
-            fontSize: 18,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.vertical, 
-          child: Column(
-            crossAxisAlignment:
-                CrossAxisAlignment.start, 
-            children: [
-              Text(
-                'หมายเลขห้อง : 123/1',
-                textAlign: TextAlign.left, 
+        SizedBox(height: 7),
+        ListView(
+          shrinkWrap:
+              true, // To make the ListView take only the required height
+          physics: NeverScrollableScrollPhysics(), // Disable ListView scrolling
+          children: [
+            Text(
+              'หมายเลขห้อง : 123/1',
+              style: TextStyle(
+                fontSize: 18,
               ),
-              Text(
-                'หมายเลขห้อง : 123/2',
-                textAlign: TextAlign.left, 
+            ),
+            Text(
+              'ขนาดห้อง : 26-28 ตารางเมตร',
+              style: TextStyle(
+                fontSize: 18,
               ),
-              Text(
-                'หมายเลขห้อง : 123/3',
-                textAlign: TextAlign.left, 
+            ),
+            Text(
+              'ชื่อเจ้าของห้อง : นางลูกบ้าน เช่าอยู่',
+              style: TextStyle(
+                fontSize: 18,
               ),
-              Text(
-                'หมายเลขห้อง : 123/4',
-                textAlign: TextAlign.left, 
+            ),
+            Text(
+              'เบอร์โทรศัพท์ : 0887658874',
+              style: TextStyle(
+                fontSize: 18,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );

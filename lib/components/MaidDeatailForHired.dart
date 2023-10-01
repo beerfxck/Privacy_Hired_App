@@ -15,7 +15,7 @@ class MaidDetailForHired extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(
                   Icons.person,
-                  size: 48, // ขนาดไอคอน
+                  size: 20, // ขนาดไอคอน
                 ),
               ),
             ),
