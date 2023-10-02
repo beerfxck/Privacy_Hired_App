@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +12,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final dio = Dio();
+  Login()async {
+    if(usernameController.text.isNotEmpty && passwordController.text.isNotEmpty){
+      Response  response = await dio.post('/test', data: {'username': usernameController.text, 'password': passwordController.text});
+      print(response);
+    }
+  }
   bool passToggle = true;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -104,16 +114,9 @@ class _LoginPageState extends State<LoginPage> {
                             .grey, //สีตอนไม่ใส่ยูสแนมพาสเวิร์ด
                     borderRadius: BorderRadius.circular(14),
                     child: InkWell(
-                      onTap: isLoginEnabled
-                          ? () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => NavigatorBar(),
-                                ),
-                              );
-                            }
-                          : null, 
+                      onTap: () {
+                        Login();
+                      },
                       child: Padding(
                         padding:
                             EdgeInsets.symmetric(vertical: 15, horizontal: 40),
