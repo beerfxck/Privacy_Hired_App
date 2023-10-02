@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:privacy_maid_flutter/components/Complete.dart';
 
 class ServiceConditionsComponent extends StatelessWidget {
   @override
@@ -86,18 +87,24 @@ class ServiceConditionsComponent extends StatelessWidget {
             CenteredText('- หากแม่บ้านก่อให้เกิดความเสียหายในทรัพย์สิน'),
             CenteredText('- ของลูกบ้าน ลูกบ้านจะต้องแจ้งปัญหาให้กับทางคอนโด'),
             CenteredText('- พร้อมเก็บหลักฐาน ภายใน 24 ชั่วโมง'),
-            CenteredText(
-                '- โดยลูกบ้านสามารถกดแจ้งปัญหาหลังจากเสร็จสิ้นการจองคิวทำความสะอาดแล้ว'),
+            Center(
+              child: Text(
+                '- โดยลูกบ้านสามารถกดแจ้งปัญหาหลังจากเสร็จสิ้นการจองคิวทำความสะอาดแล้ว',
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            ),
             SizedBox(height: 27),
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => ServiceConditionsComponent(),
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CompletePage(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors

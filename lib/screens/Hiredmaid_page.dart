@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:privacy_maid_flutter/components/Time.dart';
 
 import '../components/MaidDeatailForHired.dart';
 import '../components/Terms_of_service.dart';
@@ -28,15 +29,13 @@ class _HomePageState extends State<HiredMaidPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin:
-              EdgeInsets.all(10), // Margin to add spacing around the content
-          padding:
-              EdgeInsets.all(10), // Padding to add spacing within the container
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Colors.white, // Set the background color to white
-            borderRadius: BorderRadius.circular(10.0), // Add rounded corners
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10.0),
             border: Border.all(
-              color: Colors.grey, // Border color
+              color: Colors.grey,
             ),
             boxShadow: [
               BoxShadow(
@@ -50,6 +49,10 @@ class _HomePageState extends State<HiredMaidPage> {
           child: Column(
             children: <Widget>[
               MaidDetailForHired(),
+              Divider(
+                color: Colors.black,
+                thickness: 1,
+              ),
               Text(
                 'รายละเอียดการจอง',
                 style: TextStyle(
@@ -57,20 +60,20 @@ class _HomePageState extends State<HiredMaidPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              Divider(
+                color: Colors.black,
+                thickness: 1,
+              ),
               SizedBox(
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                    left:
-                        40.0), // Add left padding to move content to the right
+                padding: const EdgeInsets.only(left: 40.0),
                 child: Align(
-                  alignment: Alignment
-                      .topLeft, // Align the following content to the left
+                  alignment: Alignment.topLeft,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment:
-                        CrossAxisAlignment.start, // Align children to the left
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       ElevatedButton(
                         onPressed: () {
@@ -88,11 +91,10 @@ class _HomePageState extends State<HiredMaidPage> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          primary:
-                              Colors.green, // Change the button color to green
+                          primary: Colors.green,
                         ),
                         child: Text(
-                          'กรุณาเลือกวันที่',
+                          'เลือกวันที่ ที่นี่',
                           style: TextStyle(
                             color: Colors.white,
                           ),
@@ -104,95 +106,7 @@ class _HomePageState extends State<HiredMaidPage> {
                         style: TextStyle(fontSize: 20),
                       ),
                       SizedBox(height: 20),
-                      Text(
-                        'เลือกจำนวนชั่วโมง',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 2), // Add horizontal spacing
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    selectedHours = 1;
-                                  });
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: selectedHours == 1
-                                      ? Colors.green
-                                      : Colors.grey,
-                                ),
-                                child: Text(
-                                  '1 ชั่วโมง',
-                                  style: TextStyle(
-                                    color: selectedHours == 1
-                                        ? Colors.white
-                                        : Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 30), // Add horizontal spacing
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    selectedHours = 2;
-                                  });
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: selectedHours == 2
-                                      ? Colors.green
-                                      : Colors.grey,
-                                ),
-                                child: Text(
-                                  '2 ชั่วโมง',
-                                  style: TextStyle(
-                                    color: selectedHours == 2
-                                        ? Colors.white
-                                        : Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 5), // Add horizontal spacing
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    selectedHours = 3;
-                                  });
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: selectedHours == 3
-                                      ? Colors.green
-                                      : Colors.grey,
-                                ),
-                                child: Text(
-                                  '3 ชั่วโมง',
-                                  style: TextStyle(
-                                    color: selectedHours == 3
-                                        ? Colors.white
-                                        : Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        'จำนวนที่เลือก: $selectedHours' + ' ชั่วโมง',
-                        style: TextStyle(fontSize: 18),
-                      ),
+                      HourSelection(),
                       SizedBox(height: 15),
                       UserDetailForHired(),
                       SizedBox(height: 30),
@@ -208,10 +122,8 @@ class _HomePageState extends State<HiredMaidPage> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors
-                                .green, // Set the button's background color to green
-                            minimumSize:
-                                Size(120, 40), // Set button size as needed
+                            primary: Colors.green,
+                            minimumSize: Size(120, 40),
                           ),
                           child: Text(
                             'ต่อไป',

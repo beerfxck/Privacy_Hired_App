@@ -76,6 +76,7 @@ class _MaidDetailState extends State<MaidDetail> {
           ],
         ),
       ),
+      
     );
   }
 }
