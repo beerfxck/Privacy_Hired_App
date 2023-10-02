@@ -7,6 +7,9 @@ import 'package:privacy_maid_flutter/screens/Home_page.dart';
 import 'package:privacy_maid_flutter/screens/Menubar.dart';
 import '../constant/domain.dart';
 import '../widgets/navigatorbar.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:privacy_maid_flutter/components/checkbox.dart';
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -57,6 +60,7 @@ GotoHome() {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -65,46 +69,35 @@ GotoHome() {
         child: SafeArea(
           child: Column(
             children: [
-              SizedBox(height: 170),
-              Text(
-                'The',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+              SizedBox(
+                width: 300,
+                height: 350, 
+                child: ClipRRect(
+                  child: Image(image: AssetImage('images/logo_maid.png')),
                 ),
               ),
-              Text(
-                'Privacy',
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
-                ),
-              ),
-              Text(
-                'Taopoon',
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 15),
+              
               Padding(
-                padding: EdgeInsets.all(12),
+                padding: EdgeInsets.all(25),
                 child: TextField(
                   controller: usernameController,
                   onChanged: (value) {
                     checkLoginEnable();
                   },
+
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    label: Text('ชื่อผู้ใช้'),
-                    prefixIcon: Icon(Icons.person),
+                    label: Text('ชื่อผู้ใช้',
+                    style: GoogleFonts.kanit(
+                      fontSize: 18, color: Colors.grey,
+                    ),   
+                  ),
+                    prefixIcon: Icon(Icons.person_rounded),
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(12),
+                padding: EdgeInsets.all(25),
                 child: TextField(
                   controller: passwordController,
                   obscureText: passToggle ? true : false,
@@ -113,8 +106,10 @@ GotoHome() {
                   },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    label: Text('รหัสผ่าน'),
-                    prefixIcon: Icon(Icons.lock),
+                    label: Text('รหัสผ่าน',
+                    style: GoogleFonts.kanit(
+                      fontSize: 18, color: Colors.grey)),
+                    prefixIcon: Icon(Icons.lock_rounded),
                     suffixIcon: InkWell(
                       onTap: () {
                         setState(() {
@@ -127,18 +122,17 @@ GotoHome() {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 15),
+                ),
+              SizedBox(height: 5),
               Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(12),
                 child: SizedBox(
-                  width: double.infinity,
+                  width: 250,
                   child: Material(
                     color: isLoginEnabled
                         ? Color.fromARGB(255, 11, 143, 11)
-                        : Colors
-                            .grey, //สีตอนไม่ใส่ยูสแนมพาสเวิร์ด
-                    borderRadius: BorderRadius.circular(14),
+                        : Colors.grey, //สีตอนไม่ใส่ยูสแนมพาสเวิร์ด
+                    borderRadius: BorderRadius.circular(10),
                     child: InkWell(
                       onTap: () {
                         Login();
@@ -149,10 +143,10 @@ GotoHome() {
                         child: Center(
                           child: Text(
                             "ลงชื่อเข้าใช้",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                            style: GoogleFonts.kanit(
+                              textStyle: TextStyle(color: Colors.white),
+                              fontSize: 18,
+                              //fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -161,15 +155,15 @@ GotoHome() {
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     '** หากยังไม่มีชื่อผู้ใช้และรหัสผ่านโปรดติดต่อขอรับที่นิติบุคคล **',
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color: Colors.blueGrey),
+                    ),   
                   ),
                 ],
               ),

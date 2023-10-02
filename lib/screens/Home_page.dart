@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-
 import '../components/Maid_Detail.dart';
 import '../widgets/Upcoming_schedule.dart';
 
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
-class HomePage extends StatelessWidget {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,10 +50,6 @@ class HomePage extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              MaidDetail(),
-              MaidDetail(),
-              MaidDetail(),
-              MaidDetail(),
               MaidDetail(),
             ],
           ),
