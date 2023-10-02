@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UpcomingSchedule extends StatelessWidget {
   @override
@@ -27,27 +28,32 @@ class UpcomingSchedule extends StatelessWidget {
               child: Column(
                 children: [
                   ListTile(
+                    contentPadding: EdgeInsets.only(top: 10, left: 15),
                     title: Text(
-                      "แม่บ้ากำลังทำ อย่าขัด",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                      "แม่บ้านกำลังทำความสะอาด",
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.black),
+                        fontSize: 16,
                       ),
                     ),
-                    trailing: CircleAvatar(
-                      radius: 25,
-                      child: Icon(
-                        Icons.person,
-                        color:
-                            Colors.white, // You can adjust the color as needed
+                    trailing: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: CircleAvatar(
+                        radius: 25,
+                        backgroundColor: Colors.lightGreen,
+                        child: Icon(
+                          Icons.cleaning_services_rounded,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Divider(
-                      color: Colors.black,
+                      //color: Colors.black,
                       thickness: 1,
-                      height: 20,
+                      //height: 20,
                     ),
                   ),
                   Row(

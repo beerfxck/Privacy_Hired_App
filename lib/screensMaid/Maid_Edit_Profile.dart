@@ -10,7 +10,7 @@ class _EditPageState extends State<EditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('แก้ไขโปรไฟล์'),
+        title: Text('แก้ไขโปรไฟล์'),
         toolbarHeight: 80,
         elevation: 0,
         backgroundColor: Colors.white,

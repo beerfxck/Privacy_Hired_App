@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomCheckbox extends StatefulWidget {
   final String option1Text;
   final String option2Text;
   final Function(bool) onChanged;
 
-  CustomCheckbox({required this.option1Text, required this.option2Text, required this.onChanged});
+  CustomCheckbox(
+      {required this.option1Text,
+      required this.option2Text,
+      required this.onChanged});
 
   @override
   _CustomCheckboxState createState() => _CustomCheckboxState();
@@ -37,7 +41,7 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
                       color: Colors.grey,
                     ),
               SizedBox(width: 5),
-              Text(widget.option1Text),
+              Text(widget.option1Text,style: GoogleFonts.kanit(fontSize: 16)),
             ],
           ),
         ),
@@ -49,21 +53,19 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
               widget.onChanged(isChecked);
             });
           },
-          child: Row(
-            children: [
-              !isChecked
-                  ? Icon(
-                      Icons.check_box,
-                      color: Colors.green,
-                    )
-                  : Icon(
-                      Icons.check_box_outline_blank,
-                      color: Colors.grey,
-                    ),
-              SizedBox(width: 5),
-              Text(widget.option2Text),
-            ],
-          ),
+          child: Row(children: [
+            !isChecked
+                ? Icon(
+                    Icons.check_box,
+                    color: Colors.green,
+                  )
+                : Icon(
+                    Icons.check_box_outline_blank,
+                    color: Colors.grey,
+                  ),
+            SizedBox(width: 5),
+            Text(widget.option2Text, style: GoogleFonts.kanit(fontSize: 16)),
+          ]),
         ),
       ],
     );
