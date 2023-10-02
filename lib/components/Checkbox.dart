@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomCheckbox extends StatefulWidget {
-  final String resident;
-  final String maid;
+  final String option1Text;
+  final String option2Text;
   final Function(bool) onChanged;
 
-  CustomCheckbox({required this.resident, required this.maid, required this.onChanged});
+  CustomCheckbox({required this.option1Text, required this.option2Text, required this.onChanged});
 
   @override
-, required String maid, required String resident, required String resident  _CustomCheckboxState createState() => _CustomCheckboxState();
+  _CustomCheckboxState createState() => _CustomCheckboxState();
 }
 
 class _CustomCheckboxState extends State<CustomCheckbox> {
@@ -30,14 +30,14 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
               isChecked
                   ? Icon(
                       Icons.check_box,
-                      color: Colors.blue,
+                      color: Colors.green,
                     )
                   : Icon(
                       Icons.check_box_outline_blank,
                       color: Colors.grey,
                     ),
               SizedBox(width: 5),
-              Text(widget.resident),
+              Text(widget.option1Text),
             ],
           ),
         ),
@@ -54,14 +54,14 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
               !isChecked
                   ? Icon(
                       Icons.check_box,
-                      color: Colors.blue,
+                      color: Colors.green,
                     )
                   : Icon(
                       Icons.check_box_outline_blank,
                       color: Colors.grey,
                     ),
               SizedBox(width: 5),
-              Text(widget.maid),
+              Text(widget.option2Text),
             ],
           ),
         ),

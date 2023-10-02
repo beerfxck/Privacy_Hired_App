@@ -71,7 +71,7 @@ GotoHome() {
             children: [
               SizedBox(
                 width: 300,
-                height: 350, 
+                height: 250, 
                 child: ClipRRect(
                   child: Image(image: AssetImage('images/logo_maid.png')),
                 ),
@@ -123,6 +123,12 @@ GotoHome() {
                   ),
                 ),
                 ),
+                CustomCheckbox(
+                  option1Text: 'แม่บ้าน',
+                  option2Text: 'ลูกบ้าน',
+                  onChanged: (isChecked) {
+                },
+              ),
               SizedBox(height: 5),
               Padding(
                 padding: const EdgeInsets.all(12),
