@@ -37,13 +37,8 @@ class EditPage extends StatelessWidget {
                 child: OutlinedButton.icon(onPressed: (){
                   debugPrint('Received click');},
                   icon: (Icon(Icons.draw)), 
-                  label: Text('แก้ไขโปรไฟล์',style: TextStyle(color: Color.fromARGB(255, 128, 8, 108)),),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.all(10.0),
-                    elevation: 1,
-                    backgroundColor: Colors.white,
-                    side: const BorderSide(color: Color.fromRGBO(25, 73, 216, 1), width: 2),
-                  ),
+                  label: Text('แก้ไขโปรไฟล์',style: TextStyle(color: Color.fromRGBO(25, 73, 216, 1),),
+                  )
                 ),
               )
             ]

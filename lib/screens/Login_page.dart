@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:privacy_maid_flutter/screens/Home_page.dart';
+import 'package:privacy_maid_flutter/screens/Menubar.dart';
+import '../constant/domain.dart';
 import '../widgets/navigatorbar.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,11 +15,35 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final dio = Dio();
-  Login()async {
-    if(usernameController.text.isNotEmpty && passwordController.text.isNotEmpty){
-      Response  response = await dio.post('/test', data: {'username': usernameController.text, 'password': passwordController.text});
+  Login() async {
+  try {
+    if (usernameController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      Response response = await dio.post(
+        url_api + '/auth/login',
+        data: {
+          'username': usernameController.text,
+          'password': passwordController.text,
+          'type_name': 'resident'
+        },
+      );
       print(response);
+      GotoHome();
+    } else {
+      print('Username or password is empty.');
     }
+  } catch (e) {
+    print('An error occurred during login: $e');
+  }
+}
+GotoHome() {
+    Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return NavigatorBar();
+        },
+      ),
+      (_) => false,
+    );
   }
   bool passToggle = true;
   TextEditingController usernameController = TextEditingController();

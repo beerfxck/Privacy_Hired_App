@@ -57,7 +57,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month),
+              icon: Icon(Icons.bathroom_rounded),
               label: 'Schedule',
             ),
             BottomNavigationBarItem(
