@@ -1,6 +1,6 @@
 class maidWork {
   int? idWorktime;
-  Null? status;
+  String? status;
   String? day;
   int? idTimeworktype;
   int? idUser;
@@ -8,9 +8,9 @@ class maidWork {
   String? fname;
   String? lname;
   String? phone;
-  Null? roomnumber;
-  Null? roomsize;
-  Null? maidRating;
+  String? roomnumber;
+  String? roomsize;
+  int? maidRating;
   String? password;
   String? idCard;
   int? age;
