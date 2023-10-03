@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return NavigationMenuBar();
+          return BottomNavBar();
         },
       ),
       (_) => false,

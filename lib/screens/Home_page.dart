@@ -9,16 +9,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 80,
+        toolbarHeight: 50,
         elevation: 0,
         backgroundColor: Color.fromARGB(217, 217, 217, 217),
-        leading: Container(
-          child: Image.asset('images/logo_maid.png'),
+        leading: Padding(
+          padding: EdgeInsets.only(left: 35.0),
+          child: Transform.scale(
+            scale: 3.5,
+            child: Image.asset('images/logo_maid.png'),
+          ),
         ),
       ),
       body: Container(
@@ -43,10 +46,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Text(
-                'กำลังดำเนินการ',
+                'การจองคิวล่าสุด',
                 style: GoogleFonts.kanit(
                   textStyle: TextStyle(color: Colors.black),
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: 20,
                 ),
               ),
@@ -56,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                 'แม่บ้านทั้งหมด',
                 style: GoogleFonts.kanit(
                   textStyle: TextStyle(color: Colors.black),
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: 20,
                 ),
               ),

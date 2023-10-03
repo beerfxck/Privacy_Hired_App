@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class UpcomingSchedule extends StatelessWidget {
+class UpcomingSchedule extends StatefulWidget {
+  @override
+  _UpcomingScheduleState createState() => _UpcomingScheduleState();
+}
+
+class _UpcomingScheduleState extends State<UpcomingSchedule> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal:1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 15),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 5),
+            padding: EdgeInsets.all(13), //ขนาดกล่อง
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 232, 241, 230),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black12,
-                  blurRadius: 4,
-                  spreadRadius: 2,
+                  blurRadius: 6,
+                  spreadRadius: 4,
                 ),
               ],
             ),
@@ -29,15 +34,15 @@ class UpcomingSchedule extends StatelessWidget {
                 children: [
                   ListTile(
                     contentPadding: EdgeInsets.only(top: 20, left: 17),
-                    title: Text(
+                    trailing: Text(
                       "แม่บ้านกำลังทำความสะอาด",
                       style: GoogleFonts.kanit(
                         textStyle: TextStyle(color: Colors.black),
                         fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
-                    trailing: Padding(
+                    title: Padding(
                       padding: EdgeInsets.all(5),
                       child: CircleAvatar(
                         radius: 30,

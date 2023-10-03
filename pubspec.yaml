@@ -43,6 +43,7 @@ dependencies:
   dio: ^5.3.3
   persistent_bottom_nav_bar: ^5.0.2
   google_fonts: ^4.0.4
+  curved_navigation_bar: ^1.0.3
 
 dev_dependencies:
   flutter_test:

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:privacy_maid_flutter/screens/Hiredmaid_page.dart';
 import 'package:privacy_maid_flutter/screens/Home_page.dart';
+import 'package:privacy_maid_flutter/screens/Schedule_Page.dart';
 import 'package:privacy_maid_flutter/screens/Setting_page.dart';
 
 class NavigationMenuBar extends StatefulWidget {
@@ -26,16 +27,16 @@ class _NavigationMenuBarState extends State<NavigationMenuBar> {
     return [
       PersistentBottomNavBarItem(
         inactiveColorSecondary: CupertinoColors.black,
-        icon: Icon(Icons.home_filled),
+        icon: Icon(Icons.home_rounded),
         title: ("หน้าหลัก"),
         activeColorPrimary: Colors.green,
         inactiveColorPrimary: Colors.blueGrey,
       ),
       PersistentBottomNavBarItem(
           inactiveColorSecondary: CupertinoColors.black,
-          icon: Icon(Icons.cleaning_services_outlined, color: Colors.green),
+          icon: Icon(Icons.cleaning_services_rounded),
           title: ("แม่บ้าน"),
-          activeColorPrimary: Color.fromARGB(255, 221, 255, 218),
+          activeColorPrimary: Colors.green,
           inactiveColorPrimary: Colors.blueGrey),
       PersistentBottomNavBarItem(
           inactiveColorSecondary: CupertinoColors.black,
@@ -48,7 +49,7 @@ class _NavigationMenuBarState extends State<NavigationMenuBar> {
   }
 
   List<Widget> _buildScreens() {
-    return [HomePage(), HiredMaidPage(), SettingsPage()];
+    return [HomePage(), SchedulePage(), SettingsPage()];
   }
   @override
   Widget build(BuildContext context) {
@@ -76,7 +77,7 @@ class _NavigationMenuBarState extends State<NavigationMenuBar> {
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.bottomRight,
-            colors: [Color.fromARGB(255, 221, 255, 218), Color.fromARGB(255, 230, 255, 224)], // พื้นหลังบาร์
+            colors: [Colors.white, Colors.white], // พื้นหลังบาร์
           )),
 
       popAllScreensOnTapOfSelectedTab: true,
@@ -91,7 +92,7 @@ class _NavigationMenuBarState extends State<NavigationMenuBar> {
         duration: Duration(milliseconds: 250),
       ),
       navBarStyle:
-          NavBarStyle.style15, // Choose the nav bar style with this property.
+          NavBarStyle.style13, // Choose the nav bar style with this property.
     );
   }
 }

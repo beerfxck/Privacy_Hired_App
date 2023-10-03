@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/Upcoming_schedule.dart';
 import '../widgets/Complete_schedule.dart';
 import '../widgets/Cancle_schedule.dart';
@@ -20,19 +21,32 @@ class _ScheduleState extends State<SchedulePage> {
   ];
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Padding(
-      padding: const EdgeInsets.only(top: 70),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Text(
-              "Schedule",
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w500,
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 50,
+        elevation: 0,
+        backgroundColor: Color.fromARGB(217, 217, 217, 217),
+        leading: Padding(
+          padding: EdgeInsets.only(left: 35.0),
+          child: Transform.scale(
+            scale: 3.5,
+            child: Image.asset('images/logo_maid.png'),
+          ),
+        ),
+      ),
+    body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                child: Text(
+                  "ประวัติการจอง",
+                  style: GoogleFonts.kanit(
+                    textStyle: TextStyle(color: Colors.black),
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
               ),
             ),
           ),
@@ -140,6 +154,7 @@ class _ScheduleState extends State<SchedulePage> {
           _scheduleWidgets[_buttonIndex],
         ],
       ),
-    ));
+    ),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:privacy_maid_flutter/screens/Home_page.dart';
 import 'package:privacy_maid_flutter/screens/Login_page.dart';
 import 'package:privacy_maid_flutter/widgets/navigatorbar.dart';
 
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       home: LoginPage(),
       routes: {
         '/login': (context) => LoginPage(),
+        '/BottomNavBar': (context) => BottomNavBar(),
       },
     );
   }

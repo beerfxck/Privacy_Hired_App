@@ -12,7 +12,7 @@ class CompletePage extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    NavigatorBar()), // Navigate to the EditPage
+                    BottomNavBar()), // Navigate to the EditPage
           );
         },
         child: Center(
