@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EditPage extends StatefulWidget {
   @override
@@ -32,29 +33,38 @@ class _EditPageState extends State<EditPage> {
                 ),
               ),
               const SizedBox(height: 10),
-              Text('หมายเลขห้อง 123/1', style: Theme.of(context).textTheme.headlineSmall),
-              Text('ขนาดห้อง 26-29 ตารางเมตร', style: Theme.of(context).textTheme.bodySmall),
-              const Divider(),
-              const SizedBox(height: 10),
+              Text('หมายเลขห้อง 123/1',
+                  style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color: Colors.black),
+                      fontSize: 22,
+                      fontWeight: FontWeight.w400)),
+              Text('ขนาดห้อง 26-29 ตารางเมตร',
+                  style: GoogleFonts.kanit(
+                    textStyle: TextStyle(color: Colors.black54),
+                    fontSize: 14,
+                  )),
+              Divider(),
+              SizedBox(height: 10),
               SizedBox(
                 width: 350,
                 child: OutlinedButton.icon(
                   onPressed: () {
                     debugPrint('Received click');
                   },
-                  icon: const Icon(Icons.draw),
+                  icon: const Icon(Icons.edit),
                   label: Text(
                     'แก้ไขข้อมูล',
-                    style: TextStyle(
-                      color: Color.fromRGBO(25, 73, 216, 1),
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color:Colors.white),
+                      fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
+            ]
               ),
-            ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

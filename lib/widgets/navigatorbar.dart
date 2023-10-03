@@ -53,7 +53,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
           },
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_filled),
+              icon: Icon(Icons.add),
               label: 'Home',
             ),
             BottomNavigationBarItem(

@@ -33,9 +33,9 @@ class _NavigationMenuBarState extends State<NavigationMenuBar> {
       ),
       PersistentBottomNavBarItem(
           inactiveColorSecondary: CupertinoColors.black,
-          icon: Icon(Icons.add),
+          icon: Icon(Icons.cleaning_services_outlined, color: Colors.green),
           title: ("แม่บ้าน"),
-          activeColorPrimary: Colors.green,
+          activeColorPrimary: Color.fromARGB(255, 221, 255, 218),
           inactiveColorPrimary: Colors.blueGrey),
       PersistentBottomNavBarItem(
           inactiveColorSecondary: CupertinoColors.black,
@@ -76,7 +76,7 @@ class _NavigationMenuBarState extends State<NavigationMenuBar> {
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.bottomRight,
-            colors: [Colors.white, Colors.white],
+            colors: [Color.fromARGB(255, 221, 255, 218), Color.fromARGB(255, 230, 255, 224)], // พื้นหลังบาร์
           )),
 
       popAllScreensOnTapOfSelectedTab: true,

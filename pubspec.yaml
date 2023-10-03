@@ -84,9 +84,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-  - family: Kanit-Regular
+  - family: Kanit
     fonts:
       - asset: font/Kanit-Regular.ttf
+  - family: NotoSansThai
+  
+  #fonts: 
+  #    - assets: font/NotoSansThai-Regular.ttf
 
   #   - family: Trajan Pro
   #     fonts:

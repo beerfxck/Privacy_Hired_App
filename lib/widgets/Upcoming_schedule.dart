@@ -28,21 +28,22 @@ class UpcomingSchedule extends StatelessWidget {
               child: Column(
                 children: [
                   ListTile(
-                    contentPadding: EdgeInsets.only(top: 10, left: 15),
+                    contentPadding: EdgeInsets.only(top: 20, left: 17),
                     title: Text(
                       "แม่บ้านกำลังทำความสะอาด",
                       style: GoogleFonts.kanit(
                         textStyle: TextStyle(color: Colors.black),
-                        fontSize: 16,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     trailing: Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(5),
                       child: CircleAvatar(
-                        radius: 25,
-                        backgroundColor: Colors.lightGreen,
+                        radius: 30,
+                        backgroundColor: Colors.blueGrey,
                         child: Icon(
-                          Icons.cleaning_services_rounded,
+                          Icons.work_history_rounded,
                           color: Colors.white,
                         ),
                       ),
@@ -68,8 +69,9 @@ class UpcomingSchedule extends StatelessWidget {
                           SizedBox(width: 5),
                           Text(
                             "27/09/2023",
-                            style: TextStyle(
-                              color: Colors.black54,
+                            style: GoogleFonts.kanit(
+                              textStyle: TextStyle(color: Colors.black54),
+                              fontSize: 14,
                             ),
                           ),
                         ],
@@ -83,8 +85,9 @@ class UpcomingSchedule extends StatelessWidget {
                           SizedBox(width: 5),
                           Text(
                             "16:30 AM",
-                            style: TextStyle(
-                              color: Colors.black54,
+                            style: GoogleFonts.kanit(
+                              textStyle: TextStyle(color: Colors.black54),
+                              fontSize: 14,
                             ),
                           ),
                         ],
@@ -101,8 +104,9 @@ class UpcomingSchedule extends StatelessWidget {
                           SizedBox(width: 5),
                           Text(
                             "ระหว่างทำ",
-                            style: TextStyle(
-                              color: Colors.black54,
+                            style: GoogleFonts.kanit(
+                              textStyle: TextStyle(color: Colors.black54),
+                              fontSize: 14,
                             ),
                           ),
                         ],
@@ -117,18 +121,20 @@ class UpcomingSchedule extends StatelessWidget {
                         onTap: () {},
                         child: Container(
                           width: 150,
-                          padding: EdgeInsets.symmetric(vertical: 12),
+                          height: 40,
+                          padding: EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 238, 3, 3),
-                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(255, 221, 2, 2),
+                            borderRadius: BorderRadius.circular(30),
                           ),
                           child: Center(
                             child: Text(
-                              "Cancel",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black54,
+                              "ยกเลิกการจอง",
+                              style: GoogleFonts.kanit(
+                                textStyle: TextStyle(color: Colors.black54),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -140,18 +146,20 @@ class UpcomingSchedule extends StatelessWidget {
                         },
                         child: Container(
                           width: 150,
-                          padding: EdgeInsets.symmetric(vertical: 12),
+                          height: 40,
+                          padding: EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 43, 223, 43),
-                            borderRadius: BorderRadius.circular(10),
+                            color: Color.fromARGB(255, 141, 141, 141),
+                            borderRadius: BorderRadius.circular(30),
                           ),
                           child: Center(
                             child: Text(
-                              "ดูรายละเอียด",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black54,
+                              "รายละเอียด",
+                              style: GoogleFonts.kanit(
+                                textStyle: TextStyle(color: Colors.black54),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
                               ),
                             ),
                           ),
