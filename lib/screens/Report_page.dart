@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:privacy_maid_flutter/components/Report.dart';
-import 'package:privacy_maid_flutter/components/Reportproblem.dart';
+
 
 class ReportPage extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class _ReportPageState extends State<ReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('แจ้งปัญหา')),
+        //title: Center(child: Text('แจ้งปัญหา')),
         backgroundColor: Color.fromARGB(243, 255, 255, 255),
         title: Padding(
             padding: const EdgeInsets.fromLTRB(94, 0, 0, 0),

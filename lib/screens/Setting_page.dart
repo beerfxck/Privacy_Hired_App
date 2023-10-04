@@ -74,12 +74,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             onTap: () {Navigator.pushNamed(context,
                   '/ReportPage'); },
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ReportPage()),
-              );
-            },
             leading: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
