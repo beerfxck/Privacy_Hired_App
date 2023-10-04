@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:privacy_maid_flutter/components/Report.dart';
+import 'package:privacy_maid_flutter/components/Reportproblem.dart';
 
 class ReportPage extends StatefulWidget {
   @override
@@ -13,6 +14,13 @@ class _ReportPageState extends State<ReportPage> {
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text('แจ้งปัญหา')),
+        backgroundColor: Color.fromARGB(243, 255, 255, 255),
+        title: Padding(
+            padding: const EdgeInsets.fromLTRB(94, 0, 0, 0),
+            child: Text(
+              'แจ้งปัญหา',
+              style: TextStyle(color: Colors.black),
+            )),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -40,6 +48,18 @@ class _ReportPageState extends State<ReportPage> {
                 ),
               ),
               SizedBox(height: 20),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 1,
+                  //height: 20,
+                ),
+              ),
+              SizedBox(height: 4),
               Padding(
                 padding: const EdgeInsets.fromLTRB(40, 20, 0, 0),
                 child: Text(
@@ -60,6 +80,18 @@ class _ReportPageState extends State<ReportPage> {
                 ),
               ),
               SizedBox(height: 40),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 1,
+                  //height: 20,
+                ),
+              ),
+              SizedBox(height: 20),
               ReportComponents(),
             ],
           ),
