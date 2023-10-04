@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:privacy_maid_flutter/screens/Report_page.dart';
 
 import '../screensMaid/Maid_Edit_Profile.dart';
 
@@ -71,7 +72,12 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           SizedBox(height: 20),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ReportPage()),
+              );
+            },
             leading: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
