@@ -36,14 +36,14 @@ class _EditPageState extends State<EditPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(0.0),
+          padding: EdgeInsets.all(0.0),
           child: Column(children: [
             SizedBox(
               width: 120,
               height: 150,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                child: const Image(image: AssetImage('images/user3.png')),
+                child: Image(image: AssetImage('images/user3.png')),
               ),
             ),
             SizedBox(height: 5),

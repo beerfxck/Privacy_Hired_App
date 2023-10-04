@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         toolbarHeight: 50,
         elevation: 0,
-        backgroundColor: Color.fromARGB(217, 217, 217, 217),
+        backgroundColor: Color.fromARGB(217, 255, 255, 255),
         leading: Padding(
           padding: EdgeInsets.only(left: 35.0),
           child: Transform.scale(

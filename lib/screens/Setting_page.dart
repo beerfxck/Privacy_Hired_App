@@ -71,7 +71,8 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           SizedBox(height: 20),
           ListTile(
-            onTap: () {},
+            onTap: () {Navigator.pushNamed(context,
+                  '/ReportPage'); },
             leading: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -97,7 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(context,
-                  '/login'); // Replace '/login' with the route to your login page.
+                  '/login'); 
             },
             child: ListTile(
               leading: Container(

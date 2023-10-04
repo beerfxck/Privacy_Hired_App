@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:privacy_maid_flutter/screens/Home_page.dart';
 import 'package:privacy_maid_flutter/screens/Login_page.dart';
+import 'package:privacy_maid_flutter/screens/Report_page.dart';
 import 'package:privacy_maid_flutter/widgets/Upcoming_schedule.dart';
 import 'package:privacy_maid_flutter/widgets/navigatorbar.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => LoginPage(),
         '/BottomNavBar': (context) => BottomNavBar(),
-        //'/UpcomingSchedule': (context) => UpcomingSchedule(),
+        '/ReportPage': (context) => ReportPage(),
       },
     );
   }
