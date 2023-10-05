@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/Complete.dart';
 
 class ServiceConditionsComponent extends StatelessWidget {
@@ -7,10 +8,22 @@ class ServiceConditionsComponent extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Center(
-          child: Text(
-            'จองคิวทำความสะอาด',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        toolbarHeight: 50,
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/HiredMaidPage');
+          },
+          icon: Icon(
+            Icons.arrow_back_rounded,
+            color: Colors.green,
+          ),
+        ),
+        title: Text(
+          'การจองคิวของคุณ',
+          style: GoogleFonts.kanit(
+            textStyle: TextStyle(color: Colors.black),
+            fontSize: 18,
           ),
         ),
       ),

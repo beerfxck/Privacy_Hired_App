@@ -114,9 +114,11 @@ class _MaidDetailState extends State<MaidDetail> {
                         },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.green,
+                          shape: StadiumBorder(),
+                          elevation: 3,
                         ),
                         child: Text(
-                          'ว่าง',
+                          'จอง',
                           style: GoogleFonts.kanit(
                             textStyle: TextStyle(color: Colors.white),
                             fontSize: 16,

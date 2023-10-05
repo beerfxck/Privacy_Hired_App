@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/widgets/navigatorbar.dart';
 
 class CompletePage extends StatelessWidget {
@@ -26,8 +27,8 @@ class CompletePage extends StatelessWidget {
               ),
               SizedBox(height: 20.0),
               Text(
-                'การจองเสร็จสิ้น !',
-                style: TextStyle(
+                'การชำระเงินเสร็จสิ้น !',
+                style: GoogleFonts.kanit(
                   color: Colors.white,
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
