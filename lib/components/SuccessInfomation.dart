@@ -6,14 +6,14 @@ import 'package:privacy_maid_flutter/components/MaidDeatailForHired.dart';
 import 'package:privacy_maid_flutter/components/TimeInfomation.dart';
 import 'package:privacy_maid_flutter/components/UserDeatailForHired.dart';
 
-class HiredInfomation extends StatefulWidget {
-  const HiredInfomation({super.key});
+class SuccessInfo extends StatefulWidget {
+  const SuccessInfo({super.key});
 
   @override
-  State<HiredInfomation> createState() => _HiredInfomationState();
+  State<SuccessInfo> createState() => _SuccessInfoState();
 }
 
-class _HiredInfomationState extends State<HiredInfomation> {
+class _SuccessInfoState extends State<SuccessInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,12 +102,24 @@ class _HiredInfomationState extends State<HiredInfomation> {
               ),
               Align(
                 alignment: Alignment.centerLeft,
+                child: Text(
+                  'ค่าบริการ : ' + '520 บาท',
+                  style: GoogleFonts.kanit(
+                    textStyle: TextStyle(color: Colors.black),
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
                 child: Center(
-                  child: Text(
-                    'ค่าบริการ : ' + '520 บาท',
-                    style: GoogleFonts.kanit(
-                      textStyle: TextStyle(color: Colors.black),
-                      fontSize: 20,
+                  child: Center(
+                    child: Text(
+                      'เสร้จสิ้นแล้ว',
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.green),
+                        fontSize: 22,
+                      ),
                     ),
                   ),
                 ),

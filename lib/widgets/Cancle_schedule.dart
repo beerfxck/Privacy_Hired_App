@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:privacy_maid_flutter/components/CancleInfomation.dart';
 
 class Cancle extends StatelessWidget {
   @override
@@ -108,7 +109,14 @@ class Cancle extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  CancleInfo(), // Make sure this is a valid widget
+                            ),
+                          );
+                        },
                         child: Container(
                           width: 150,
                           padding: EdgeInsets.symmetric(vertical: 12),
