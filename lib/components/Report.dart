@@ -14,9 +14,7 @@ class _ReportComponentsState extends State<ReportComponents> {
     super.dispose();
   }
 
-  void _handleSubmit() {
-    
-  }
+  void _handleSubmit() {}
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +41,9 @@ class _ReportComponentsState extends State<ReportComponents> {
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: _reportController,
-                maxLines: null, 
+                maxLines: null,
                 decoration: InputDecoration(
-                  hintText: 'Enter your report here',
+                  hintText: 'ปัญหาที่พบ',
                   border: InputBorder.none,
                 ),
               ),
@@ -55,7 +53,7 @@ class _ReportComponentsState extends State<ReportComponents> {
           ElevatedButton(
             onPressed: _handleSubmit,
             style: ElevatedButton.styleFrom(
-              primary: Colors.red, 
+              primary: Colors.red,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),

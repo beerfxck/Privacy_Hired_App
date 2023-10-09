@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserDetailForHired extends StatelessWidget {
   @override
@@ -21,25 +22,29 @@ class UserDetailForHired extends StatelessWidget {
           children: [
             Text(
               'หมายเลขห้อง : 123/1',
-              style: TextStyle(
+              style: GoogleFonts.kanit(
+                textStyle: TextStyle(color: Colors.black),
                 fontSize: 18,
               ),
             ),
             Text(
               'ขนาดห้อง : 26-28 ตารางเมตร',
-              style: TextStyle(
+              style: GoogleFonts.kanit(
+                textStyle: TextStyle(color: Colors.black),
                 fontSize: 18,
               ),
             ),
             Text(
               'ชื่อเจ้าของห้อง : นางลูกบ้าน เช่าอยู่',
-              style: TextStyle(
+              style: GoogleFonts.kanit(
+                textStyle: TextStyle(color: Colors.black),
                 fontSize: 18,
               ),
             ),
             Text(
               'เบอร์โทรศัพท์ : 0887658874',
-              style: TextStyle(
+              style: GoogleFonts.kanit(
+                textStyle: TextStyle(color: Colors.black),
                 fontSize: 18,
               ),
             ),

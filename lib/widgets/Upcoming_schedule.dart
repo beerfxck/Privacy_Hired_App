@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:privacy_maid_flutter/screens/HiredInfomation.dart';
 
 class UpcomingSchedule extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal:1),
+      padding: EdgeInsets.symmetric(horizontal: 1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -147,7 +148,12 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                       ),
                       InkWell(
                         onTap: () {
-                          // Handle 'Detail' button click
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  HiredInfomation(), // Make sure this is a valid widget
+                            ),
+                          );
                         },
                         child: Container(
                           width: 150,

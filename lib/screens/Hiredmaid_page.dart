@@ -176,7 +176,7 @@ class _HomePageState extends State<HiredMaidPage> {
                           //child: Icon(Icons.watch_later_rounded),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 8.0,bottom: 8),
+                          padding: const EdgeInsets.only(right: 8.0, bottom: 8),
                           child: Text(
                             'จำนวนชั่วโมง :',
                             style: GoogleFonts.kanit(
@@ -254,6 +254,7 @@ class _HomePageState extends State<HiredMaidPage> {
                   ],
                 ),
                 SizedBox(height: 10),
+                UserDetailForHired(),
                 MyWidget(),
               ],
             ),
