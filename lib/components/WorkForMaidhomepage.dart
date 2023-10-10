@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:privacy_maid_flutter/components/WorkInfoForMaid.dart';
 import 'package:privacy_maid_flutter/screens/HiredInfomation.dart';
 
 class WorkforMaid extends StatefulWidget {
@@ -113,7 +114,7 @@ class _WorkforMaidState extends State<WorkforMaid> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
-                                  HiredInfomation(), // Make sure this is a valid widget
+                                  WorkInfo(), // Make sure this is a valid widget
                             ),
                           );
                         },
