@@ -71,7 +71,7 @@ class _MaidDetailState extends State<MaidDetail> {
                       padding: EdgeInsets.all(8.0),
                       child: Icon(
                         Icons.person,
-                        size: 48, // ขนาดไอคอน
+                        size: 48, 
                       ),
                     ),
                   ),

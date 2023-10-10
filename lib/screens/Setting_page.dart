@@ -30,14 +30,14 @@ class _SettingsPageState extends State<SettingsPage> {
               radius: 30,
             ),
             title: Text(
-              "อยากให้โชว์ชื่อลูกบ้านถ้าทำได้อะนะ",
+              "ชื่อลูกบ้าน",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
             ),
             subtitle:
-                Text("ลูกบ้าน**โชว์ว่าเป็นแม่บ้านหรือลูกบ้านถ้าทำได้อะนะ"),
+                Text("ลูกบ้าน"),
           ),
           Divider(height: 50),
           ListTile(
@@ -46,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        EditPage()), // Navigate to the EditPage
+                        EditPage()),
               );
             },
             leading: Container(

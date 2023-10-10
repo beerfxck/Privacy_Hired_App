@@ -22,7 +22,7 @@ class _WorkforMaidState extends State<WorkforMaid> {
         children: [
           SizedBox(height: 15),
           Container(
-            padding: EdgeInsets.all(13), //ขนาดกล่อง
+            padding: EdgeInsets.all(13), 
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 232, 241, 230),
               borderRadius: BorderRadius.circular(15),
@@ -114,7 +114,7 @@ class _WorkforMaidState extends State<WorkforMaid> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
-                                  WorkInfo(), // Make sure this is a valid widget
+                                  WorkInfo(), 
                             ),
                           );
                         },

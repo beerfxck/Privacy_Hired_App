@@ -17,8 +17,8 @@ class UserDetailForHired extends StatelessWidget {
         SizedBox(height: 7),
         ListView(
           shrinkWrap:
-              true, // To make the ListView take only the required height
-          physics: NeverScrollableScrollPhysics(), // Disable ListView scrolling
+              true, 
+          physics: NeverScrollableScrollPhysics(), 
           children: [
             Text(
               'หมายเลขห้อง : 123/1',

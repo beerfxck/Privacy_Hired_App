@@ -70,14 +70,14 @@ class _NavigationMenuBarState extends State<NavigationMenuBar> {
               color: Colors.grey.withOpacity(0.4),
               spreadRadius: 5,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: Offset(0, 3), 
             ),
           ],
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.bottomRight,
-            colors: [Colors.white, Colors.white], // พื้นหลังบาร์
+            colors: [Colors.white, Colors.white], 
           )),
 
       popAllScreensOnTapOfSelectedTab: true,
@@ -92,7 +92,7 @@ class _NavigationMenuBarState extends State<NavigationMenuBar> {
         duration: Duration(milliseconds: 250),
       ),
       navBarStyle:
-          NavBarStyle.style13, // Choose the nav bar style with this property.
+          NavBarStyle.style13, 
     );
   }
 }

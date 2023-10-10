@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Container(
                 margin: EdgeInsets.symmetric(
-                    horizontal: 25.0), // Add margin as needed
+                    horizontal: 25.0), 
                 child: CustomCheckbox(
                   option1Text: 'แม่บ้าน',
                   option2Text: 'ผู้อยู่อาศัย',
