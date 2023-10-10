@@ -36,11 +36,9 @@ class _MaidDetailState extends State<MaidDetail> {
           maidWorklist = maidWorkList;
         });
       } else {
-        // Handle HTTP error
         print("HTTP Error: ${response.statusCode}");
       }
     } catch (e) {
-      // Handle Dio error or network error
       print("Error: $e");
     }
   }
@@ -52,7 +50,7 @@ class _MaidDetailState extends State<MaidDetail> {
         child: Column(
           children: maidWorklist.map((maidWork) {
             return Container(
-              padding: EdgeInsets.all(40), //ขนาดกล่อง
+              padding: EdgeInsets.all(40), 
               margin: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 color: Colors.white,
