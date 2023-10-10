@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/checkbox.dart';
 import 'package:privacy_maid_flutter/screens/Menubar.dart';
+import 'package:privacy_maid_flutter/screensMaid/MaidHome_page.dart';
 import 'package:privacy_maid_flutter/screensMaid/Maid_Edit_Profile.dart';
 import 'package:privacy_maid_flutter/widgets/navigatorbar.dart';
 
@@ -78,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return EditPage(); // แทนที่ด้วยหน้า MaidHome ของคุณ
+          return MaidHomePage(); // แทนที่ด้วยหน้า MaidHome ของคุณ
         },
       ),
       (_) => false,
@@ -174,11 +175,10 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                              color:
-                                  Colors.grey.withOpacity(0.5), 
-                              spreadRadius: 2, 
-                              blurRadius: 10, 
-                              offset: Offset(0, 3), 
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                              offset: Offset(0, 3),
                             ),
                           ],
                         ),
