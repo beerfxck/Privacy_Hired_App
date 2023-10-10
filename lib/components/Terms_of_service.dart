@@ -28,15 +28,13 @@ class ServiceConditionsComponent extends StatelessWidget {
         ),
       ),
       body: Container(
-        margin: EdgeInsets.all(
-            10), // Add margin to provide spacing around the content
-        padding: EdgeInsets.all(
-            16), // Add padding to provide spacing within the container
+        margin: EdgeInsets.all(10),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0), // Rounded corners
+          borderRadius: BorderRadius.circular(10.0),
           border: Border.all(
-            color: Colors.grey, // Border color
+            color: Colors.grey,
           ),
           boxShadow: [
             BoxShadow(
@@ -59,9 +57,7 @@ class ServiceConditionsComponent extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 8), // Add vertical spacing
-
-            // List of service conditions
+            SizedBox(height: 8),
             ServiceConditionItem('- การเรียกใช้บริการ 1 ครั้ง/แม่บ้าน 1 ท่าน'),
             ServiceConditionItem('- การเรียกใช้บริการ 1 ครั้ง/แม่บ้าน 1 ท่าน'),
             ServiceConditionItem(
@@ -70,9 +66,7 @@ class ServiceConditionsComponent extends StatelessWidget {
             ServiceConditionItem('- ปัดฝุ่น เช็ดฝุ่น จัดระเบียบสิ่งของ'),
             ServiceConditionItem('- กรณีเปลี่ยนผ้าปู ลูกบ้านต้องเตรียมไว้'),
             ServiceConditionItem('- ล้างแก้ว ถ้วย จาน ชาม ที่ใช้แล้ว'),
-
             SizedBox(height: 16),
-
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -93,10 +87,7 @@ class ServiceConditionsComponent extends StatelessWidget {
                 ],
               ),
             ),
-
             SizedBox(height: 8),
-
-            // Centered text
             CenteredText('- หากแม่บ้านก่อให้เกิดความเสียหายในทรัพย์สิน'),
             CenteredText('- ของลูกบ้าน ลูกบ้านจะต้องแจ้งปัญหาให้กับทางคอนโด'),
             CenteredText('- พร้อมเก็บหลักฐาน ภายใน 24 ชั่วโมง'),
@@ -120,9 +111,8 @@ class ServiceConditionsComponent extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors
-                      .green, // Set the button's background color to green
-                  minimumSize: Size(120, 40), // Set button size as needed
+                  primary: Colors.green,
+                  minimumSize: Size(120, 40),
                 ),
                 child: Text(
                   'จอง',
@@ -149,7 +139,7 @@ class ServiceConditionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 16), // Add left padding for indentation
+      padding: EdgeInsets.only(left: 16),
       child: Text(
         text,
         style: TextStyle(
