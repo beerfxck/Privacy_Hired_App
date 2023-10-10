@@ -25,7 +25,7 @@ class _MaidDetailState extends State<MaidDetail> {
 
   void getMaid() async {
     try {
-      Response response = await dio.get(url_api + '/maidwork/getwork');
+      Response response = await dio.get(url_api + '/user/get-maid');
       if (response.statusCode == 200) {
         List<dynamic> responseData = response.data;
         List<maidWork> maidWorkList = responseData
@@ -82,16 +82,21 @@ class _MaidDetailState extends State<MaidDetail> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          maidWork
-                              .fname!, // Use the appropriate property from maidWork
+                          'ชื่อ: ${maidWork.fname!}',
                           style: GoogleFonts.kanit(
                             textStyle: TextStyle(color: Colors.black54),
-                            fontSize: 18,
+                            fontSize: 16,
                           ),
                         ),
                         Text(
-                          maidWork
-                              .lname!, // Use the appropriate property from maidWork
+                          'นามสกุล: ${maidWork.lname!}',
+                          style: GoogleFonts.kanit(
+                            textStyle: TextStyle(color: Colors.black54),
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          'อายุ: ${maidWork.age!.toString()}', // ใช้ String interpolation เพื่อรวมข้อความ "อายุ:" และค่าของ maidWork.age ที่แปลงเป็น String
                           style: GoogleFonts.kanit(
                             textStyle: TextStyle(color: Colors.black54),
                             fontSize: 16,
