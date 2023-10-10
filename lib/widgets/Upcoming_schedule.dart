@@ -17,7 +17,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
         children: [
           SizedBox(height: 15),
           Container(
-            padding: EdgeInsets.all(13), //ขนาดกล่อง
+            padding: EdgeInsets.fromLTRB(3, 0, 3, 15),
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 232, 241, 230),
               borderRadius: BorderRadius.circular(15),
@@ -34,7 +34,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
               child: Column(
                 children: [
                   ListTile(
-                    contentPadding: EdgeInsets.only(top: 20, left: 17),
+                    contentPadding: EdgeInsets.only(top: 20, right: 17),
                     trailing: Text(
                       "แม่บ้านกำลังทำความสะอาด",
                       style: GoogleFonts.kanit(

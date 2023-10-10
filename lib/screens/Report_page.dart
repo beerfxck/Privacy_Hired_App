@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:privacy_maid_flutter/components/Report.dart';
 
-
 class ReportPage extends StatefulWidget {
   @override
   _ReportPageState createState() => _ReportPageState();
 }
 
 class _ReportPageState extends State<ReportPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +39,7 @@ class _ReportPageState extends State<ReportPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(80, 10, 0, 0),
                 child: Text(
-                  'งงงย ป่วยเป็นไร',
+                  'ลูกบ้าน มีปัญหา',
                   style: TextStyle(
                     fontSize: 18.0,
                   ),

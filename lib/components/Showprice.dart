@@ -4,7 +4,6 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/Terms_of_service.dart';
 
-
 class MyWidget extends StatefulWidget {
   const MyWidget({super.key});
 
@@ -17,14 +16,14 @@ class _MyWidgetState extends State<MyWidget> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        color: Colors.white, 
-        padding: EdgeInsets.all(16), 
+        color: Colors.white,
+        padding: EdgeInsets.all(16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'ค่าบริการ',
+              'ค่าบริการ' + '  520 บาท',
               style: GoogleFonts.kanit(
                 fontSize: 18,
                 color: Colors.black,
@@ -37,18 +36,19 @@ class _MyWidgetState extends State<MyWidget> {
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton.icon(
                 onPressed: () {
-                  Navigator.push(context,MaterialPageRoute(
-                    builder: (context) => ServiceConditionsComponent())
-                  );
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ServiceConditionsComponent()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                   shape: StadiumBorder(),
                   elevation: 10,
                 ),
-                icon: Icon(Icons.paid_outlined),
+                icon: Icon(Icons.trending_up_outlined),
                 label: Text(
-                  'ชำระเงิน',
+                  'ต่อไป',
                   style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.white),
                     fontSize: 16,
