@@ -96,7 +96,7 @@ class _MaidDetailState extends State<MaidDetail> {
                           ),
                         ),
                         Text(
-                          'อายุ: ${maidWork.age!.toString()}', // ใช้ String interpolation เพื่อรวมข้อความ "อายุ:" และค่าของ maidWork.age ที่แปลงเป็น String
+                          'อายุ: ${maidWork.age!.toString()}',
                           style: GoogleFonts.kanit(
                             textStyle: TextStyle(color: Colors.black54),
                             fontSize: 16,
