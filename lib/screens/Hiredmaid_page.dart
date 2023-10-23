@@ -1,15 +1,20 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:privacy_maid_flutter/components/Showprice.dart';
 import 'package:privacy_maid_flutter/components/Time.dart';
+import 'package:privacy_maid_flutter/constant/domain.dart';
+import 'package:privacy_maid_flutter/model/timeWork.dart';
 
 import '../components/MaidDeatailForHired.dart';
 import '../components/Terms_of_service.dart';
 import '../components/UserDeatailForHired.dart';
 
 class HiredMaidPage extends StatefulWidget {
+  final int id_user;
+  const HiredMaidPage({Key? key, required this.id_user}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -17,6 +22,34 @@ class HiredMaidPage extends StatefulWidget {
 class _HomePageState extends State<HiredMaidPage> {
   DateTime selectedDate = DateTime.now();
   int selectedHours = 1;
+  final dio = Dio();
+  List<TimeWork> maidWorklist = [];
+
+  @override
+  void initState() {
+    getMaidWork();
+    super.initState();
+  }
+
+  void getMaidWork() async {
+    try {
+      Response response = await dio.get(url_api + '/maidwork/getwork/' + widget.id_user.toString());
+      if (response.statusCode == 200) {
+        List<dynamic> responseData = response.data;
+        List<TimeWork> maidWorkList = responseData
+            .map((dynamic item) => TimeWork.fromJson(item))
+            .toList();
+
+        setState(() {
+          maidWorklist = maidWorkList;
+        });
+      } else {
+        print("HTTP Error: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,24 +144,6 @@ class _HomePageState extends State<HiredMaidPage> {
                             ),
                           ),
                         ),
-                        DropdownMenuItem<int>(
-                          value: 2,
-                          child: Text(
-                            '15 ต.ค. 2023',
-                            style: GoogleFonts.kanit(
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                        DropdownMenuItem<int>(
-                          value: 3,
-                          child: Text(
-                            '20 ต.ค. 2023',
-                            style: GoogleFonts.kanit(
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
                       ],
                       onChanged: (int? newValue) {
                         setState(() {
@@ -165,6 +180,7 @@ class _HomePageState extends State<HiredMaidPage> {
                     ),
                   ],
                 ),
+                
                 SizedBox(height: 10),
                 Column(
                   children: <Widget>[
@@ -263,4 +279,31 @@ class _HomePageState extends State<HiredMaidPage> {
       ),
     );
   }
+  List<DropdownMenuItem<int>> dropdownItems = worktimes!.map((worktime) {
+  return DropdownMenuItem<int>(
+    value: worktime['id_worktime'], // Use the appropriate value from your data
+    child: Text(
+      worktime['day'],
+      style: GoogleFonts.kanit(
+        fontSize: 16,
+      ),
+    ),
+  );
+}).toList();
+List<Map<String, dynamic>> worktimes = [
+  {
+    "id_worktime": 44,
+    "status": null,
+    "day": "2023-10-03T17:00:00.000Z",
+    "id_timeworktype": 1,
+    "id_user": 36
+  },
+  {
+    "id_worktime": 47,
+    "status": null,
+    "day": "2023-09-11T17:00:00.000Z",
+    "id_timeworktype": 2,
+    "id_user": 36
+  }
+];
 }

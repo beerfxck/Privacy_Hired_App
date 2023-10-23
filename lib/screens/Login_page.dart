@@ -35,17 +35,15 @@ class _LoginPageState extends State<LoginPage> {
     try {
       if (usernameController.text.isNotEmpty &&
           passwordController.text.isNotEmpty) {
-        String userType = isChecked
-            ? 'maid'
-            : 'resident'; // ใช้ isChecked เพื่อตรวจสอบประเภทของผู้ใช้
+        String userType = "";
         Response response = await dio.post(
           url_api + '/auth/login',
           data: {
             'username': usernameController.text,
             'password': passwordController.text,
-            'type_name': userType,
           },
         );
+        userType = response.data["type_name"];
         print(response);
 
         if (userType == 'resident') {
@@ -148,19 +146,6 @@ class _LoginPageState extends State<LoginPage> {
                           : Icon(CupertinoIcons.eye_fill),
                     ),
                   ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                    horizontal: 25.0), 
-                child: CustomCheckbox(
-                  option1Text: 'แม่บ้าน',
-                  option2Text: 'ผู้อยู่อาศัย',
-                  onChanged: (isChecked) {
-                    setState(() {
-                      this.isChecked = isChecked;
-                    });
-                  },
                 ),
               ),
               SizedBox(height: 15),

@@ -94,7 +94,7 @@ class _MaidDetailState extends State<MaidDetail> {
                           ),
                         ),
                         Text(
-                          'อายุ: ${maidWork.age!.toString()}',
+                          'อายุ: ${maidWork.birthday!.toString()}',
                           style: GoogleFonts.kanit(
                             textStyle: TextStyle(color: Colors.black54),
                             fontSize: 16,
@@ -111,7 +111,7 @@ class _MaidDetailState extends State<MaidDetail> {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => HiredMaidPage(),
+                              builder: (context) => HiredMaidPage(id_user: maidWork.idUser! ,),
                             ),
                           );
                         },

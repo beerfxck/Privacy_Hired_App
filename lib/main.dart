@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/BottomNavBar': (context) => BottomNavBar(),
         '/ReportPage': (context) => ReportPage(),
-        '/HiredMaidPage' : (context) => HiredMaidPage(),
       },
     );
   }

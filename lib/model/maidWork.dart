@@ -13,7 +13,7 @@ class maidWork {
   int? maidRating;
   String? password;
   String? idCard;
-  int? age;
+  int? birthday;
   String? address;
   int? typeId;
   int? idWorktimetype;
@@ -36,7 +36,7 @@ class maidWork {
       this.maidRating,
       this.password,
       this.idCard,
-      this.age,
+      this.birthday,
       this.address,
       this.typeId,
       this.idWorktimetype,
@@ -59,7 +59,7 @@ class maidWork {
     maidRating = json['maid_rating'];
     password = json['password'];
     idCard = json['id_card'];
-    age = json['age'];
+    birthday = json['birthday'];
     address = json['address'];
     typeId = json['type_id'];
     idWorktimetype = json['id_worktimetype'];
@@ -84,7 +84,7 @@ class maidWork {
     data['maid_rating'] = this.maidRating;
     data['password'] = this.password;
     data['id_card'] = this.idCard;
-    data['age'] = this.age;
+    data['birthday'] = this.birthday;
     data['address'] = this.address;
     data['type_id'] = this.typeId;
     data['id_worktimetype'] = this.idWorktimetype;
