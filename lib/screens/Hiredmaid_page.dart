@@ -7,6 +7,7 @@ import 'package:privacy_maid_flutter/components/Showprice.dart';
 import 'package:privacy_maid_flutter/components/Time.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
 import 'package:privacy_maid_flutter/model/timeWork.dart';
+import 'package:privacy_maid_flutter/components/Calendar.dart';
 
 import '../components/MaidDeatailForHired.dart';
 import '../components/Terms_of_service.dart';
@@ -33,7 +34,8 @@ class _HomePageState extends State<HiredMaidPage> {
 
   void getMaidWork() async {
     try {
-      Response response = await dio.get(url_api + '/maidwork/getwork/' + widget.id_user.toString());
+      Response response = await dio
+          .get(url_api + '/maidwork/getwork/' + widget.id_user.toString());
       if (response.statusCode == 200) {
         List<dynamic> responseData = response.data;
         List<TimeWork> maidWorkList = responseData
@@ -132,56 +134,12 @@ class _HomePageState extends State<HiredMaidPage> {
                         ),
                       ],
                     ),
-                    DropdownButtonFormField<int>(
-                      value: selectedHours,
-                      items: <DropdownMenuItem<int>>[
-                        DropdownMenuItem<int>(
-                          value: 1,
-                          child: Text(
-                            '10 ต.ค. 2023',
-                            style: GoogleFonts.kanit(
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ],
-                      onChanged: (int? newValue) {
-                        setState(() {
-                          selectedHours = newValue!;
-                        });
-                      },
-                      icon: Icon(Icons.calendar_month_outlined),
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey.shade300,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 12.0),
-                      ),
-                    ),
                   ],
                 ),
-                
-                SizedBox(height: 10),
+                DateSelectionComponent(),
+                SizedBox(
+                  height: 10,
+                ),
                 Column(
                   children: <Widget>[
                     Row(
@@ -279,31 +237,31 @@ class _HomePageState extends State<HiredMaidPage> {
       ),
     );
   }
-  List<DropdownMenuItem<int>> dropdownItems = worktimes!.map((worktime) {
-  return DropdownMenuItem<int>(
-    value: worktime['id_worktime'], // Use the appropriate value from your data
-    child: Text(
-      worktime['day'],
-      style: GoogleFonts.kanit(
-        fontSize: 16,
-      ),
-    ),
-  );
-}).toList();
-List<Map<String, dynamic>> worktimes = [
-  {
-    "id_worktime": 44,
-    "status": null,
-    "day": "2023-10-03T17:00:00.000Z",
-    "id_timeworktype": 1,
-    "id_user": 36
-  },
-  {
-    "id_worktime": 47,
-    "status": null,
-    "day": "2023-09-11T17:00:00.000Z",
-    "id_timeworktype": 2,
-    "id_user": 36
-  }
-];
+//   List<DropdownMenuItem<int>> dropdownItems = worktimes!.map((worktime) {
+//   return DropdownMenuItem<int>(
+//     value: worktime['id_worktime'], // Use the appropriate value from your data
+//     child: Text(
+//       worktime['day'],
+//       style: GoogleFonts.kanit(
+//         fontSize: 16,
+//       ),
+//     ),
+//   );
+// }).toList();
+// List<Map<String, dynamic>> worktimes = [
+//   {
+//     "id_worktime": 44,
+//     "status": null,
+//     "day": "2023-10-03T17:00:00.000Z",
+//     "id_timeworktype": 1,
+//     "id_user": 36
+//   },
+//   {
+//     "id_worktime": 47,
+//     "status": null,
+//     "day": "2023-09-11T17:00:00.000Z",
+//     "id_timeworktype": 2,
+//     "id_user": 36
+//   }
+// ];
 }
