@@ -8,6 +8,7 @@ import 'package:privacy_maid_flutter/screensMaid/MaidHome_page.dart';
 import 'package:privacy_maid_flutter/screensMaid/Maid_Edit_Profile.dart';
 import 'package:privacy_maid_flutter/widgets/navigatorbar.dart';
 
+import '../Widget_Maid/Maid_Navigatorbar.dart';
 import '../constant/domain.dart';
 
 class LoginPage extends StatefulWidget {
@@ -77,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return MaidHomePage(); // แทนที่ด้วยหน้า MaidHome ของคุณ
+          return MaidBottomNavBar(); // แทนที่ด้วยหน้า MaidHome ของคุณ
         },
       ),
       (_) => false,
