@@ -1,35 +1,30 @@
 class maidWork {
-  int? idWorktime;
-  String? status;
-  String? day;
-  int? idTimeworktype;
   int? idUser;
   String? username;
   String? fname;
   String? lname;
+  String? nickname;
+  String? profile;
   String? phone;
   String? roomnumber;
   String? roomsize;
-  int? maidRating;
+  double? maidRating;
   String? password;
   String? idCard;
-  int? birthday;
+  String? birthday;
   String? address;
   int? typeId;
-  int? idWorktimetype;
-  String? startWork;
-  String? endWork;
-  String? descriptionWork;
+  String? typeName;
+  String? typeDescription;
+  int? idType;
 
   maidWork(
-      {this.idWorktime,
-      this.status,
-      this.day,
-      this.idTimeworktype,
-      this.idUser,
+      {this.idUser,
       this.username,
       this.fname,
       this.lname,
+      this.nickname,
+      this.profile,
       this.phone,
       this.roomnumber,
       this.roomsize,
@@ -39,20 +34,17 @@ class maidWork {
       this.birthday,
       this.address,
       this.typeId,
-      this.idWorktimetype,
-      this.startWork,
-      this.endWork,
-      this.descriptionWork});
+      this.typeName,
+      this.typeDescription,
+      this.idType});
 
   maidWork.fromJson(Map<String, dynamic> json) {
-    idWorktime = json['id_worktime'];
-    status = json['status'];
-    day = json['day'];
-    idTimeworktype = json['id_timeworktype'];
     idUser = json['id_user'];
     username = json['username'];
     fname = json['fname'];
     lname = json['lname'];
+    nickname = json['nickname'];
+    profile = json['profile'];
     phone = json['phone'];
     roomnumber = json['roomnumber'];
     roomsize = json['roomsize'];
@@ -62,22 +54,19 @@ class maidWork {
     birthday = json['birthday'];
     address = json['address'];
     typeId = json['type_id'];
-    idWorktimetype = json['id_worktimetype'];
-    startWork = json['start_work'];
-    endWork = json['end_work'];
-    descriptionWork = json['description_work'];
+    typeName = json['type_name'];
+    typeDescription = json['type_description'];
+    idType = json['id_type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id_worktime'] = this.idWorktime;
-    data['status'] = this.status;
-    data['day'] = this.day;
-    data['id_timeworktype'] = this.idTimeworktype;
     data['id_user'] = this.idUser;
     data['username'] = this.username;
     data['fname'] = this.fname;
     data['lname'] = this.lname;
+    data['nickname'] = this.nickname;
+    data['profile'] = this.profile;
     data['phone'] = this.phone;
     data['roomnumber'] = this.roomnumber;
     data['roomsize'] = this.roomsize;
@@ -87,10 +76,9 @@ class maidWork {
     data['birthday'] = this.birthday;
     data['address'] = this.address;
     data['type_id'] = this.typeId;
-    data['id_worktimetype'] = this.idWorktimetype;
-    data['start_work'] = this.startWork;
-    data['end_work'] = this.endWork;
-    data['description_work'] = this.descriptionWork;
+    data['type_name'] = this.typeName;
+    data['type_description'] = this.typeDescription;
+    data['id_type'] = this.idType;
     return data;
   }
 }

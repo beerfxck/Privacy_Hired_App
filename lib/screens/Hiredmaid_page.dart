@@ -136,7 +136,7 @@ class _HomePageState extends State<HiredMaidPage> {
                     ),
                   ],
                 ),
-                DateSelectionComponent(),
+                DateSelectionComponent(id_user:widget.id_user),
                 SizedBox(
                   height: 10,
                 ),

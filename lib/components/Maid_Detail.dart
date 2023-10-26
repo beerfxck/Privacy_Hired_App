@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,7 +52,7 @@ class _MaidDetailState extends State<MaidDetail> {
         child: Column(
           children: maidWorklist.map((maidWork) {
             return Container(
-              padding: EdgeInsets.all(40), 
+              padding: EdgeInsets.all(40),
               margin: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -71,7 +73,7 @@ class _MaidDetailState extends State<MaidDetail> {
                       padding: EdgeInsets.all(8.0),
                       child: Icon(
                         Icons.person,
-                        size: 48, 
+                        size: 48,
                       ),
                     ),
                   ),
@@ -100,6 +102,13 @@ class _MaidDetailState extends State<MaidDetail> {
                             fontSize: 16,
                           ),
                         ),
+                        if (maidWork.profile !=
+                            null) // ตรวจสอบว่ามีรูปภาพหรือไม่
+                          Image.memory(
+                            base64Decode(maidWork.profile!),
+                            width: 200,
+                            height: 200,
+                          ),
                       ],
                     ),
                   ),
@@ -111,7 +120,9 @@ class _MaidDetailState extends State<MaidDetail> {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => HiredMaidPage(id_user: maidWork.idUser! ,),
+                              builder: (context) => HiredMaidPage(
+                                id_user: maidWork.idUser!,
+                              ),
                             ),
                           );
                         },
