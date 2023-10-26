@@ -1,15 +1,51 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:privacy_maid_flutter/constant/domain.dart';
+import 'package:privacy_maid_flutter/model/timeWork.dart';
 
 class DateSelectionComponent extends StatefulWidget {
+  // final int id_user;
+  // const DateSelectionComponent({Key? key, required this.id_user})
+      // : super(key: key);
   @override
   _DateSelectionComponentState createState() => _DateSelectionComponentState();
 }
 
 class _DateSelectionComponentState extends State<DateSelectionComponent> {
   DateTime selectedDate = DateTime.now();
+  // final dio = Dio();
+  // List<TimeWork> maidWorklist = [];
+
+  // @override
+  // void initState() {
+  //   getMaidWork();
+  //   super.initState();
+  // }
+
+  // void getMaidWork() async {
+  //   try {
+  //     Response response = await dio
+  //         .get(url_api + '/maidwork/getwork/' + widget.id_user.toString());
+  //     if (response.statusCode == 200) {
+  //       List<dynamic> responseData = response.data;
+  //       List<TimeWork> maidWorkList = responseData
+  //           .map((dynamic item) => TimeWork.fromJson(item))
+  //           .toList();
+
+  //       setState(() {
+  //         maidWorklist = maidWorkList;
+  //       });
+  //     } else {
+  //       print("HTTP Error: ${response.statusCode}");
+  //     }
+  //   } catch (e) {
+  //     print("Error: $e");
+  //   }
+  // }
 
   Future<void> _selectDate(BuildContext context) async {
+    // await getMaidWork();
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
