@@ -70,11 +70,17 @@ class _MaidDetailState extends State<MaidDetail> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.person,
-                        size: 48,
-                      ),
+                      padding: EdgeInsets.fromLTRB(0, 10, 17, 5),
+                      child: maidWork.profile != null
+                          ? Image.memory(
+                              base64Decode(maidWork.profile!),
+                              width: 60,
+                              height: 48,
+                            )
+                          : Icon(
+                              Icons.person,
+                              size: 48,
+                            ),
                     ),
                   ),
                   Expanded(
@@ -102,20 +108,13 @@ class _MaidDetailState extends State<MaidDetail> {
                             fontSize: 16,
                           ),
                         ),
-                        if (maidWork.profile !=
-                            null) // ตรวจสอบว่ามีรูปภาพหรือไม่
-                          Image.memory(
-                            base64Decode(maidWork.profile!),
-                            width: 200,
-                            height: 200,
-                          ),
                       ],
                     ),
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).push(
