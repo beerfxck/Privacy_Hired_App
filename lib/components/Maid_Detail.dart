@@ -74,8 +74,8 @@ class _MaidDetailState extends State<MaidDetail> {
                       child: maidWork.profile != null
                           ? Image.memory(
                               base64Decode(maidWork.profile!),
-                              width: 60,
-                              height: 48,
+                              width: 100,
+                              height: 95,
                             )
                           : Icon(
                               Icons.person,
@@ -102,7 +102,7 @@ class _MaidDetailState extends State<MaidDetail> {
                           ),
                         ),
                         Text(
-                          'อายุ: ${maidWork.birthday!.toString()}',
+                          'ชื่อเล่น: ${maidWork.nickname!.toString()}',
                           style: GoogleFonts.kanit(
                             textStyle: TextStyle(color: Colors.black54),
                             fontSize: 16,

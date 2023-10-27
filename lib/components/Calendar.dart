@@ -2,13 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
-import 'package:privacy_maid_flutter/model/timeWork.dart';
-import 'package:privacy_maid_flutter/widgets/calendarwidget.dart';
+import 'package:table_calendar/table_calendar.dart';
+
+import '../model/timeWork.dart';
 
 class DateSelectionComponent extends StatefulWidget {
   final int id_user;
   const DateSelectionComponent({Key? key, required this.id_user})
       : super(key: key);
+
   @override
   _DateSelectionComponentState createState() => _DateSelectionComponentState();
 }
@@ -17,6 +19,7 @@ class _DateSelectionComponentState extends State<DateSelectionComponent> {
   DateTime selectedDate = DateTime.now();
   final dio = Dio();
   List<TimeWork> maidWorklist = [];
+  Map<DateTime, List<TimeWork>> events = {};
 
   @override
   void initState() {
@@ -36,6 +39,14 @@ class _DateSelectionComponentState extends State<DateSelectionComponent> {
 
         setState(() {
           maidWorklist = maidWorkList;
+
+          // Update events based on maidWork data
+          events = Map.fromIterable(maidWorklist,
+              key: (e) {
+                final DateTime workDate = DateTime.parse(e.day!);
+                return DateTime(workDate.year, workDate.month, workDate.day);
+              },
+              value: (e) => [e]);
         });
       } else {
         print("HTTP Error: ${response.statusCode}");
@@ -64,13 +75,13 @@ class _DateSelectionComponentState extends State<DateSelectionComponent> {
   Widget build(BuildContext context) {
     String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
 
-    return GestureDetector(
-      onTap: () {
-        _selectDate(context);
-      },
-      child: Column(
-        children: [
-          Container(
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () {
+            _selectDate(context);
+          },
+          child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
@@ -88,12 +99,29 @@ class _DateSelectionComponentState extends State<DateSelectionComponent> {
               enabled: false,
             ),
           ),
-          CalendarWidget(
-            selectedDate: selectedDate, // ส่งวันที่ที่เลือก
-            maidWorklist: maidWorklist, // ส่งข้อมูล maidWork
-          ),
-        ],
-      ),
+        ),
+        TableCalendar(
+          firstDay: DateTime(2000),
+          lastDay: DateTime(2101),
+          focusedDay: selectedDate,
+          calendarFormat: CalendarFormat.month,
+          eventLoader: (day) {
+            final eventsOnDay = events[day];
+            return eventsOnDay ?? [];
+          },
+          onPageChanged: (date) {
+            setState(() {
+              selectedDate = date;
+            });
+          },
+          onDaySelected: (date, _) {
+            // Ignore the other parameters
+            setState(() {
+              selectedDate = date;
+            });
+          },
+        ),
+      ],
     );
   }
 }
