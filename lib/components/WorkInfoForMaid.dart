@@ -5,6 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/TimeInfomation.dart';
 import 'package:privacy_maid_flutter/components/User_NameAndTell.dart';
 
+import '../Widget_Maid/Maid_Navigatorbar.dart';
+import '../Widget_Maid/Work_process.dart';
+import '../screensMaid/Schedule_Maid.dart';
 import 'UserDeatailForHired.dart';
 
 class WorkInfo extends StatefulWidget {
@@ -118,9 +121,19 @@ class _WorkInfoState extends State<WorkInfo> {
               ),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MaidBottomNavBar(),
+                        settings: RouteSettings(
+                          arguments:
+                              1, // Set the current index to 1 (second page).
+                        ),
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.green, 
+                    primary: Colors.green,
                   ),
                   child: Text(
                     'เริ่มงาน',
