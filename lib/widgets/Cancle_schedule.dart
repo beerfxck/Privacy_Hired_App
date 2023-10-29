@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:privacy_maid_flutter/components/CancleInfomation.dart';
 
-class Cancle extends StatelessWidget {
+class Cancle extends StatefulWidget {
+  @override
+  _CancleState createState() => _CancleState();
+}
+
+class _CancleState extends State<Cancle> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -113,7 +118,7 @@ class Cancle extends StatelessWidget {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
-                                  CancleInfo(), // Make sure this is a valid widget
+                                  CancleInfo(),
                             ),
                           );
                         },
