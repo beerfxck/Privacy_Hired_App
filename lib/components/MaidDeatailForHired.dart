@@ -6,7 +6,8 @@ import 'package:privacy_maid_flutter/model/maidWork.dart';
 
 class MaidDetailForHired extends StatefulWidget {
   final int? id_user;
-  const MaidDetailForHired({Key? key, this.id_user}) : super(key: key);
+  final String? workday;
+  const MaidDetailForHired({Key? key, this.id_user, this.workday}) : super(key: key);
   @override
   _MaidDetailForHiredState createState() => _MaidDetailForHiredState();
 }
@@ -94,7 +95,7 @@ class _MaidDetailForHiredState extends State<MaidDetailForHired> {
                       ),
                     ),
                     Text(
-                      '0986787764',
+                      '${maidWork.phone!}',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
