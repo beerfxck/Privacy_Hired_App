@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:privacy_maid_flutter/components/SuccessInfomation.dart';
 
-class CompleteSchedule extends StatelessWidget {
+class CompleteSchedule extends StatefulWidget {
+  @override
+  _CompleteScheduleState createState() => _CompleteScheduleState();
+}
+
+class _CompleteScheduleState extends State<CompleteSchedule> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,8 +43,7 @@ class CompleteSchedule extends StatelessWidget {
                       radius: 25,
                       child: Icon(
                         Icons.person,
-                        color:
-                            Colors.white, // You can adjust the color as needed
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -109,11 +113,10 @@ class CompleteSchedule extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       InkWell(
-                       onTap: () {
+                        onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  SuccessInfo(), // Make sure this is a valid widget
+                              builder: (context) => SuccessInfo(),
                             ),
                           );
                         },

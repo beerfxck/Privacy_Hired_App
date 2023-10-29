@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Widget_Maid/Work_cancle.dart';
 import '../Widget_Maid/Work_complete.dart';
+import '../Widget_Maid/Work_process.dart';
 import '../widgets/Complete_schedule.dart';
 import '../widgets/Cancle_schedule.dart';
 
@@ -17,8 +18,9 @@ class _MaidScheduleState extends State<MaidSchedulePage> {
   int index = 0;
 
   final _scheduleWidgets = [
-    CompleteSchedule(),
-    Cancle(),
+    WorkProcessComponent(),
+    WorkCompleteComponent(),
+    WorkCancleComponent(),
   ];
 
   @override
@@ -39,6 +41,14 @@ class _MaidScheduleState extends State<MaidSchedulePage> {
       body: ContainedTabBarView(
         tabs: [
           Text(
+            'ดำเนินการ',
+            style: GoogleFonts.kanit(
+              textStyle: TextStyle(color: Colors.black),
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+            ),
+          ),
+          Text(
             'เสร็จสิ้น',
             style: GoogleFonts.kanit(
               textStyle: TextStyle(color: Colors.black),
@@ -56,6 +66,7 @@ class _MaidScheduleState extends State<MaidSchedulePage> {
           ),
         ],
         views: [
+          WorkProcessComponent(),
           WorkCompleteComponent(),
           WorkCancleComponent(),
         ],

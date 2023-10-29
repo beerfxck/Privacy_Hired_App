@@ -6,6 +6,7 @@ import 'package:privacy_maid_flutter/screens/Setting_page.dart';
 
 import '../screensMaid/MaidHome_page.dart';
 import '../screensMaid/Schedule_Maid.dart';
+import '../screensMaid/SettingForMaid.dart';
 
 void main() => runApp(MaterialApp(home: MaidBottomNavBar()));
 
@@ -69,7 +70,7 @@ class _MaidBottomNavBarState extends State<MaidBottomNavBar> {
         children: <Widget>[
           MaidHomePage(),
           MaidSchedulePage(),
-          SettingsPage(),
+          SettingsMaidPage(),
         ],
       ),
     );
