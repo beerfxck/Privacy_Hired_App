@@ -111,7 +111,7 @@ class _HomePageState extends State<HiredMaidPage> {
                     ),
                   ),
                 ),
-                MaidDetailForHired(id_user: widget.id_user),
+                MaidDetailForHired(),
                 Divider(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,33 +137,35 @@ class _HomePageState extends State<HiredMaidPage> {
                     ),
                   ],
                 ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  TableEventsExample(id_user: widget.id_user)),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.green,
-                        shape: StadiumBorder(),
-                        elevation: 3,
-                      ),
-                      child: Text(
-                        'จองคิว',
-                        style: GoogleFonts.kanit(
-                          textStyle: TextStyle(color: Colors.white),
-                          fontSize: 16,
+                Container(
+                  width: 240,
+                  height: 45,
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              TableEventsExample(id_user: widget.id_user),
                         ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: StadiumBorder(),
+                      elevation: 10,
+                    ),
+                    icon: Icon(Icons.calendar_month),
+                    label: Text(
+                      'จองคิว',
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.white),
+                        fontSize: 16,
                       ),
                     ),
                   ),
                 ),
+                // TableEventsExample(id_user:widget.id_user),
                 SizedBox(
                   height: 10,
                 ),
