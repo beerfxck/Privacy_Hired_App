@@ -1,30 +1,39 @@
+import 'dart:collection';
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
+import 'package:privacy_maid_flutter/model/timeWork.dart';
+import 'package:privacy_maid_flutter/screens/Hiredmaid_page.dart';
+import 'package:privacy_maid_flutter/widgets/utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../model/timeWork.dart';
-
-class DateSelectionComponent extends StatefulWidget {
-  final int id_user;
-  const DateSelectionComponent({Key? key, required this.id_user})
-      : super(key: key);
-
+class TableEventsExample extends StatefulWidget {
+  final int? id_user;
+  const TableEventsExample({Key? key, this.id_user}) : super(key: key);
   @override
-  _DateSelectionComponentState createState() => _DateSelectionComponentState();
+  _TableEventsExampleState createState() => _TableEventsExampleState();
 }
 
-class _DateSelectionComponentState extends State<DateSelectionComponent> {
-  DateTime selectedDate = DateTime.now();
+class _TableEventsExampleState extends State<TableEventsExample> {
+  late String eventJsonString;
+  late final ValueNotifier<List<Event>> _selectedEvents;
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode.toggledOff;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+  DateTime? _rangeStart;
+  DateTime? _rangeEnd;
   final dio = Dio();
   List<TimeWork> maidWorklist = [];
-  Map<DateTime, List<TimeWork>> events = {};
-
   @override
   void initState() {
-    getMaidWork();
     super.initState();
+    getMaidWork();
+    _selectedDay = _focusedDay;
+    _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+    
   }
 
   void getMaidWork() async {
@@ -32,22 +41,19 @@ class _DateSelectionComponentState extends State<DateSelectionComponent> {
       Response response = await dio
           .get(url_api + '/maidwork/getwork/' + widget.id_user.toString());
       if (response.statusCode == 200) {
-        List<dynamic> responseData = response.data;
-        List<TimeWork> maidWorkList = responseData
-            .map((dynamic item) => TimeWork.fromJson(item))
-            .toList();
-
+        String jsonString = jsonEncode(response.data);
+        eventJsonString = jsonString;
         setState(() {
-          maidWorklist = maidWorkList;
-
-          // Update events based on maidWork data
-          events = Map.fromIterable(maidWorklist,
-              key: (e) {
-                final DateTime workDate = DateTime.parse(e.day!);
-                return DateTime(workDate.year, workDate.month, workDate.day);
-              },
-              value: (e) => [e]);
+          updateEventSourceFromJson(_kEventSource, eventJsonString);
         });
+        // List<dynamic> responseData = response.data;
+        // List<TimeWork> maidWorkList = responseData
+        //     .map((dynamic item) => TimeWork.fromJson(item))
+        //     .toList();
+
+        // setState(() {
+        //   maidWorklist = maidWorkList;
+        // });
       } else {
         print("HTTP Error: ${response.statusCode}");
       }
@@ -56,72 +62,154 @@ class _DateSelectionComponentState extends State<DateSelectionComponent> {
     }
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    getMaidWork();
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
-    if (picked != null && picked != selectedDate) {
+  @override
+  void dispose() {
+    _selectedEvents.dispose();
+    super.dispose();
+  }
+
+  final kEventsNew = LinkedHashMap<DateTime, List<Event>>(
+    equals: isSameDay,
+    hashCode: getHashCode,
+  );
+
+  final _kEventSource = <DateTime, List<Event>>{};
+
+  void updateEventSourceFromJson(
+      Map<DateTime, List<Event>> _kEventSource, String jsonStr) {
+    final List<dynamic> jsonData = jsonDecode(jsonStr);
+    for (var item in jsonData) {
+      final DateTime day = DateTime.parse(item['day']);
+      final Event event = Event(item['day'], item['day'], item['start_work'],item['end_work']);
+      if (_kEventSource.containsKey(day)) {
+        _kEventSource[day]!.add(event);
+      } else {
+        _kEventSource[day] = [event];
+      }
+    }
+    kEventsNew.addAll(_kEventSource);
+  }
+
+  List<Event> _getEventsForDay(DateTime day) {
+    // Implementation example
+    print(kEventsNew[day] ?? []);
+    return kEventsNew[day] ?? [];
+  }
+
+  List<Event> _getEventsForRange(DateTime start, DateTime end) {
+    // Implementation example
+    final days = daysInRange(start, end);
+
+    return [
+      for (final d in days) ..._getEventsForDay(d),
+    ];
+  }
+
+  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+    if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() {
-        selectedDate = picked;
+        _selectedDay = selectedDay;
+        _focusedDay = focusedDay;
+        _rangeStart = null; // Important to clean those
+        _rangeEnd = null;
+        _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
+
+      _selectedEvents.value = _getEventsForDay(selectedDay);
+    }
+  }
+
+  void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
+    setState(() {
+      _selectedDay = null;
+      _focusedDay = focusedDay;
+      _rangeStart = start;
+      _rangeEnd = end;
+      _rangeSelectionMode = RangeSelectionMode.toggledOn;
+    });
+
+    // `start` or `end` could be null
+    if (start != null && end != null) {
+      _selectedEvents.value = _getEventsForRange(start, end);
+    } else if (start != null) {
+      _selectedEvents.value = _getEventsForDay(start);
+    } else if (end != null) {
+      _selectedEvents.value = _getEventsForDay(end);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
-
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            _selectDate(context);
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Color.fromARGB(255, 43, 45, 46),
-                width: 1.0,
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('ดูวันการจองคิวแม่บ้าน'),
+      ),
+      body: Column(
+        children: [
+          TableCalendar<Event>(
+            firstDay: kFirstDay,
+            lastDay: kLastDay,
+            focusedDay: _focusedDay,
+            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+            rangeStartDay: _rangeStart,
+            rangeEndDay: _rangeEnd,
+            calendarFormat: _calendarFormat,
+            rangeSelectionMode: _rangeSelectionMode,
+            eventLoader: _getEventsForDay,
+            startingDayOfWeek: StartingDayOfWeek.monday,
+            calendarStyle: CalendarStyle(
+              outsideDaysVisible: false,
             ),
-            child: TextFormField(
-              controller: TextEditingController(text: formattedDate),
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(10, 15, 0, 0),
-                suffixIcon: Icon(Icons.calendar_month),
-                border: InputBorder.none,
-              ),
-              enabled: false,
+            onDaySelected: _onDaySelected,
+            onRangeSelected: _onRangeSelected,
+            onFormatChanged: (format) {
+              if (_calendarFormat != format) {
+                setState(() {
+                  _calendarFormat = format;
+                });
+              }
+            },
+            onPageChanged: (focusedDay) {
+              _focusedDay = focusedDay;
+            },
+          ),
+          const SizedBox(height: 8.0),
+          Expanded(
+            child: ValueListenableBuilder<List<Event>>(
+              valueListenable: _selectedEvents,
+              builder: (context, value, _) {
+                return ListView.builder(
+                  itemCount: value.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 12.0,
+                        vertical: 4.0,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      child: ListTile(
+                        onTap: () => {
+                         Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => HiredMaidPage(workday:value[index].date)
+                          ),
+                        ),
+                          print('${value[index].title}'),
+                          print('${value[index].date}')
+                        },
+                        title: Text('เวลาเริ่มงาน: ${value[index].start} เวลาจบงาน: ${value[index].end}'),
+                      ),
+                    );
+                  },
+                );
+              },
             ),
           ),
-        ),
-        TableCalendar(
-          firstDay: DateTime(2000),
-          lastDay: DateTime(2101),
-          focusedDay: selectedDate,
-          calendarFormat: CalendarFormat.month,
-          eventLoader: (day) {
-            final eventsOnDay = events[day];
-            return eventsOnDay ?? [];
-          },
-          onPageChanged: (date) {
-            setState(() {
-              selectedDate = date;
-            });
-          },
-          onDaySelected: (date, _) {
-            // Ignore the other parameters
-            setState(() {
-              selectedDate = date;
-            });
-          },
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

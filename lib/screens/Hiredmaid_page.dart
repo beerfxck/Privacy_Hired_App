@@ -14,8 +14,9 @@ import '../components/Terms_of_service.dart';
 import '../components/UserDeatailForHired.dart';
 
 class HiredMaidPage extends StatefulWidget {
-  final int id_user;
-  const HiredMaidPage({Key? key, required this.id_user}) : super(key: key);
+  final int? id_user;
+  final String? workday;
+  const HiredMaidPage({Key? key, this.id_user, this.workday}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -136,7 +137,34 @@ class _HomePageState extends State<HiredMaidPage> {
                     ),
                   ],
                 ),
-                DateSelectionComponent(id_user:widget.id_user),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  TableEventsExample(id_user: widget.id_user)),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.green,
+                        shape: StadiumBorder(),
+                        elevation: 3,
+                      ),
+                      child: Text(
+                        'จองคิว',
+                        style: GoogleFonts.kanit(
+                          textStyle: TextStyle(color: Colors.white),
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                // TableEventsExample(id_user:widget.id_user),
                 SizedBox(
                   height: 10,
                 ),

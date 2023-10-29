@@ -49,8 +49,8 @@ class _LoginPageState extends State<LoginPage> {
         userType = response.data["type_name"];
         print(response);
         await storageToken.write(
-          key: 'username',
-          value: response.data["id_user"],
+          key: 'id_user',
+          value: response.data["id_user"].toString()
         );
 
         if (userType == 'resident') {
