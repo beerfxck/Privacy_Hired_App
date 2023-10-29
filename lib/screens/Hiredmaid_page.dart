@@ -111,7 +111,7 @@ class _HomePageState extends State<HiredMaidPage> {
                     ),
                   ),
                 ),
-                MaidDetailForHired(),
+                MaidDetailForHired(id_user: widget.id_user),
                 Divider(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,7 +164,6 @@ class _HomePageState extends State<HiredMaidPage> {
                     ),
                   ),
                 ),
-                // TableEventsExample(id_user:widget.id_user),
                 SizedBox(
                   height: 10,
                 ),
