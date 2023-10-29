@@ -111,7 +111,12 @@ class _HomePageState extends State<HiredMaidPage> {
                     ),
                   ),
                 ),
-                MaidDetailForHired(),
+                MaidDetailForHired(
+                  id_user: widget.id_user,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 Divider(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
