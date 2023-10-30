@@ -194,7 +194,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                         onTap: () => {
                          Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => HiredMaidPage(workday:value[index].date)
+                            builder: (context) => HiredMaidPage(workday:value[index].date, id_user: widget.id_user,)
                           ),
                         ),
                           print('${value[index].title}'),
