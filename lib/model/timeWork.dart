@@ -1,6 +1,6 @@
 class TimeWork {
   int? idWorktime;
-  Null? status;
+  int? statuswork;
   String? day;
   int? idTimeworktype;
   int? idUser;
@@ -11,7 +11,7 @@ class TimeWork {
 
   TimeWork(
       {this.idWorktime,
-      this.status,
+      this.statuswork,
       this.day,
       this.idTimeworktype,
       this.idUser,
@@ -22,7 +22,7 @@ class TimeWork {
 
   TimeWork.fromJson(Map<String, dynamic> json) {
     idWorktime = json['id_worktime'];
-    status = json['status'];
+    statuswork = json['statuswork'];
     day = json['day'];
     idTimeworktype = json['id_timeworktype'];
     idUser = json['id_user'];
@@ -35,7 +35,7 @@ class TimeWork {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id_worktime'] = this.idWorktime;
-    data['status'] = this.status;
+    data['statuswork'] = this.statuswork;
     data['day'] = this.day;
     data['id_timeworktype'] = this.idTimeworktype;
     data['id_user'] = this.idUser;

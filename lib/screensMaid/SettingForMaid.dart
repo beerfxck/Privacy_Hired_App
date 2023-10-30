@@ -1,15 +1,59 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:privacy_maid_flutter/screens/Report_page.dart';
 
+import '../constant/domain.dart';
+import '../model/maidWork.dart';
 import '../screensMaid/Maid_Edit_Profile.dart';
 
 class SettingsMaidPage extends StatefulWidget {
+  const SettingsMaidPage({super.key});
   @override
   _SettingsMaidPageState createState() => _SettingsMaidPageState();
 }
 
 class _SettingsMaidPageState extends State<SettingsMaidPage> {
+  final dio = Dio();
+  String? idUser;
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  List<maidWork> maid = [];
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  Future<void> getData() async {
+    try {
+      maid = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          maid.add(maidWork(
+            username: element["username"],
+            password: element["password"],
+            profile: element["profile"],
+            fname: element["fname"],
+            lname: element["lname"],
+            typeDescription: element["type_description"],
+            idUser: element["id_user"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,15 +72,18 @@ class _SettingsMaidPageState extends State<SettingsMaidPage> {
           ListTile(
             leading: CircleAvatar(
               radius: 30,
+              backgroundImage: maid.isNotEmpty && maid[0].profile != null
+                  ? MemoryImage(base64Decode(maid[0].profile!))
+                  : null,
             ),
             title: Text(
-              "ชื่อแม่บ้าน",
+              "${maid.isNotEmpty ? maid[0].fname : ""} ${maid.isNotEmpty ? maid[0].lname : ""}",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
             ),
-            subtitle: Text("แม่บ้าน"),
+            subtitle: Text("${maid.isNotEmpty ? maid[0].typeDescription : ""}"),
           ),
           Divider(height: 50),
           ListTile(

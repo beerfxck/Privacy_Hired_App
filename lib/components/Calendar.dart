@@ -80,7 +80,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     final List<dynamic> jsonData = jsonDecode(jsonStr);
     for (var item in jsonData) {
       final DateTime day = DateTime.parse(item['day']);
-      final Event event = Event(item['day'], item['day'], item['start_work'],item['end_work']);
+      final Event event = Event(item['day'], item['day'], item['start_work'],item['end_work'],item['statuswork']);
       if (_kEventSource.containsKey(day)) {
         _kEventSource[day]!.add(event);
       } else {

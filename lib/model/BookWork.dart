@@ -6,7 +6,7 @@ class BookWork {
   int? servicePrice;
   String? paymentslip;
   int? maidRating;
-  String? status;
+  int? status;
   int? userBooking;
   int? maidbooking;
 

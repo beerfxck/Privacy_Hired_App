@@ -8,7 +8,8 @@ class Event {
   final String date;
   final String start;
   final String end;
-  const Event(this.title, this.date,this.start,this.end);
+  final String statuswork;
+  const Event(this.title, this.date,this.start,this.end,this.statuswork);
 
   @override
   String toString() => title;

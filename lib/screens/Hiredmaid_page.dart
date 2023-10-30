@@ -281,31 +281,4 @@ class _HomePageState extends State<HiredMaidPage> {
       ),
     );
   }
-//   List<DropdownMenuItem<int>> dropdownItems = worktimes!.map((worktime) {
-//   return DropdownMenuItem<int>(
-//     value: worktime['id_worktime'], // Use the appropriate value from your data
-//     child: Text(
-//       worktime['day'],
-//       style: GoogleFonts.kanit(
-//         fontSize: 16,
-//       ),
-//     ),
-//   );
-// }).toList();
-// List<Map<String, dynamic>> worktimes = [
-//   {
-//     "id_worktime": 44,
-//     "status": null,
-//     "day": "2023-10-03T17:00:00.000Z",
-//     "id_timeworktype": 1,
-//     "id_user": 36
-//   },
-//   {
-//     "id_worktime": 47,
-//     "status": null,
-//     "day": "2023-09-11T17:00:00.000Z",
-//     "id_timeworktype": 2,
-//     "id_user": 36
-//   }
-// ];
 }
