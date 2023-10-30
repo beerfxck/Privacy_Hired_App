@@ -1,15 +1,55 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:privacy_maid_flutter/screens/Report_page.dart';
 
+import '../constant/domain.dart';
+import '../model/maidWork.dart';
 import '../screensMaid/Maid_Edit_Profile.dart';
 
 class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+   final dio = Dio();
+  String? idUser;
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  List<maidWork> resident = [];
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  Future<void> getData() async {
+    try {
+      resident = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          resident.add(maidWork(
+            username: element["username"],
+            password: element["password"],
+            fname: element["fname"],
+            lname: element["lname"],
+            typeDescription: element["type_description"],
+            idUser: element["id_user"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,14 +70,14 @@ class _SettingsPageState extends State<SettingsPage> {
               radius: 30,
             ),
             title: Text(
-              "ชื่อลูกบ้าน",
+              "${resident.isNotEmpty ? resident[0].fname : ""} ${resident.isNotEmpty ? resident[0].lname : ""}",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
             ),
             subtitle:
-                Text("ลูกบ้าน"),
+                Text("${resident.isNotEmpty ? resident[0].typeDescription : ""}"),
           ),
           Divider(height: 50),
           ListTile(

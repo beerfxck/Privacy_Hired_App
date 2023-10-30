@@ -66,6 +66,18 @@ class _LoginPageState extends State<LoginPage> {
       }
     } catch (e) {
       print('An error occurred during login: $e');
+      if (e is DioError) {
+        if (e.response != null) {
+          // Handle DioError with response (e.g., server returned an error)
+          print('DioError with response: ${e.response}');
+        } else {
+          // Handle DioError without response (e.g., network issue)
+          print('DioError without response');
+        }
+      } else {
+        // Handle other types of exceptions
+        print('Other exception occurred: $e');
+      }
     }
   }
 

@@ -1,10 +1,15 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/WorkForMaidhomepage.dart';
 
 import 'package:privacy_maid_flutter/widgets/Upcoming_schedule.dart';
+
+import '../constant/domain.dart';
+import '../model/maidWork.dart';
 
 class MaidHomePage extends StatefulWidget {
   const MaidHomePage({super.key});
@@ -14,6 +19,41 @@ class MaidHomePage extends StatefulWidget {
 }
 
 class _MaidHomePageState extends State<MaidHomePage> {
+  final dio = Dio();
+  String? idUser;
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  List<maidWork> maid = [];
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  Future<void> getData() async {
+    try {
+      maid = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          maid.add(maidWork(
+            username: element["username"],
+            password: element["password"],
+            fname: element["fname"],
+            lname: element["lname"],
+            idUser: element["id_user"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +83,7 @@ class _MaidHomePageState extends State<MaidHomePage> {
                 ),
               ),
               Text(
-                'username',
+                '${maid.isNotEmpty ? maid[0].fname : ""} ${maid.isNotEmpty ? maid[0].lname : ""}',
                 textAlign: TextAlign.right,
                 style: GoogleFonts.kanit(
                   textStyle: TextStyle(color: Colors.black),

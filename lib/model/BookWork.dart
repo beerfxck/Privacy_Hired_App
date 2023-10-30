@@ -2,6 +2,7 @@ class BookWork {
   String? bookingDate;
   int? workHour;
   String? startWork;
+  String? descriptmaid;
   int? servicePrice;
   String? paymentslip;
   int? maidRating;
@@ -13,6 +14,7 @@ class BookWork {
       {this.bookingDate,
       this.workHour,
       this.startWork,
+      this.descriptmaid,
       this.servicePrice,
       this.paymentslip,
       this.maidRating,
@@ -24,6 +26,7 @@ class BookWork {
     bookingDate = json['booking_date'];
     workHour = json['work_hour'];
     startWork = json['start_work'];
+    descriptmaid = json['descriptmaid'];
     servicePrice = json['service_price'];
     paymentslip = json['paymentslip'];
     maidRating = json['maid_rating'];
@@ -37,6 +40,7 @@ class BookWork {
     data['booking_date'] = this.bookingDate;
     data['work_hour'] = this.workHour;
     data['start_work'] = this.startWork;
+    data['descriptmaid'] = this.descriptmaid;
     data['service_price'] = this.servicePrice;
     data['paymentslip'] = this.paymentslip;
     data['maid_rating'] = this.maidRating;
