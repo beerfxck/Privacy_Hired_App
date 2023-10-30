@@ -10,7 +10,9 @@ import 'package:privacy_maid_flutter/model/timeWork.dart';
 import 'package:privacy_maid_flutter/components/Calendar.dart';
 
 import '../components/MaidDeatailForHired.dart';
+import '../components/SpecialRequired.dart';
 import '../components/Terms_of_service.dart';
+import '../components/TimeStart.dart';
 import '../components/UserDeatailForHired.dart';
 
 class HiredMaidPage extends StatefulWidget {
@@ -265,6 +267,10 @@ class _HomePageState extends State<HiredMaidPage> {
                     ),
                   ],
                 ),
+                SizedBox(height: 10),
+                TimeStartComponents(),
+                SizedBox(height: 10),
+                SpecialTextField(),
                 SizedBox(height: 10),
                 UserDetailForHired(),
                 MyWidget(),
