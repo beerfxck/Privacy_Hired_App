@@ -68,31 +68,6 @@ class _SettingsMaidPageState extends State<SettingsMaidPage> {
             trailing: Icon(Icons.arrow_forward_outlined),
           ),
           SizedBox(height: 20),
-          // ListTile(
-          //   onTap: () {
-          //     Navigator.pushNamed(context, '/ReportPage');
-          //   },
-          //   leading: Container(
-          //     padding: EdgeInsets.all(10),
-          //     decoration: BoxDecoration(
-          //       color: Colors.orange.shade100,
-          //       shape: BoxShape.circle,
-          //     ),
-          //     child: Icon(
-          //       Icons.report,
-          //       color: Colors.orange,
-          //       size: 35,
-          //     ),
-          //   ),
-          //   title: Text(
-          //     "แจ้งปัญหา/ร้องเรียน",
-          //     style: TextStyle(
-          //       fontWeight: FontWeight.w500,
-          //       fontSize: 20,
-          //     ),
-          //   ),
-          //   trailing: Icon(Icons.arrow_forward_outlined),
-          // ),
           Divider(height: 40),
           GestureDetector(
             onTap: () {
