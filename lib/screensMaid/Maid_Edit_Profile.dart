@@ -1,13 +1,56 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../constant/domain.dart';
+import '../model/maidWork.dart';
+
 class EditPage extends StatefulWidget {
+  const EditPage({super.key});
   @override
   _EditPageState createState() => _EditPageState();
 }
 
 class _EditPageState extends State<EditPage> {
+  final dio = Dio();
+  String? idUser;
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  List<maidWork> resident = [];
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  Future<void> getData() async {
+    try {
+      resident = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          resident.add(maidWork(
+            username: element["username"],
+            password: element["password"],
+            fname: element["fname"],
+            lname: element["lname"],
+            phone: element["phone"],
+            roomnumber: element["roomnumber"],
+            roomsize: element["roomsize"],
+            idUser: element["id_user"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,12 +90,12 @@ class _EditPageState extends State<EditPage> {
               ),
             ),
             SizedBox(height: 5),
-            Text('หมายเลขห้อง 123/1',
+            Text('${resident.isNotEmpty ? resident[0].roomnumber : ""}',
                 style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.black),
                     fontSize: 22,
                     fontWeight: FontWeight.w400)),
-            Text('ขนาดห้อง 26-29 ตารางเมตร',
+            Text('ขนาดห้อง: ${resident.isNotEmpty ? resident[0].roomsize : ""}',
                 style: GoogleFonts.kanit(
                   textStyle: TextStyle(color: Colors.black54),
                   fontSize: 14,
@@ -73,7 +116,7 @@ class _EditPageState extends State<EditPage> {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   border: InputBorder.none,
-                  labelText: 'ชื่อผู้ใช้',
+                  labelText: '${resident.isNotEmpty ? resident[0].username : ""}',
                   labelStyle: GoogleFonts.kanit(
                     fontSize: 16,
                     color: Colors.grey,
@@ -96,7 +139,7 @@ class _EditPageState extends State<EditPage> {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   border: InputBorder.none,
-                  label: Text('รหัสผ่าน',
+                  label: Text('${resident.isNotEmpty ? resident[0].password : ""}',
                       style: GoogleFonts.kanit(
                         fontSize: 16,
                         color: Colors.grey,
@@ -119,7 +162,7 @@ class _EditPageState extends State<EditPage> {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   border: InputBorder.none,
-                  label: Text('ชื่อเจ้าของห้อง',
+                  label: Text('${resident.isNotEmpty ? resident[0].fname : ""}',
                       style: GoogleFonts.kanit(
                         fontSize: 16,
                         color: Colors.grey,
@@ -142,7 +185,7 @@ class _EditPageState extends State<EditPage> {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   border: InputBorder.none,
-                  label: Text('นามสกุลเจ้าของห้อง',
+                  label: Text('${resident.isNotEmpty ? resident[0].lname : ""}',
                       style: GoogleFonts.kanit(
                         fontSize: 16,
                         color: Colors.grey,
@@ -165,7 +208,7 @@ class _EditPageState extends State<EditPage> {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   border: InputBorder.none,
-                  label: Text('เบอร์โทรศัพท์',
+                  label: Text('${resident.isNotEmpty ? resident[0].phone : ""}',
                       style: GoogleFonts.kanit(
                         fontSize: 16,
                         color: Colors.grey,
