@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:privacy_maid_flutter/screens/Report_page.dart';
+import 'package:privacy_maid_flutter/screens/UserEditProfile.dart';
 
 import '../constant/domain.dart';
 import '../model/maidWork.dart';
@@ -86,7 +87,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        EditPage()),
+                        EditUserPage()),
               );
             },
             leading: Container(

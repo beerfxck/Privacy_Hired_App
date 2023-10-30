@@ -7,13 +7,13 @@ import 'package:google_fonts/google_fonts.dart';
 import '../constant/domain.dart';
 import '../model/maidWork.dart';
 
-class EditPage extends StatefulWidget {
-  const EditPage({super.key});
+class EditUserPage extends StatefulWidget {
+  const EditUserPage({super.key});
   @override
-  _EditPageState createState() => _EditPageState();
+  _EditUserPageState createState() => _EditUserPageState();
 }
 
-class _EditPageState extends State<EditPage> {
+class _EditUserPageState extends State<EditUserPage> {
   final dio = Dio();
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
@@ -38,7 +38,8 @@ class _EditPageState extends State<EditPage> {
             fname: element["fname"],
             lname: element["lname"],
             phone: element["phone"],
-            address: element["address"],
+            roomnumber: element["roomnumber"],
+            roomsize: element["roomsize"],
             idUser: element["id_user"],
           ));
         }
@@ -66,7 +67,7 @@ class _EditPageState extends State<EditPage> {
         actions: <Widget>[
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/MaidBottomNavBar');
+              Navigator.pushNamed(context, '/BottomNavBar');
             },
             icon: Icon(
               Icons.home_rounded,
@@ -82,18 +83,22 @@ class _EditPageState extends State<EditPage> {
           child: Column(children: [
             SizedBox(
               width: 120,
-              height: 150,
+              height: 120,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                child: Image(image: AssetImage('images/user3.png')),
+                child: Image(image: AssetImage('images/logo_maid.png')),
               ),
             ),
-            SizedBox(height: 5),
-            Text('${resident.isNotEmpty ? resident[0].fname : ""} ${resident.isNotEmpty ? resident[0].lname : ""}',
+            Text('${resident.isNotEmpty ? resident[0].roomnumber : ""}',
                 style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.black),
                     fontSize: 22,
                     fontWeight: FontWeight.w400)),
+            Text('ขนาดห้อง: ${resident.isNotEmpty ? resident[0].roomsize : ""}',
+                style: GoogleFonts.kanit(
+                  textStyle: TextStyle(color: Colors.black54),
+                  fontSize: 14,
+                )),
             Divider(),
             SizedBox(height: 10),
             Container(
@@ -202,12 +207,12 @@ class _EditPageState extends State<EditPage> {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   border: InputBorder.none,
-                  label: Text('${resident.isNotEmpty ? resident[0].address : ""}',
+                  label: Text('${resident.isNotEmpty ? resident[0].phone : ""}',
                       style: GoogleFonts.kanit(
                         fontSize: 16,
                         color: Colors.grey,
                       )),
-                  prefixIcon: Icon(Icons.home),
+                  prefixIcon: Icon(Icons.phone),
                 ),
               ),
             ),

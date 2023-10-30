@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:privacy_maid_flutter/Widget_Maid/Maid_Navigatorbar.dart';
 import 'package:privacy_maid_flutter/screens/Hiredmaid_page.dart';
 import 'package:privacy_maid_flutter/screens/Home_page.dart';
 import 'package:privacy_maid_flutter/screens/Login_page.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/BottomNavBar': (context) => BottomNavBar(),
         '/ReportPage': (context) => ReportPage(),
+        '/MaidBottomNavBar': (context) => MaidBottomNavBar(),
       },
     );
   }
