@@ -16,7 +16,11 @@ import '../components/UserDeatailForHired.dart';
 class HiredMaidPage extends StatefulWidget {
   final int? id_user;
   final String? workday;
-  const HiredMaidPage({Key? key, this.id_user, this.workday}) : super(key: key);
+  const HiredMaidPage({
+    Key? key,
+    this.id_user,
+    this.workday,
+  }) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -162,7 +166,7 @@ class _HomePageState extends State<HiredMaidPage> {
                     ),
                     icon: Icon(Icons.calendar_month),
                     label: Text(
-                      'จองคิว',
+                      'จองเวลาทำความสะอาด',
                       style: GoogleFonts.kanit(
                         textStyle: TextStyle(color: Colors.white),
                         fontSize: 16,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:privacy_maid_flutter/components/SuccessInfomation.dart';
 
+import '../screens/Pay_Page.dart';
+
 class CompleteSchedule extends StatefulWidget {
   @override
   _CompleteScheduleState createState() => _CompleteScheduleState();
@@ -130,6 +132,33 @@ class _CompleteScheduleState extends State<CompleteSchedule> {
                           child: Center(
                             child: Text(
                               "ดูรายละเอียด",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PayPage(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 150,
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 20, 196, 49),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "ชำระเงิน",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
