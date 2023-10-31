@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/screens/Report_page.dart';
 import 'package:privacy_maid_flutter/screens/UserEditProfile.dart';
 
@@ -59,8 +60,8 @@ class _SettingsPageState extends State<SettingsPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Settings",
-            style: TextStyle(
+            "ตั้งค่า",
+            style: GoogleFonts.kanit(
               fontSize: 30,
               fontWeight: FontWeight.w500,
             ),
@@ -104,8 +105,8 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             title: Text(
               "แก้ไขโปรไฟล์",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
+              style: GoogleFonts.kanit(
+                fontWeight: FontWeight.w400,
                 fontSize: 20,
               ),
             ),
@@ -129,8 +130,8 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             title: Text(
               "แจ้งปัญหา/ร้องเรียน",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
+              style: GoogleFonts.kanit(
+                fontWeight: FontWeight.w400,
                 fontSize: 20,
               ),
             ),
@@ -157,8 +158,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               title: Text(
                 "ออกจากระบบ",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
+                style: GoogleFonts.kanit(
+                  fontWeight: FontWeight.w400,
                   fontSize: 20,
                 ),
               ),
