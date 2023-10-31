@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:privacy_maid_flutter/components/SuccessInfomation.dart';
 
 import '../screens/Pay_Page.dart';
-import '../screens/Report_page.dart';
 
-class CompleteSchedule extends StatefulWidget {
+class WaitForPayments extends StatefulWidget {
   @override
-  _CompleteScheduleState createState() => _CompleteScheduleState();
+  _WaitForPaymentsState createState() => _WaitForPaymentsState();
 }
 
-class _CompleteScheduleState extends State<CompleteSchedule> {
+class _WaitForPaymentsState extends State<WaitForPayments> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,7 +36,7 @@ class _CompleteScheduleState extends State<CompleteSchedule> {
                 children: [
                   ListTile(
                     title: Text(
-                      "แม่บ้านขยัน เลยเส็จแล้ว",
+                      "แม่บ้าน รเก็บเงิน",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -102,7 +101,7 @@ class _CompleteScheduleState extends State<CompleteSchedule> {
                           ),
                           SizedBox(width: 5),
                           Text(
-                            "เสร็จสิ้น",
+                            "รออชำระเงิน",
                             style: TextStyle(
                               color: Colors.black54,
                             ),
@@ -146,7 +145,7 @@ class _CompleteScheduleState extends State<CompleteSchedule> {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => ReportPage(),
+                              builder: (context) => PayPage(),
                             ),
                           );
                         },
@@ -154,12 +153,12 @@ class _CompleteScheduleState extends State<CompleteSchedule> {
                           width: 150,
                           padding: EdgeInsets.symmetric(vertical: 12),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 220, 223, 64),
+                            color: Color.fromARGB(255, 20, 196, 49),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(
                             child: Text(
-                              "แจ้งปัญหา",
+                              "ชำระเงิน",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,

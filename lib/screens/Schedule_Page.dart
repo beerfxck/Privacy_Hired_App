@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../widgets/Upcoming_schedule.dart';
 import '../widgets/Complete_schedule.dart';
 import '../widgets/Cancle_schedule.dart';
+import '../widgets/WaitForPayment.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
@@ -17,17 +18,18 @@ class _ScheduleState extends State<SchedulePage> {
 
   final _scheduleWidgets = [
     UpcomingSchedule(),
+    WaitForPayments(),
     CompleteSchedule(),
     Cancle(),
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
         elevation: 0,
-        backgroundColor:Color.fromARGB(217, 217, 217, 217),
+        backgroundColor: Color.fromARGB(217, 217, 217, 217),
         leading: Padding(
           padding: EdgeInsets.only(left: 35.0),
           child: Transform.scale(
@@ -36,30 +38,44 @@ class _ScheduleState extends State<SchedulePage> {
           ),
         ),
       ),
-    
       body: ContainedTabBarView(
         tabs: [
-          Text('ดำเนินการ', style: GoogleFonts.kanit(
-                  textStyle: TextStyle(color: Colors.black),
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                ),
-              ),
-          Text('เสร็จสิ้น', style: GoogleFonts.kanit(
-                  textStyle: TextStyle(color: Colors.black),
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                ),
-              ),
-          Text('ยกเลิก', style: GoogleFonts.kanit(
-                  textStyle: TextStyle(color: Colors.black),
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                ),
-              ),
+          Text(
+            'ดำเนินการ',
+            style: GoogleFonts.kanit(
+              textStyle: TextStyle(color: Colors.black),
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+            ),
+          ),
+          Text(
+            'รอชำระ',
+            style: GoogleFonts.kanit(
+              textStyle: TextStyle(color: Colors.black),
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+            ),
+          ),
+          Text(
+            'เสร็จสิ้น',
+            style: GoogleFonts.kanit(
+              textStyle: TextStyle(color: Colors.black),
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+            ),
+          ),
+          Text(
+            'ยกเลิก',
+            style: GoogleFonts.kanit(
+              textStyle: TextStyle(color: Colors.black),
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+            ),
+          ),
         ],
         views: [
           UpcomingSchedule(),
+          WaitForPayments(),
           CompleteSchedule(),
           Cancle(),
         ],
