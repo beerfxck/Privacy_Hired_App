@@ -16,13 +16,16 @@ class _PayPageState extends State<PayPage> {
 
   Future<void> _selectImage() async {
     final ImagePicker _picker = ImagePicker();
-    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    XFile? selectedImage = await _picker.pickImage(source: ImageSource.gallery);
 
-    if (image != null) {
+    if (selectedImage != null) {
+      File imageFile = File(selectedImage.path);
+      List<int> bytes = await imageFile.readAsBytes();
+      String base64Image = base64Encode(bytes);
+
       setState(() {
-        _selectedImage = File(image!.path);
-        final bytes = _selectedImage!.readAsBytesSync();
-        image = base64Encode(bytes) as XFile?;
+        _selectedImage = imageFile;
+        image = base64Image;
       });
     }
   }
@@ -117,64 +120,83 @@ class _PayPageState extends State<PayPage> {
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.green),
       ),
-      body: Container(
-        color: Color.fromARGB(255, 232, 241, 230),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              if (_selectedImage != null)
-                Image.file(_selectedImage!)
-              else
-                Text(
-                  'แนบหลักฐานการชำระเงิน',
-                  style: GoogleFonts.kanit(
-                    textStyle: TextStyle(color: Colors.black),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20,
-                  ),
-                ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: _selectImage,
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: Container(
+              height: 450,
+              width: double.infinity,
+              child: Column(
+                children: [
+                  Text(
+                    'แนบหลักฐานการชำระเงิน',
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color: Colors.black),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
                     ),
-                    child: Text('เลือกรูปภาพ'),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Center(
+                      child: Container(
+                        width: 300,
+                        height: 400,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.green),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: image == null
+                                  ? Center(child: Text('no image selected',))
+                                  : Image.memory(base64Decode("${image}")),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                shape: StadiumBorder(),
+                                elevation: 8,
+                              ),
+                              onPressed: () {
+                                _showImageSourceActionSheet(context);},
+                              child: Text(
+                                'อัปโหลดรูปภาพ',
+                                style: GoogleFonts.kanit(
+                                  textStyle: TextStyle(color: Colors.white),
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                shape: StadiumBorder(),
+                                elevation: 8,
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/UserReview');
+                              },
+                              child: Text(
+                                'เสร็จสิ้น',
+                                style: GoogleFonts.kanit(
+                                  textStyle: TextStyle(color: Colors.white),
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: 10.0),
-              if (image != null)
-                CircleAvatar(
-                  radius: 120,
-                  backgroundImage: MemoryImage(base64Decode("${image}")),
-                ),
-              SizedBox(height: 20.0),
-              Text(
-                "รูปสัตว์เลี้ยง",
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-              SizedBox(height: 15.0),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 125, 152, 91),
-                  minimumSize: const Size.fromHeight(50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                onPressed: () {
-                  _showImageSourceActionSheet(context);
-                },
-                child: Text('อัปโหลดรูปสัตว์เลี้ยง'),
-              ),
-            ],
+            ),
           ),
         ),
       ),

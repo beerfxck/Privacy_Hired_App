@@ -36,7 +36,7 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                 children: [
                   ListTile(
                     title: Text(
-                      "แม่บ้าน รเก็บเงิน",
+                      "รอชำระเงิน",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -101,7 +101,7 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                           ),
                           SizedBox(width: 5),
                           Text(
-                            "รออชำระเงิน",
+                            "แม่บ้าน รอชำระเงิน",
                             style: TextStyle(
                               color: Colors.black54,
                             ),
