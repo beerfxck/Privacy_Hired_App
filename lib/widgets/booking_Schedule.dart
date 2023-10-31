@@ -225,7 +225,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                           height: 40,
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 141, 141, 141),
+                            color: Color.fromARGB(255, 11, 129, 56),
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Center(
