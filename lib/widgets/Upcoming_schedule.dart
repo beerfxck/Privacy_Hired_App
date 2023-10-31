@@ -1,13 +1,55 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:privacy_maid_flutter/model/BookWork.dart';
 import 'package:privacy_maid_flutter/screens/HiredInfomation.dart';
 
+import '../constant/domain.dart';
+
 class UpcomingSchedule extends StatefulWidget {
+  const UpcomingSchedule({super.key});
   @override
   _UpcomingScheduleState createState() => _UpcomingScheduleState();
 }
 
 class _UpcomingScheduleState extends State<UpcomingSchedule> {
+  final dio = Dio();
+  String? idUser;
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  List<BookWork> bookwork = [];
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+   Future<void> getData() async {
+    try {
+      bookwork = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response = await dio.get(url_api + '/books/get-book-resident/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          bookwork.add(BookWork(
+            username: element["username"],
+            password: element["password"],
+            fname: element["fname"],
+            lname: element["lname"],
+            idUser: element["id_user"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
