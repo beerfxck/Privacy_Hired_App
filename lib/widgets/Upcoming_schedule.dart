@@ -7,6 +7,7 @@ import 'package:privacy_maid_flutter/screens/HiredInfomation.dart';
 
 import '../constant/domain.dart';
 import '../model/BookWork.dart';
+import '../screens/Infomation_Page.dart';
 
 class UpcomingSchedule extends StatefulWidget {
   const UpcomingSchedule({Key? key}) : super(key: key);
@@ -214,7 +215,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                             ? () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => HiredInfomation(
+                                    builder: (context) => InformationPage(
                                         id_user: bookwork[0].idUser),
                                   ),
                                 );
