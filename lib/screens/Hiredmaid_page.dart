@@ -329,7 +329,7 @@ class _HomePageState extends State<HiredMaidPage> {
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0, bottom: 8),
                     child: Text(
-                      'เน้นส่วนไหนเป็นพิเศษ  ',
+                      'ความต้องการเพิ่มเติม  ',
                       style: GoogleFonts.kanit(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -349,7 +349,7 @@ class _HomePageState extends State<HiredMaidPage> {
                 child: TextField(
                   controller: _textController,
                   decoration: InputDecoration(
-                    hintText: 'บอกหรือไม่บอกก็ได้',
+                    hintText: 'เช่น เน้นห้องน้ำ, ห้องนอน ฯลฯ',
                     border: InputBorder.none,
                   ),
                 ),

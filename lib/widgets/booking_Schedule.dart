@@ -78,7 +78,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 1),
+      padding: const EdgeInsets.fromLTRB(4, 5, 5, 9),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -101,7 +101,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
               child: Column(
                 children: [
                   ListTile(
-                    contentPadding: const EdgeInsets.only(top: 20, right: 17),
+                    contentPadding: const EdgeInsets.fromLTRB(4, 10, 18, 4),
                     trailing: Text(
                       "${bookwork.isNotEmpty ? 'ชื่อ: ${bookwork[0].fname ?? ''}\nนามสกุล: ${bookwork[0].lname ?? ''}' : ''}",
                       style: const TextStyle(
@@ -111,7 +111,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                       ),
                     ),
                     title: Padding(
-                      padding: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.fromLTRB(0, 3, 3, 3),
                       child: CircleAvatar(
                         radius: 30,
                         backgroundColor: Colors.blueGrey,
