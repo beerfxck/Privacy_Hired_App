@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/MaidDeatailForHired.dart';
 import 'package:privacy_maid_flutter/components/TimeInfomation.dart';
@@ -8,6 +10,8 @@ import 'package:privacy_maid_flutter/components/UserDeatailForHired.dart';
 
 import '../components/DateForBook.dart';
 import '../components/MaiddetailForBooking.dart';
+import '../constant/domain.dart';
+import '../model/BookWork.dart';
 
 class InformationPage extends StatefulWidget {
   final int? id_user;
@@ -21,6 +25,51 @@ class InformationPage extends StatefulWidget {
 }
 
 class _InformationPageState extends State<InformationPage> {
+  final dio = Dio();
+  String? idUser;
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  List<BookWork> bookwork = [];
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  Future<void> getData() async {
+    try {
+      bookwork = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response =
+          await dio.get(url_api + '/books/get-book-resident/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          bookwork.add(BookWork(
+            bookingId: element["booking_id"],
+            bookingDate: element["booking_date"],
+            workHour: element["work_hour"],
+            startWork: element["start_work"],
+            descriptmaid: element["descriptmaid"],
+            servicePrice: element["service_price"],
+            paymentslip: element["paymentslip"],
+            profile: element["profile"],
+            phone: element["phone"],
+            status: element["status "],
+            statusDescription: element["status_description"],
+            fname: element["fname"],
+            nickname: element["nickname"],
+            lname: element["lname"],
+            idUser: element["id_user"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,7 +164,7 @@ class _InformationPageState extends State<InformationPage> {
               alignment: Alignment.centerLeft,
               child: Center(
                 child: Text(
-                  'ค่าบริการ : ' + '520 บาท',
+                  'ค่าบริการ : ' '${bookwork.isNotEmpty ? bookwork[0].servicePrice : ""}',
                   style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.black),
                     fontSize: 20,

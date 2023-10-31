@@ -18,10 +18,12 @@ import '../components/UserDeatailForHired.dart';
 class HiredMaidPage extends StatefulWidget {
   final int? id_user;
   final String? workday;
+  final int? showprice;
   const HiredMaidPage({
     Key? key,
     this.id_user,
     this.workday,
+    this.showprice,
   }) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
@@ -93,8 +95,10 @@ class _HomePageState extends State<HiredMaidPage> {
       Response response =
           await dio.post(url_api + '/books/save', data: maidWorkData);
       if (response.statusCode == 201) {
-        Navigator.pushNamed(context, '/BottomNavBar');
         print("Maid work saved successfully");
+        // After saving the maidwork, update the statuswork
+        // await updateMaidWorkStatus(response.data["maidwork_id"]);
+        Navigator.pushNamed(context, '/BottomNavBar');
       } else {
         print("HTTP Error: ${response.statusCode}");
       }
@@ -102,6 +106,24 @@ class _HomePageState extends State<HiredMaidPage> {
       print("Error: $e");
     }
   }
+
+// Future<void> updateMaidWorkStatus(int maidworkId) async {
+//   try {
+//     final Map<String, dynamic> updateData = {
+//       "statuswork": 2, // Assuming you want to update it to status 2
+//     };
+//     Response response = await dio.put(
+//         url_api + '/books/update-statuswork/$maidworkId',
+//         data: updateData);
+//     if (response.statusCode == 200) {
+//       print("Maid work status updated successfully");
+//     } else {
+//       print("HTTP Error: ${response.statusCode}");
+//     }
+//   } catch (e) {
+//     print("Error: $e");
+//   }
+// }
 
   @override
   Widget build(BuildContext context) {
@@ -356,7 +378,7 @@ class _HomePageState extends State<HiredMaidPage> {
               ),
               SizedBox(height: 10),
               UserDetailForHired(),
-              MyWidget(),
+              MyWidget(selectHour: selectedHours),
             ],
           ),
         ),

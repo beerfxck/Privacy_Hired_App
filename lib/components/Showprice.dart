@@ -10,7 +10,10 @@ import '../constant/domain.dart';
 import '../model/maidWork.dart';
 
 class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+  final int selectHour;
+
+
+  MyWidget({Key? key, required this.selectHour}) : super(key: key);
 
   @override
   State<MyWidget> createState() => _MyWidgetState();
@@ -19,8 +22,9 @@ class MyWidget extends StatefulWidget {
 class _MyWidgetState extends State<MyWidget> {
   final dio = Dio();
   String? idUser;
-  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  static FlutterSecureStorage storageToken = FlutterSecureStorage();
   List<maidWork> resident = [];
+
   @override
   void initState() {
     getData();
@@ -56,12 +60,12 @@ class _MyWidgetState extends State<MyWidget> {
   int calculateServiceCost(String? roomsize) {
     if (roomsize == null) {
       return 0;
-    } else if (roomsize.contains("26.5 -29.5 sq m")) {
-      return 600;
+    } else if (roomsize.contains("26.5 - 29.5 sq m")) {
+      return 400 * widget.selectHour;
     } else if (roomsize.contains("34.5 sq m")) {
-      return 700;
-    } else if (roomsize.contains("49.5 -50.25 sq m")) {
-      return 800;
+      return 500 * widget.selectHour;
+    } else if (roomsize.contains("49.5 - 50.25 sq m")) {
+      return 650 * widget.selectHour;
     } else {
       return 0;
     }
@@ -85,8 +89,10 @@ class _MyWidgetState extends State<MyWidget> {
             ),
             SizedBox(height: 10),
           ],
+          
         ),
       ),
     );
+    
   }
 }
