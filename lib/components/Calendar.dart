@@ -45,14 +45,6 @@ class _TableEventsExampleState extends State<TableEventsExample> {
         setState(() {
           updateEventSourceFromJson(_kEventSource, eventJsonString);
         });
-        // List<dynamic> responseData = response.data;
-        // List<TimeWork> maidWorkList = responseData
-        //     .map((dynamic item) => TimeWork.fromJson(item))
-        //     .toList();
-
-        // setState(() {
-        //   maidWorklist = maidWorkList;
-        // });
       } else {
         print("HTTP Error: ${response.statusCode}");
       }

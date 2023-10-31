@@ -40,7 +40,7 @@ class _TimeStartComponentsState extends State<TimeStartComponents> {
           value: selectedHours,
           items: <DropdownMenuItem<String>>[
             DropdownMenuItem<String>(
-              value: '9.00 น.',
+              value: '09:00 น.',
               child: Text(
                 '9.00',
                 style: GoogleFonts.kanit(
@@ -49,7 +49,7 @@ class _TimeStartComponentsState extends State<TimeStartComponents> {
               ),
             ),
             DropdownMenuItem<String>(
-              value: '10.00',
+              value: '10:00',
               child: Text(
                 '10.00 น.',
                 style: GoogleFonts.kanit(
@@ -58,7 +58,7 @@ class _TimeStartComponentsState extends State<TimeStartComponents> {
               ),
             ),
             DropdownMenuItem<String>(
-              value: '11.00',
+              value: '11:00',
               child: Text(
                 '11.00 น.',
                 style: GoogleFonts.kanit(
@@ -67,7 +67,7 @@ class _TimeStartComponentsState extends State<TimeStartComponents> {
               ),
             ),
             DropdownMenuItem<String>(
-              value: '13.00',
+              value: '13:00',
               child: Text(
                 '13.00 น.',
                 style: GoogleFonts.kanit(
@@ -76,7 +76,7 @@ class _TimeStartComponentsState extends State<TimeStartComponents> {
               ),
             ),
             DropdownMenuItem<String>(
-              value: '14.00',
+              value: '14:00',
               child: Text(
                 '14.00 น.',
                 style: GoogleFonts.kanit(
@@ -85,7 +85,7 @@ class _TimeStartComponentsState extends State<TimeStartComponents> {
               ),
             ),
             DropdownMenuItem<String>(
-              value: '15.00',
+              value: '15:00',
               child: Text(
                 '15.00 น.',
                 style: GoogleFonts.kanit(
@@ -94,7 +94,7 @@ class _TimeStartComponentsState extends State<TimeStartComponents> {
               ),
             ),
             DropdownMenuItem<String>(
-              value: '16.00',
+              value: '16:00',
               child: Text(
                 '16.00 น.',
                 style: GoogleFonts.kanit(
