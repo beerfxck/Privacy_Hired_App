@@ -16,7 +16,6 @@ class _TimeInfomationState extends State<TimeInfomation> {
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(5),
-        //margin: EdgeInsets.all(40),
         child: Row(
           children: <Widget>[
             Expanded(

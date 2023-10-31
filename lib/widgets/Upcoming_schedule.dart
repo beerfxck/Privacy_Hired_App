@@ -1,14 +1,16 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:privacy_maid_flutter/model/BookWork.dart';
+import 'package:intl/intl.dart';
 import 'package:privacy_maid_flutter/screens/HiredInfomation.dart';
 
 import '../constant/domain.dart';
+import '../model/BookWork.dart';
 
 class UpcomingSchedule extends StatefulWidget {
-  const UpcomingSchedule({super.key});
+  const UpcomingSchedule({Key? key}) : super(key: key);
+
   @override
   _UpcomingScheduleState createState() => _UpcomingScheduleState();
 }
@@ -18,24 +20,36 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<BookWork> bookwork = [];
+
   @override
   void initState() {
     getData();
     super.initState();
   }
 
-   Future<void> getData() async {
+  Future<void> getData() async {
     try {
       bookwork = [];
       idUser = await storageToken.read(key: 'id_user');
-      final response = await dio.get(url_api + '/books/get-book-resident/' + idUser!);
+      final response =
+          await dio.get(url_api + '/books/get-book-resident/' + idUser!);
       if (response.statusCode == 200) {
         final responseData = response.data;
         for (var element in responseData) {
           bookwork.add(BookWork(
-            username: element["username"],
-            password: element["password"],
+            bookingId: element["booking_id"],
+            bookingDate: element["booking_date"],
+            workHour: element["work_hour"],
+            startWork: element["start_work"],
+            descriptmaid: element["descriptmaid"],
+            servicePrice: element["service_price"],
+            paymentslip: element["paymentslip"],
+            profile: element["profile"],
+            phone: element["phone"],
+            status: element["status "],
+            statusDescription: element["status_description"],
             fname: element["fname"],
+            nickname: element["nickname"],
             lname: element["lname"],
             idUser: element["id_user"],
           ));
@@ -45,25 +59,35 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
         print('Request failed with status: ${response.statusCode}');
       }
     } catch (e) {
-      // Handle any exceptions that may occur during the request
       print('Error: $e');
     }
+  }
+
+  String? convertDate(String? inputDate) {
+    if (inputDate != null) {
+      final parts = inputDate.split('T');
+      if (parts.length >= 1) {
+        final datePart = parts[0];
+        return datePart;
+      }
+    }
+    return "";
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 1),
+      padding: const EdgeInsets.symmetric(horizontal: 1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Container(
-            padding: EdgeInsets.fromLTRB(3, 0, 3, 15),
+            padding: const EdgeInsets.fromLTRB(3, 0, 3, 15),
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 232, 241, 230),
+              color: const Color.fromARGB(255, 232, 241, 230),
               borderRadius: BorderRadius.circular(15),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Colors.black12,
                   blurRadius: 6,
@@ -76,21 +100,21 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
               child: Column(
                 children: [
                   ListTile(
-                    contentPadding: EdgeInsets.only(top: 20, right: 17),
+                    contentPadding: const EdgeInsets.only(top: 20, right: 17),
                     trailing: Text(
-                      "แม่บ้านกำลังทำความสะอาด",
-                      style: GoogleFonts.kanit(
-                        textStyle: TextStyle(color: Colors.black),
+                      "${bookwork.isNotEmpty ? 'ชื่อ: ${bookwork[0].fname ?? ''}\nนามสกุล: ${bookwork[0].lname ?? ''}' : ''}",
+                      style: const TextStyle(
+                        color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
                     title: Padding(
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       child: CircleAvatar(
                         radius: 30,
                         backgroundColor: Colors.blueGrey,
-                        child: Icon(
+                        child: const Icon(
                           Icons.work_history_rounded,
                           color: Colors.white,
                         ),
@@ -100,9 +124,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Divider(
-                      //color: Colors.black,
                       thickness: 1,
-                      //height: 20,
                     ),
                   ),
                   Row(
@@ -110,15 +132,15 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                     children: [
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.calendar_month,
                             color: Colors.black54,
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text(
-                            "27/09/2023",
-                            style: GoogleFonts.kanit(
-                              textStyle: TextStyle(color: Colors.black54),
+                            '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}',
+                            style: const TextStyle(
+                              color: Colors.black54,
                               fontSize: 14,
                             ),
                           ),
@@ -126,15 +148,15 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                       ),
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.access_time_filled,
                             color: Colors.black54,
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text(
-                            "16:30 AM",
-                            style: GoogleFonts.kanit(
-                              textStyle: TextStyle(color: Colors.black54),
+                            "${bookwork.isNotEmpty ? bookwork[0].startWork : ""}",
+                            style: const TextStyle(
+                              color: Colors.black54,
                               fontSize: 14,
                             ),
                           ),
@@ -143,17 +165,17 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                       Row(
                         children: [
                           Container(
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(5),
+                            decoration: const BoxDecoration(
                               color: Colors.green,
                               shape: BoxShape.circle,
                             ),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text(
-                            "ระหว่างทำ",
-                            style: GoogleFonts.kanit(
-                              textStyle: TextStyle(color: Colors.black54),
+                            "${bookwork.isNotEmpty ? bookwork[0].statusDescription : ""}",
+                            style: const TextStyle(
+                              color: Colors.black54,
                               fontSize: 14,
                             ),
                           ),
@@ -161,7 +183,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -170,16 +192,15 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                         child: Container(
                           width: 150,
                           height: 40,
-                          padding: EdgeInsets.symmetric(vertical: 8),
+                          padding: const EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 221, 2, 2),
+                            color: const Color.fromARGB(255, 221, 2, 2),
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Center(
                             child: Text(
                               "ยกเลิกการจอง",
-                              style: GoogleFonts.kanit(
-                                textStyle: TextStyle(color: Colors.black54),
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.white,
@@ -189,27 +210,28 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  HiredInfomation(), // Make sure this is a valid widget
-                            ),
-                          );
-                        },
+                        onTap: bookwork.isNotEmpty
+                            ? () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => HiredInfomation(
+                                        id_user: bookwork[0].idUser),
+                                  ),
+                                );
+                              }
+                            : null,
                         child: Container(
                           width: 150,
                           height: 40,
-                          padding: EdgeInsets.symmetric(vertical: 8),
+                          padding: const EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 141, 141, 141),
+                            color: const Color.fromARGB(255, 141, 141, 141),
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Center(
                             child: Text(
                               "รายละเอียด",
-                              style: GoogleFonts.kanit(
-                                textStyle: TextStyle(color: Colors.black54),
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.white,

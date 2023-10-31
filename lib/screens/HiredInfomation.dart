@@ -7,7 +7,11 @@ import 'package:privacy_maid_flutter/components/TimeInfomation.dart';
 import 'package:privacy_maid_flutter/components/UserDeatailForHired.dart';
 
 class HiredInfomation extends StatefulWidget {
-  const HiredInfomation({super.key});
+  final int? id_user;
+  const HiredInfomation({
+    Key? key,
+    this.id_user,
+  }) : super(key: key);
 
   @override
   State<HiredInfomation> createState() => _HiredInfomationState();
@@ -61,7 +65,7 @@ class _HiredInfomationState extends State<HiredInfomation> {
               SizedBox(
                 height: 10,
               ),
-              MaidDetailForHired(),
+              MaidDetailForHired(id_user: widget.id_user),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Divider(
