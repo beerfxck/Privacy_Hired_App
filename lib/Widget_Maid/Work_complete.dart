@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'informationcompleteMaid.dart';
+
 class WorkCompleteComponent extends StatefulWidget {
   @override
   _WorkCompleteComponentState createState() => _WorkCompleteComponentState();
@@ -108,38 +110,38 @@ class _WorkCompleteComponentState extends State<WorkCompleteComponent> {
                     ],
                   ),
                   SizedBox(height: 15),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //   children: [
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Navigator.of(context).push(
-                  //           MaterialPageRoute(
-                  //             builder: (context) => SuccessInfo(),
-                  //           ),
-                  //         );
-                  //       },
-                  //       child: Container(
-                  //         width: 150,
-                  //         padding: EdgeInsets.symmetric(vertical: 12),
-                  //         decoration: BoxDecoration(
-                  //           color: Color.fromARGB(255, 20, 196, 49),
-                  //           borderRadius: BorderRadius.circular(10),
-                  //         ),
-                  //         child: Center(
-                  //           child: Text(
-                  //             "ดูรายละเอียด",
-                  //             style: TextStyle(
-                  //               fontSize: 16,
-                  //               fontWeight: FontWeight.bold,
-                  //               color: Colors.black54,
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => InfoCompleteForMaid(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 150,
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 20, 196, 49),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "ดูรายละเอียด",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
