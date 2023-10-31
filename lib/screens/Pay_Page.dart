@@ -182,4 +182,10 @@ class _PayPageState extends State<PayPage> {
       );
     }
   }
+  
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
 }
