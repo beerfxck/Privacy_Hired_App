@@ -54,26 +54,24 @@ class _MyWidgetState extends State<MyWidget> {
   }
 
   int calculateServiceCost(String? roomsize) {
-  if (roomsize == null) {
-    return 0;
-  } else if (roomsize.contains("26.5 -29.5 sq m")) {
-    return 600;
-  } else if (roomsize.contains("34.5 sq m")) {
-    return 700;
-  } else if (roomsize.contains("49.5 -50.25 sq m")) {
-    return 800;
-  } else {
-    return 0; 
+    if (roomsize == null) {
+      return 0;
+    } else if (roomsize.contains("26.5 -29.5 sq m")) {
+      return 600;
+    } else if (roomsize.contains("34.5 sq m")) {
+      return 700;
+    } else if (roomsize.contains("49.5 -50.25 sq m")) {
+      return 800;
+    } else {
+      return 0;
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
         color: Colors.white,
-        padding: EdgeInsets.all(16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -86,32 +84,6 @@ class _MyWidgetState extends State<MyWidget> {
               ),
             ),
             SizedBox(height: 10),
-            Container(
-              width: 100,
-              height: 50,
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ServiceConditionsComponent()));
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  shape: StadiumBorder(),
-                  elevation: 10,
-                ),
-                icon: Icon(Icons.trending_up_outlined),
-                label: Text(
-                  'ต่อไป',
-                  style: GoogleFonts.kanit(
-                    textStyle: TextStyle(color: Colors.white),
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),

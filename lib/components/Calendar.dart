@@ -33,7 +33,6 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     getMaidWork();
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
-    
   }
 
   void getMaidWork() async {
@@ -80,7 +79,8 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     final List<dynamic> jsonData = jsonDecode(jsonStr);
     for (var item in jsonData) {
       final DateTime day = DateTime.parse(item['day']);
-      final Event event = Event(item['day'], item['day'], item['start_work'],item['end_work'],item['statuswork']);
+      final Event event = Event(item['day'], item['day'], item['start_work'],
+          item['end_work'], item['statuswork']);
       if (_kEventSource.containsKey(day)) {
         _kEventSource[day]!.add(event);
       } else {
@@ -192,15 +192,18 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                       ),
                       child: ListTile(
                         onTap: () => {
-                         Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => HiredMaidPage(workday:value[index].date, id_user: widget.id_user,)
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => HiredMaidPage(
+                                      workday: value[index].date,
+                                      id_user: widget.id_user,
+                                    )),
                           ),
-                        ),
                           print('${value[index].title}'),
                           print('${value[index].date}')
                         },
-                        title: Text('เวลาเริ่มงาน: ${value[index].start} เวลาจบงาน: ${value[index].end}'),
+                        title: Text(
+                            'เวลาเริ่มงาน: ${value[index].start} เวลาจบงาน: ${value[index].end}'),
                       ),
                     );
                   },
