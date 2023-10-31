@@ -52,7 +52,7 @@ class _MaidDetailState extends State<MaidDetail> {
         child: Column(
           children: maidWorklist.map((maidWork) {
             return Container(
-              padding: EdgeInsets.all(40),
+              padding: EdgeInsets.fromLTRB(7, 10, 7, 8),
               margin: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 color: Colors.white,
