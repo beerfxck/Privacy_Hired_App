@@ -6,6 +6,7 @@ import 'package:privacy_maid_flutter/constant/domain.dart';
 import 'package:privacy_maid_flutter/model/maidWork.dart';
 import '../components/Maid_Detail.dart';
 import '../widgets/Upcoming_schedule.dart';
+import '../widgets/booking_Schedule.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -94,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 20,
                 ),
               ),
-              UpcomingSchedule(),
+              BookingSchedule(),
               SizedBox(height: 20),
               Text(
                 'แม่บ้านทั้งหมด',

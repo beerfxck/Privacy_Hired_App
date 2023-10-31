@@ -77,6 +77,7 @@ class _HiredInfomationState extends State<HiredInfomation> {
               SizedBox(
                 height: 10,
               ),
+              MaidDetailForHired(),
               TimeInfomation(),
               SizedBox(
                 height: 10,
