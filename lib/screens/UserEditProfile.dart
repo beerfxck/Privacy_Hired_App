@@ -15,6 +15,7 @@ class EditUserPage extends StatefulWidget {
 
 class _EditUserPageState extends State<EditUserPage> {
   final dio = Dio();
+  bool _obscureText = true;
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
@@ -51,6 +52,7 @@ class _EditUserPageState extends State<EditUserPage> {
       print('Error: $e');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,7 +117,8 @@ class _EditUserPageState extends State<EditUserPage> {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   border: InputBorder.none,
-                  labelText: '${resident.isNotEmpty ? resident[0].username : ""}',
+                  labelText:
+                      '${resident.isNotEmpty ? resident[0].username : ""}',
                   labelStyle: GoogleFonts.kanit(
                     fontSize: 16,
                     color: Colors.grey,
@@ -138,13 +141,24 @@ class _EditUserPageState extends State<EditUserPage> {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   border: InputBorder.none,
-                  label: Text('${resident.isNotEmpty ? resident[0].password : ""}',
-                      style: GoogleFonts.kanit(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      )),
+                  labelText:
+                      '${resident.isNotEmpty ? resident[0].password : ""}',
+                  labelStyle: GoogleFonts.kanit(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
                   prefixIcon: Icon(Icons.lock_outlined),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        _obscureText ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  ),
                 ),
+                obscureText: _obscureText,
               ),
             ),
             Container(
