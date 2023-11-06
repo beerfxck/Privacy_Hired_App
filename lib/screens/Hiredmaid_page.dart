@@ -210,6 +210,14 @@ class _HomePageState extends State<HiredMaidPage> {
                 height: 10,
               ),
               Divider(),
+              Text(
+                ' ** กรุณาจองล่วงหน้า้อย่างน้อย 1 วัน **',
+                style: GoogleFonts.kanit(
+                  textStyle: TextStyle(color: Colors.black),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
