@@ -71,12 +71,13 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     final List<dynamic> jsonData = jsonDecode(jsonStr);
     for (var item in jsonData) {
       final DateTime day = DateTime.parse(item['day']);
+      DateTime tomorrow = day.add(Duration(days: 1));
       final Event event = Event(item['day'], item['day'], item['start_work'],
-          item['end_work'], item['statuswork']);
-      if (_kEventSource.containsKey(day)) {
-        _kEventSource[day]!.add(event);
+          item['end_work'], item['statuswork'], item['id_worktime']);
+      if (_kEventSource.containsKey(tomorrow)) {
+        _kEventSource[tomorrow]!.add(event);
       } else {
-        _kEventSource[day] = [event];
+        _kEventSource[tomorrow] = [event];
       }
     }
     kEventsNew.addAll(_kEventSource);
@@ -189,6 +190,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                                 builder: (context) => HiredMaidPage(
                                       workday: value[index].date,
                                       id_user: widget.id_user,
+                                      id_worktime: value[index].id_worktime
                                     )),
                           ),
                           print('${value[index].title}'),

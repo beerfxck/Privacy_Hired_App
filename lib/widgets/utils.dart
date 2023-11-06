@@ -9,7 +9,8 @@ class Event {
   final String start;
   final String end;
   final int statuswork;
-  const Event(this.title, this.date, this.start, this.end, this.statuswork);
+  final int id_worktime;
+  const Event(this.title, this.date, this.start, this.end, this.statuswork, this.id_worktime);
 
   @override
   String toString() => title;

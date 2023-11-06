@@ -12,7 +12,6 @@ import '../model/maidWork.dart';
 class MyWidget extends StatefulWidget {
   final int selectHour;
 
-
   MyWidget({Key? key, required this.selectHour}) : super(key: key);
 
   @override
@@ -22,6 +21,7 @@ class MyWidget extends StatefulWidget {
 class _MyWidgetState extends State<MyWidget> {
   final dio = Dio();
   String? idUser;
+  int? sumprice;
   static FlutterSecureStorage storageToken = FlutterSecureStorage();
   List<maidWork> resident = [];
 
@@ -52,20 +52,19 @@ class _MyWidgetState extends State<MyWidget> {
         print('Request failed with status: ${response.statusCode}');
       }
     } catch (e) {
-      // Handle any exceptions that may occur during the request
       print('Error: $e');
     }
   }
 
   int calculateServiceCost(String? roomsize) {
     if (roomsize == null) {
-      return 0;
+      return sumprice = 0;
     } else if (roomsize.contains("26.5 - 29.5 sq m")) {
-      return 400 * widget.selectHour;
+      return sumprice = (400 + (widget.selectHour)*60);
     } else if (roomsize.contains("34.5 sq m")) {
-      return 500 * widget.selectHour;
+      return sumprice = (500 + (widget.selectHour)*60);
     } else if (roomsize.contains("49.5 - 50.25 sq m")) {
-      return 650 * widget.selectHour;
+      return sumprice = (650 + (widget.selectHour)*60);
     } else {
       return 0;
     }
@@ -89,10 +88,8 @@ class _MyWidgetState extends State<MyWidget> {
             ),
             SizedBox(height: 10),
           ],
-          
         ),
       ),
     );
-    
   }
 }

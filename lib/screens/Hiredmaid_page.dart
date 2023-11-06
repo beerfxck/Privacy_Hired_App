@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:privacy_maid_flutter/components/Showprice.dart';
 import 'package:privacy_maid_flutter/components/Time.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
+import 'package:privacy_maid_flutter/model/maidWork.dart';
 import 'package:privacy_maid_flutter/model/timeWork.dart';
 import 'package:privacy_maid_flutter/components/Calendar.dart';
 
@@ -19,12 +20,10 @@ class HiredMaidPage extends StatefulWidget {
   final int? id_user;
   final String? workday;
   final int? showprice;
-  const HiredMaidPage({
-    Key? key,
-    this.id_user,
-    this.workday,
-    this.showprice,
-  }) : super(key: key);
+  final int? id_worktime;
+  const HiredMaidPage(
+      {Key? key, this.id_user, this.workday, this.showprice, this.id_worktime})
+      : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -33,15 +32,43 @@ class _HomePageState extends State<HiredMaidPage> {
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   DateTime selectedDate = DateTime.now();
   int selectedHours = 1;
+  int? sumprice;
   String start_work = '';
   final TextEditingController _textController = TextEditingController();
   final dio = Dio();
   List<TimeWork> maidWorklist = [];
+  List<maidWork> resident = [];
 
   @override
   void initState() {
     getMaidWork();
+    getData();
     super.initState();
+  }
+
+  Future<void> getData() async {
+    try {
+      resident = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          resident.add(maidWork(
+            username: element["username"],
+            password: element["password"],
+            fname: element["fname"],
+            roomsize: element["roomsize"],
+            idUser: element["id_user"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 
   String? convertDate(String? inputDate) {
@@ -53,6 +80,20 @@ class _HomePageState extends State<HiredMaidPage> {
       }
     }
     return "";
+  }
+
+  int calculateServiceCost(int selectHour) {
+    if (resident[0].roomsize == null) {
+      return 0;
+    } else if (resident[0].roomsize!.contains("26.5 - 29.5 sq m")) {
+      return (400 + (selectHour) * 60);
+    } else if (resident[0].roomsize!.contains("34.5 sq m")) {
+      return (500 + (selectHour) * 60);
+    } else if (resident[0].roomsize!.contains("49.5 - 50.25 sq m")) {
+      return (650 + (selectHour) * 60);
+    } else {
+      return 0;
+    }
   }
 
   void getMaidWork() async {
@@ -85,7 +126,7 @@ class _HomePageState extends State<HiredMaidPage> {
         "work_hour": selectedHours,
         "start_work": start_work,
         "descriptmaid": _textController.text,
-        "service_price": 790,
+        "service_price": calculateServiceCost(selectedHours),
         "maid_rating": 4,
         "status": 1,
         "user_booking": idUser,
@@ -96,8 +137,6 @@ class _HomePageState extends State<HiredMaidPage> {
           await dio.post(url_api + '/books/save', data: maidWorkData);
       if (response.statusCode == 201) {
         print("Maid work saved successfully");
-        // After saving the maidwork, update the statuswork
-        // await updateMaidWorkStatus(response.data["maidwork_id"]);
         Navigator.pushNamed(context, '/BottomNavBar');
       } else {
         print("HTTP Error: ${response.statusCode}");
@@ -106,24 +145,6 @@ class _HomePageState extends State<HiredMaidPage> {
       print("Error: $e");
     }
   }
-
-// Future<void> updateMaidWorkStatus(int maidworkId) async {
-//   try {
-//     final Map<String, dynamic> updateData = {
-//       "statuswork": 2, // Assuming you want to update it to status 2
-//     };
-//     Response response = await dio.put(
-//         url_api + '/books/update-statuswork/$maidworkId',
-//         data: updateData);
-//     if (response.statusCode == 200) {
-//       print("Maid work status updated successfully");
-//     } else {
-//       print("HTTP Error: ${response.statusCode}");
-//     }
-//   } catch (e) {
-//     print("Error: $e");
-//   }
-// }
 
   @override
   Widget build(BuildContext context) {
