@@ -3,15 +3,38 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TimeStartComponents extends StatefulWidget {
   final Function(String) onChanged;
-
-  TimeStartComponents({Key? key, required this.onChanged}) : super(key: key);
+  final int? id_worktimetype;
+  TimeStartComponents({Key? key, required this.onChanged, this.id_worktimetype})
+      : super(key: key);
 
   @override
   _TimeStartComponentsState createState() => _TimeStartComponentsState();
 }
 
 class _TimeStartComponentsState extends State<TimeStartComponents> {
-  String? selectedHours; // To store the selected number of hours.
+  String? selectedHours;
+
+  List<String> generateTimeSlots(int? id_worktimetype) {
+    List<String> timeSlots = [];
+
+    if (id_worktimetype == 1) {
+      timeSlots = ['9.00', '10.00', '11.00'];
+    } else if (id_worktimetype == 2) {
+      timeSlots = ['13.00', '14.00', '15.00', '16.00'];
+    } else if (id_worktimetype == 3) {
+      timeSlots = ['10.00', '11.00'];
+    } else if (id_worktimetype == 4) {
+      timeSlots = ['11.00'];
+    } else if (id_worktimetype == 5) {
+      timeSlots = ['14.00', '15.00', '16.00'];
+    } else if (id_worktimetype == 6) {
+      timeSlots = ['15.00', '16.00'];
+    } else if (id_worktimetype == 7) {
+      timeSlots = ['16.00'];
+    }
+
+    return timeSlots;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,78 +61,24 @@ class _TimeStartComponentsState extends State<TimeStartComponents> {
         ),
         DropdownButtonFormField<String>(
           value: selectedHours,
-          items: <DropdownMenuItem<String>>[
-            DropdownMenuItem<String>(
-              value: '09:00 น.',
+          items: generateTimeSlots(widget.id_worktimetype).map((timeSlot) {
+            return DropdownMenuItem<String>(
+              value: timeSlot,
               child: Text(
-                '9.00',
+                '$timeSlot น.',
                 style: GoogleFonts.kanit(
                   fontSize: 16,
                 ),
               ),
-            ),
-            DropdownMenuItem<String>(
-              value: '10:00',
-              child: Text(
-                '10.00 น.',
-                style: GoogleFonts.kanit(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            DropdownMenuItem<String>(
-              value: '11:00',
-              child: Text(
-                '11.00 น.',
-                style: GoogleFonts.kanit(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            DropdownMenuItem<String>(
-              value: '13:00',
-              child: Text(
-                '13.00 น.',
-                style: GoogleFonts.kanit(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            DropdownMenuItem<String>(
-              value: '14:00',
-              child: Text(
-                '14.00 น.',
-                style: GoogleFonts.kanit(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            DropdownMenuItem<String>(
-              value: '15:00',
-              child: Text(
-                '15.00 น.',
-                style: GoogleFonts.kanit(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            DropdownMenuItem<String>(
-              value: '16:00',
-              child: Text(
-                '16.00 น.',
-                style: GoogleFonts.kanit(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ],
+            );
+          }).toList(),
           onChanged: (String? newValue) {
             setState(() {
               selectedHours = newValue;
               widget.onChanged(newValue!);
             });
           },
-        ),
+        )
       ],
     );
   }

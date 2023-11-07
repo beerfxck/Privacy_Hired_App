@@ -89,7 +89,6 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   }
 
   List<Event> _getEventsForRange(DateTime start, DateTime end) {
-    // Implementation example
     final days = daysInRange(start, end);
 
     return [

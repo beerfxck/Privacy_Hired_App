@@ -22,7 +22,11 @@ class HiredMaidPage extends StatefulWidget {
   final int? id_worktime;
   final int? id_worktimetype;
   const HiredMaidPage(
-      {Key? key, this.id_user, this.workday, this.id_worktime, this.id_worktimetype})
+      {Key? key,
+      this.id_user,
+      this.workday,
+      this.id_worktime,
+      this.id_worktimetype})
       : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
@@ -96,6 +100,28 @@ class _HomePageState extends State<HiredMaidPage> {
     }
   }
 
+  List<int> generateDurationOptions(int? id_worktimetype) {
+    List<int> durationOptions = [];
+
+    if (id_worktimetype == 1) {
+      durationOptions = [1, 2, 3];
+    } else if (id_worktimetype == 2) {
+      durationOptions = [1, 2, 3, 4];
+    } else if (id_worktimetype == 3) {
+      durationOptions = [1, 2];
+    } else if (id_worktimetype == 4) {
+      durationOptions = [1];
+    } else if (id_worktimetype == 5) {
+      durationOptions = [1, 2, 3];
+    } else if (id_worktimetype == 6) {
+      durationOptions = [1, 2];
+    } else if (id_worktimetype == 7) {
+      durationOptions = [1];
+    }
+
+    return durationOptions;
+  }
+
   void getMaidWork() async {
     try {
       Response response = await dio
@@ -127,7 +153,6 @@ class _HomePageState extends State<HiredMaidPage> {
         "start_work": start_work,
         "descriptmaid": _textController.text,
         "service_price": calculateServiceCost(selectedHours),
-        "maid_rating": 4,
         "status": 1,
         "user_booking": idUser,
         "maidbooking": widget.id_user,
@@ -211,7 +236,7 @@ class _HomePageState extends State<HiredMaidPage> {
               ),
               Divider(),
               Text(
-                ' ** กรุณาจองล่วงหน้า้อย่างน้อย 1 วัน **',
+                ' ** กรุณาจองล่วงหน้าอย่างน้อย 1 วัน **',
                 style: GoogleFonts.kanit(
                   textStyle: TextStyle(color: Colors.black),
                   fontSize: 20,
@@ -297,35 +322,18 @@ class _HomePageState extends State<HiredMaidPage> {
                   ),
                   DropdownButtonFormField<int>(
                     value: selectedHours,
-                    items: <DropdownMenuItem<int>>[
-                      DropdownMenuItem<int>(
-                        value: 1,
+                    items: generateDurationOptions(widget.id_worktimetype)
+                        .map((durationOption) {
+                      return DropdownMenuItem<int>(
+                        value: durationOption,
                         child: Text(
-                          '1 ชั่วโมง',
+                          '$durationOption ชั่วโมง',
                           style: GoogleFonts.kanit(
                             fontSize: 16,
                           ),
                         ),
-                      ),
-                      DropdownMenuItem<int>(
-                        value: 2,
-                        child: Text(
-                          '2 ชั่วโมง',
-                          style: GoogleFonts.kanit(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      DropdownMenuItem<int>(
-                        value: 3,
-                        child: Text(
-                          '3 ชั่วโมง',
-                          style: GoogleFonts.kanit(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ],
+                      );
+                    }).toList(),
                     onChanged: (int? newValue) {
                       setState(() {
                         selectedHours = newValue!;
@@ -365,6 +373,7 @@ class _HomePageState extends State<HiredMaidPage> {
 
               TimeStartComponents(
                 onChanged: (data) => {start_work = data},
+                id_worktimetype: widget.id_worktimetype,
               ),
               SizedBox(height: 20),
               // SpecialTextField(),
