@@ -73,7 +73,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
       final DateTime day = DateTime.parse(item['day']);
       DateTime tomorrow = day.add(Duration(days: 1));
       final Event event = Event(item['day'], item['day'], item['start_work'],
-          item['end_work'], item['statuswork'], item['id_worktime']);
+          item['end_work'], item['statuswork'], item['id_worktime'], item['fname'], item['lname'], item['id_worktimetype']);
       if (_kEventSource.containsKey(tomorrow)) {
         _kEventSource[tomorrow]!.add(event);
       } else {
@@ -84,7 +84,6 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   }
 
   List<Event> _getEventsForDay(DateTime day) {
-    // Implementation example
     print(kEventsNew[day] ?? []);
     return kEventsNew[day] ?? [];
   }
@@ -190,14 +189,15 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                                 builder: (context) => HiredMaidPage(
                                       workday: value[index].date,
                                       id_user: widget.id_user,
-                                      id_worktime: value[index].id_worktime
+                                      id_worktime: value[index].id_worktime,
+                                      id_worktimetype: value[index].id_worktimetype,
                                     )),
                           ),
                           print('${value[index].title}'),
                           print('${value[index].date}')
                         },
                         title: Text(
-                            'เวลาเริ่มงาน: ${value[index].start} เวลาจบงาน: ${value[index].end}'),
+                            'เริ่มงาน: ${value[index].start} จบงาน: ${value[index].end} ชื่อ:${value[index].fname} ${value[index].lname}'),
                       ),
                     );
                   },

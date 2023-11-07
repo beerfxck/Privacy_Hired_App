@@ -19,10 +19,10 @@ import '../components/UserDeatailForHired.dart';
 class HiredMaidPage extends StatefulWidget {
   final int? id_user;
   final String? workday;
-  final int? showprice;
   final int? id_worktime;
+  final int? id_worktimetype;
   const HiredMaidPage(
-      {Key? key, this.id_user, this.workday, this.showprice, this.id_worktime})
+      {Key? key, this.id_user, this.workday, this.id_worktime, this.id_worktimetype})
       : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
@@ -270,7 +270,6 @@ class _HomePageState extends State<HiredMaidPage> {
                   ),
                 ),
               ),
-              // TableEventsExample(id_user:widget.id_user),
               SizedBox(
                 height: 10,
               ),

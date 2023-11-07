@@ -10,7 +10,11 @@ class Event {
   final String end;
   final int statuswork;
   final int id_worktime;
-  const Event(this.title, this.date, this.start, this.end, this.statuswork, this.id_worktime);
+  final String fname;
+  final String lname;
+  final int id_worktimetype;
+  const Event(this.title, this.date, this.start, this.end, this.statuswork,
+      this.id_worktime, this.fname, this.lname, this.id_worktimetype);
 
   @override
   String toString() => title;
