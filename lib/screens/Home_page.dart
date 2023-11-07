@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Text(
-                ' ${resident.isNotEmpty ? resident[0].fname : ""} ${resident.isNotEmpty ? resident[0].lname : ""}', // Use the first resident's username if the list is not empty
+                ' ${resident.isNotEmpty ? resident[0].fname : ""} ${resident.isNotEmpty ? resident[0].lname : ""}', 
                 textAlign: TextAlign.right,
                 style: GoogleFonts.kanit(
                   textStyle: TextStyle(color: Colors.black),

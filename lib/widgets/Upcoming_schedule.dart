@@ -81,9 +81,8 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
       padding: const EdgeInsets.symmetric(horizontal: 1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 15),
-          Container(
+        children: bookwork.map((booking) {
+          return Container(
             padding: const EdgeInsets.fromLTRB(3, 0, 3, 15),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 232, 241, 230),
@@ -103,7 +102,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                   ListTile(
                     contentPadding: const EdgeInsets.only(top: 20, right: 17),
                     trailing: Text(
-                      "${bookwork.isNotEmpty ? 'ชื่อ: ${bookwork[0].fname ?? ''}\nนามสกุล: ${bookwork[0].lname ?? ''}' : ''}",
+                      "${booking.fname != null ? 'ชื่อ: ${booking.fname}\nนามสกุล: ${booking.lname ?? ''}' : ''}",
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -139,7 +138,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                           ),
                           const SizedBox(width: 5),
                           Text(
-                            '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}',
+                            '${convertDate(booking.bookingDate) ?? ""}',
                             style: const TextStyle(
                               color: Colors.black54,
                               fontSize: 14,
@@ -155,7 +154,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                           ),
                           const SizedBox(width: 5),
                           Text(
-                            "${bookwork.isNotEmpty ? bookwork[0].startWork : ""}",
+                            "${booking.startWork ?? ""}",
                             style: const TextStyle(
                               color: Colors.black54,
                               fontSize: 14,
@@ -174,7 +173,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                           ),
                           const SizedBox(width: 5),
                           Text(
-                            "${bookwork.isNotEmpty ? bookwork[0].statusDescription : ""}",
+                            "${booking.statusDescription ?? ""}",
                             style: const TextStyle(
                               color: Colors.black54,
                               fontSize: 14,
@@ -211,12 +210,12 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                         ),
                       ),
                       InkWell(
-                        onTap: bookwork.isNotEmpty
+                        onTap: booking.idUser != null
                             ? () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => InformationPage(
-                                        id_user: bookwork[0].idUser),
+                                        id_user: booking.idUser),
                                   ),
                                 );
                               }
@@ -246,8 +245,8 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                 ],
               ),
             ),
-          ),
-        ],
+          );
+        }).toList(),
       ),
     );
   }

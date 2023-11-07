@@ -33,7 +33,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
       bookwork = [];
       idUser = await storageToken.read(key: 'id_user');
       final response =
-          await dio.get(url_api + '/books/get-book-resident/' + idUser!);
+          await dio.get(url_api + '/books/get-book-residentnew/' + idUser!);
       if (response.statusCode == 200) {
         final responseData = response.data;
         for (var element in responseData) {
