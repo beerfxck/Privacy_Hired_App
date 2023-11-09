@@ -45,7 +45,7 @@ class _ReportPageState extends State<ReportPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 4),
               SizedBox(
                 height: 10,
               ),
@@ -59,7 +59,7 @@ class _ReportPageState extends State<ReportPage> {
               ),
               SizedBox(height: 4),
               Padding(
-                padding: const EdgeInsets.fromLTRB(40, 20, 0, 0),
+                padding: const EdgeInsets.fromLTRB(40, 10, 0, 0),
                 child: Text(
                   'เลขห้อง :',
                   style: TextStyle(
@@ -77,7 +77,7 @@ class _ReportPageState extends State<ReportPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 4),
               SizedBox(
                 height: 10,
               ),
