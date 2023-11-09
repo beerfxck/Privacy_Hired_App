@@ -9,7 +9,13 @@ import '../constant/domain.dart';
 import '../model/BookWork.dart';
 
 class TimeInfomation extends StatefulWidget {
-  const TimeInfomation({super.key});
+   final int? id_user;
+  final int? bookingId;
+  const TimeInfomation({
+    Key? key,
+    this.id_user,
+    this.bookingId,
+  }) : super(key: key);
 
   @override
   State<TimeInfomation> createState() => _TimeInfomationState();

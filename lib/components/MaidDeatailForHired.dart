@@ -7,7 +7,10 @@ import 'package:privacy_maid_flutter/model/maidWork.dart';
 class MaidDetailForHired extends StatefulWidget {
   final int? id_user;
   final String? workday;
-  const MaidDetailForHired({Key? key, this.id_user, this.workday}) : super(key: key);
+  final int? bookingId;
+  const MaidDetailForHired(
+      {Key? key, this.id_user, this.workday, this.bookingId})
+      : super(key: key);
   @override
   _MaidDetailForHiredState createState() => _MaidDetailForHiredState();
 }
@@ -17,8 +20,8 @@ class _MaidDetailForHiredState extends State<MaidDetailForHired> {
   List<maidWork> maidWorklist = [];
   @override
   void initState() {
-    super.initState();
     getMaidByID();
+    super.initState();
   }
 
   void getMaidByID() async {

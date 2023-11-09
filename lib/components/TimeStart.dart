@@ -18,19 +18,19 @@ class _TimeStartComponentsState extends State<TimeStartComponents> {
     List<String> timeSlots = [];
 
     if (id_worktimetype == 1) {
-      timeSlots = ['9.00', '10.00', '11.00'];
+      timeSlots = ['09:00', '10:00', '11:00'];
     } else if (id_worktimetype == 2) {
-      timeSlots = ['13.00', '14.00', '15.00', '16.00'];
+      timeSlots = ['13:00', '14:00', '15:00', '16:00'];
     } else if (id_worktimetype == 3) {
-      timeSlots = ['10.00', '11.00'];
+      timeSlots = ['10:00', '11:00'];
     } else if (id_worktimetype == 4) {
-      timeSlots = ['11.00'];
+      timeSlots = ['11:00'];
     } else if (id_worktimetype == 5) {
-      timeSlots = ['14.00', '15.00', '16.00'];
+      timeSlots = ['14:00', '15:00', '16:00'];
     } else if (id_worktimetype == 6) {
-      timeSlots = ['15.00', '16.00'];
+      timeSlots = ['15:00', '16:00'];
     } else if (id_worktimetype == 7) {
-      timeSlots = ['16.00'];
+      timeSlots = ['16:00'];
     }
 
     return timeSlots;
