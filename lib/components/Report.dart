@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ReportComponents extends StatefulWidget {
   @override
@@ -23,19 +24,15 @@ class _ReportComponentsState extends State<ReportComponents> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: 500,
-            height: 300,
+            width: 350,
+            height: 200,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(20.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
-                ),
-              ],
+              borderRadius: BorderRadius.circular(10.0),
+              border: Border.all(
+                color: Color.fromARGB(255, 216, 216, 216),
+                width: 1.5, 
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -43,7 +40,7 @@ class _ReportComponentsState extends State<ReportComponents> {
                 controller: _reportController,
                 maxLines: null,
                 decoration: InputDecoration(
-                  hintText: 'ปัญหาที่พบ',
+                  hintText: 'กรอกปัญหาที่ต้องการแจ้ง...',
                   border: InputBorder.none,
                 ),
               ),
@@ -65,7 +62,7 @@ class _ReportComponentsState extends State<ReportComponents> {
               ),
               child: Text(
                 'แจ้งปัญหา',
-                style: TextStyle(
+                style: GoogleFonts.kanit(
                   color: Colors.white,
                   fontSize: 18.0,
                 ),
