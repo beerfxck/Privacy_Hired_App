@@ -31,7 +31,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
     super.initState();
   }
 
-   Future<void> getData() async {
+  Future<void> getData() async {
     try {
       resident = [];
       idUser = await storageToken.read(key: 'id_user');
@@ -102,12 +102,13 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 1),
+      padding: const EdgeInsets.fromLTRB(3, 15, 3, 3),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: bookWork.map((booking) {
           return Container(
-            padding: const EdgeInsets.fromLTRB(3, 0, 3, 15),
+            padding: const EdgeInsets.fromLTRB(3, 0, 3, 10),
+            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 232, 241, 230),
               borderRadius: BorderRadius.circular(15),
