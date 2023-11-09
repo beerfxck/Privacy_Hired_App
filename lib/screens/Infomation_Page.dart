@@ -15,9 +15,11 @@ import '../model/BookWork.dart';
 
 class InformationPage extends StatefulWidget {
   final int? id_user;
+  final int? bookingId;
   const InformationPage({
     Key? key,
     this.id_user,
+    this.bookingId,
   }) : super(key: key);
 
   @override
@@ -70,6 +72,7 @@ class _InformationPageState extends State<InformationPage> {
       print('Error: $e');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,7 +130,7 @@ class _InformationPageState extends State<InformationPage> {
             SizedBox(
               height: 10,
             ),
-            MaiddetailForBooking(),
+            MaiddetailForBooking(bookingId: widget.bookingId),
             SizedBox(
               height: 10,
             ),
@@ -138,7 +141,7 @@ class _InformationPageState extends State<InformationPage> {
                 //height: 20,
               ),
             ),
-            DateForBook(),
+            DateForBook(bookingId: widget.bookingId),
             SizedBox(
               height: 10,
             ),
@@ -164,7 +167,8 @@ class _InformationPageState extends State<InformationPage> {
               alignment: Alignment.centerLeft,
               child: Center(
                 child: Text(
-                  'ค่าบริการ : ' '${bookwork.isNotEmpty ? bookwork[0].servicePrice : ""}',
+                  'ค่าบริการ : '
+                  '${bookwork.isNotEmpty ? bookwork[0].servicePrice : ""}',
                   style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.black),
                     fontSize: 20,

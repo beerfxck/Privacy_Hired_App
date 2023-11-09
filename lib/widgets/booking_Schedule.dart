@@ -64,6 +64,8 @@ class _BookingScheduleState extends State<BookingSchedule> {
     }
   }
 
+  
+
   String? convertDate(String? inputDate) {
     if (inputDate != null) {
       final parts = inputDate.split('T');
@@ -215,7 +217,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                             ? () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => InformationPage(
-                                      // id_user: bookwork[0].idUser),
+                                       bookingId: bookwork[0].bookingId
                                       ),
                                 ));
                               }
