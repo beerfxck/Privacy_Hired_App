@@ -120,7 +120,7 @@ class _SuccessInfoState extends State<SuccessInfo> {
               ),
               MaidDetailForHired(
                 bookingId: widget.bookingId,
-                id_user: bookwork == null ? null : bookwork[0].maidbooking 
+                id_user: bookwork.isNotEmpty ? bookwork[0].maidbooking : null,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -133,8 +133,10 @@ class _SuccessInfoState extends State<SuccessInfo> {
               SizedBox(
                 height: 10,
               ),
-              TimeInfomation(bookingId: widget.bookingId,
-                id_user: bookwork == null ? null : bookwork[0].maidbooking ),
+              TimeInfomation(
+                bookingId: widget.bookingId,
+                id_user: bookwork.isNotEmpty ? bookwork[0].maidbooking : null,
+              ),
               SizedBox(
                 height: 10,
               ),
