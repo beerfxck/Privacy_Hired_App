@@ -125,7 +125,7 @@ Widget build(BuildContext context) {
                   children: [
                     ListTile(
                       title: Text(
-                        "แม่บ้านขยัน เลยเส็จแล้ว",
+                        "${booking.fname ?? ""} ${booking.lname ?? ""}",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

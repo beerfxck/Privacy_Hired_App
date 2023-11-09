@@ -1,9 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/TimeInfomation.dart';
 import 'package:privacy_maid_flutter/components/User_NameAndTell.dart';
+import 'package:privacy_maid_flutter/constant/domain.dart';
+import 'package:privacy_maid_flutter/model/BookWork.dart';
+import 'package:privacy_maid_flutter/model/maidWork.dart';
 
 import '../Widget_Maid/Maid_Navigatorbar.dart';
 import '../Widget_Maid/Work_process.dart';
@@ -11,13 +16,97 @@ import '../screensMaid/Schedule_Maid.dart';
 import 'UserDeatailForHired.dart';
 
 class WorkInfo extends StatefulWidget {
-  const WorkInfo({super.key});
+  final int? bookingId;
+  
+  const WorkInfo({Key? key, this.bookingId}) : super(key: key);
 
   @override
   State<WorkInfo> createState() => _WorkInfoState();
 }
 
 class _WorkInfoState extends State<WorkInfo> {
+ final dio = Dio();
+  String? idUser;
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  List<maidWork> resident = [];
+  List<BookWork> bookwork = [];
+
+  @override
+  void initState() {
+    getData();
+    getbookWork();
+    super.initState();
+  }
+
+  Future<void> getData() async {
+    try {
+      resident = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          resident.add(maidWork(
+            idUser: element["id_user"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> getbookWork() async {
+    idUser = await storageToken.read(key: 'id_user');
+    try {
+      final Map<String, dynamic> maidWorkData = {
+        "booking_id": widget.bookingId,
+        "maidbooking": idUser,
+      };
+      print(maidWorkData);
+      Response response =
+          await dio.post(url_api + '/books/get-bookmaid-info', data: maidWorkData);
+      if (response.statusCode == 201) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          bookwork.add(BookWork(
+            idUser: element["id_user"],
+            bookingDate: element["booking_date"],
+            bookingId: element["booking_id"],
+            workHour: element["work_hour"],
+            startWork: element["start_work"],
+            descriptmaid: element["descriptmaid"],
+            servicePrice: element["service_price"],
+            maidbooking: element["maidbooking"],
+            fname: element["fname"],
+            lname: element["lname"],
+            phone: element["phone"],
+            statusDescription: element["status_description"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  String? convertDate(String? inputDate) {
+    if (inputDate != null) {
+      final parts = inputDate.split('T');
+      if (parts.length >= 1) {
+        final datePart = parts[0];
+        return datePart;
+      }
+    }
+    return "";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,7 +197,7 @@ class _WorkInfoState extends State<WorkInfo> {
                 alignment: Alignment.centerLeft,
                 child: Center(
                   child: Text(
-                    'ค่าบริการ : ' + '520 บาท',
+                    'ค่าบริการ : ${bookwork.isNotEmpty ? bookwork[0].servicePrice?.toString() ?? "" : null}',
                     style: GoogleFonts.kanit(
                       textStyle: TextStyle(color: Colors.black),
                       fontSize: 20,
