@@ -1,30 +1,143 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/MaidDeatailForHired.dart';
 import 'package:privacy_maid_flutter/components/TimeInfomation.dart';
 import 'package:privacy_maid_flutter/components/UserDeatailForHired.dart';
 
+import '../constant/domain.dart';
+import '../model/BookWork.dart';
+import '../model/maidWork.dart';
+
 class CancleInfo extends StatefulWidget {
-  const CancleInfo({super.key});
+  final int? bookingId;
+  const CancleInfo({
+    Key? key,
+    this.bookingId,
+  }) : super(key: key);
 
   @override
   State<CancleInfo> createState() => _CancleInfoState();
 }
 
 class _CancleInfoState extends State<CancleInfo> {
+  final dio = Dio();
+  String? idUser;
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  List<maidWork> resident = [];
+  List<BookWork> bookwork = [];
+
+  @override
+  void initState() {
+    getData();
+    getbookWork();
+    super.initState();
+  }
+
+  Future<void> getData() async {
+    try {
+      resident = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          resident.add(maidWork(
+            idUser: element["id_user"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> getbookWork() async {
+    idUser = await storageToken.read(key: 'id_user');
+    try {
+      final Map<String, dynamic> maidWorkData = {
+        "booking_id": widget.bookingId.toString(),
+        "user_booking": idUser,
+      };
+      print(maidWorkData);
+      Response response =
+          await dio.post(url_api + '/books/get-book-info', data: maidWorkData);
+      if (response.statusCode == 201) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          bookwork.add(BookWork(
+            idUser: element["id_user"],
+            bookingDate: element["booking_date"],
+            bookingId: element["booking_id"],
+            workHour: element["work_hour"],
+            startWork: element["start_work"],
+            descriptmaid: element["descriptmaid"],
+            servicePrice: element["service_price"],
+            maidbooking: element["maidbooking"],
+            fname: element["fname"],
+            lname: element["lname"],
+            phone: element["phone"],
+            statusDescription: element["status_description"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  String? convertDate(String? inputDate) {
+    if (inputDate != null) {
+      final parts = inputDate.split('T');
+      if (parts.length >= 1) {
+        final datePart = parts[0];
+        return datePart;
+      }
+    }
+    return "";
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(243, 255, 255, 255),
-        title: Padding(
+    if (bookwork.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(243, 255, 255, 255),
+          title: Padding(
             padding: const EdgeInsets.fromLTRB(75, 0, 0, 0),
             child: Text(
               'รายละเอียด',
               style: TextStyle(color: Colors.black),
-            )),
+            ),
+          ),
+        ),
+        body: Center(
+          child: Text('ไม่พบข้อมูลการจอง'),
+        ),
+      );
+    }
+
+    final booking = bookwork[0];
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(243, 255, 255, 255),
+        title: Padding(
+          padding: const EdgeInsets.fromLTRB(75, 0, 0, 0),
+          child: Text(
+            'รายละเอียด',
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -58,52 +171,20 @@ class _CancleInfoState extends State<CancleInfo> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              MaidDetailForHired(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  //color: Colors.black,
-                  thickness: 1,
-                  //height: 20,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TimeInfomation(),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  //color: Colors.black,
-                  thickness: 1,
-                  //height: 20,
-                ),
-              ),
+              SizedBox(height: 10),
+              MaidDetailForHired(bookingId: bookwork[0].bookingId),
+              Divider(thickness: 1),
+              SizedBox(height: 10),
+              TimeInfomation(bookingId: bookwork[0].bookingId),
+              Divider(thickness: 1),
+              SizedBox(height: 10),
               UserDetailForHired(),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  //color: Colors.black,
-                  thickness: 1,
-                  //height: 20,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
+              Divider(thickness: 1),
+              SizedBox(height: 10),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'ค่าบริการ : ' + '520 บาท',
+                  'ค่าบริการ : ${booking.servicePrice?.toString() ?? ""}',
                   style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.black),
                     fontSize: 20,
@@ -113,13 +194,11 @@ class _CancleInfoState extends State<CancleInfo> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Center(
-                  child: Center(
-                    child: Text(
-                      'ยกเลิกแล้ว',
-                      style: GoogleFonts.kanit(
-                        textStyle: TextStyle(color: Colors.red),
-                        fontSize: 22,
-                      ),
+                  child: Text(
+                    'ยกเลิกแล้ว',
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color: Colors.red),
+                      fontSize: 22,
                     ),
                   ),
                 ),

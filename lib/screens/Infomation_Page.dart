@@ -119,7 +119,6 @@ class _InformationPageState extends State<InformationPage> {
             SizedBox(
               height: 10,
             ),
-            // MaidDetailForHired(id_user: widget.id_user),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Divider(
