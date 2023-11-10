@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:privacy_maid_flutter/components/MaidDeatailForHired.dart';
-import 'package:privacy_maid_flutter/components/TimeInfomation.dart';
-import 'package:privacy_maid_flutter/components/UserDeatailForHired.dart';
 
 class InfoCompleteForMaid extends StatefulWidget {
-  const InfoCompleteForMaid({super.key});
+  const InfoCompleteForMaid({Key? key}) : super(key: key);
 
   @override
   State<InfoCompleteForMaid> createState() => _InfoCompleteForMaidState();
@@ -20,16 +15,18 @@ class _InfoCompleteForMaidState extends State<InfoCompleteForMaid> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(243, 255, 255, 255),
         title: Padding(
-            padding: const EdgeInsets.fromLTRB(75, 0, 0, 0),
-            child: Text(
-              'รายละเอียด',
-              style: TextStyle(color: Colors.black),
-            )),
+          padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
+          child: Text(
+            'รายละเอียดการจอง',
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.fromLTRB(10, 40, 10, 0),
-          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+          margin: EdgeInsets.fromLTRB(10, 20, 10, 0), // Reduced top margin
+          padding: EdgeInsets.symmetric(
+              horizontal: 25, vertical: 15), // Reduced vertical padding
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10.0),
@@ -46,86 +43,58 @@ class _InfoCompleteForMaidState extends State<InfoCompleteForMaid> {
             ],
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  ' รายละเอียดการจอง',
-                  style: GoogleFonts.kanit(
-                    textStyle: TextStyle(color: Colors.black),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  //color: Colors.black,
-                  thickness: 1,
-                  //height: 20,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TimeInfomation(),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  //color: Colors.black,
-                  thickness: 1,
-                  //height: 20,
-                ),
-              ),
-              UserDetailForHired(),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  //color: Colors.black,
-                  thickness: 1,
-                  //height: 20,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'ค่าบริการ : ' + '520 บาท',
-                  style: GoogleFonts.kanit(
-                    textStyle: TextStyle(color: Colors.black),
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              // Align(
-              //   alignment: Alignment.centerLeft,
-              //   child: Center(
-              //     child: Center(
-              //       child: Text(
-              //         'เสร้จสิ้นแล้ว',
-              //         style: GoogleFonts.kanit(
-              //           textStyle: TextStyle(color: Colors.green),
-              //           fontSize: 22,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              MainText('รายละเอียดการจอง'),
+              buildDivider(),
+              SupText('วันที่จอง :' + '   ดึงข้อมูล'),
+              SupText('จำนวชั่วโมง : ' + '   ดึงข้อมูล'),
+              buildDivider(),
+              MainText('รายละเอียดทำความสะอาด'),
+              SupText('หมายเลขห้อง :' + '   ดึงข้อมูล'),
+              SupText('ขนาดห้อง :' + '   ดึงข้อมูล'),
+              SupText('ชื่อเจ้าของห้อง :' + '   ดึงข้อมูล'),
+              SupText('เบอร์โทรศัพท์ :' + '   ดึงข้อมูล'),
+              buildDivider(),
+              SupText('ค่าบริการ :' + '   ดึงข้อมูล'),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget SupText(String text) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 4), // Adjust the vertical margin
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+    );
+  }
+
+  Widget MainText(String text) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 8), // Adjust the vertical margin
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  Widget buildDivider() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Divider(
+        thickness: 1,
       ),
     );
   }
