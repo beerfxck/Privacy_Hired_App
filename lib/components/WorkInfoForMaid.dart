@@ -17,7 +17,7 @@ import 'UserDeatailForHired.dart';
 
 class WorkInfo extends StatefulWidget {
   final int? bookingId;
-  
+
   const WorkInfo({Key? key, this.bookingId}) : super(key: key);
 
   @override
@@ -25,7 +25,7 @@ class WorkInfo extends StatefulWidget {
 }
 
 class _WorkInfoState extends State<WorkInfo> {
- final dio = Dio();
+  final dio = Dio();
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
@@ -67,8 +67,8 @@ class _WorkInfoState extends State<WorkInfo> {
         "maidbooking": idUser,
       };
       print(maidWorkData);
-      Response response =
-          await dio.post(url_api + '/books/get-bookmaid-info', data: maidWorkData);
+      Response response = await dio.post(url_api + '/books/get-bookmaid-info',
+          data: maidWorkData);
       if (response.statusCode == 201) {
         final responseData = response.data;
         for (var element in responseData) {

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class InfoCompleteForMaid extends StatefulWidget {
-  const InfoCompleteForMaid({Key? key}) : super(key: key);
+import 'Maid_Navigatorbar.dart';
+
+class InfoProcessForMaid extends StatefulWidget {
+  const InfoProcessForMaid({Key? key}) : super(key: key);
 
   @override
-  State<InfoCompleteForMaid> createState() => _InfoCompleteForMaidState();
+  State<InfoProcessForMaid> createState() => _InfoProcessForMaidState();
 }
 
-class _InfoCompleteForMaidState extends State<InfoCompleteForMaid> {
+class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +71,29 @@ class _InfoCompleteForMaidState extends State<InfoCompleteForMaid> {
 
               //ราคา
               SupText('ค่าบริการ :' + '   ดึงข้อมูล'), //ใส่ตรงนี้
+
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MaidBottomNavBar(),
+                        settings: RouteSettings(
+                          arguments:
+                              1, // Set the current index to 1 (second page).
+                        ),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                  ),
+                  child: Text(
+                    'เริ่มงาน',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

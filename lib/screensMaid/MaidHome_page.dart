@@ -54,6 +54,7 @@ class _MaidHomePageState extends State<MaidHomePage> {
       print('Error: $e');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,6 +98,9 @@ class _MaidHomePageState extends State<MaidHomePage> {
                   fontWeight: FontWeight.w500,
                   fontSize: 20,
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               WorkforMaid(),
               SizedBox(height: 20),

@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/WorkInfoForMaid.dart';
 import 'package:privacy_maid_flutter/screens/HiredInfomation.dart';
 
+import '../Widget_Maid/info_process.dart';
+import '../Widget_Maid/informationcompleteMaid.dart';
 import '../constant/domain.dart';
 import '../model/BookWork.dart';
 import '../model/maidWork.dart';
@@ -109,7 +111,7 @@ class _WorkforMaidState extends State<WorkforMaid> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: bookWork.map((booking) {
           return SizedBox(
-             // ใส่ height ที่ถูกต้อง
+            // ใส่ height ที่ถูกต้อง
             child: Container(
               padding: EdgeInsets.all(13),
               decoration: BoxDecoration(
@@ -200,9 +202,9 @@ class _WorkforMaidState extends State<WorkforMaid> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => WorkInfo(
-                                  bookingId: booking.bookingId,
-                                ),
+                                builder: (context) => InfoProcessForMaid(
+                                    // bookingId: booking.bookingId,
+                                    ),
                               ),
                             );
                           },
