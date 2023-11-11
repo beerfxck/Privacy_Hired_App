@@ -75,6 +75,71 @@ class _InformationPageState extends State<InformationPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isCancelled = false;
+    void _showCancelDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // title: Text("ยืนยันการยกเลิกรับบริการ"),
+            content: Text(
+              "คุณต้องการยกเลิกรับบริการหรือไม่?",
+              style: GoogleFonts.kanit(
+                textStyle: TextStyle(color: Colors.black),
+                fontSize: 17,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            actions: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Close the dialog
+                    },
+                    style: TextButton.styleFrom(
+                      primary: Colors.black, // Button text color
+                    ),
+                    child: Text(
+                      "ไม่",
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.black),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Perform the cancellation logic here
+                      // This can include updating the state and making API calls
+                      setState(() {
+                        isCancelled = true;
+                      });
+                      Navigator.of(context).pop(); // Close the dialog
+                    },
+                    style: TextButton.styleFrom(
+                      primary: Colors.red, // Button text color
+                    ),
+                    child: Text(
+                      "ยกเลิก",
+                      style: GoogleFonts.kanit(
+                        textStyle:
+                            TextStyle(color: Color.fromARGB(255, 255, 0, 0)),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(243, 255, 255, 255),
@@ -104,78 +169,109 @@ class _InformationPageState extends State<InformationPage> {
               ),
             ],
           ),
-          child: Column(children: <Widget>[
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                ' รายละเอียดการจอง',
-                style: GoogleFonts.kanit(
-                  textStyle: TextStyle(color: Colors.black),
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Divider(
-                thickness: 1,
-                //height: 20,
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            MaiddetailForBooking(bookingId: widget.bookingId),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Divider(
-                thickness: 1,
-                //height: 20,
-              ),
-            ),
-            DateForBook(bookingId: widget.bookingId),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Divider(
-                thickness: 1,
-                //height: 20,
-              ),
-            ),
-            UserDetailForHired(),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Divider(
-                thickness: 1,
-                //height: 20,
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Center(
+          child: Column(
+            children: <Widget>[
+              Align(
+                alignment: Alignment.centerLeft,
                 child: Text(
-                  'ค่าบริการ : '
-                  '${bookwork.isNotEmpty ? bookwork[0].servicePrice : ""}',
+                  ' รายละเอียดการจอง',
                   style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.black),
                     fontSize: 20,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
-            ),
-          ]),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Divider(
+                  thickness: 1,
+                  //height: 20,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              MaiddetailForBooking(bookingId: widget.bookingId),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Divider(
+                  thickness: 1,
+                  //height: 20,
+                ),
+              ),
+              DateForBook(bookingId: widget.bookingId),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Divider(
+                  thickness: 1,
+                  //height: 20,
+                ),
+              ),
+              UserDetailForHired(),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Divider(
+                  thickness: 1,
+                  //height: 20,
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Center(
+                  child: Text(
+                    'ค่าบริการ : '
+                    '${bookwork.isNotEmpty ? bookwork[0].servicePrice : ""}',
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color: Colors.black),
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              InkWell(
+                onTap: bookwork.isNotEmpty
+                    ? () {
+                        _showCancelDialog(); // Show the cancellation confirmation dialog
+                      }
+                    : null,
+                child: Container(
+                  width: 300,
+                  height: 40,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "ยกเลิกรับบริการ",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

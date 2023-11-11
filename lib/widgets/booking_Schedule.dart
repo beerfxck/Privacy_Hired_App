@@ -64,8 +64,6 @@ class _BookingScheduleState extends State<BookingSchedule> {
     }
   }
 
-  
-
   String? convertDate(String? inputDate) {
     if (inputDate != null) {
       final parts = inputDate.split('T');
@@ -190,40 +188,39 @@ class _BookingScheduleState extends State<BookingSchedule> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          width: 150,
-                          height: 40,
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 221, 2, 2),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "ยกเลิกการจอง",
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {},
+                      //   child: Container(
+                      //     width: 150,
+                      //     height: 40,
+                      //     padding: const EdgeInsets.symmetric(vertical: 8),
+                      //     decoration: BoxDecoration(
+                      //       color: const Color.fromARGB(255, 221, 2, 2),
+                      //       borderRadius: BorderRadius.circular(30),
+                      //     ),
+                      //     child: Center(
+                      //       child: Text(
+                      //         "ยกเลิกการจอง",
+                      //         style: const TextStyle(
+                      //           fontSize: 14,
+                      //           fontWeight: FontWeight.w400,
+                      //           color: Colors.white,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       InkWell(
                         onTap: bookwork.isNotEmpty
                             ? () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => InformationPage(
-                                       bookingId: bookwork[0].bookingId
-                                      ),
+                                      bookingId: bookwork[0].bookingId),
                                 ));
                               }
                             : null,
                         child: Container(
-                          width: 150,
+                          width: 300,
                           height: 40,
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
@@ -234,7 +231,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                             child: Text(
                               "รายละเอียด",
                               style: const TextStyle(
-                                fontSize: 14,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.white,
                               ),
