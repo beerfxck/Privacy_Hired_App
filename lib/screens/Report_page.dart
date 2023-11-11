@@ -89,14 +89,16 @@ class _ReportPageState extends State<ReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(243, 255, 255, 255),
-        title: Padding(
-          padding: const EdgeInsets.fromLTRB(94, 0, 0, 0),
-          child: Text(
-            'แจ้งปัญหา',
-            style: GoogleFonts.kanit(color: Colors.black),
+        backgroundColor: Color.fromARGB(255, 232, 241, 230),
+        title: Text(
+          'แจ้งปัญหา',
+          style: GoogleFonts.kanit(
+            textStyle: TextStyle(color: Colors.green),
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
           ),
         ),
+        centerTitle: true,
         iconTheme: IconThemeData(color: Colors.green),
       ),
       body: Column(

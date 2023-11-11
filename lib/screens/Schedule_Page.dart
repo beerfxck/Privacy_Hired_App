@@ -67,7 +67,7 @@ class _ScheduleState extends State<SchedulePage> {
           Text(
             'ยกเลิก',
             style: GoogleFonts.kanit(
-              textStyle: TextStyle(color: Color.fromARGB(255, 241, 8, 8)),
+              textStyle: TextStyle(color: Colors.black),
               fontWeight: FontWeight.w500,
               fontSize: 20,
             ),
