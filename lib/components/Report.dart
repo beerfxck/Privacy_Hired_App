@@ -62,7 +62,7 @@ class _ReportComponentsState extends State<ReportComponents> {
           ElevatedButton(
             onPressed: _handleSubmit,
             style: ElevatedButton.styleFrom(
-              primary: Colors.red,
+              primary: Colors.red[700],
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),

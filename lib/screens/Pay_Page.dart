@@ -5,7 +5,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'package:privacy_maid_flutter/screens/UserReview.dart';
+
 class PayPage extends StatefulWidget {
+  final int? id_user;
+  final int? idBooking;
+  const PayPage({
+    Key? key,
+    this.id_user,
+    this.idBooking,
+  }) : super(key: key);
+
   @override
   _PayPageState createState() => _PayPageState();
 }
@@ -153,7 +163,10 @@ class _PayPageState extends State<PayPage> {
                           children: [
                             Expanded(
                               child: image == null
-                                  ? Center(child: Text('no image selected',))
+                                  ? Center(
+                                      child: Text(
+                                      'no image selected',
+                                    ))
                                   : Image.memory(base64Decode("${image}")),
                             ),
                             ElevatedButton(
@@ -163,7 +176,8 @@ class _PayPageState extends State<PayPage> {
                                 elevation: 8,
                               ),
                               onPressed: () {
-                                _showImageSourceActionSheet(context);},
+                                _showImageSourceActionSheet(context);
+                              },
                               child: Text(
                                 'อัปโหลดรูปภาพ',
                                 style: GoogleFonts.kanit(
@@ -179,7 +193,13 @@ class _PayPageState extends State<PayPage> {
                                 elevation: 8,
                               ),
                               onPressed: () {
-                                Navigator.pushNamed(context, '/UserReview');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => UserReview(
+                                        idBooking: widget.idBooking
+                                      )),
+                                );
                               },
                               child: Text(
                                 'เสร็จสิ้น',

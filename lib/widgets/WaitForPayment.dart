@@ -235,7 +235,9 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => PayPage(),
+                                  builder: (context) => PayPage(
+                                    idBooking:booking.bookingId
+                                  ),
                                 ),
                               );
                             },
