@@ -166,7 +166,10 @@ class _SuccessInfoState extends State<SuccessInfo> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'ค่าบริการ : ' + '520 บาท',
+                  'ค่าบริการ : ' +
+                      (bookwork.isNotEmpty
+                          ? bookwork[0].servicePrice.toString()
+                          : ""),
                   style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.black),
                     fontSize: 20,

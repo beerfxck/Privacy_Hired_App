@@ -1,16 +1,111 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:privacy_maid_flutter/constant/domain.dart';
+import 'package:privacy_maid_flutter/model/BookWork.dart';
+import 'package:privacy_maid_flutter/model/maidWork.dart';
 
 import 'Maid_Navigatorbar.dart';
 
 class InfoProcessForMaid extends StatefulWidget {
-  const InfoProcessForMaid({Key? key}) : super(key: key);
+  final int? id_user;
+  final int? bookingId;
+  const InfoProcessForMaid({
+    Key? key,
+    this.id_user,
+    this.bookingId,
+  }) : super(key: key);
 
   @override
   State<InfoProcessForMaid> createState() => _InfoProcessForMaidState();
 }
 
 class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
+final dio = Dio();
+  String? idUser;
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  List<maidWork> resident = [];
+  List<BookWork> bookwork = [];
+
+  @override
+  void initState() {
+    getData();
+    getbookWork();
+    super.initState();
+  }
+
+  Future<void> getData() async {
+    try {
+      resident = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          resident.add(maidWork(
+            idUser: element["id_user"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> getbookWork() async {
+    idUser = await storageToken.read(key: 'id_user');
+    try {
+      final Map<String, dynamic> maidWorkData = {
+        "booking_id": widget.bookingId,
+        "maidbooking": idUser,
+      };
+      print(maidWorkData);
+      Response response =
+          await dio.post(url_api + '/books/get-bookmaid-info', data: maidWorkData);
+      if (response.statusCode == 201) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          bookwork.add(BookWork(
+            idUser: element["id_user"],
+            bookingDate: element["booking_date"],
+            bookingId: element["booking_id"],
+            workHour: element["work_hour"],
+            startWork: element["start_work"],
+            descriptmaid: element["descriptmaid"],
+            servicePrice: element["service_price"],
+            maidbooking: element["maidbooking"],
+            fname: element["fname"],
+            lname: element["lname"],
+            phone: element["phone"],
+            roomnumber: element["roomnumber"],
+            roomsize: element["roomsize"],
+            statusDescription: element["status_description"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  String? convertDate(String? inputDate) {
+    if (inputDate != null) {
+      final parts = inputDate.split('T');
+      if (parts.length >= 1) {
+        final datePart = parts[0];
+        return datePart;
+      }
+    }
+    return "";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,26 +146,28 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
               buildDivider(),
 
               //รายละเอียดวันที่ จำนวนชั่วโมง เวลาเริ่ม
-              SupText('วันที่จอง :' + '   ดึงข้อมูล'), //ใส่ตรงนี้
-              SupText('เวลาเริ่มงาน : ' + '   ดึงข้อมูล'), //ใส่ตรงนี้
-              SupText('จำนวชั่วโมง : ' + '   ดึงข้อมูล'), //ใส่ตรงนี้
+              SupText('วันที่จอง :' + '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}'), //ใส่ตรงนี้
+              SupText('เวลาเริ่มงาน : ' + '${bookwork.isNotEmpty ? bookwork[0].startWork : ""}'), //ใส่ตรงนี้
+              SupText('จำนวนชั่วโมง : ' + '${bookwork.isNotEmpty ? bookwork[0].workHour : ""}'), //ใส่ตรงนี้
               buildDivider(),
 
               //รายละเอียดลูกช้านที่จง
               MainText('รายละเอียดทำความสะอาด'),
-              SupText('หมายเลขห้อง :' + '   ดึงข้อมูล'), //ใส่ตรงนี้
-              SupText('ขนาดห้อง :' + '   ดึงข้อมูล'), //ใส่ตรงนี้
-              SupText('ชื่อเจ้าของห้อง :' + '   ดึงข้อมูล'), //ใส่ตรงนี้
-              SupText('เบอร์โทรศัพท์ :' + '   ดึงข้อมูล'), //ใส่ตรงนี้
+              SupText('หมายเลขห้อง :' + '${bookwork.isNotEmpty ? bookwork[0].roomnumber : ""}'), //ใส่ตรงนี้
+              SupText('ขนาดห้อง :' + '${bookwork.isNotEmpty ? bookwork[0].roomsize : ""}'), //ใส่ตรงนี้
+              SupText('ชื่อเจ้าของห้อง :' + '${bookwork.isNotEmpty ? bookwork[0].fname : ""} ${bookwork.isNotEmpty ? bookwork[0].lname : ""}'), //ใส่ตรงนี้
+              SupText('เบอร์โทรศัพท์ :' + '${bookwork.isNotEmpty ? bookwork[0].phone : ""}'), //ใส่ตรงนี้
               buildDivider(),
 
               //คำขเพิ่มเติม
               MainText('คำขอเพิ่มเติม'), //ใส่ตรงนี้
-              RequireText('เน้นห้องน้ำลบาๆๆ'), //ใส่ตรงนี้
+              RequireText('${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}'), //ใส่ตรงนี้
               buildDivider(),
 
               //ราคา
-              SupText('ค่าบริการ :' + '   ดึงข้อมูล'), //ใส่ตรงนี้
+              SupText('ค่าบริการ :' + (bookwork.isNotEmpty
+                          ? bookwork[0].servicePrice.toString()
+                          : "")), //ใส่ตรงนี้
 
               Center(
                 child: ElevatedButton(
