@@ -237,7 +237,9 @@ Widget build(BuildContext context) {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => ReportPage(),
+                                builder: (context) => ReportPage(
+                                  bookingId: booking.bookingId
+                                ),
                               ),
                             );
                           },

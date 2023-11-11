@@ -57,7 +57,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
     idUser = await storageToken.read(key: 'id_user');
     try {
       final Map<String, dynamic> maidWorkData = {
-        "status": 1,
+        "status":2,
         "user_booking": idUser,
       };
       print(maidWorkData);
