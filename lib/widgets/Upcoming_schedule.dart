@@ -9,6 +9,7 @@ import 'package:privacy_maid_flutter/screens/HiredInfomation.dart';
 import '../constant/domain.dart';
 import '../model/BookWork.dart';
 import '../screens/Infomation_Page.dart';
+import '../screens/UpcomingIfomation.dart';
 
 class UpcomingSchedule extends StatefulWidget {
   const UpcomingSchedule({Key? key}) : super(key: key);
@@ -108,7 +109,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
         children: bookWork.map((booking) {
           return Container(
             padding: const EdgeInsets.fromLTRB(3, 0, 3, 10),
-            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 232, 241, 230),
               borderRadius: BorderRadius.circular(15),
@@ -212,42 +213,43 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          width: 150,
-                          height: 40,
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 221, 2, 2),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "ยกเลิกการจอง",
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {},
+                      //   child: Container(
+                      //     width: 150,
+                      //     height: 40,
+                      //     padding: const EdgeInsets.symmetric(vertical: 8),
+                      //     decoration: BoxDecoration(
+                      //       color: const Color.fromARGB(255, 221, 2, 2),
+                      //       borderRadius: BorderRadius.circular(30),
+                      //     ),
+                      //     child: Center(
+                      //       child: Text(
+                      //         "ยกเลิกการจอง",
+                      //         style: const TextStyle(
+                      //           fontSize: 14,
+                      //           fontWeight: FontWeight.w400,
+                      //           color: Colors.white,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       InkWell(
                         onTap: booking.idUser != null
                             ? () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => InformationPage(
-                                        id_user: booking.idUser,
-                                        bookingId: booking.bookingId),
+                                    builder: (context) =>
+                                        UpcomingInformationPage(
+                                            id_user: booking.idUser,
+                                            bookingId: booking.bookingId),
                                   ),
                                 );
                               }
                             : null,
                         child: Container(
-                          width: 150,
+                          width: 300,
                           height: 40,
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(

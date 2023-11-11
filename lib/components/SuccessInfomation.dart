@@ -201,7 +201,7 @@ class _SuccessInfoState extends State<SuccessInfo> {
                   child: Text(
                     '${booking.statusDescription}',
                     style: GoogleFonts.kanit(
-                      textStyle: TextStyle(color: Colors.red),
+                      textStyle: TextStyle(color: Colors.green),
                       fontSize: 22,
                     ),
                   ),
