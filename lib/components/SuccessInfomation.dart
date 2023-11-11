@@ -9,6 +9,7 @@ import 'package:privacy_maid_flutter/components/TimeInfomation.dart';
 import 'package:privacy_maid_flutter/components/UserDeatailForHired.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
 import 'package:privacy_maid_flutter/model/BookWork.dart';
+import 'package:privacy_maid_flutter/model/maidWork.dart';
 
 class SuccessInfo extends StatefulWidget {
   final int? id_user;
@@ -27,38 +28,25 @@ class _SuccessInfoState extends State<SuccessInfo> {
   final dio = Dio();
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  List<maidWork> resident = [];
   List<BookWork> bookwork = [];
+
   @override
   void initState() {
     getData();
+    getbookWork();
     super.initState();
   }
 
   Future<void> getData() async {
     try {
-      bookwork = [];
+      resident = [];
       idUser = await storageToken.read(key: 'id_user');
-      final response =
-          await dio.get(url_api + '/books/get-book-residentnew/' + idUser!);
+      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
       if (response.statusCode == 200) {
         final responseData = response.data;
         for (var element in responseData) {
-          bookwork.add(BookWork(
-            bookingId: element["booking_id"],
-            bookingDate: element["booking_date"],
-            workHour: element["work_hour"],
-            startWork: element["start_work"],
-            descriptmaid: element["descriptmaid"],
-            servicePrice: element["service_price"],
-            paymentslip: element["paymentslip"],
-            maidbooking: element["maidbooking"],
-            profile: element["profile"],
-            phone: element["phone"],
-            status: element["status "],
-            statusDescription: element["status_description"],
-            fname: element["fname"],
-            nickname: element["nickname"],
-            lname: element["lname"],
+          resident.add(maidWork(
             idUser: element["id_user"],
           ));
         }
@@ -71,17 +59,86 @@ class _SuccessInfoState extends State<SuccessInfo> {
     }
   }
 
+  Future<void> getbookWork() async {
+    idUser = await storageToken.read(key: 'id_user');
+    try {
+      final Map<String, dynamic> maidWorkData = {
+        "booking_id": widget.bookingId.toString(),
+        "user_booking": idUser,
+      };
+      print(maidWorkData);
+      Response response =
+          await dio.post(url_api + '/books/get-book-info', data: maidWorkData);
+      if (response.statusCode == 201) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          bookwork.add(BookWork(
+            idUser: element["id_user"],
+            bookingDate: element["booking_date"],
+            bookingId: element["booking_id"],
+            workHour: element["work_hour"],
+            startWork: element["start_work"],
+            descriptmaid: element["descriptmaid"],
+            servicePrice: element["service_price"],
+            maidbooking: element["maidbooking"],
+            fname: element["fname"],
+            lname: element["lname"],
+            phone: element["phone"],
+            statusDescription: element["status_description"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  String? convertDate(String? inputDate) {
+    if (inputDate != null) {
+      final parts = inputDate.split('T');
+      if (parts.length >= 1) {
+        final datePart = parts[0];
+        return datePart;
+      }
+    }
+    return "";
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(243, 255, 255, 255),
-        title: Padding(
+    if (bookwork.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(243, 255, 255, 255),
+          title: Padding(
             padding: const EdgeInsets.fromLTRB(75, 0, 0, 0),
             child: Text(
               'รายละเอียด',
               style: TextStyle(color: Colors.black),
-            )),
+            ),
+          ),
+        ),
+        body: Center(
+          child: Text('ไม่พบข้อมูลการจอง'),
+        ),
+      );
+    }
+
+    final booking = bookwork[0];
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(243, 255, 255, 255),
+        title: Padding(
+          padding: const EdgeInsets.fromLTRB(75, 0, 0, 0),
+          child: Text(
+            'รายละเอียด',
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -115,61 +172,23 @@ class _SuccessInfoState extends State<SuccessInfo> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               MaidDetailForHired(
                 bookingId: widget.bookingId,
-                id_user: bookwork.isNotEmpty ? bookwork[0].maidbooking : null,
+                id_user: booking.maidbooking,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  //color: Colors.black,
-                  thickness: 1,
-                  //height: 20,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TimeInfomation(
-                bookingId: widget.bookingId,
-                id_user: bookwork.isNotEmpty ? bookwork[0].maidbooking : null,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  //color: Colors.black,
-                  thickness: 1,
-                  //height: 20,
-                ),
-              ),
+              Divider(thickness: 1),
+              SizedBox(height: 10),
+              TimeInfomation(bookingId: widget.bookingId),
+              Divider(thickness: 1),
+              SizedBox(height: 10),
               UserDetailForHired(),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  //color: Colors.black,
-                  thickness: 1,
-                  //height: 20,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
+              Divider(thickness: 1),
+              SizedBox(height: 10),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'ค่าบริการ : ' +
-                      (bookwork.isNotEmpty
-                          ? bookwork[0].servicePrice.toString()
-                          : ""),
+                  'ค่าบริการ : ${booking.servicePrice?.toString() ?? ""}',
                   style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.black),
                     fontSize: 20,
@@ -179,13 +198,11 @@ class _SuccessInfoState extends State<SuccessInfo> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Center(
-                  child: Center(
-                    child: Text(
-                      'เสร้จสิ้นแล้ว',
-                      style: GoogleFonts.kanit(
-                        textStyle: TextStyle(color: Colors.green),
-                        fontSize: 22,
-                      ),
+                  child: Text(
+                    '${booking.statusDescription}',
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color: Colors.red),
+                      fontSize: 22,
                     ),
                   ),
                 ),
