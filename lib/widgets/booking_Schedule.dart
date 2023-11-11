@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:privacy_maid_flutter/screens/HiredInfomation.dart';
 
@@ -104,7 +105,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                     contentPadding: const EdgeInsets.fromLTRB(4, 10, 18, 4),
                     trailing: Text(
                       "${bookwork.isNotEmpty ? 'ชื่อ: ${bookwork[0].fname ?? ''}\nนามสกุล: ${bookwork[0].lname ?? ''}' : ''}",
-                      style: const TextStyle(
+                      style: GoogleFonts.kanit(
                         color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.w400,
@@ -140,7 +141,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                           const SizedBox(width: 5),
                           Text(
                             '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}',
-                            style: const TextStyle(
+                            style: GoogleFonts.kanit(
                               color: Colors.black54,
                               fontSize: 14,
                             ),
@@ -156,7 +157,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                           const SizedBox(width: 5),
                           Text(
                             "${bookwork.isNotEmpty ? bookwork[0].startWork : ""}",
-                            style: const TextStyle(
+                            style: GoogleFonts.kanit(
                               color: Colors.black54,
                               fontSize: 14,
                             ),
@@ -175,7 +176,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                           const SizedBox(width: 5),
                           Text(
                             "${bookwork.isNotEmpty ? bookwork[0].statusDescription : ""}",
-                            style: const TextStyle(
+                            style: GoogleFonts.kanit(
                               color: Colors.black54,
                               fontSize: 14,
                             ),
@@ -188,28 +189,6 @@ class _BookingScheduleState extends State<BookingSchedule> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // InkWell(
-                      //   onTap: () {},
-                      //   child: Container(
-                      //     width: 150,
-                      //     height: 40,
-                      //     padding: const EdgeInsets.symmetric(vertical: 8),
-                      //     decoration: BoxDecoration(
-                      //       color: const Color.fromARGB(255, 221, 2, 2),
-                      //       borderRadius: BorderRadius.circular(30),
-                      //     ),
-                      //     child: Center(
-                      //       child: Text(
-                      //         "ยกเลิกการจอง",
-                      //         style: const TextStyle(
-                      //           fontSize: 14,
-                      //           fontWeight: FontWeight.w400,
-                      //           color: Colors.white,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
                       InkWell(
                         onTap: bookwork.isNotEmpty
                             ? () {
@@ -220,17 +199,17 @@ class _BookingScheduleState extends State<BookingSchedule> {
                               }
                             : null,
                         child: Container(
-                          width: 300,
+                          width: 320,
                           height: 40,
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 11, 129, 56),
-                            borderRadius: BorderRadius.circular(30),
+                            color: Color.fromARGB(255, 9, 150, 63),
+                            borderRadius: BorderRadius.circular(5),
                           ),
                           child: Center(
                             child: Text(
                               "รายละเอียด",
-                              style: const TextStyle(
+                              style: GoogleFonts.kanit(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.white,
