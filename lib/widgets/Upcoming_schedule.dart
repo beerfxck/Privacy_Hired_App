@@ -251,7 +251,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                           height: 40,
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 141, 141, 141),
+                            color: Colors.green,
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Center(
