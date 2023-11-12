@@ -72,8 +72,16 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     for (var item in jsonData) {
       final DateTime day = DateTime.parse(item['day']);
       DateTime tomorrow = day.add(Duration(days: 1));
-      final Event event = Event(item['day'], item['day'], item['start_work'],
-          item['end_work'], item['statuswork'], item['id_worktime'], item['fname'], item['lname'], item['id_worktimetype']);
+      final Event event = Event(
+          item['day'],
+          item['day'],
+          item['start_work'],
+          item['end_work'],
+          item['statuswork'],
+          item['id_worktime'],
+          item['fname'],
+          item['lname'],
+          item['id_worktimetype']);
       if (_kEventSource.containsKey(tomorrow)) {
         _kEventSource[tomorrow]!.add(event);
       } else {
@@ -108,6 +116,13 @@ class _TableEventsExampleState extends State<TableEventsExample> {
 
       _selectedEvents.value = _getEventsForDay(selectedDay);
     }
+  }
+
+  String addDay(String date) {
+    DateTime myDate = DateTime.parse(date);
+    DateTime newDate = myDate.add(Duration(days: 1));
+    String formattedDate = newDate.toIso8601String();
+    return formattedDate;
   }
 
   void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
@@ -186,14 +201,15 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                                 builder: (context) => HiredMaidPage(
-                                      workday: value[index].date,
+                                      workday: addDay(value[index].date),
                                       id_user: widget.id_user,
                                       id_worktime: value[index].id_worktime,
-                                      id_worktimetype: value[index].id_worktimetype,
+                                      id_worktimetype:
+                                          value[index].id_worktimetype,
                                     )),
                           ),
                           print('${value[index].title}'),
-                          print('${value[index].date}')
+                          print('${addDay(value[index].date)}')
                         },
                         title: Text(
                             'เริ่มงาน: ${value[index].start} จบงาน: ${value[index].end} ชื่อ:${value[index].fname} ${value[index].lname}'),
