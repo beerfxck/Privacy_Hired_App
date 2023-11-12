@@ -22,7 +22,7 @@ class InfoProcessForMaid extends StatefulWidget {
 }
 
 class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
-final dio = Dio();
+  final dio = Dio();
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
@@ -64,8 +64,8 @@ final dio = Dio();
         "maidbooking": idUser,
       };
       print(maidWorkData);
-      Response response =
-          await dio.post(url_api + '/books/get-bookmaid-info', data: maidWorkData);
+      Response response = await dio.post(url_api + '/books/get-bookmaid-info',
+          data: maidWorkData);
       if (response.statusCode == 201) {
         final responseData = response.data;
         for (var element in responseData) {
@@ -104,6 +104,33 @@ final dio = Dio();
       }
     }
     return "";
+  }
+
+  Future<void> updateStatus(BuildContext context) async {
+    try {
+      final response = await dio.post(
+        url_api + '/books/update-status',
+        data: {
+          'booking_id': widget.bookingId,
+          'status': 2,
+        },
+      );
+
+      if (response.statusCode == 201) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => MaidBottomNavBar(),
+            settings: RouteSettings(
+              arguments: 1, // Set the current index to 1 (second page).
+            ),
+          ),
+        );
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 
   @override
@@ -146,41 +173,42 @@ final dio = Dio();
               buildDivider(),
 
               //รายละเอียดวันที่ จำนวนชั่วโมง เวลาเริ่ม
-              SupText('วันที่จอง :' + '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}'), //ใส่ตรงนี้
-              SupText('เวลาเริ่มงาน : ' + '${bookwork.isNotEmpty ? bookwork[0].startWork : ""}'), //ใส่ตรงนี้
-              SupText('จำนวนชั่วโมง : ' + '${bookwork.isNotEmpty ? bookwork[0].workHour : ""}'), //ใส่ตรงนี้
+              SupText('วันที่จอง :' +
+                  '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}'), //ใส่ตรงนี้
+              SupText('เวลาเริ่มงาน : ' +
+                  '${bookwork.isNotEmpty ? bookwork[0].startWork : ""}'), //ใส่ตรงนี้
+              SupText('จำนวนชั่วโมง : ' +
+                  '${bookwork.isNotEmpty ? bookwork[0].workHour : ""}'), //ใส่ตรงนี้
               buildDivider(),
 
               //รายละเอียดลูกช้านที่จง
               MainText('รายละเอียดทำความสะอาด'),
-              SupText('หมายเลขห้อง :' + '${bookwork.isNotEmpty ? bookwork[0].roomnumber : ""}'), //ใส่ตรงนี้
-              SupText('ขนาดห้อง :' + '${bookwork.isNotEmpty ? bookwork[0].roomsize : ""}'), //ใส่ตรงนี้
-              SupText('ชื่อเจ้าของห้อง :' + '${bookwork.isNotEmpty ? bookwork[0].fname : ""} ${bookwork.isNotEmpty ? bookwork[0].lname : ""}'), //ใส่ตรงนี้
-              SupText('เบอร์โทรศัพท์ :' + '${bookwork.isNotEmpty ? bookwork[0].phone : ""}'), //ใส่ตรงนี้
+              SupText('หมายเลขห้อง :' +
+                  '${bookwork.isNotEmpty ? bookwork[0].roomnumber : ""}'), //ใส่ตรงนี้
+              SupText('ขนาดห้อง :' +
+                  '${bookwork.isNotEmpty ? bookwork[0].roomsize : ""}'), //ใส่ตรงนี้
+              SupText('ชื่อเจ้าของห้อง :' +
+                  '${bookwork.isNotEmpty ? bookwork[0].fname : ""} ${bookwork.isNotEmpty ? bookwork[0].lname : ""}'), //ใส่ตรงนี้
+              SupText('เบอร์โทรศัพท์ :' +
+                  '${bookwork.isNotEmpty ? bookwork[0].phone : ""}'), //ใส่ตรงนี้
               buildDivider(),
 
               //คำขเพิ่มเติม
               MainText('คำขอเพิ่มเติม'), //ใส่ตรงนี้
-              RequireText('${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}'), //ใส่ตรงนี้
+              RequireText(
+                  '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}'), //ใส่ตรงนี้
               buildDivider(),
 
               //ราคา
-              SupText('ค่าบริการ :' + (bookwork.isNotEmpty
-                          ? bookwork[0].servicePrice.toString()
-                          : "")), //ใส่ตรงนี้
+              SupText('ค่าบริการ :' +
+                  (bookwork.isNotEmpty
+                      ? bookwork[0].servicePrice.toString()
+                      : "")), //ใส่ตรงนี้
 
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => MaidBottomNavBar(),
-                        settings: RouteSettings(
-                          arguments:
-                              1, // Set the current index to 1 (second page).
-                        ),
-                      ),
-                    );
+                    updateStatus(context);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green,

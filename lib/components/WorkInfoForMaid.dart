@@ -38,6 +38,27 @@ class _WorkInfoState extends State<WorkInfo> {
     super.initState();
   }
 
+  Future<void> updateStatus(String newStatus) async {
+    try {
+      final response = await dio.post(
+        url_api + '/books/update-status',
+        data: {
+          'booking_id': widget.bookingId,
+          'status': 2,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        print('Status updated successfully');
+        // Handle the response if needed
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   Future<void> getData() async {
     try {
       resident = [];
@@ -211,15 +232,15 @@ class _WorkInfoState extends State<WorkInfo> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => MaidBottomNavBar(),
-                        settings: RouteSettings(
-                          arguments:
-                              1, // Set the current index to 1 (second page).
-                        ),
-                      ),
-                    );
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) => MaidBottomNavBar(),
+                    //     settings: RouteSettings(
+                    //       arguments:
+                    //           1, // Set the current index to 1 (second page).
+                    //     ),
+                    //   ),
+                    // );
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green,

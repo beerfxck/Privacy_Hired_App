@@ -108,135 +108,155 @@ class _WorkforMaidState extends State<WorkforMaid> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 1),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: bookWork.map((booking) {
-          return SizedBox(
-            // ใส่ height ที่ถูกต้อง
-            child: Container(
-              padding: EdgeInsets.all(13),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 232, 241, 230),
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 6,
-                    spreadRadius: 4,
-                  ),
-                ],
+        children: [
+          if (bookWork.length == 0)
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Text(
+                "ไม่มีรายการ",
+                style: GoogleFonts.kanit(
+                  textStyle: TextStyle(color: Colors.black),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: [
-                    ListTile(
-                      contentPadding: EdgeInsets.fromLTRB(2, 10, 70, 0),
-                      trailing: Text(
-                        "ห้อง ${booking.roomnumber ?? ""}",
-                        style: GoogleFonts.kanit(
-                          textStyle: TextStyle(color: Colors.black),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      title: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.blueGrey,
-                          child: Icon(
-                            Icons.work_history_rounded,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Divider(
-                        thickness: 1,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.calendar_month,
-                              color: Colors.black54,
-                            ),
-                            SizedBox(width: 5),
-                            Text(
-                              "${convertDate(booking.bookingDate) ?? ""}",
-                              style: GoogleFonts.kanit(
-                                textStyle: TextStyle(color: Colors.black54),
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.access_time_filled,
-                              color: Colors.black54,
-                            ),
-                            SizedBox(width: 5),
-                            Text(
-                              "${booking.startWork ?? ""}",
-                              style: GoogleFonts.kanit(
-                                textStyle: TextStyle(color: Colors.black54),
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
+            ),
+          if (bookWork.length != 0)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: bookWork.map((booking) {
+                return SizedBox(
+                  // ใส่ height ที่ถูกต้อง
+                  child: Container(
+                    padding: EdgeInsets.all(13),
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 232, 241, 230),
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 6,
+                          spreadRadius: 4,
                         ),
                       ],
                     ),
-                    SizedBox(height: 15),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => InfoProcessForMaid(
-                                    bookingId: booking.bookingId,
-                                    ),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        children: [
+                          ListTile(
+                            contentPadding: EdgeInsets.fromLTRB(2, 10, 70, 0),
+                            trailing: Text(
+                              "ห้อง ${booking.roomnumber ?? ""}",
+                              style: GoogleFonts.kanit(
+                                textStyle: TextStyle(color: Colors.black),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
                               ),
-                            );
-                          },
-                          child: Container(
-                            width: 150,
-                            height: 40,
-                            padding: EdgeInsets.symmetric(vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 6, 143, 6),
-                              borderRadius: BorderRadius.circular(30),
                             ),
-                            child: Center(
-                              child: Text(
-                                "กดเพื่อเริ่มงาน",
-                                style: GoogleFonts.kanit(
-                                  textStyle: TextStyle(color: Colors.black54),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                            title: Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                              child: CircleAvatar(
+                                radius: 30,
+                                backgroundColor: Colors.blueGrey,
+                                child: Icon(
+                                  Icons.work_history_rounded,
                                   color: Colors.white,
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Divider(
+                              thickness: 1,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.calendar_month,
+                                    color: Colors.black54,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    "${convertDate(booking.bookingDate) ?? ""}",
+                                    style: GoogleFonts.kanit(
+                                      textStyle:
+                                          TextStyle(color: Colors.black54),
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.access_time_filled,
+                                    color: Colors.black54,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    "${booking.startWork ?? ""}",
+                                    style: GoogleFonts.kanit(
+                                      textStyle:
+                                          TextStyle(color: Colors.black54),
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 15),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => InfoProcessForMaid(
+                                        bookingId: booking.bookingId,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  width: 150,
+                                  height: 40,
+                                  padding: EdgeInsets.symmetric(vertical: 8),
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 6, 143, 6),
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "กดเพื่อเริ่มงาน",
+                                      style: GoogleFonts.kanit(
+                                        textStyle:
+                                            TextStyle(color: Colors.black54),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              }).toList(),
             ),
-          );
-        }).toList(),
+        ],
       ),
     );
   }
