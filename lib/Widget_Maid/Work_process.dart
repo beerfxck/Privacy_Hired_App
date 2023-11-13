@@ -122,6 +122,7 @@ class _WorkProcessComponentState extends State<WorkProcessComponent> {
         children: bookWork.map((booking) {
           return Container(
             padding: EdgeInsets.fromLTRB(3, 0, 3, 15),
+            margin: EdgeInsets.fromLTRB(6, 10, 6, 1),
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 232, 241, 230),
               borderRadius: BorderRadius.circular(15),
