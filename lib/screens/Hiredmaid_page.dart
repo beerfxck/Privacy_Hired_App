@@ -161,6 +161,7 @@ class _HomePageState extends State<HiredMaidPage> {
       Response response =
           await dio.post(url_api + '/books/save', data: maidWorkData);
       if (response.statusCode == 201) {
+        updateWork(context);
         print("Maid work saved successfully");
         Navigator.pushNamed(context, '/BottomNavBar');
       } else {
@@ -168,6 +169,61 @@ class _HomePageState extends State<HiredMaidPage> {
       }
     } catch (e) {
       print("Error: $e");
+    }
+  }
+
+  Future<void> updateWork(BuildContext context) async {
+    try {
+      Map<String, dynamic> requestData = {
+        'id_worktime': widget.id_worktime,
+      };
+
+      if (widget.id_worktimetype == 1 && selectedHours == 1) {
+        requestData['id_timeworktype'] = 3;
+      } else if (widget.id_worktimetype == 1 && selectedHours == 2) {
+        requestData['id_timeworktype'] = 4;
+      } else if (widget.id_worktimetype == 1 && selectedHours == 3) {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 2 && selectedHours == 1) {
+        requestData['id_timeworktype'] = 5;
+      } else if (widget.id_worktimetype == 2 && selectedHours == 2) {
+        requestData['id_timeworktype'] = 6;
+      } else if (widget.id_worktimetype == 2 && selectedHours == 3) {
+        requestData['id_timeworktype'] = 7;
+      } else if (widget.id_worktimetype == 2 && selectedHours == 4) {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 3 && selectedHours == 1) {
+        requestData['id_timeworktype'] = 4;
+      } else if (widget.id_worktimetype == 3 && selectedHours == 2) {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 4 && selectedHours == 1) {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 5 && selectedHours == 1) {
+        requestData['id_timeworktype'] = 6;
+      } else if (widget.id_worktimetype == 5 && selectedHours == 2) {
+        requestData['id_timeworktype'] = 7;
+      } else if (widget.id_worktimetype == 5 && selectedHours == 3) {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 6 && selectedHours == 1) {
+        requestData['id_timeworktype'] = 7;
+      } else if (widget.id_worktimetype == 6 && selectedHours == 2) {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 7 && selectedHours == 1) {
+        requestData['id_timeworktype'] = 8;
+      }
+
+      final response = await dio.post(
+        url_api + '/maidwork/update-work',
+        data: requestData,
+      );
+
+      if (response.statusCode == 201) {
+        print('Success');
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
     }
   }
 
