@@ -55,8 +55,8 @@ class _WorkProcessComponentState extends State<WorkProcessComponent> {
         "maidbooking": idUser,
       };
       print(maidWorkData);
-      Response response = await dio.post(url_api + '/books/get-book-maid',
-          data: maidWorkData);
+      Response response =
+          await dio.post(url_api + '/books/get-book-maid', data: maidWorkData);
       if (response.statusCode == 201) {
         final responseData = response.data;
         for (var element in responseData) {
@@ -93,7 +93,26 @@ class _WorkProcessComponentState extends State<WorkProcessComponent> {
     }
     return "";
   }
-  
+
+  Future<void> updateStatus(BuildContext context) async {
+    try {
+      final response = await dio.post(
+        url_api + '/books/update-status',
+        data: {
+          'booking_id': bookWork[0].bookingId,
+          'status': 4,
+        },
+      );
+      if (response.statusCode == 201) {
+        print("success");
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -209,7 +228,9 @@ class _WorkProcessComponentState extends State<WorkProcessComponent> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          updateStatus(context);
+                        },
                         child: Container(
                           width: 150,
                           height: 40,
