@@ -100,7 +100,7 @@ class _HomePageState extends State<HiredMaidPage> {
     }
   }
 
-  List<int> generateDurationOptions(int? id_worktimetype) {
+  List<int> selectedTimeByworktime(int? id_worktimetype) {
     List<int> durationOptions = [];
 
     if (id_worktimetype == 1) {
@@ -378,7 +378,7 @@ class _HomePageState extends State<HiredMaidPage> {
                   ),
                   DropdownButtonFormField<int>(
                     value: selectedHours,
-                    items: generateDurationOptions(widget.id_worktimetype)
+                    items: selectedTimeByworktime(widget.id_worktimetype)
                         .map((durationOption) {
                       return DropdownMenuItem<int>(
                         value: durationOption,
@@ -426,7 +426,6 @@ class _HomePageState extends State<HiredMaidPage> {
                 ],
               ),
               SizedBox(height: 10),
-
               TimeStartComponents(
                 onChanged: (data) => {start_work = data},
                 id_worktimetype: widget.id_worktimetype,

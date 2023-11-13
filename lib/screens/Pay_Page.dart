@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:privacy_maid_flutter/constant/domain.dart';
 import 'dart:io';
 
 import 'package:privacy_maid_flutter/screens/UserReview.dart';
@@ -23,6 +25,28 @@ class PayPage extends StatefulWidget {
 class _PayPageState extends State<PayPage> {
   File? _selectedImage;
   String? image;
+  final dio = Dio();
+
+  Future<void> updateSlip(BuildContext context) async {
+    try {
+      final response = await dio.post(
+        url_api + '/books/update-slip',
+        data: {
+          'booking_id': widget.idBooking,
+          'paymentslip': image,
+          'status': 4,
+        },
+      );
+
+      if (response.statusCode == 201) {
+        print('success');
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
 
   Future<void> _selectImage() async {
     final ImagePicker _picker = ImagePicker();
@@ -193,12 +217,14 @@ class _PayPageState extends State<PayPage> {
                                 elevation: 8,
                               ),
                               onPressed: () {
+                                updateSlip(
+                                    context); 
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => UserReview(
-                                        idBooking: widget.idBooking
-                                      )),
+                                    builder: (context) =>
+                                        UserReview(idBooking: widget.idBooking),
+                                  ),
                                 );
                               },
                               child: Text(
