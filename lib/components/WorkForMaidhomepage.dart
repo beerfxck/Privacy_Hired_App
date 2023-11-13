@@ -129,6 +129,7 @@ class _WorkforMaidState extends State<WorkforMaid> {
                   // ใส่ height ที่ถูกต้อง
                   child: Container(
                     padding: EdgeInsets.all(13),
+                    margin: EdgeInsets.fromLTRB(1, 10, 1, 1),
                     decoration: BoxDecoration(
                       color: Color.fromARGB(255, 232, 241, 230),
                       borderRadius: BorderRadius.circular(15),
