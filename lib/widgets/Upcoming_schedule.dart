@@ -57,7 +57,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
     idUser = await storageToken.read(key: 'id_user');
     try {
       final Map<String, dynamic> maidWorkData = {
-        "status":2,
+        "status": 2,
         "user_booking": idUser,
       };
       print(maidWorkData);
@@ -102,179 +102,181 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(3, 15, 3, 3),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: bookWork.map((booking) {
-          return Container(
-            padding: const EdgeInsets.fromLTRB(3, 0, 3, 10),
-            margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 232, 241, 230),
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 6,
-                  spreadRadius: 4,
-                ),
-              ],
-            ),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  ListTile(
-                    contentPadding: const EdgeInsets.only(top: 20, right: 17),
-                    trailing: Text(
-                      "${booking.fname != null ? 'ชื่อ: ${booking.fname}\nนามสกุล: ${booking.lname ?? ''}' : ''}",
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(3, 15, 3, 3),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: bookWork.map((booking) {
+            return Container(
+              padding: const EdgeInsets.fromLTRB(3, 0, 3, 10),
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 232, 241, 230),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 6,
+                    spreadRadius: 4,
+                  ),
+                ],
+              ),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  children: [
+                    ListTile(
+                      contentPadding: const EdgeInsets.only(top: 20, right: 17),
+                      trailing: Text(
+                        "${booking.fname != null ? 'ชื่อ: ${booking.fname}\nนามสกุล: ${booking.lname ?? ''}' : ''}",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                    title: Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.blueGrey,
-                        child: const Icon(
-                          Icons.work_history_rounded,
-                          color: Colors.white,
+                      title: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.blueGrey,
+                          child: const Icon(
+                            Icons.work_history_rounded,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Divider(
-                      thickness: 1,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Divider(
+                        thickness: 1,
+                      ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.calendar_month,
-                            color: Colors.black54,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            '${convertDate(booking.bookingDate) ?? ""}',
-                            style: const TextStyle(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.calendar_month,
                               color: Colors.black54,
-                              fontSize: 14,
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.access_time_filled,
-                            color: Colors.black54,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "${booking.startWork ?? ""}",
-                            style: const TextStyle(
-                              color: Colors.black54,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: const BoxDecoration(
-                              color: Colors.green,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "${booking.statusDescription ?? ""}",
-                            style: const TextStyle(
-                              color: Colors.black54,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      // InkWell(
-                      //   onTap: () {},
-                      //   child: Container(
-                      //     width: 150,
-                      //     height: 40,
-                      //     padding: const EdgeInsets.symmetric(vertical: 8),
-                      //     decoration: BoxDecoration(
-                      //       color: const Color.fromARGB(255, 221, 2, 2),
-                      //       borderRadius: BorderRadius.circular(30),
-                      //     ),
-                      //     child: Center(
-                      //       child: Text(
-                      //         "ยกเลิกการจอง",
-                      //         style: const TextStyle(
-                      //           fontSize: 14,
-                      //           fontWeight: FontWeight.w400,
-                      //           color: Colors.white,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      InkWell(
-                        onTap: booking.idUser != null
-                            ? () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        UpcomingInformationPage(
-                                            id_user: booking.idUser,
-                                            bookingId: booking.bookingId),
-                                  ),
-                                );
-                              }
-                            : null,
-                        child: Container(
-                          width: 300,
-                          height: 40,
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "รายละเอียด",
+                            const SizedBox(width: 5),
+                            Text(
+                              '${convertDate(booking.bookingDate) ?? ""}',
                               style: const TextStyle(
+                                color: Colors.black54,
                                 fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.access_time_filled,
+                              color: Colors.black54,
+                            ),
+                            const SizedBox(width: 5),
+                            Text(
+                              "${booking.startWork ?? ""}",
+                              style: const TextStyle(
+                                color: Colors.black54,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: const BoxDecoration(
+                                color: Colors.green,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            Text(
+                              "${booking.statusDescription ?? ""}",
+                              style: const TextStyle(
+                                color: Colors.black54,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        // InkWell(
+                        //   onTap: () {},
+                        //   child: Container(
+                        //     width: 150,
+                        //     height: 40,
+                        //     padding: const EdgeInsets.symmetric(vertical: 8),
+                        //     decoration: BoxDecoration(
+                        //       color: const Color.fromARGB(255, 221, 2, 2),
+                        //       borderRadius: BorderRadius.circular(30),
+                        //     ),
+                        //     child: Center(
+                        //       child: Text(
+                        //         "ยกเลิกการจอง",
+                        //         style: const TextStyle(
+                        //           fontSize: 14,
+                        //           fontWeight: FontWeight.w400,
+                        //           color: Colors.white,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        InkWell(
+                          onTap: booking.idUser != null
+                              ? () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          UpcomingInformationPage(
+                                              id_user: booking.idUser,
+                                              bookingId: booking.bookingId),
+                                    ),
+                                  );
+                                }
+                              : null,
+                          child: Container(
+                            width: 300,
+                            height: 40,
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "รายละเอียด",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        }).toList(),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
