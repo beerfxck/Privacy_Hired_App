@@ -121,7 +121,34 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
           MaterialPageRoute(
             builder: (context) => MaidBottomNavBar(),
             settings: RouteSettings(
-              arguments: 1, // Set the current index to 1 (second page).
+              arguments: 1, 
+            ),
+          ),
+        );
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> updateCancelStatus(BuildContext context) async {
+    try {
+      final response = await dio.post(
+        url_api + '/books/update-status',
+        data: {
+          'booking_id': widget.bookingId,
+          'status': 7,
+        },
+      );
+
+      if (response.statusCode == 201) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => MaidBottomNavBar(),
+            settings: RouteSettings(
+              arguments: 1, 
             ),
           ),
         );
@@ -141,7 +168,6 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            // title: Text("ยืนยันการยกเลิกรับบริการ"),
             content: Text(
               "คุณต้องการยกเลิกรับบริการหรือไม่?",
               style: GoogleFonts.kanit(
@@ -156,10 +182,10 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).pop(); // Close the dialog
+                      Navigator.of(context).pop(); 
                     },
                     style: TextButton.styleFrom(
-                      primary: Colors.black, // Button text color
+                      primary: Colors.black, 
                     ),
                     child: Text(
                       "ไม่",
@@ -172,15 +198,14 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
                   ),
                   TextButton(
                     onPressed: () {
-                      // Perform the cancellation logic here
-                      // This can include updating the state and making API calls
+                      updateCancelStatus(context);
                       setState(() {
                         isCancelled = true;
                       });
-                      Navigator.of(context).pop(); // Close the dialog
+                      Navigator.of(context).pop(); 
                     },
                     style: TextButton.styleFrom(
-                      primary: Colors.red, // Button text color
+                      primary: Colors.red, 
                     ),
                     child: Text(
                       "ยกเลิก",
@@ -213,9 +238,9 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.fromLTRB(10, 20, 10, 0), // Reduced top margin
+            margin: EdgeInsets.fromLTRB(10, 20, 10, 0), 
             padding: EdgeInsets.symmetric(
-                horizontal: 25, vertical: 15), // Reduced vertical padding
+                horizontal: 25, vertical: 15),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.0),
@@ -237,34 +262,34 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
                   MainText('รายละเอียดการจอง'),
                   buildDivider(),
 
-                  //รายละเอียดวันที่ จำนวนชั่วโมง เวลาเริ่ม
+                  
                   SupText('วันที่จอง :' +
-                      '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}'), //ใส่ตรงนี้
+                      '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}'), 
                   SupText('เวลาเริ่มงาน : ' +
-                      '${bookwork.isNotEmpty ? bookwork[0].startWork : ""}'), //ใส่ตรงนี้
+                      '${bookwork.isNotEmpty ? bookwork[0].startWork : ""}'), 
                   SupText('จำนวนชั่วโมง : ' +
-                      '${bookwork.isNotEmpty ? bookwork[0].workHour : ""}'), //ใส่ตรงนี้
+                      '${bookwork.isNotEmpty ? bookwork[0].workHour : ""}'), 
                   buildDivider(),
 
-                  //รายละเอียดลูกช้านที่จง
+                  
                   MainText('รายละเอียดทำความสะอาด'),
                   SupText('หมายเลขห้อง :' +
-                      '${bookwork.isNotEmpty ? bookwork[0].roomnumber : ""}'), //ใส่ตรงนี้
+                      '${bookwork.isNotEmpty ? bookwork[0].roomnumber : ""}'), 
                   SupText('ขนาดห้อง :' +
-                      '${bookwork.isNotEmpty ? bookwork[0].roomsize : ""}'), //ใส่ตรงนี้
+                      '${bookwork.isNotEmpty ? bookwork[0].roomsize : ""}'), 
                   SupText('ชื่อเจ้าของห้อง :' +
-                      '${bookwork.isNotEmpty ? bookwork[0].fname : ""} ${bookwork.isNotEmpty ? bookwork[0].lname : ""}'), //ใส่ตรงนี้
+                      '${bookwork.isNotEmpty ? bookwork[0].fname : ""} ${bookwork.isNotEmpty ? bookwork[0].lname : ""}'), 
                   SupText('เบอร์โทรศัพท์ :' +
-                      '${bookwork.isNotEmpty ? bookwork[0].phone : ""}'), //ใส่ตรงนี้
+                      '${bookwork.isNotEmpty ? bookwork[0].phone : ""}'), 
                   buildDivider(),
 
-                  //คำขเพิ่มเติม
-                  MainText('คำขอเพิ่มเติม'), //ใส่ตรงนี้
+                  
+                  MainText('คำขอเพิ่มเติม'), 
                   RequireText(
-                      '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}'), //ใส่ตรงนี้
+                      '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}'), 
                   buildDivider(),
 
-                  //ราคา
+                  
                   SupText('ค่าบริการ :' +
                       (bookwork.isNotEmpty
                           ? bookwork[0].servicePrice.toString()
@@ -281,7 +306,7 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
                           primary: Colors.green,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
-                                10.0), // Adjust the value as needed
+                                10.0), 
                           ),
                         ),
                         child: Container(
@@ -330,7 +355,7 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
 
   Widget SupText(String text) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 4), // Adjust the vertical margin
+      margin: EdgeInsets.symmetric(vertical: 4), 
       child: Text(
         text,
         style: TextStyle(
@@ -343,7 +368,7 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
 
   Widget MainText(String text) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8), // Adjust the vertical margin
+      margin: EdgeInsets.symmetric(vertical: 8),
       child: Text(
         text,
         style: TextStyle(

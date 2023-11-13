@@ -78,7 +78,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return bookwork.length >0? Padding(
       padding: const EdgeInsets.fromLTRB(4, 5, 5, 9),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,6 +225,11 @@ class _BookingScheduleState extends State<BookingSchedule> {
             ),
           ),
         ],
+      ),
+    ):Container(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Center(child: Text("ไม่มีรายการการจองคิว")),
       ),
     );
   }

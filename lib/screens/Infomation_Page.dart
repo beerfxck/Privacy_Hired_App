@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/MaidDeatailForHired.dart';
 import 'package:privacy_maid_flutter/components/TimeInfomation.dart';
 import 'package:privacy_maid_flutter/components/UserDeatailForHired.dart';
+import 'package:privacy_maid_flutter/screens/Home_page.dart';
+import 'package:privacy_maid_flutter/widgets/navigatorbar.dart';
 
 import '../components/DateForBook.dart';
 import '../components/MaiddetailForBooking.dart';
@@ -73,6 +75,33 @@ class _InformationPageState extends State<InformationPage> {
     }
   }
 
+  Future<void> updateStatus(BuildContext context) async {
+    try {
+      final response = await dio.post(
+        url_api + '/books/update-status',
+        data: {
+          'booking_id': widget.bookingId,
+          'status': 7,
+        },
+      );
+
+      if (response.statusCode == 201) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => BottomNavBar(),
+            settings: RouteSettings(
+              arguments: 1, 
+            ),
+          ),
+        );
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     bool isCancelled = false;
@@ -112,15 +141,14 @@ class _InformationPageState extends State<InformationPage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      // Perform the cancellation logic here
-                      // This can include updating the state and making API calls
+                      updateStatus(context);
                       setState(() {
                         isCancelled = true;
                       });
-                      Navigator.of(context).pop(); // Close the dialog
+                      Navigator.of(context).pop();
                     },
                     style: TextButton.styleFrom(
-                      primary: Colors.red, // Button text color
+                      primary: Colors.red,
                     ),
                     child: Text(
                       "ยกเลิก",
