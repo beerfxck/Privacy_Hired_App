@@ -125,11 +125,11 @@ class _MaidDetailState extends State<MaidDetail> {
                                 Icon(
                                   Icons.star,
                                   color: Colors.yellow,
-                                  size: 25,
+                                  size: 20,
                                 ),
                                 SizedBox(width: 5),
                                 Text(
-                                  'Rating: ',
+                                  'Rating: ${maidWork.maidRating!}',
                                   style: GoogleFonts.kanit(
                                     textStyle: TextStyle(color: Colors.black54),
                                     fontSize: 16,
