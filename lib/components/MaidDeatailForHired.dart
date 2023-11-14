@@ -50,7 +50,7 @@ class _MaidDetailForHiredState extends State<MaidDetailForHired> {
     return Column(
       children: maidWorklist.map((maidWork) {
         return Container(
-          padding: EdgeInsets.all(40),
+          padding: EdgeInsets.all(30),
           margin: EdgeInsets.all(5),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -88,20 +88,20 @@ class _MaidDetailForHiredState extends State<MaidDetailForHired> {
               ),
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text(
                       '${maidWork.fname!} ${maidWork.lname!}',
-                      style: TextStyle(
+                      style: GoogleFonts.kanit(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                     Text(
                       '${maidWork.phone!}',
-                      style: TextStyle(
+                      style: GoogleFonts.kanit(
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                   ],

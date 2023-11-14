@@ -229,7 +229,11 @@ class _BookingScheduleState extends State<BookingSchedule> {
     ):Container(
       child: Padding(
         padding: const EdgeInsets.only(top: 20),
-        child: Center(child: Text("ไม่มีรายการการจองคิว")),
+        child: Center(child: Text("ไม่มีรายการการจองคิว",
+        style: GoogleFonts.kanit(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      )),),
       ),
     );
   }

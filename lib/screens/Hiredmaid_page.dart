@@ -279,7 +279,7 @@ class _HomePageState extends State<HiredMaidPage> {
                   ' รายละเอียดการจอง',
                   style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.black),
-                    fontSize: 20,
+                    fontSize: 23,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -287,18 +287,8 @@ class _HomePageState extends State<HiredMaidPage> {
               MaidDetailForHired(
                 id_user: widget.id_user,
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Divider(),
-              Text(
-                ' ** กรุณาจองล่วงหน้าอย่างน้อย 1 วัน **',
-                style: GoogleFonts.kanit(
-                  textStyle: TextStyle(color: Colors.black),
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              SizedBox(height: 10,),
+              HorizontalDividerWithText(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -312,7 +302,7 @@ class _HomePageState extends State<HiredMaidPage> {
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: Text(
-                          'วันที่รับบริการ : ${widget.workday == null ? '' : convertDate(widget.workday)}',
+                          'วันที่ต้องการรับบริการ  ${widget.workday == null ? '' : convertDate(widget.workday)}',
                           style: GoogleFonts.kanit(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
@@ -324,7 +314,7 @@ class _HomePageState extends State<HiredMaidPage> {
                 ],
               ),
               Container(
-                width: 240,
+                width: 350,
                 height: 45,
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 child: ElevatedButton.icon(
@@ -338,7 +328,7 @@ class _HomePageState extends State<HiredMaidPage> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
-                    shape: StadiumBorder(),
+                    //shape: StadiumBorder(),
                     elevation: 10,
                   ),
                   icon: Icon(Icons.calendar_month),
@@ -463,7 +453,7 @@ class _HomePageState extends State<HiredMaidPage> {
                 child: TextField(
                   controller: _textController,
                   decoration: InputDecoration(
-                    hintText: 'เช่น เน้นห้องน้ำ, ห้องนอน ฯลฯ',
+                    hintText: 'เช่น เน้นความสะอาดห้องน้ำ, ห้องนอน ฯลฯ',
                     border: InputBorder.none,
                   ),
                 ),
@@ -538,6 +528,39 @@ class _HomePageState extends State<HiredMaidPage> {
                 ],
               ),
             ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class HorizontalDividerWithText extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: Divider(
+            color: Colors.grey[700],
+            height: 1.5,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(
+                'กรุณาจองล่วงหน้าอย่างน้อย 1 วัน',
+                style: GoogleFonts.kanit(
+                  textStyle: TextStyle(color: Colors.grey[700],),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+        ),
+        Expanded(
+          child: Divider(
+            color: Colors.black,
+            height: 1.5,
           ),
         ),
       ],

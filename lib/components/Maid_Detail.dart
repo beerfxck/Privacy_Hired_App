@@ -128,13 +128,13 @@ class _MaidDetailState extends State<MaidDetail> {
                                   size: 20,
                                 ),
                                 SizedBox(width: 5),
-                                Text(
-                                  'Rating: ${maidWork.maidRating!}',
-                                  style: GoogleFonts.kanit(
-                                    textStyle: TextStyle(color: Colors.black54),
-                                    fontSize: 16,
-                                  ),
-                                ),
+                                //Text(
+                                  //'Rating: ${maidWork.maidRating!}',
+                                //  style: GoogleFonts.kanit(
+                                //    textStyle: TextStyle(color: Colors.black54),
+                                //    fontSize: 16,
+                                //  ),
+                               // ),
                               ],
                             ),
                           ),
