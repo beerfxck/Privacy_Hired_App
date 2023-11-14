@@ -115,28 +115,53 @@ class _MaidDetailState extends State<MaidDetail> {
                     alignment: Alignment.bottomRight,
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => HiredMaidPage(
-                                id_user: maidWork.idUser!,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                  size: 25,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  'Rating: ',
+                                  style: GoogleFonts.kanit(
+                                    textStyle: TextStyle(color: Colors.black54),
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => HiredMaidPage(
+                                    id_user: maidWork.idUser!,
+                                  ),
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.green,
+                              shape: StadiumBorder(),
+                              elevation: 3,
+                            ),
+                            child: Text(
+                              'จอง',
+                              style: GoogleFonts.kanit(
+                                textStyle: TextStyle(color: Colors.white),
+                                fontSize: 16,
                               ),
                             ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
-                          shape: StadiumBorder(),
-                          elevation: 3,
-                        ),
-                        child: Text(
-                          'จอง',
-                          style: GoogleFonts.kanit(
-                            textStyle: TextStyle(color: Colors.white),
-                            fontSize: 16,
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ),
