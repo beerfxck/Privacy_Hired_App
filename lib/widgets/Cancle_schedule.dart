@@ -104,6 +104,7 @@ class _CancleState extends State<Cancle> {
             return SizedBox(
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 5),
+                margin: EdgeInsets.only(top: 13),
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 232, 241, 230),
                   borderRadius: BorderRadius.circular(10),
