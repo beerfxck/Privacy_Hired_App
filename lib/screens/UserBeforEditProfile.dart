@@ -5,26 +5,27 @@ import 'package:dio/dio.dart';
 
 import '../constant/domain.dart';
 import '../model/maidWork.dart';
+import 'UserEditProfile.dart';
 
-class EditUserPage extends StatefulWidget {
-  const EditUserPage({Key? key}) : super(key: key);
+class BeforEdit extends StatefulWidget {
+  const BeforEdit({Key? key}) : super(key: key);
 
   @override
-  _EditUserPageState createState() => _EditUserPageState();
+  _BeforEditState createState() => _BeforEditState();
 }
 
-class _EditUserPageState extends State<EditUserPage> {
+class _BeforEditState extends State<BeforEdit> {
   final dio = Dio();
   bool _obscureText = true;
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
 
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController fnameController = TextEditingController();
-  TextEditingController lnameController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
+  // TextEditingController usernameController = TextEditingController();
+  // TextEditingController passwordController = TextEditingController();
+  // TextEditingController fnameController = TextEditingController();
+  // TextEditingController lnameController = TextEditingController();
+  // TextEditingController phoneController = TextEditingController();
 
   @override
   void initState() {
@@ -60,28 +61,28 @@ class _EditUserPageState extends State<EditUserPage> {
     }
   }
 
-  Future<void> editProfile(BuildContext context) async {
-    try {
-      final response = await dio.post(
-        url_api + '/books/update-Review/' + idUser!,
-        data: {
-          'username': usernameController.text,
-          'password': passwordController.text,
-          'fname': fnameController.text,
-          'lname': lnameController.text,
-          'phone': phoneController.text,
-        },
-      );
+  // Future<void> editProfile(BuildContext context) async {
+  //   try {
+  //     final response = await dio.post(
+  //       url_api + '/books/update-Review/' + idUser!,
+  //       data: {
+  //         // 'username': usernameController.text,
+  //         // 'password': passwordController.text,
+  //         // 'fname': fnameController.text,
+  //         // 'lname': lnameController.text,
+  //         // 'phone': phoneController.text,
+  //       },
+  //     );
 
-      if (response.statusCode == 201) {
-        print('success');
-      } else {
-        print('Request failed with status: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
+  //     if (response.statusCode == 201) {
+  //       print('success');
+  //     } else {
+  //       print('Request failed with status: ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     print('Error: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -142,20 +143,21 @@ class _EditUserPageState extends State<EditUserPage> {
                   width: 1.0,
                 ),
               ),
-              child: TextField(
-                controller: usernameController,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  border: InputBorder.none,
-                  labelText:
-                      '${resident.isNotEmpty ? resident[0].username : ""}',
-                  labelStyle: GoogleFonts.kanit(
-                    fontSize: 16,
-                    color: Colors.grey,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                    child: Icon(Icons.account_circle_outlined),
                   ),
-                  prefixIcon: Icon(Icons.account_circle_outlined),
-                ),
+                  Text(
+                    '${resident.isNotEmpty ? resident[0].username : ""}',
+                    style: GoogleFonts.kanit(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
@@ -167,30 +169,21 @@ class _EditUserPageState extends State<EditUserPage> {
                   width: 1.0,
                 ),
               ),
-              child: TextField(
-                controller: passwordController,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  border: InputBorder.none,
-                  labelText:
-                      '${resident.isNotEmpty ? resident[0].password : ""}',
-                  labelStyle: GoogleFonts.kanit(
-                    fontSize: 16,
-                    color: Colors.grey,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                    child: Icon(Icons.lock_outlined),
                   ),
-                  prefixIcon: Icon(Icons.lock_outlined),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                        _obscureText ? Icons.visibility : Icons.visibility_off),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
+                  Text(
+                    '${resident.isNotEmpty ? resident[0].password : ""}',
+                    style: GoogleFonts.kanit(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
                   ),
-                ),
-                obscureText: _obscureText,
+                ],
               ),
             ),
             Container(
@@ -202,19 +195,21 @@ class _EditUserPageState extends State<EditUserPage> {
                   width: 1.0,
                 ),
               ),
-              child: TextField(
-                controller: fnameController,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  border: InputBorder.none,
-                  label: Text('${resident.isNotEmpty ? resident[0].fname : ""}',
-                      style: GoogleFonts.kanit(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      )),
-                  prefixIcon: Icon(Icons.account_circle_outlined),
-                ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                    child: Icon(Icons.account_circle_outlined),
+                  ),
+                  Text(
+                    '${resident.isNotEmpty ? resident[0].fname : ""}',
+                    style: GoogleFonts.kanit(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
@@ -226,19 +221,21 @@ class _EditUserPageState extends State<EditUserPage> {
                   width: 1.0,
                 ),
               ),
-              child: TextField(
-                controller: lnameController,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  border: InputBorder.none,
-                  label: Text('${resident.isNotEmpty ? resident[0].lname : ""}',
-                      style: GoogleFonts.kanit(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      )),
-                  prefixIcon: Icon(Icons.account_circle_outlined),
-                ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                    child: Icon(Icons.account_circle_outlined),
+                  ),
+                  Text(
+                    '${resident.isNotEmpty ? resident[0].lname : ""}',
+                    style: GoogleFonts.kanit(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
@@ -250,19 +247,21 @@ class _EditUserPageState extends State<EditUserPage> {
                   width: 1.0,
                 ),
               ),
-              child: TextField(
-                controller: phoneController,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  border: InputBorder.none,
-                  label: Text('${resident.isNotEmpty ? resident[0].phone : ""}',
-                      style: GoogleFonts.kanit(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      )),
-                  prefixIcon: Icon(Icons.phone),
-                ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                    child: Icon(Icons.phone),
+                  ),
+                  Text(
+                    '${resident.isNotEmpty ? resident[0].phone : ""}',
+                    style: GoogleFonts.kanit(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
             ),
             SizedBox(height: 30),
@@ -272,7 +271,10 @@ class _EditUserPageState extends State<EditUserPage> {
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton.icon(
                 onPressed: () {
-                  debugPrint('Received click');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EditUserPage()),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 209, 15, 1),
@@ -281,7 +283,7 @@ class _EditUserPageState extends State<EditUserPage> {
                 ),
                 icon: Icon(Icons.edit),
                 label: Text(
-                  'แก้ไขข้อมูลเสร็จสิ้น',
+                  'แก้ไขข้อมูล',
                   style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.white),
                     fontSize: 16,

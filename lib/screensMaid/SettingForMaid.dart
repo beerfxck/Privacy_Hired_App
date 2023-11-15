@@ -9,6 +9,7 @@ import 'package:privacy_maid_flutter/screens/Report_page.dart';
 import '../constant/domain.dart';
 import '../model/maidWork.dart';
 import '../screensMaid/Maid_Edit_Profile.dart';
+import 'Maid_Befor_Edit.dart';
 
 class SettingsMaidPage extends StatefulWidget {
   const SettingsMaidPage({super.key});
@@ -90,7 +91,7 @@ class _SettingsMaidPageState extends State<SettingsMaidPage> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => EditPage()),
+                MaterialPageRoute(builder: (context) => MaidBeforEdit()),
               );
             },
             leading: Container(

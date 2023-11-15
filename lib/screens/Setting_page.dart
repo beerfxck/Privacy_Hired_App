@@ -9,6 +9,7 @@ import 'package:privacy_maid_flutter/screens/UserEditProfile.dart';
 import '../constant/domain.dart';
 import '../model/maidWork.dart';
 import '../screensMaid/Maid_Edit_Profile.dart';
+import 'UserBeforEditProfile.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -88,7 +89,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        EditUserPage()),
+                        BeforEdit()),
               );
             },
             leading: Container(
