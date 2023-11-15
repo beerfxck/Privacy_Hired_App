@@ -53,6 +53,29 @@ class _EditUserPageState extends State<EditUserPage> {
     }
   }
 
+   Future<void> editProfile(BuildContext context) async {
+    try {
+      final response = await dio.post(
+        url_api + '/books/update-Review/'+ idUser!,
+        data: {
+          // 'username': ,
+          // 'password': rating,
+          // 'fname': widget.idBooking,
+          // 'lname': widget.idBooking,
+          // 'phone ': widget.idBooking,
+        },
+      );
+
+      if (response.statusCode == 201) {
+        print('success');
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
