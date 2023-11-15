@@ -25,6 +25,7 @@ class _InfoCompleteForMaidState extends State<InfoCompleteForMaid> {
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
   List<BookWork> bookwork = [];
+  
 
   @override
   void initState() {
@@ -169,6 +170,15 @@ class _InfoCompleteForMaidState extends State<InfoCompleteForMaid> {
               RequireText(
                   '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}'), //ใส่ตรงนี้
               buildDivider(),
+
+
+              MainText('สลิปการชำระค่าบริการ'),
+              // leading: CircleAvatar(
+              // radius: 30,
+              // backgroundImage: maid.isNotEmpty && maid[0].profile != null
+              // ? MemoryImage(base64Decode(maid[0].profile!))
+              // : AssetImage('assets/default_profile_image.png'), // Provide a default image
+              // ),
 
               //ราคา
               SupText('ค่าบริการ :' +
