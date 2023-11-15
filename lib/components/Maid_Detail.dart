@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
+import 'package:privacy_maid_flutter/model/BookWork.dart';
 import 'package:privacy_maid_flutter/model/maidWork.dart';
 
 import '../screens/Hiredmaid_page.dart';
@@ -128,13 +129,13 @@ class _MaidDetailState extends State<MaidDetail> {
                                   size: 20,
                                 ),
                                 SizedBox(width: 5),
-                                //Text(
-                                  //'Rating: ${maidWork.maidRating!}',
-                                //  style: GoogleFonts.kanit(
-                                //    textStyle: TextStyle(color: Colors.black54),
-                                //    fontSize: 16,
-                                //  ),
-                               // ),
+                                Text(
+                                  ' ${maidWork.maidSumrating}',
+                                  style: GoogleFonts.kanit(
+                                    textStyle: TextStyle(color: Colors.black54),
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ],
                             ),
                           ),

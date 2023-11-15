@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -102,6 +103,8 @@ class _UserReviewtState extends State<UserReview> {
     }
   }
 
+ 
+
   Future<void> updateRating(BuildContext context) async {
     try {
       final response = await dio.post(
@@ -109,9 +112,10 @@ class _UserReviewtState extends State<UserReview> {
         data: {
           'booking_id': widget.idBooking,
           'maid_rating': rating,
+          'maidbooking': bookwork[0].maidbooking,
+          'maid_sumrating': rating,
         },
       );
-
       if (response.statusCode == 201) {
         Navigator.push(
           context,

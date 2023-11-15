@@ -8,7 +8,7 @@ class maidWork {
   String? phone;
   String? roomnumber;
   String? roomsize;
-  double? maidRating;
+  String? maidSumrating;
   String? password;
   String? idCard;
   String? birthday;
@@ -28,7 +28,7 @@ class maidWork {
       this.phone,
       this.roomnumber,
       this.roomsize,
-      this.maidRating,
+      this.maidSumrating,
       this.password,
       this.idCard,
       this.birthday,
@@ -48,7 +48,7 @@ class maidWork {
     phone = json['phone'];
     roomnumber = json['roomnumber'];
     roomsize = json['roomsize'];
-    maidRating = json['maid_rating'];
+    maidSumrating = json['maid_sumrating'];
     password = json['password'];
     idCard = json['id_card'];
     birthday = json['birthday'];
@@ -70,7 +70,7 @@ class maidWork {
     data['phone'] = this.phone;
     data['roomnumber'] = this.roomnumber;
     data['roomsize'] = this.roomsize;
-    data['maid_rating'] = this.maidRating;
+    data['maid_sumrating'] = this.maidSumrating;
     data['password'] = this.password;
     data['id_card'] = this.idCard;
     data['birthday'] = this.birthday;
