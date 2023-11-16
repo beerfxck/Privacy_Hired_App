@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/MaidDeatailForHired.dart';
 import 'package:privacy_maid_flutter/components/TimeInfomation.dart';
 import 'package:privacy_maid_flutter/components/UserDeatailForHired.dart';
+import 'package:privacy_maid_flutter/model/maidWork.dart';
 
 import '../components/DateForBook.dart';
 import '../components/MaiddetailForBooking.dart';
@@ -31,37 +32,25 @@ class _UpcomingInformationPageState extends State<UpcomingInformationPage> {
   final dio = Dio();
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  List<maidWork> resident = [];
   List<BookWork> bookwork = [];
+
   @override
   void initState() {
     getData();
+    getbookWork();
     super.initState();
   }
 
   Future<void> getData() async {
     try {
-      bookwork = [];
+      resident = [];
       idUser = await storageToken.read(key: 'id_user');
-      final response =
-          await dio.get(url_api + '/books/get-book-residentnew/' + idUser!);
+      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
       if (response.statusCode == 200) {
         final responseData = response.data;
         for (var element in responseData) {
-          bookwork.add(BookWork(
-            bookingId: element["booking_id"],
-            bookingDate: element["booking_date"],
-            workHour: element["work_hour"],
-            startWork: element["start_work"],
-            descriptmaid: element["descriptmaid"],
-            servicePrice: element["service_price"],
-            paymentslip: element["paymentslip"],
-            profile: element["profile"],
-            phone: element["phone"],
-            status: element["status "],
-            statusDescription: element["status_description"],
-            fname: element["fname"],
-            nickname: element["nickname"],
-            lname: element["lname"],
+          resident.add(maidWork(
             idUser: element["id_user"],
           ));
         }
@@ -73,6 +62,35 @@ class _UpcomingInformationPageState extends State<UpcomingInformationPage> {
       print('Error: $e');
     }
   }
+
+  Future<void> getbookWork() async {
+    idUser = await storageToken.read(key: 'id_user');
+    try {
+      final Map<String, dynamic> maidWorkData = {
+        "status": 2,
+        "user_booking": idUser,
+      };
+      print(maidWorkData);
+      Response response = await dio.post(url_api + '/books/get-book-resident',
+          data: maidWorkData);
+      if (response.statusCode == 201) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          bookwork.add(BookWork(
+            descriptmaid: element["descriptmaid"],
+            servicePrice: element["service_price"],
+          
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
