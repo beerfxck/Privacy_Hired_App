@@ -169,7 +169,7 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
         builder: (BuildContext context) {
           return AlertDialog(
             content: Text(
-              "คุณต้องการยกเลิกรับบริการหรือไม่?",
+              "คุณต้องการยกเลิกให้บริการหรือไม่?",
               style: GoogleFonts.kanit(
                 textStyle: TextStyle(color: Colors.black),
                 fontSize: 17,

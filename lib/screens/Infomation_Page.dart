@@ -90,7 +90,7 @@ class _InformationPageState extends State<InformationPage> {
           MaterialPageRoute(
             builder: (context) => BottomNavBar(),
             settings: RouteSettings(
-              arguments: 1, 
+              arguments: 1,
             ),
           ),
         );
@@ -254,6 +254,39 @@ class _InformationPageState extends State<InformationPage> {
                 child: Divider(
                   thickness: 1,
                   //height: 20,
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'คำขอเพิ่มเติม',
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.black),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 0.5,
+                        ),
+                        color: Colors.white,
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Align(

@@ -9,6 +9,7 @@ import 'package:privacy_maid_flutter/model/maidWork.dart';
 
 class ReportPage extends StatefulWidget {
   final int? bookingId;
+
   const ReportPage({
     Key? key,
     this.bookingId,
@@ -101,93 +102,110 @@ class _ReportPageState extends State<ReportPage> {
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.green),
       ),
-      body: Column(
-        children: <Widget>[
-          SizedBox(height: 10),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(
-                color: Color.fromARGB(255, 216, 216, 216),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: Offset(0, 3),
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30.0, bottom: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                      color: Color.fromARGB(255, 216, 216, 216),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 30.0, bottom: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Center(
+                            child: Text(
+                              'ยื่นคำร้อง',
+                              style: GoogleFonts.kanit(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 30),
+                            child: Container(
+                              width: 400,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10.0),
+                                border: Border.all(
+                                  color: Color.fromARGB(255, 216, 216, 216),
+                                  width: 1.5,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'ชื่อ-นามสกุล : ${resident.isNotEmpty ? resident[0].fname : ""} ${resident.isNotEmpty ? resident[0].lname : ""}',
+                                      style: GoogleFonts.kanit(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    SizedBox(height: 4),
+                                    Text(
+                                      'หมายเลขการจอง : ${widget.bookingId}',
+                                      style: GoogleFonts.kanit(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    SizedBox(height: 4),
+                                    Text(
+                                      'ค่าบริการ : ' +
+                                          (bookwork.isNotEmpty
+                                              ? bookwork[0]
+                                                  .servicePrice
+                                                  .toString()
+                                              : "") +
+                                          ' บาท',
+                                      style: GoogleFonts.kanit(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          ReportComponents(bookingId: widget.bookingId),
+                          SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30.0,bottom: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Center(
-                      child: Text(
-                        'ยื่นคำร้อง',
-                        style: GoogleFonts.kanit(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 30),
-                      child: Container(
-                        width: 400,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          border: Border.all(
-                            color: Color.fromARGB(255, 216, 216, 216),
-                            width: 1.5,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'ชื่อ-นามสกุล : ${resident.isNotEmpty ? resident[0].fname : ""} ${resident.isNotEmpty ? resident[0].lname : ""}',
-                                style: GoogleFonts.kanit(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                'หมายเลขการจอง : ${widget.bookingId}',
-                                style: GoogleFonts.kanit(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                'ค่าบริการ : ' + (bookwork.isNotEmpty? bookwork[0].servicePrice.toString(): "") +' บาท',
-                                style: GoogleFonts.kanit(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    ReportComponents(bookingId: widget.bookingId),
-                    SizedBox(height: 20),
-                  ],
-                ),
-              ),
-            ),
           ),
-        ],
+        ),
       ),
     );
   }

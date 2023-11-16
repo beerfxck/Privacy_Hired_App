@@ -172,8 +172,9 @@ class _CancleInfoState extends State<CancleInfo> {
                 ),
               ),
               SizedBox(height: 10),
-              MaidDetailForHired(bookingId: bookwork[0].bookingId,
-                              id_user: bookwork[0].maidbooking),
+              MaidDetailForHired(
+                  bookingId: bookwork[0].bookingId,
+                  id_user: bookwork[0].maidbooking),
               Divider(thickness: 1),
               SizedBox(height: 10),
               TimeInfomation(bookingId: bookwork[0].bookingId),
@@ -182,6 +183,39 @@ class _CancleInfoState extends State<CancleInfo> {
               UserDetailForHired(),
               Divider(thickness: 1),
               SizedBox(height: 10),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'คำขอเพิ่มเติม',
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.black),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 0.5,
+                        ),
+                        color: Colors.white,
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(

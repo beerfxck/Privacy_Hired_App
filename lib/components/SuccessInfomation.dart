@@ -187,6 +187,39 @@ class _SuccessInfoState extends State<SuccessInfo> {
               SizedBox(height: 10),
               Align(
                 alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'คำขอเพิ่มเติม',
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.black),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 0.5,
+                        ),
+                        color: Colors.white,
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
                 child: Text(
                   'ค่าบริการ : ${booking.servicePrice?.toString() ?? ""}',
                   style: GoogleFonts.kanit(
