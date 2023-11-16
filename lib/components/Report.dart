@@ -1,13 +1,76 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:privacy_maid_flutter/constant/domain.dart';
+import 'package:privacy_maid_flutter/model/maidWork.dart';
 
 class ReportComponents extends StatefulWidget {
+  final int? bookingId;
+  const ReportComponents({
+    Key? key,
+    this.bookingId,
+  }) : super(key: key);
   @override
   _ReportComponentsState createState() => _ReportComponentsState();
 }
 
 class _ReportComponentsState extends State<ReportComponents> {
   TextEditingController _reportController = TextEditingController();
+  final dio = Dio();
+  String? idUser;
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  List<maidWork> resident = [];
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  Future<void> getData() async {
+    try {
+      resident = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          resident.add(maidWork(
+            idUser: element["id_user"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  void saveReportWork(BuildContext context) async {
+    idUser = await storageToken.read(key: 'id_user');
+    try {
+      final Map<String, dynamic> maidWorkData = {
+        "feedback_description": _reportController.text,
+        "id_user": idUser,
+        "id_booking": widget.bookingId,
+        "status_feedback": 9,
+      };
+      print(maidWorkData);
+      Response response =
+          await dio.post(url_api + '/feedback/savefeed', data: maidWorkData);
+      if (response.statusCode == 201) {
+        print("Maid work saved successfully");
+        Navigator.pushNamed(context, '/BottomNavBar');
+      } else {
+        print("HTTP Error: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
 
   @override
   void dispose() {
@@ -44,7 +107,7 @@ class _ReportComponentsState extends State<ReportComponents> {
                   border: InputBorder.none,
                   hintStyle: GoogleFonts.kanit(
                     fontSize: 16.0,
-                    color: Colors.grey[600], 
+                    color: Colors.grey[600],
                   ),
                 ),
               ),
@@ -60,7 +123,9 @@ class _ReportComponentsState extends State<ReportComponents> {
           ),
           SizedBox(height: 50),
           ElevatedButton(
-            onPressed: _handleSubmit,
+            onPressed: () {
+              saveReportWork(context);
+            },
             style: ElevatedButton.styleFrom(
               primary: Colors.red[700],
               shape: RoundedRectangleBorder(

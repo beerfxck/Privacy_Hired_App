@@ -180,7 +180,7 @@ class _ReportPageState extends State<ReportPage> {
                         ),
                       ),
                     ),
-                    ReportComponents(),
+                    ReportComponents(bookingId: widget.bookingId),
                     SizedBox(height: 20),
                   ],
                 ),
