@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -25,13 +27,22 @@ class _InfoCompleteForMaidState extends State<InfoCompleteForMaid> {
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
   List<BookWork> bookwork = [];
-  
 
   @override
   void initState() {
     getData();
     getbookWork();
     super.initState();
+  }
+
+  ImageProvider _buildPaymentSlipImage(String base64String) {
+    try {
+      return MemoryImage(base64Decode(base64String));
+    } catch (e) {
+      print('Error decoding base64: $e');
+      // Provide a default image or handle the error as needed
+      return AssetImage('images/logo_maid.png');
+    }
   }
 
   Future<void> getData() async {
@@ -83,6 +94,7 @@ class _InfoCompleteForMaidState extends State<InfoCompleteForMaid> {
             roomnumber: element["roomnumber"],
             roomsize: element["roomsize"],
             statusDescription: element["status_description"],
+            paymentslip: element["paymentslip"],
           ));
         }
         setState(() {});
@@ -171,24 +183,93 @@ class _InfoCompleteForMaidState extends State<InfoCompleteForMaid> {
                   '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}'), //ใส่ตรงนี้
               buildDivider(),
 
-
-              MainText('สลิปการชำระค่าบริการ'),
-              // leading: CircleAvatar(
-              // radius: 30,
-              // backgroundImage: maid.isNotEmpty && maid[0].profile != null
-              // ? MemoryImage(base64Decode(maid[0].profile!))
-              // : AssetImage('assets/default_profile_image.png'), // Provide a default image
+              TextButton(
+                onPressed: () {
+                  _showPaymentSlipDialog(context);
+                },
+                child: Text(
+                  'สลิปการชำระค่าบริการ',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue, // Customize the button color
+                  ),
+                ),
+              ),
+              // Container(
+              //   margin: EdgeInsets.symmetric(vertical: 10),
+              //   width: 10,
+              //   height: 10,
+              //   decoration: BoxDecoration(
+              //     shape: BoxShape.circle,
+              //     image: DecorationImage(
+              //       fit: BoxFit.cover,
+              //       image: bookwork.isNotEmpty &&
+              //               bookwork[0].paymentslip != null
+              //           ? _buildPaymentSlipImage(bookwork[0].paymentslip!)
+              //           : AssetImage(
+              //               'assets/default_profile_image.png'), // Provide a default image
+              //     ),
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: bookwork.isNotEmpty && bookwork[0].paymentslip != null
+              //       ? Image.memory(
+              //           base64Decode(bookwork[0].paymentslip!),
+              //           height: 200,
+              //           width: double.infinity,
+              //         )
+              //       : Text(
+              //           'No image available'), // You can customize this message
+              // ),
+              // CircleAvatar(
+              //   radius: 30,
+              //   backgroundImage: bookwork.isNotEmpty &&
+              //           bookwork[0].paymentslip != null
+              //       ? MemoryImage(base64Decode(bookwork[0].paymentslip!))
+              //       : AssetImage(
+              //           'assets/default_profile_image.png'), // Provide a default image
               // ),
 
-              //ราคา
               SupText('ค่าบริการ :' +
                   (bookwork.isNotEmpty
                       ? bookwork[0].servicePrice.toString()
-                      : "")), //ใส่ตรงนี้
+                      : "")),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void _showPaymentSlipDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Container(
+            width: double.maxFinite,
+            height: 500,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: bookwork.isNotEmpty && bookwork[0].paymentslip != null
+                    ? _buildPaymentSlipImage(bookwork[0].paymentslip!)
+                    : AssetImage('images/logo_maid.png'),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Close'),
+            ),
+          ],
+        );
+      },
     );
   }
 
