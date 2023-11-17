@@ -18,6 +18,13 @@ class _EditPageState extends State<EditPage> {
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController fnameController = TextEditingController();
+  TextEditingController lnameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+
   @override
   void initState() {
     getData();
@@ -42,6 +49,17 @@ class _EditPageState extends State<EditPage> {
             idUser: element["id_user"],
           ));
         }
+
+        // Set initial values to controllers
+        usernameController.text =
+            (resident.isNotEmpty ? resident[0].username : "")!;
+        passwordController.text =
+            (resident.isNotEmpty ? resident[0].password : "")!;
+        fnameController.text = (resident.isNotEmpty ? resident[0].fname : "")!;
+        lnameController.text = (resident.isNotEmpty ? resident[0].lname : "")!;
+        addressController.text =
+            (resident.isNotEmpty ? resident[0].address : "")!;
+
         setState(() {});
       } else {
         print('Request failed with status: ${response.statusCode}');
@@ -50,6 +68,48 @@ class _EditPageState extends State<EditPage> {
       print('Error: $e');
     }
   }
+
+  Future<void> editMaidprofile(BuildContext context) async {
+    try {
+      await getData();
+
+      final bool isUsernameEdited = usernameController.text.isNotEmpty &&
+          usernameController.text != resident[0].username;
+      final bool isPasswordEdited = passwordController.text.isNotEmpty &&
+          passwordController.text != resident[0].password;
+      final bool isFnameEdited = fnameController.text.isNotEmpty &&
+          fnameController.text != resident[0].fname;
+      final bool isLnameEdited = lnameController.text.isNotEmpty &&
+          lnameController.text != resident[0].lname;
+      final bool isAddressEdited = addressController.text.isNotEmpty &&
+          addressController.text != resident[0].phone;
+
+      final Map<String, dynamic> dataToUpdate = {
+        'username':
+            isUsernameEdited ? usernameController.text : resident[0].username,
+        'password':
+            isPasswordEdited ? passwordController.text : resident[0].password,
+        'fname': isFnameEdited ? fnameController.text : resident[0].fname,
+        'lname': isLnameEdited ? lnameController.text : resident[0].lname,
+        'address': isAddressEdited ? addressController.text : resident[0].phone,
+      };
+
+      final response = await dio.post(
+        url_api + '/user/edit/' + idUser!,
+        data: dataToUpdate,
+      );
+
+      if (response.statusCode == 201) {
+        Navigator.pushNamed(context, '/BottomNavBar');
+        print('success');
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +149,8 @@ class _EditPageState extends State<EditPage> {
               ),
             ),
             SizedBox(height: 5),
-            Text('${resident.isNotEmpty ? resident[0].fname : ""} ${resident.isNotEmpty ? resident[0].lname : ""}',
+            Text(
+                '${resident.isNotEmpty ? resident[0].fname : ""} ${resident.isNotEmpty ? resident[0].lname : ""}',
                 style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.black),
                     fontSize: 22,
@@ -106,11 +167,13 @@ class _EditPageState extends State<EditPage> {
                 ),
               ),
               child: TextField(
+                controller: usernameController,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   border: InputBorder.none,
-                  labelText: '${resident.isNotEmpty ? resident[0].username : ""}',
+                  labelText:
+                      '${resident.isNotEmpty ? resident[0].username : ""}',
                   labelStyle: GoogleFonts.kanit(
                     fontSize: 16,
                     color: Colors.grey,
@@ -129,15 +192,17 @@ class _EditPageState extends State<EditPage> {
                 ),
               ),
               child: TextField(
+                controller: passwordController,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   border: InputBorder.none,
-                  label: Text('${resident.isNotEmpty ? resident[0].password : ""}',
-                      style: GoogleFonts.kanit(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      )),
+                  label:
+                      Text('${resident.isNotEmpty ? resident[0].password : ""}',
+                          style: GoogleFonts.kanit(
+                            fontSize: 16,
+                            color: Colors.grey,
+                          )),
                   prefixIcon: Icon(Icons.lock_outlined),
                 ),
               ),
@@ -152,6 +217,7 @@ class _EditPageState extends State<EditPage> {
                 ),
               ),
               child: TextField(
+                controller: fnameController,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -175,6 +241,7 @@ class _EditPageState extends State<EditPage> {
                 ),
               ),
               child: TextField(
+                controller: lnameController,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -198,15 +265,17 @@ class _EditPageState extends State<EditPage> {
                 ),
               ),
               child: TextField(
+                controller: addressController,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   border: InputBorder.none,
-                  label: Text('${resident.isNotEmpty ? resident[0].address : ""}',
-                      style: GoogleFonts.kanit(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      )),
+                  label:
+                      Text('${resident.isNotEmpty ? resident[0].address : ""}',
+                          style: GoogleFonts.kanit(
+                            fontSize: 16,
+                            color: Colors.grey,
+                          )),
                   prefixIcon: Icon(Icons.home),
                 ),
               ),
@@ -218,7 +287,7 @@ class _EditPageState extends State<EditPage> {
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton.icon(
                 onPressed: () {
-                  debugPrint('Received click');
+                  editMaidprofile(context);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 209, 15, 1),
@@ -227,7 +296,7 @@ class _EditPageState extends State<EditPage> {
                 ),
                 icon: Icon(Icons.edit),
                 label: Text(
-                  'แก้ไขข้อมูล',
+                  'แก้ไขข้อมูลเสร็จสิ้น',
                   style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.white),
                     fontSize: 16,
