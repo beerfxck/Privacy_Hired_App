@@ -7,6 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../constant/domain.dart';
 import '../model/maidWork.dart';
 
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
 class EditPage extends StatefulWidget {
   const EditPage({super.key});
   @override
@@ -18,6 +21,7 @@ class _EditPageState extends State<EditPage> {
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
+  File? _image;
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -66,6 +70,17 @@ class _EditPageState extends State<EditPage> {
       }
     } catch (e) {
       print('Error: $e');
+    }
+  }
+
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
     }
   }
 
@@ -141,12 +156,29 @@ class _EditPageState extends State<EditPage> {
         child: Container(
           padding: EdgeInsets.all(0.0),
           child: Column(children: [
-            SizedBox(
-              width: 120,
-              height: 150,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Image(image: AssetImage('images/user3.png')),
+            InkWell(
+              onTap: () {
+                _pickImage(); // Call the function to open image picker
+              },
+              child: Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  SizedBox(
+                    width: 120,
+                    height: 150,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: _image != null
+                          ? Image.file(_image!) // Display selected image
+                          : Image.asset('images/user3.png'),
+                    ),
+                  ),
+                  Icon(
+                    Icons.camera_alt,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                ],
               ),
             ),
             SizedBox(height: 5),
