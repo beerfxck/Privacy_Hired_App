@@ -21,11 +21,11 @@ class _BeforEditState extends State<BeforEdit> {
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
 
-  // TextEditingController usernameController = TextEditingController();
-  // TextEditingController passwordController = TextEditingController();
-  // TextEditingController fnameController = TextEditingController();
-  // TextEditingController lnameController = TextEditingController();
-  // TextEditingController phoneController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController fnameController = TextEditingController();
+  TextEditingController lnameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   @override
   void initState() {
@@ -61,28 +61,6 @@ class _BeforEditState extends State<BeforEdit> {
     }
   }
 
-  // Future<void> editProfile(BuildContext context) async {
-  //   try {
-  //     final response = await dio.post(
-  //       url_api + '/books/update-Review/' + idUser!,
-  //       data: {
-  //         // 'username': usernameController.text,
-  //         // 'password': passwordController.text,
-  //         // 'fname': fnameController.text,
-  //         // 'lname': lnameController.text,
-  //         // 'phone': phoneController.text,
-  //       },
-  //     );
-
-  //     if (response.statusCode == 201) {
-  //       print('success');
-  //     } else {
-  //       print('Request failed with status: ${response.statusCode}');
-  //     }
-  //   } catch (e) {
-  //     print('Error: $e');
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

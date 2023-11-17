@@ -61,27 +61,43 @@ class _EditUserPageState extends State<EditUserPage> {
   }
 
   Future<void> editProfile(BuildContext context) async {
-    try {
-      final response = await dio.post(
-        url_api + '/books/update-Review/' + idUser!,
-        data: {
-          'username': usernameController.text,
-          'password': passwordController.text,
-          'fname': fnameController.text,
-          'lname': lnameController.text,
-          'phone': phoneController.text,
-        },
-      );
+  try {
+    // ดึงข้อมูลที่มีอยู่
+    await getData();
 
-      if (response.statusCode == 201) {
-        print('success');
-      } else {
-        print('Request failed with status: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error: $e');
+    // ตรวจสอบว่ามีการแก้ไขหรือไม่
+    final bool isUsernameEdited = usernameController.text.isNotEmpty && usernameController.text != resident[0].username;
+    final bool isPasswordEdited = passwordController.text.isNotEmpty && passwordController.text != resident[0].password;
+    final bool isFnameEdited = fnameController.text.isNotEmpty && fnameController.text != resident[0].fname;
+    final bool isLnameEdited = lnameController.text.isNotEmpty && lnameController.text != resident[0].lname;
+    final bool isPhoneEdited = phoneController.text.isNotEmpty && phoneController.text != resident[0].phone;
+
+    // สร้าง Map ข้อมูลที่จะส่ง
+    final Map<String, dynamic> dataToUpdate = {
+      'username': isUsernameEdited ? usernameController.text : resident[0].username,
+      'password': isPasswordEdited ? passwordController.text : resident[0].password,
+      'fname': isFnameEdited ? fnameController.text : resident[0].fname,
+      'lname': isLnameEdited ? lnameController.text : resident[0].lname,
+      'phone': isPhoneEdited ? phoneController.text : resident[0].phone,
+    };
+
+    // ส่งข้อมูล
+    final response = await dio.post(
+      url_api + '/user/edit/' + idUser!,
+      data: dataToUpdate,
+    );
+
+    if (response.statusCode == 201) {
+      Navigator.pushNamed(context, '/BottomNavBar');
+      print('success');
+    } else {
+      print('Request failed with status: ${response.statusCode}');
     }
+  } catch (e) {
+    print('Error: $e');
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -272,7 +288,7 @@ class _EditUserPageState extends State<EditUserPage> {
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton.icon(
                 onPressed: () {
-                  debugPrint('Received click');
+                 editProfile(context);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 209, 15, 1),
