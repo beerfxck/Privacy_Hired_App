@@ -82,7 +82,7 @@ class _EditPageState extends State<EditPage> {
       final bool isLnameEdited = lnameController.text.isNotEmpty &&
           lnameController.text != resident[0].lname;
       final bool isAddressEdited = addressController.text.isNotEmpty &&
-          addressController.text != resident[0].phone;
+          addressController.text != resident[0].address;
 
       final Map<String, dynamic> dataToUpdate = {
         'username':
@@ -91,7 +91,8 @@ class _EditPageState extends State<EditPage> {
             isPasswordEdited ? passwordController.text : resident[0].password,
         'fname': isFnameEdited ? fnameController.text : resident[0].fname,
         'lname': isLnameEdited ? lnameController.text : resident[0].lname,
-        'address': isAddressEdited ? addressController.text : resident[0].phone,
+        'address':
+            isAddressEdited ? addressController.text : resident[0].address,
       };
 
       final response = await dio.post(
