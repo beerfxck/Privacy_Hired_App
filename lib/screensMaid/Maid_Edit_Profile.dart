@@ -168,11 +168,11 @@ class _EditPageState extends State<EditPage> {
                     height: 150,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
-                      child: _image != null
+                      child: _image != ''
                           ? Image.memory(
                               Base64Decoder().convert(_image!),
                               fit: BoxFit
-                                  .cover, // Adjust the fit based on your requirements
+                                  .cover, 
                             )
                           : _imageFile != null
                               ? Image.file(
