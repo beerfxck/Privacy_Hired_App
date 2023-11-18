@@ -104,6 +104,7 @@ class _WorkCancleComponentState extends State<WorkCancleComponent> {
           return SizedBox(
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 5),
+              margin: EdgeInsets.only(top: 15),
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 232, 241, 230),
                 borderRadius: BorderRadius.circular(10),
