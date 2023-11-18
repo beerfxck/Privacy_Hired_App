@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +23,8 @@ class _EditPageState extends State<EditPage> {
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
-  File? _image;
+  File? _imageFile;
+  String _image = '';
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -50,20 +53,10 @@ class _EditPageState extends State<EditPage> {
             lname: element["lname"],
             phone: element["phone"],
             address: element["address"],
+            profile: element["profile"],
             idUser: element["id_user"],
           ));
         }
-
-        // Set initial values to controllers
-        usernameController.text =
-            (resident.isNotEmpty ? resident[0].username : "")!;
-        passwordController.text =
-            (resident.isNotEmpty ? resident[0].password : "")!;
-        fnameController.text = (resident.isNotEmpty ? resident[0].fname : "")!;
-        lnameController.text = (resident.isNotEmpty ? resident[0].lname : "")!;
-        addressController.text =
-            (resident.isNotEmpty ? resident[0].address : "")!;
-
         setState(() {});
       } else {
         print('Request failed with status: ${response.statusCode}');
@@ -75,11 +68,15 @@ class _EditPageState extends State<EditPage> {
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
+      File imageFile = File(pickedFile.path);
+      List<int> bytes = await imageFile.readAsBytes();
+      String base64Image = base64Encode(bytes);
       setState(() {
-        _image = File(pickedFile.path);
+        _imageFile = imageFile;
+        _image = base64Image;
       });
     }
   }
@@ -98,6 +95,8 @@ class _EditPageState extends State<EditPage> {
           lnameController.text != resident[0].lname;
       final bool isAddressEdited = addressController.text.isNotEmpty &&
           addressController.text != resident[0].address;
+      final bool imageEdited =
+          _image.isNotEmpty && _image != resident[0].profile;
 
       final Map<String, dynamic> dataToUpdate = {
         'username':
@@ -108,6 +107,7 @@ class _EditPageState extends State<EditPage> {
         'lname': isLnameEdited ? lnameController.text : resident[0].lname,
         'address':
             isAddressEdited ? addressController.text : resident[0].address,
+        'profile': imageEdited ? _image : resident[0].profile,
       };
 
       final response = await dio.post(
@@ -116,7 +116,7 @@ class _EditPageState extends State<EditPage> {
       );
 
       if (response.statusCode == 201) {
-        Navigator.pushNamed(context, '/BottomNavBar');
+        Navigator.pushNamed(context, '/MaidBottomNavBar');
         print('success');
       } else {
         print('Request failed with status: ${response.statusCode}');
@@ -158,7 +158,7 @@ class _EditPageState extends State<EditPage> {
           child: Column(children: [
             InkWell(
               onTap: () {
-                _pickImage(); // Call the function to open image picker
+                _pickImage(); // Call the function to open the image picker
               },
               child: Stack(
                 alignment: Alignment.bottomRight,
@@ -169,8 +169,17 @@ class _EditPageState extends State<EditPage> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
                       child: _image != null
-                          ? Image.file(_image!) // Display selected image
-                          : Image.asset('images/user3.png'),
+                          ? Image.memory(
+                              Base64Decoder().convert(_image!),
+                              fit: BoxFit
+                                  .cover, // Adjust the fit based on your requirements
+                            )
+                          : _imageFile != null
+                              ? Image.file(
+                                  _imageFile!,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset('images/user3.png'),
                     ),
                   ),
                   Icon(
