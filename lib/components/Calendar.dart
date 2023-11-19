@@ -134,7 +134,6 @@ class _TableEventsExampleState extends State<TableEventsExample> {
       _rangeSelectionMode = RangeSelectionMode.toggledOn;
     });
 
-
     if (start != null && end != null) {
       _selectedEvents.value = _getEventsForRange(start, end);
     } else if (start != null) {
@@ -212,7 +211,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                           print('${addDay(value[index].date)}')
                         },
                         title: Text(
-                            'เริ่มงาน: ${value[index].start} จบงาน: ${value[index].end} ชื่อ:${value[index].fname} ${value[index].lname}'),
+                            'ชื่อ:${value[index].fname} ${value[index].lname} เวลาทำงาน: ${value[index].start} - ${value[index].end}'),
                       ),
                     );
                   },

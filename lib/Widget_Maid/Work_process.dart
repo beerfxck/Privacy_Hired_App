@@ -100,7 +100,7 @@ class _WorkProcessComponentState extends State<WorkProcessComponent> {
         url_api + '/books/update-status',
         data: {
           'booking_id': bookWork[0].bookingId,
-          'status': 4,
+          'status': 3,
         },
       );
       if (response.statusCode == 201) {
