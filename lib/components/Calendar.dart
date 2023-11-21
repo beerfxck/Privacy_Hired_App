@@ -147,7 +147,8 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ดูวันการจองคิวแม่บ้าน'),
+        backgroundColor: Colors.green,
+        title: Text('จองคิวแม่บ้าน'),
       ),
       body: Column(
         children: [
