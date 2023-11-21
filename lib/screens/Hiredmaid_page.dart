@@ -158,6 +158,7 @@ class _HomePageState extends State<HiredMaidPage> {
         "descriptmaid": _textController.text,
         "service_price": calculateServiceCost(selectedHours),
         "status": 1,
+        "maid_rating":0,
         "user_booking": idUser,
         "maidbooking": widget.id_user,
       };

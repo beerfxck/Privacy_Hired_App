@@ -43,6 +43,8 @@ class _WorkProcessComponentState extends State<WorkProcessComponent> {
         print('Request failed with status: ${response.statusCode}');
       }
     } catch (e) {
+      bookWork = [];
+      setState(() {});
       print('Error: $e');
     }
   }
@@ -79,6 +81,7 @@ class _WorkProcessComponentState extends State<WorkProcessComponent> {
         print('Request failed with status: ${response.statusCode}');
       }
     } catch (e) {
+      bookWork = [];
       print('Error: $e');
     }
   }
@@ -105,6 +108,8 @@ class _WorkProcessComponentState extends State<WorkProcessComponent> {
       );
       if (response.statusCode == 201) {
         print("success");
+        getbookWork();
+        setState(() {});
       } else {
         print('Request failed with status: ${response.statusCode}');
       }

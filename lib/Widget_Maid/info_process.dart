@@ -91,6 +91,7 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
         print('Request failed with status: ${response.statusCode}');
       }
     } catch (e) {
+      setState(() {});
       print('Error: $e');
     }
   }
