@@ -122,7 +122,7 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
           MaterialPageRoute(
             builder: (context) => MaidBottomNavBar(),
             settings: RouteSettings(
-              arguments: 1, 
+              arguments: 1,
             ),
           ),
         );
@@ -149,7 +149,7 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
           MaterialPageRoute(
             builder: (context) => MaidBottomNavBar(),
             settings: RouteSettings(
-              arguments: 1, 
+              arguments: 1,
             ),
           ),
         );
@@ -183,10 +183,10 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).pop(); 
+                      Navigator.of(context).pop();
                     },
                     style: TextButton.styleFrom(
-                      primary: Colors.black, 
+                      primary: Colors.black,
                     ),
                     child: Text(
                       "ไม่",
@@ -203,10 +203,10 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
                       setState(() {
                         isCancelled = true;
                       });
-                      Navigator.of(context).pop(); 
+                      Navigator.of(context).pop();
                     },
                     style: TextButton.styleFrom(
-                      primary: Colors.red, 
+                      primary: Colors.red,
                     ),
                     child: Text(
                       "ยกเลิก",
@@ -239,9 +239,8 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.fromLTRB(10, 20, 10, 0), 
-            padding: EdgeInsets.symmetric(
-                horizontal: 25, vertical: 15),
+            margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.0),
@@ -262,40 +261,31 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
                 children: <Widget>[
                   MainText('รายละเอียดการจอง'),
                   buildDivider(),
-
-                  
                   SupText('วันที่จอง :' +
-                      '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}'), 
+                      '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}'),
                   SupText('เวลาเริ่มงาน : ' +
-                      '${bookwork.isNotEmpty ? bookwork[0].startWork : ""}'), 
+                      '${bookwork.isNotEmpty ? bookwork[0].startWork : ""}'),
                   SupText('จำนวนชั่วโมง : ' +
-                      '${bookwork.isNotEmpty ? bookwork[0].workHour : ""}'), 
+                      '${bookwork.isNotEmpty ? bookwork[0].workHour : ""}'),
                   buildDivider(),
-
-                  
                   MainText('รายละเอียดทำความสะอาด'),
                   SupText('หมายเลขห้อง :' +
-                      '${bookwork.isNotEmpty ? bookwork[0].roomnumber : ""}'), 
+                      '${bookwork.isNotEmpty ? bookwork[0].roomnumber : ""}'),
                   SupText('ขนาดห้อง :' +
-                      '${bookwork.isNotEmpty ? bookwork[0].roomsize : ""}'), 
+                      '${bookwork.isNotEmpty ? bookwork[0].roomsize : ""}'),
                   SupText('ชื่อเจ้าของห้อง :' +
-                      '${bookwork.isNotEmpty ? bookwork[0].fname : ""} ${bookwork.isNotEmpty ? bookwork[0].lname : ""}'), 
+                      '${bookwork.isNotEmpty ? bookwork[0].fname : ""} ${bookwork.isNotEmpty ? bookwork[0].lname : ""}'),
                   SupText('เบอร์โทรศัพท์ :' +
-                      '${bookwork.isNotEmpty ? bookwork[0].phone : ""}'), 
+                      '${bookwork.isNotEmpty ? bookwork[0].phone : ""}'),
                   buildDivider(),
-
-                  
-                  MainText('คำขอเพิ่มเติม'), 
+                  MainText('คำขอเพิ่มเติม'),
                   RequireText(
-                      '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}'), 
+                      '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}'),
                   buildDivider(),
-
-                  
                   SupText('ค่าบริการ :' +
                       (bookwork.isNotEmpty
                           ? bookwork[0].servicePrice.toString()
-                          : "")), //ใส่ตรงนี้
-
+                          : "")),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -306,8 +296,7 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
                         style: ElevatedButton.styleFrom(
                           primary: Colors.green,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10.0), 
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
                         child: Container(
@@ -337,7 +326,7 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
                           ),
                           child: Center(
                             child: Text(
-                              "ยกเลิกการใหบริการ",
+                              "ยกเลิกการให้บริการ",
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -356,7 +345,7 @@ class _InfoProcessForMaidState extends State<InfoProcessForMaid> {
 
   Widget SupText(String text) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 4), 
+      margin: EdgeInsets.symmetric(vertical: 4),
       child: Text(
         text,
         style: TextStyle(
