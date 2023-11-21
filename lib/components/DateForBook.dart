@@ -119,6 +119,13 @@ class _DateForBookState extends State<DateForBook> {
                     ),
                   ),
                   Text(
+                    'เวลาเริ่มงาน :',
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color: Colors.black),
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
                     'จำนวนชั่วโมง :',
                     style: GoogleFonts.kanit(
                       textStyle: TextStyle(color: Colors.black),
@@ -145,7 +152,17 @@ class _DateForBookState extends State<DateForBook> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                       '${bookwork.isNotEmpty ? bookwork[0].workHour : ""} ชั่วโมง',
+                      '${bookwork.isNotEmpty ? bookwork[0].startWork : ""} ',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      '${bookwork.isNotEmpty ? bookwork[0].workHour : ""} ชั่วโมง',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,

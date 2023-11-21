@@ -18,7 +18,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-   final dio = Dio();
+  final dio = Dio();
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
@@ -53,6 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
       print('Error: $e');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -79,17 +80,15 @@ class _SettingsPageState extends State<SettingsPage> {
                 fontSize: 18,
               ),
             ),
-            subtitle:
-                Text("${resident.isNotEmpty ? resident[0].typeDescription : ""}"),
+            subtitle: Text(
+                "${resident.isNotEmpty ? resident[0].typeDescription : ""}"),
           ),
           Divider(height: 50),
           ListTile(
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        BeforEdit()),
+                MaterialPageRoute(builder: (context) => BeforEdit()),
               );
             },
             leading: Container(
@@ -114,35 +113,34 @@ class _SettingsPageState extends State<SettingsPage> {
             trailing: Icon(Icons.arrow_forward_outlined),
           ),
           SizedBox(height: 20),
-          ListTile(
-            onTap: () {Navigator.pushNamed(context,
-                  '/ReportPage'); },
-            leading: Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.orange.shade100,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.report,
-                color: Colors.orange,
-                size: 35,
-              ),
-            ),
-            title: Text(
-              "แจ้งปัญหา/ร้องเรียน",
-              style: GoogleFonts.kanit(
-                fontWeight: FontWeight.w400,
-                fontSize: 20,
-              ),
-            ),
-            trailing: Icon(Icons.arrow_forward_outlined),
-          ),
+          // ListTile(
+          //   onTap: () {Navigator.pushNamed(context,
+          //         '/ReportPage'); },
+          //   leading: Container(
+          //     padding: EdgeInsets.all(10),
+          //     decoration: BoxDecoration(
+          //       color: Colors.orange.shade100,
+          //       shape: BoxShape.circle,
+          //     ),
+          //     child: Icon(
+          //       Icons.report,
+          //       color: Colors.orange,
+          //       size: 35,
+          //     ),
+          //   ),
+          //   title: Text(
+          //     "แจ้งปัญหา/ร้องเรียน",
+          //     style: GoogleFonts.kanit(
+          //       fontWeight: FontWeight.w400,
+          //       fontSize: 20,
+          //     ),
+          //   ),
+          //   trailing: Icon(Icons.arrow_forward_outlined),
+          // ),
           Divider(height: 40),
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context,
-                  '/login'); 
+              Navigator.pushNamed(context, '/login');
             },
             child: ListTile(
               leading: Container(

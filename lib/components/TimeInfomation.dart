@@ -124,6 +124,13 @@ class _TimeInfomationState extends State<TimeInfomation> {
                     ),
                   ),
                   Text(
+                    'เวลาเริ่มงาน :',
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color: Colors.black),
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
                     'จำนวนชั่วโมง :',
                     style: GoogleFonts.kanit(
                       textStyle: TextStyle(color: Colors.black),
@@ -144,6 +151,16 @@ class _TimeInfomationState extends State<TimeInfomation> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      '${bookwork.isNotEmpty ? bookwork[0].startWork : ""} ',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
