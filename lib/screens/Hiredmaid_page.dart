@@ -106,7 +106,11 @@ class _HomePageState extends State<HiredMaidPage> {
     if (id_worktimetype == 1) {
       durationOptions = [1, 2, 3];
     } else if (id_worktimetype == 2) {
-      durationOptions = [1, 2, 3, 4];
+      durationOptions = [
+        1,
+        2,
+        3,
+      ];
     } else if (id_worktimetype == 3) {
       durationOptions = [1, 2];
     } else if (id_worktimetype == 4) {
@@ -287,7 +291,9 @@ class _HomePageState extends State<HiredMaidPage> {
               MaidDetailForHired(
                 id_user: widget.id_user,
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               HorizontalDividerWithText(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -313,6 +319,7 @@ class _HomePageState extends State<HiredMaidPage> {
                   ),
                 ],
               ),
+
               Container(
                 width: 350,
                 height: 45,
@@ -343,6 +350,10 @@ class _HomePageState extends State<HiredMaidPage> {
               ),
               SizedBox(
                 height: 10,
+              ),
+              TimeStartComponents(
+                onChanged: (data) => {start_work = data},
+                id_worktimetype: widget.id_worktimetype,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -416,10 +427,10 @@ class _HomePageState extends State<HiredMaidPage> {
                 ],
               ),
               SizedBox(height: 10),
-              TimeStartComponents(
-                onChanged: (data) => {start_work = data},
-                id_worktimetype: widget.id_worktimetype,
-              ),
+              // TimeStartComponents(
+              //   onChanged: (data) => {start_work = data},
+              //   id_worktimetype: widget.id_worktimetype,
+              // ),
               SizedBox(height: 20),
               // SpecialTextField(),
 
@@ -549,13 +560,15 @@ class HorizontalDividerWithText extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Text(
-                'กรุณาจองล่วงหน้าอย่างน้อย 1 วัน',
-                style: GoogleFonts.kanit(
-                  textStyle: TextStyle(color: Colors.grey[700],),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
+            'กรุณาจองล่วงหน้าอย่างน้อย 1 วัน',
+            style: GoogleFonts.kanit(
+              textStyle: TextStyle(
+                color: Colors.grey[700],
               ),
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
         ),
         Expanded(
           child: Divider(
