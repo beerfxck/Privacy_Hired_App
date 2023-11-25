@@ -1,20 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
 import 'package:privacy_maid_flutter/model/maidWork.dart';
-import '../components/Maid_Detail.dart';
-import '../widgets/Upcoming_schedule.dart';
-import '../widgets/booking_Schedule.dart';
+import 'package:privacy_maid_flutter/widgets/booking_Schedule.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class BookingPage extends StatefulWidget {
+  const BookingPage({super.key});
+
   @override
-  _HomePageState createState() => _HomePageState();
+  State<BookingPage> createState() => _BookingPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _BookingPageState extends State<BookingPage> {
   final dio = Dio();
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
@@ -87,16 +88,16 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 14,
                 ),
               ),
-              SizedBox(height: 20),
               Text(
-                'แม่บ้านทั้งหมด',
+                'การจองคิวล่าสุด',
                 style: GoogleFonts.kanit(
                   textStyle: TextStyle(color: Colors.black),
                   fontWeight: FontWeight.w500,
                   fontSize: 20,
                 ),
               ),
-              MaidDetail(),
+              BookingSchedule(),
+              SizedBox(height: 20),
             ],
           ),
         ),

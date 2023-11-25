@@ -200,7 +200,7 @@ class _EditUserPageState extends State<EditUserPage> {
                   prefixIcon: Icon(Icons.lock_outlined),
                   suffixIcon: IconButton(
                     icon: Icon(
-                        _obscureText ? Icons.visibility : Icons.visibility_off),
+                        _obscureText ? Icons.visibility_off : Icons.visibility),
                     onPressed: () {
                       setState(() {
                         _obscureText = !_obscureText;

@@ -1,6 +1,7 @@
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:privacy_maid_flutter/Widget_Maid/WaitpayFormaid.dart';
 import '../Widget_Maid/Work_cancle.dart';
 import '../Widget_Maid/Work_complete.dart';
 import '../Widget_Maid/Work_process.dart';
@@ -19,6 +20,7 @@ class _MaidScheduleState extends State<MaidSchedulePage> {
 
   final _scheduleWidgets = [
     WorkProcessComponent(),
+    WaitForPaidMaid(),
     WorkCompleteComponent(),
     WorkCancleComponent(),
   ];
@@ -49,6 +51,14 @@ class _MaidScheduleState extends State<MaidSchedulePage> {
             ),
           ),
           Text(
+            'รอชำระ',
+            style: GoogleFonts.kanit(
+              textStyle: TextStyle(color: Colors.black),
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+            ),
+          ),
+          Text(
             'เสร็จสิ้น',
             style: GoogleFonts.kanit(
               textStyle: TextStyle(color: Colors.black),
@@ -67,6 +77,7 @@ class _MaidScheduleState extends State<MaidSchedulePage> {
         ],
         views: [
           WorkProcessComponent(),
+          WaitForPaidMaid(),
           WorkCompleteComponent(),
           WorkCancleComponent(),
         ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:privacy_maid_flutter/screens/BookingPage.dart';
 import 'package:privacy_maid_flutter/screens/Home_page.dart';
 import 'package:privacy_maid_flutter/screens/Schedule_page.dart';
 import 'package:privacy_maid_flutter/screens/Setting_page.dart';
@@ -42,9 +43,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
         index: _page,
         height: 60.0,
         items: <Widget>[
-          Icon(Icons.home_rounded, size: 30,color:Colors.white),
-          Icon(Icons.cleaning_services_rounded, size: 30,color:Colors.white),
-          Icon(Icons.person_2_rounded, size: 30,color:Colors.white),
+          Icon(Icons.home, size: 30, color: Colors.white),
+          Icon(Icons.person_2_outlined, size: 30, color: Colors.white),
+          Icon(Icons.cleaning_services_rounded, size: 30, color: Colors.white),
+          Icon(Icons.settings, size: 30, color: Colors.white),
         ],
         color: Colors.green,
         buttonBackgroundColor: Colors.green,
@@ -64,6 +66,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         controller: _pageController,
         onPageChanged: _onPageChanged,
         children: <Widget>[
+          BookingPage(),
           HomePage(),
           SchedulePage(),
           SettingsPage(),

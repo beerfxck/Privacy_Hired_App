@@ -53,15 +53,15 @@ class _BookingScheduleState extends State<BookingSchedule> {
     }
   }
 
-   Future<void> getbookWork() async {
+  Future<void> getbookWork() async {
     idUser = await storageToken.read(key: 'id_user');
     try {
       final Map<String, dynamic> maidWorkData = {
         "user_booking": idUser,
       };
       print(maidWorkData);
-      Response response = await dio.post(url_api + '/books/get-book-residentnew',
-          data: maidWorkData);
+      Response response = await dio
+          .post(url_api + '/books/get-book-residentnew', data: maidWorkData);
       if (response.statusCode == 201) {
         final responseData = response.data;
         for (var element in responseData) {
@@ -114,7 +114,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                 Container(
                   padding: const EdgeInsets.fromLTRB(3, 0, 3, 15),
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 232, 241, 230),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: const [
                       BoxShadow(
