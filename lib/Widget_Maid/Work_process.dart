@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+// import 'package:timezone/browser.dart' as tz;
 import '../constant/domain.dart';
 import '../model/BookWork.dart';
 import '../model/maidWork.dart';
@@ -96,6 +96,12 @@ class _WorkProcessComponentState extends State<WorkProcessComponent> {
     }
     return "";
   }
+
+  // Future<void> setup() async {
+  //   await tz.initializeTimeZone();
+  //   var detroit = tz.getLocation('Thailand/Bangkok');
+  //   var now = tz.TZDateTime.now(detroit);
+  // }
 
   Future<void> updateStatus(BuildContext context) async {
     try {
