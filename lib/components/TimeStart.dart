@@ -31,6 +31,26 @@ class _TimeStartComponentsState extends State<TimeStartComponents> {
       timeSlots = ['15:00', '16:00'];
     } else if (id_worktimetype == 7) {
       timeSlots = ['16:00'];
+    } else if (id_worktimetype == 9) {
+      timeSlots = ['09:00', '11:00'];
+    } else if (id_worktimetype == 10) {
+      timeSlots = ['09:00', '10:00'];
+    } else if (id_worktimetype == 11) {
+      timeSlots = ['10:00', '12:00'];
+    } else if (id_worktimetype == 12) {
+      timeSlots = ['13:00', '15:00', '16:00'];
+    } else if (id_worktimetype == 13) {
+      timeSlots = ['13:00', '14:00', '16:00'];
+    } else if (id_worktimetype == 14) {
+      timeSlots = ['13:00', '14:00', '15:00'];
+    } else if (id_worktimetype == 15) {
+      timeSlots = ['14:00', '16:00'];
+    } else if (id_worktimetype == 16) {
+      timeSlots = ['14:00', '15:00'];
+    } else if (id_worktimetype == 17) {
+      timeSlots = ['15:00'];
+    } else if (id_worktimetype == 18) {
+      timeSlots = ['09:00'];
     }
 
     return timeSlots;
@@ -76,6 +96,7 @@ class _TimeStartComponentsState extends State<TimeStartComponents> {
             setState(() {
               selectedHours = newValue;
               widget.onChanged(newValue!);
+              print(selectedHours);
             });
           },
         )

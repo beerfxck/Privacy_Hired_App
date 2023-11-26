@@ -170,7 +170,7 @@ class _EditPageState extends State<EditPage> {
                       borderRadius: BorderRadius.circular(100),
                       child: _image != ''
                           ? Image.memory(
-                              Base64Decoder().convert(_image!),
+                              Base64Decoder().convert(_image),
                               fit: BoxFit
                                   .cover, 
                             )

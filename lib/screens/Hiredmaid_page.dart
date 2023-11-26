@@ -100,30 +100,295 @@ class _HomePageState extends State<HiredMaidPage> {
     }
   }
 
-  List<int> selectedTimeByworktime(int? id_worktimetype) {
-    List<int> durationOptions = [];
-
-    if (id_worktimetype == 1) {
+  List<int> durationOptions = [];
+  selectedTimeByworktime(int? id_worktimetype, String? start_work) {
+    if (start_work == '09:00' && id_worktimetype == 1) {
       durationOptions = [1, 2, 3];
-    } else if (id_worktimetype == 2) {
-      durationOptions = [
-        1,
-        2,
-        3,
-      ];
-    } else if (id_worktimetype == 3) {
+    } else if (start_work == '10:00' && id_worktimetype == 1) {
       durationOptions = [1, 2];
-    } else if (id_worktimetype == 4) {
+    } else if (start_work == '11:00' && id_worktimetype == 1) {
       durationOptions = [1];
-    } else if (id_worktimetype == 5) {
+    } else if (start_work == '13:00' && id_worktimetype == 2) {
+      durationOptions = [1, 2, 3, 4];
+    } else if (start_work == '14:00' && id_worktimetype == 2) {
       durationOptions = [1, 2, 3];
-    } else if (id_worktimetype == 6) {
+    } else if (start_work == '15:00' && id_worktimetype == 2) {
       durationOptions = [1, 2];
-    } else if (id_worktimetype == 7) {
+    } else if (start_work == '16:00' && id_worktimetype == 2) {
+      durationOptions = [1];
+    } else if (start_work == '10:00' && id_worktimetype == 3) {
+      durationOptions = [1, 2];
+    } else if (start_work == '11:00' && id_worktimetype == 3) {
+      durationOptions = [1];
+    } else if (start_work == '11:00' && id_worktimetype == 4) {
+      durationOptions = [1];
+    } else if (start_work == '14:00' && id_worktimetype == 5) {
+      durationOptions = [1, 2, 3];
+    } else if (start_work == '15:00' && id_worktimetype == 5) {
+      durationOptions = [1, 2];
+    } else if (start_work == '16:00' && id_worktimetype == 5) {
+      durationOptions = [1];
+    } else if (start_work == '15:00' && id_worktimetype == 6) {
+      durationOptions = [1, 2];
+    } else if (start_work == '16:00' && id_worktimetype == 6) {
+      durationOptions = [1];
+    } else if (start_work == '16:00' && id_worktimetype == 7) {
+      durationOptions = [1];
+    } else if (start_work == '09:00' && id_worktimetype == 9) {
+      durationOptions = [1];
+    } else if (start_work == '11:00' && id_worktimetype == 9) {
+      durationOptions = [1];
+    } else if (start_work == '09:00' && id_worktimetype == 10) {
+      durationOptions = [1, 2];
+    } else if (start_work == '10:00' && id_worktimetype == 10) {
+      durationOptions = [1];
+    } else if (start_work == '10:00' && id_worktimetype == 11) {
+      durationOptions = [1];
+    } else if (start_work == '13:00' && id_worktimetype == 12) {
+      durationOptions = [1];
+    } else if (start_work == '15:00' && id_worktimetype == 12) {
+      durationOptions = [1, 2];
+    } else if (start_work == '13:00' && id_worktimetype == 13) {
+      durationOptions = [1, 2];
+    } else if (start_work == '14:00' && id_worktimetype == 13) {
+      durationOptions = [1];
+    } else if (start_work == '16:00' && id_worktimetype == 13) {
+      durationOptions = [1];
+    } else if (start_work == '13:00' && id_worktimetype == 14) {
+      durationOptions = [1, 2, 3];
+    } else if (start_work == '14:00' && id_worktimetype == 15) {
+      durationOptions = [1];
+    } else if (start_work == '15:00' && id_worktimetype == 15) {
+      durationOptions = [1, 2];
+    } else if (start_work == '14:00' && id_worktimetype == 16) {
+      durationOptions = [1, 2];
+    } else if (start_work == '15:00' && id_worktimetype == 17) {
+      durationOptions = [1];
+    } else if (start_work == '09:00' && id_worktimetype == 18) {
+      durationOptions = [1];
+    } else {
       durationOptions = [1];
     }
+    setState(() {});
+  }
 
-    return durationOptions;
+  Future<void> updateWork(BuildContext context) async {
+    try {
+      Map<String, dynamic> requestData = {
+        'id_worktime': widget.id_worktime,
+      };
+
+      if (widget.id_worktimetype == 1 &&
+          selectedHours == 1 &&
+          start_work == '09:00') {
+        requestData['id_timeworktype'] = 3;
+      } else if (widget.id_worktimetype == 1 &&
+          selectedHours == 2 &&
+          start_work == '09:00') {
+        requestData['id_timeworktype'] = 4;
+      } else if (widget.id_worktimetype == 1 &&
+          selectedHours == 3 &&
+          start_work == '09:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 1 &&
+          selectedHours == 1 &&
+          start_work == '10:00') {
+        requestData['id_timeworktype'] = 9;
+      } else if (widget.id_worktimetype == 1 &&
+          selectedHours == 2 &&
+          start_work == '10:00') {
+        requestData['id_timeworktype'] = 18;
+      } else if (widget.id_worktimetype == 1 &&
+          selectedHours == 1 &&
+          start_work == '11:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 3 &&
+          selectedHours == 1 &&
+          start_work == '10:00') {
+        requestData['id_timeworktype'] = 4;
+      } else if (widget.id_worktimetype == 3 &&
+          selectedHours == 2 &&
+          start_work == '10:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 4 &&
+          selectedHours == 1 &&
+          start_work == '11:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 2 &&
+          selectedHours == 1 &&
+          start_work == '13:00') {
+        requestData['id_timeworktype'] = 5;
+      } else if (widget.id_worktimetype == 2 &&
+          selectedHours == 2 &&
+          start_work == '13:00') {
+        requestData['id_timeworktype'] = 6;
+      } else if (widget.id_worktimetype == 2 &&
+          selectedHours == 3 &&
+          start_work == '13:00') {
+        requestData['id_timeworktype'] = 7;
+      } else if (widget.id_worktimetype == 2 &&
+          selectedHours == 1 &&
+          start_work == '14:00') {
+        requestData['id_timeworktype'] = 12;
+      } else if (widget.id_worktimetype == 2 &&
+          selectedHours == 2 &&
+          start_work == '14:00') {
+        requestData['id_timeworktype'] = 19;
+      } else if (widget.id_worktimetype == 2 &&
+          selectedHours == 3 &&
+          start_work == '14:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 2 &&
+          selectedHours == 1 &&
+          start_work == '15:00') {
+        requestData['id_timeworktype'] = 13;
+      } else if (widget.id_worktimetype == 2 &&
+          selectedHours == 2 &&
+          start_work == '15:00') {
+        requestData['id_timeworktype'] = 20;
+      } else if (widget.id_worktimetype == 2 &&
+          selectedHours == 1 &&
+          start_work == '16:00') {
+        requestData['id_timeworktype'] = 21;
+      } else if (widget.id_worktimetype == 5 &&
+          selectedHours == 1 &&
+          start_work == '14:00') {
+        requestData['id_timeworktype'] = 6;
+      } else if (widget.id_worktimetype == 5 &&
+          selectedHours == 2 &&
+          start_work == '14:00') {
+        requestData['id_timeworktype'] = 7;
+      } else if (widget.id_worktimetype == 5 &&
+          selectedHours == 3 &&
+          start_work == '14:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 6 &&
+          selectedHours == 1 &&
+          start_work == '15:00') {
+        requestData['id_timeworktype'] = 7;
+      } else if (widget.id_worktimetype == 6 &&
+          selectedHours == 2 &&
+          start_work == '15:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 6 &&
+          selectedHours == 1 &&
+          start_work == '16:00') {
+        requestData['id_timeworktype'] = 22;
+      } else if (widget.id_worktimetype == 7 &&
+          selectedHours == 1 &&
+          start_work == '16:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 9 &&
+          selectedHours == 1 &&
+          start_work == '09:00') {
+        requestData['id_timeworktype'] = 4;
+      } else if (widget.id_worktimetype == 9 &&
+          selectedHours == 1 &&
+          start_work == '11:00') {
+        requestData['id_timeworktype'] = 7;
+      } else if (widget.id_worktimetype == 10 &&
+          selectedHours == 1 &&
+          start_work == '09:00') {
+        requestData['id_timeworktype'] = 4;
+      } else if (widget.id_worktimetype == 10 &&
+          selectedHours == 2 &&
+          start_work == '09:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 11 &&
+          selectedHours == 1 &&
+          start_work == '10:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 12 &&
+          selectedHours == 1 &&
+          start_work == '13:00') {
+        requestData['id_timeworktype'] = 6;
+      } else if (widget.id_worktimetype == 12 &&
+          selectedHours == 1 &&
+          start_work == '15:00') {
+        requestData['id_timeworktype'] = 19;
+      } else if (widget.id_worktimetype == 12 &&
+          selectedHours == 2 &&
+          start_work == '15:00') {
+        requestData['id_timeworktype'] = 22;
+      } else if (widget.id_worktimetype == 12 &&
+          selectedHours == 1 &&
+          start_work == '16:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 13 &&
+          selectedHours == 1 &&
+          start_work == '13:00') {
+        requestData['id_timeworktype'] = 5;
+      } else if (widget.id_worktimetype == 13 &&
+          selectedHours == 2 &&
+          start_work == '13:00') {
+        requestData['id_timeworktype'] = 23;
+      } else if (widget.id_worktimetype == 13 &&
+          selectedHours == 1 &&
+          start_work == '14:00') {
+        requestData['id_timeworktype'] = 12;
+      } else if (widget.id_worktimetype == 13 &&
+          selectedHours == 1 &&
+          start_work == '16:00') {
+        requestData['id_timeworktype'] = 22;
+      } else if (widget.id_worktimetype == 14 &&
+          selectedHours == 1 &&
+          start_work == '13:00') {
+        requestData['id_timeworktype'] = 5;
+      } else if (widget.id_worktimetype == 14 &&
+          selectedHours == 2 &&
+          start_work == '13:00') {
+        requestData['id_timeworktype'] = 7;
+      } else if (widget.id_worktimetype == 14 &&
+          selectedHours == 3 &&
+          start_work == '13:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 14 &&
+          selectedHours == 1 &&
+          start_work == '14:00') {
+        requestData['id_timeworktype'] = 13;
+      } else if (widget.id_worktimetype == 14 &&
+          selectedHours == 2 &&
+          start_work == '14:00') {
+        requestData['id_timeworktype'] = 19;
+      } else if (widget.id_worktimetype == 15 &&
+          selectedHours == 1 &&
+          start_work == '14:00') {
+        requestData['id_timeworktype'] = 7;
+      } else if (widget.id_worktimetype == 15 &&
+          selectedHours == 1 &&
+          start_work == '16:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 16 &&
+          selectedHours == 1 &&
+          start_work == '14:00') {
+        requestData['id_timeworktype'] = 17;
+      } else if (widget.id_worktimetype == 16 &&
+          selectedHours == 2 &&
+          start_work == '14:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 16 &&
+          selectedHours == 1 &&
+          start_work == '15:00') {
+        requestData['id_timeworktype'] = 8;
+      } else if (widget.id_worktimetype == 17 &&
+          selectedHours == 1 &&
+          start_work == '15:00') {
+        requestData['id_timeworktype'] = 8;
+      }
+
+      final response = await dio.post(
+        url_api + '/maidwork/update-work',
+        data: requestData,
+      );
+
+      if (response.statusCode == 201) {
+        print('Success');
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 
   void getMaidWork() async {
@@ -150,6 +415,7 @@ class _HomePageState extends State<HiredMaidPage> {
   String? idUser;
   void saveMaidWork(BuildContext context) async {
     idUser = await storageToken.read(key: 'id_user');
+
     try {
       final Map<String, dynamic> maidWorkData = {
         "booking_date": widget.workday != null ? widget.workday : "23023-10-30",
@@ -158,13 +424,24 @@ class _HomePageState extends State<HiredMaidPage> {
         "descriptmaid": _textController.text,
         "service_price": calculateServiceCost(selectedHours),
         "status": 1,
-        "maid_rating":0,
+        "maid_rating": 0,
         "user_booking": idUser,
         "maidbooking": widget.id_user,
+        "id_maidwork": widget.id_worktime
       };
+
+      // เพิ่มเงื่อนไขเช็คข้อมูลทุกช่องที่ต้องการ
+      if (maidWorkData.values.any((value) => value == null || value == "")) {
+        // แจ้งเตือนว่าข้อมูลไม่ครบ
+        print("กรุณาใส่ข้อมูลให้ครบ");
+        return;
+      }
+
       print(maidWorkData);
+
       Response response =
           await dio.post(url_api + '/books/save', data: maidWorkData);
+
       if (response.statusCode == 201) {
         updateWork(context);
         print("Maid work saved successfully");
@@ -173,62 +450,10 @@ class _HomePageState extends State<HiredMaidPage> {
         print("HTTP Error: ${response.statusCode}");
       }
     } catch (e) {
+      // จัดการข้อผิดพลาด
       print("Error: $e");
-    }
-  }
-
-  Future<void> updateWork(BuildContext context) async {
-    try {
-      Map<String, dynamic> requestData = {
-        'id_worktime': widget.id_worktime,
-      };
-
-      if (widget.id_worktimetype == 1 && selectedHours == 1) {
-        requestData['id_timeworktype'] = 3;
-      } else if (widget.id_worktimetype == 1 && selectedHours == 2) {
-        requestData['id_timeworktype'] = 4;
-      } else if (widget.id_worktimetype == 1 && selectedHours == 3) {
-        requestData['id_timeworktype'] = 8;
-      } else if (widget.id_worktimetype == 2 && selectedHours == 1) {
-        requestData['id_timeworktype'] = 5;
-      } else if (widget.id_worktimetype == 2 && selectedHours == 2) {
-        requestData['id_timeworktype'] = 6;
-      } else if (widget.id_worktimetype == 2 && selectedHours == 3) {
-        requestData['id_timeworktype'] = 7;
-      } else if (widget.id_worktimetype == 2 && selectedHours == 4) {
-        requestData['id_timeworktype'] = 8;
-      } else if (widget.id_worktimetype == 3 && selectedHours == 1) {
-        requestData['id_timeworktype'] = 4;
-      } else if (widget.id_worktimetype == 3 && selectedHours == 2) {
-        requestData['id_timeworktype'] = 8;
-      } else if (widget.id_worktimetype == 4 && selectedHours == 1) {
-        requestData['id_timeworktype'] = 8;
-      } else if (widget.id_worktimetype == 5 && selectedHours == 1) {
-        requestData['id_timeworktype'] = 6;
-      } else if (widget.id_worktimetype == 5 && selectedHours == 2) {
-        requestData['id_timeworktype'] = 7;
-      } else if (widget.id_worktimetype == 5 && selectedHours == 3) {
-        requestData['id_timeworktype'] = 8;
-      } else if (widget.id_worktimetype == 6 && selectedHours == 1) {
-        requestData['id_timeworktype'] = 7;
-      } else if (widget.id_worktimetype == 6 && selectedHours == 2) {
-        requestData['id_timeworktype'] = 8;
-      } else if (widget.id_worktimetype == 7 && selectedHours == 1) {
-        requestData['id_timeworktype'] = 8;
-      }
-
-      final response = await dio.post(
-        url_api + '/maidwork/update-work',
-        data: requestData,
-      );
-
-      if (response.statusCode == 201) {
-        print('Success');
-      } else {
-        print('Request failed with status: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error: $e');
+      // แจ้งเตือนว่ามีข้อผิดพลาดเกิดขึ้น
+      print("มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่");
     }
   }
 
@@ -303,7 +528,6 @@ class _HomePageState extends State<HiredMaidPage> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0),
-                        //child: Icon(Icons.calendar_month_rounded),
                       ),
                       SizedBox(height: 50),
                       Padding(
@@ -320,7 +544,6 @@ class _HomePageState extends State<HiredMaidPage> {
                   ),
                 ],
               ),
-
               Container(
                 width: 350,
                 height: 45,
@@ -353,7 +576,10 @@ class _HomePageState extends State<HiredMaidPage> {
                 height: 10,
               ),
               TimeStartComponents(
-                onChanged: (data) => {start_work = data},
+                onChanged: (data) => {
+                  start_work = data,
+                  selectedTimeByworktime(widget.id_worktimetype, start_work)
+                },
                 id_worktimetype: widget.id_worktimetype,
               ),
               Column(
@@ -380,8 +606,7 @@ class _HomePageState extends State<HiredMaidPage> {
                   ),
                   DropdownButtonFormField<int>(
                     value: selectedHours,
-                    items: selectedTimeByworktime(widget.id_worktimetype)
-                        .map((durationOption) {
+                    items: durationOptions.map((durationOption) {
                       return DropdownMenuItem<int>(
                         value: durationOption,
                         child: Text(
@@ -399,6 +624,7 @@ class _HomePageState extends State<HiredMaidPage> {
                     },
                     icon: Icon(Icons.watch_later_rounded),
                     decoration: InputDecoration(
+                      // ตัวอย่างเท่านั้น คุณสามารถปรับแต่งตามความต้องการ
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.grey,

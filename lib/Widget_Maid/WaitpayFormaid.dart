@@ -103,7 +103,7 @@ class _WaitForPaidMaidState extends State<WaitForPaidMaid> {
                 SupTextPaid("เวลาที่เริ่ม: ${booking.startWork ?? ""}"),
                 SupTextPaid("เลขห้อง : ${booking.roomnumber ?? ""}"),
                 SupTextPaid("ชื่อเจ้าของห้อง : ${booking.fname ?? ""} "),
-                SupTextPaid("เบอร์ :  ${booking.phone.toString() ?? ""} ")
+                SupTextPaid("เบอร์ :  ${booking.phone.toString()} ")
               ],
             ),
           ),
