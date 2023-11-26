@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:privacy_maid_flutter/components/UserDeatailForHired.dart';
 import 'package:privacy_maid_flutter/model/maidWork.dart';
+import 'package:privacy_maid_flutter/screens/EditBooking_page.dart';
 
 import 'package:privacy_maid_flutter/widgets/navigatorbar.dart';
 
@@ -63,7 +63,7 @@ class _InformationPageState extends State<InformationPage> {
     }
   }
 
-   Future<void> getbookWork() async {
+  Future<void> getbookWork() async {
     idUser = await storageToken.read(key: 'id_user');
     try {
       final Map<String, dynamic> maidWorkData = {
@@ -71,8 +71,8 @@ class _InformationPageState extends State<InformationPage> {
         "user_booking": idUser,
       };
       print(maidWorkData);
-      Response response = await dio.post(url_api + '/books/get-book-info',
-          data: maidWorkData);
+      Response response =
+          await dio.post(url_api + '/books/get-book-info', data: maidWorkData);
       if (response.statusCode == 201) {
         final responseData = response.data;
         for (var element in responseData) {
@@ -331,6 +331,39 @@ class _InformationPageState extends State<InformationPage> {
               ),
               SizedBox(
                 height: 15,
+              ),
+              InkWell(
+                onTap: () {
+                  // Example of navigating to the EditBooking page:
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            EditBookingPage()), // Replace EditBookingPage() with the actual widget/page for editing
+                  );
+                },
+                child: Container(
+                  width: 300,
+                  height: 40,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.blue, // Choose a color for the Edit button
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "แก้ไขข้อมูลการจอง",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               InkWell(
                 onTap: bookwork.isNotEmpty
