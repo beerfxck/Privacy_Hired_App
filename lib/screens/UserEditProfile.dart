@@ -160,19 +160,20 @@ class _EditUserPageState extends State<EditUserPage> {
                   width: 1.0,
                 ),
               ),
-              child: TextField(
-                controller: usernameController,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  border: InputBorder.none,
-                  labelText:
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                child: Row(
+                  children: [
+                    Icon(Icons.account_circle_outlined),
+                    SizedBox(width: 10),
+                    Text(
                       '${resident.isNotEmpty ? resident[0].username : ""}',
-                  labelStyle: GoogleFonts.kanit(
-                    fontSize: 16,
-                    color: Colors.grey,
-                  ),
-                  prefixIcon: Icon(Icons.account_circle_outlined),
+                      style: GoogleFonts.kanit(
+                        fontSize: 18,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
