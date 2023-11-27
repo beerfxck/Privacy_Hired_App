@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -197,6 +198,7 @@ class _ReportPageState extends State<ReportPage> {
                               ),
                             ),
                           ),
+
                           ReportComponents(bookingId: widget.bookingId),
                           SizedBox(height: 20),
                         ],
