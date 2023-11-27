@@ -78,7 +78,6 @@ class _ReportComponentsState extends State<ReportComponents> {
     super.dispose();
   }
 
-  void _handleSubmit() {}
 
   @override
   Widget build(BuildContext context) {

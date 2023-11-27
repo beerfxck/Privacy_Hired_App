@@ -51,6 +51,10 @@ class _TimeStartComponentsState extends State<TimeStartComponents> {
       timeSlots = ['15:00'];
     } else if (id_worktimetype == 18) {
       timeSlots = ['09:00'];
+    } else if (id_worktimetype == 19) {
+      timeSlots = ['13:00', '14:00', '16:00'];
+    } else if (id_worktimetype == 20) {
+      timeSlots = ['13:00', '14:00', '15:00'];
     }
 
     return timeSlots;

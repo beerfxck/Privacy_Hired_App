@@ -75,6 +75,8 @@ class _ReportPageState extends State<ReportPage> {
             servicePrice: element["service_price"],
             maidbooking: element["maidbooking"],
             statusDescription: element["status_description"],
+            fname: element["fname"],
+            lname: element["lname"],
           ));
         }
         setState(() {});
@@ -165,7 +167,7 @@ class _ReportPageState extends State<ReportPage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'ชื่อ-นามสกุล : ${resident.isNotEmpty ? resident[0].fname : ""} ${resident.isNotEmpty ? resident[0].lname : ""}',
+                                      'ชื่อ-นามสกุล : ${bookwork.isNotEmpty ? bookwork[0].fname : ""} ${bookwork.isNotEmpty ? bookwork[0].lname : ""}',
                                       style: GoogleFonts.kanit(
                                         fontSize: 16.0,
                                       ),

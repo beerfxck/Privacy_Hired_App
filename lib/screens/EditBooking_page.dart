@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:privacy_maid_flutter/components/Showprice.dart';
 import 'package:privacy_maid_flutter/components/Time.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
+import 'package:privacy_maid_flutter/model/BookWork.dart';
 import 'package:privacy_maid_flutter/model/maidWork.dart';
 import 'package:privacy_maid_flutter/model/timeWork.dart';
 import 'package:privacy_maid_flutter/components/Calendar.dart';
@@ -21,12 +22,14 @@ class EditBookingPage extends StatefulWidget {
   final String? workday;
   final int? id_worktime;
   final int? id_worktimetype;
+  final int? bookingId;
   const EditBookingPage(
       {Key? key,
       this.id_user,
       this.workday,
       this.id_worktime,
-      this.id_worktimetype})
+      this.id_worktimetype,
+      this.bookingId})
       : super(key: key);
   @override
   _EditBookingPageState createState() => _EditBookingPageState();
@@ -42,11 +45,12 @@ class _EditBookingPageState extends State<EditBookingPage> {
   final dio = Dio();
   List<TimeWork> maidWorklist = [];
   List<maidWork> resident = [];
+  List<BookWork> bookwork = [];
 
   @override
   void initState() {
-    getMaidWork();
     getData();
+    getbookWork();
     super.initState();
   }
 
@@ -391,33 +395,52 @@ class _EditBookingPageState extends State<EditBookingPage> {
     }
   }
 
-  void getMaidWork() async {
+  Future<void> getbookWork() async {
+    idUser = await storageToken.read(key: 'id_user');
     try {
-      Response response = await dio
-          .get(url_api + '/maidwork/getwork/' + widget.id_user.toString());
-      if (response.statusCode == 200) {
-        List<dynamic> responseData = response.data;
-        List<TimeWork> maidWorkList = responseData
-            .map((dynamic item) => TimeWork.fromJson(item))
-            .toList();
-
-        setState(() {
-          maidWorklist = maidWorkList;
-        });
+      final Map<String, dynamic> maidWorkData = {
+        "booking_id": widget.bookingId,
+        "user_booking": idUser,
+      };
+      print(maidWorkData);
+      Response response =
+          await dio.post(url_api + '/books/get-book-info', data: maidWorkData);
+      if (response.statusCode == 201) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          bookwork.add(BookWork(
+            idUser: element["id_user"],
+            bookingDate: element["booking_date"],
+            bookingId: element["booking_id"],
+            workHour: element["work_hour"],
+            startWork: element["start_work"],
+            descriptmaid: element["descriptmaid"],
+            servicePrice: element["service_price"],
+            maidbooking: element["maidbooking"],
+            fname: element["fname"],
+            lname: element["lname"],
+            phone: element["phone"],
+            roomnumber: element["roomnumber"],
+            roomsize: element["roomsize"],
+            statusDescription: element["status_description"],
+          ));
+        }
+        setState(() {});
       } else {
-        print("HTTP Error: ${response.statusCode}");
+        print('Request failed with status: ${response.statusCode}');
       }
     } catch (e) {
-      print("Error: $e");
+      print('Error: $e');
     }
   }
 
   String? idUser;
-  void saveMaidWork(BuildContext context) async {
+  void editMaidWork(BuildContext context) async {
     idUser = await storageToken.read(key: 'id_user');
 
     try {
       final Map<String, dynamic> maidWorkData = {
+        "booking_id": widget.bookingId,
         "booking_date": widget.workday != null ? widget.workday : "23023-10-30",
         "work_hour": selectedHours,
         "start_work": start_work,
@@ -430,17 +453,32 @@ class _EditBookingPageState extends State<EditBookingPage> {
         "id_maidwork": widget.id_worktime
       };
 
-      // เพิ่มเงื่อนไขเช็คข้อมูลทุกช่องที่ต้องการ
-      if (maidWorkData.values.any((value) => value == null || value == "")) {
-        // แจ้งเตือนว่าข้อมูลไม่ครบ
-        print("กรุณาใส่ข้อมูลให้ครบ");
+      // Keep a copy of the original values
+      final Map<String, dynamic> originalMaidWorkData = {
+        "booking_id": widget.bookingId,
+        "booking_date": widget.workday != null ? widget.workday : "23023-10-30",
+        "work_hour": selectedHours,
+        "start_work": start_work,
+        "descriptmaid": _textController.text,
+        "service_price": calculateServiceCost(selectedHours),
+        "status": 1,
+        "maid_rating": 0,
+        "user_booking": idUser,
+        "maidbooking": widget.id_user,
+        "id_maidwork": widget.id_worktime
+      };
+
+      // Check if any value is different from the original
+      if (maidWorkData.values
+          .every((value) => originalMaidWorkData.containsValue(value))) {
+        print("No changes were made.");
         return;
       }
 
       print(maidWorkData);
 
       Response response =
-          await dio.post(url_api + '/books/save', data: maidWorkData);
+          await dio.post(url_api + '/books/edit-book', data: maidWorkData);
 
       if (response.statusCode == 201) {
         updateWork(context);
@@ -450,10 +488,8 @@ class _EditBookingPageState extends State<EditBookingPage> {
         print("HTTP Error: ${response.statusCode}");
       }
     } catch (e) {
-      // จัดการข้อผิดพลาด
       print("Error: $e");
-      // แจ้งเตือนว่ามีข้อผิดพลาดเกิดขึ้น
-      print("มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่");
+      print("An error occurred. Please try again.");
     }
   }
 
@@ -550,12 +586,18 @@ class _EditBookingPageState extends State<EditBookingPage> {
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            TableEventsExample(id_user: widget.id_user),
-                      ),
-                    );
+                    if (bookwork.isNotEmpty) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => TableEventsExample(
+                              id_user: bookwork[0].maidbooking),
+                        ),
+                      );
+                    } else {
+                      print(
+                          "bookwork is empty. Unable to retrieve maidbooking.");
+                      // Handle the case when bookwork is empty, e.g., show a message to the user
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
@@ -741,7 +783,7 @@ class _EditBookingPageState extends State<EditBookingPage> {
                   Expanded(
                     flex: 1,
                     child: InkWell(
-                      onTap: () => {saveMaidWork(context)},
+                      onTap: () => {editMaidWork(context)},
                       child: Container(
                           alignment: Alignment.center,
                           decoration: BoxDecoration(

@@ -94,6 +94,7 @@ class _WorkforMaidState extends State<WorkforMaid> {
 
   String? convertDate(String? inputDate) {
     if (inputDate != null) {
+      inputDate = addDay(inputDate);
       final parts = inputDate.split('T');
       if (parts.length >= 1) {
         final datePart = parts[0];
@@ -101,6 +102,13 @@ class _WorkforMaidState extends State<WorkforMaid> {
       }
     }
     return "";
+  }
+
+  String addDay(String date) {
+    DateTime myDate = DateTime.parse(date);
+    DateTime newDate = myDate.add(Duration(days: 1));
+    String formattedDate = newDate.toIso8601String();
+    return formattedDate;
   }
 
   @override

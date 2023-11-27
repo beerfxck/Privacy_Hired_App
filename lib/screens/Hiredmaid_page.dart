@@ -440,7 +440,7 @@ class _HomePageState extends State<HiredMaidPage> {
       print(maidWorkData);
 
       Response response =
-          await dio.post(url_api + '/books/save', data: maidWorkData);
+          await dio.post(url_api + '/books/edit-book', data: maidWorkData);
 
       if (response.statusCode == 201) {
         updateWork(context);
