@@ -145,14 +145,6 @@ class _ReportComponentsState extends State<ReportComponents> {
             ),
           ),
           SizedBox(height: 10),
-          Text(
-            'โปรดเก็บหลักฐานเพื่อแสดงแก่นิติบุคคล',
-            style: GoogleFonts.kanit(
-              fontSize: 16.0,
-              color: Colors.grey[500],
-            ),
-          ),
-          SizedBox(height: 10),
           if (selectedImages.isNotEmpty)
             Row(
               children: [
@@ -173,26 +165,45 @@ class _ReportComponentsState extends State<ReportComponents> {
                   ),
               ],
             ),
-          ElevatedButton(
-            onPressed: () async {
-              await _pickImage();
-            },
-            style: ElevatedButton.styleFrom(
-              primary: Colors.green,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14.0),
-              ),
-            ),
+          Container(
+            width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 5.0,
-                horizontal: 10.0,
-              ),
-              child: Text(
-                'แนบรูปภาพ',
-                style: GoogleFonts.kanit(
-                  color: Colors.white,
-                  fontSize: 16.0,
+              padding:
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+              child: GestureDetector(
+                onTap: () async {
+                  await _pickImage();
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0),
+                    border: Border.all(
+                      color: Colors.red,
+                      width: 1.5,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                        mainAxisAlignment:
+                            MainAxisAlignment.center, 
+                        children: [
+                          Icon(
+                            Icons.camera_alt,
+                            color: Colors.red,
+                          ),
+                          SizedBox(
+                            width: 8.0,
+                          ),
+                          Text(
+                            'แนบรูปภาพ',
+                            style: GoogleFonts.kanit(
+                              color: Colors.red,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ]),
+                  ),
                 ),
               ),
             ),
