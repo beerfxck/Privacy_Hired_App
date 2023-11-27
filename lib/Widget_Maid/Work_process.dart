@@ -86,25 +86,22 @@ class _WorkProcessComponentState extends State<WorkProcessComponent> {
     }
   }
 
-  String? convertDate(String? inputDate) {
-    if (inputDate != null) {
-      inputDate = addDay(inputDate);
-      final parts = inputDate.split('T');
-      if (parts.length >= 1) {
-        final datePart = parts[0];
-        return datePart;
-      }
+ String? convertDate(String? inputDate) {
+  if (inputDate != null) {
+    final parts = inputDate.split('T');
+    if (parts.length >= 1) {
+      final datePart = parts[0];
+      
+      // Additional processing to remove time part
+      final dateOnly = datePart.split(' ')[0];
+
+      return dateOnly;
     }
-    return "";
   }
+  return "";
+}
 
-  String addDay(String date) {
-    DateTime myDate = DateTime.parse(date);
-    DateTime newDate = myDate.add(Duration(days: 1));
-    String formattedDate = newDate.toIso8601String();
-    return formattedDate;
-  }
-
+ 
   Future<void> updateStatus(BuildContext context) async {
     try {
       final response = await dio.post(

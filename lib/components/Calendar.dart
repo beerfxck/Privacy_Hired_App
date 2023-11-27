@@ -209,7 +209,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                                     )),
                           ),
                           print('${value[index].title}'),
-                          print('${addDay(value[index].date)}')
+                          print('${(value[index].date)}')
                         },
                         title: Text(
                             'ชื่อ:${value[index].fname} ${value[index].lname} เวลาทำงาน: ${value[index].start} - ${value[index].end}'),

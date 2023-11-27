@@ -121,24 +121,22 @@ class _WaitForPaidMaidState extends State<WaitForPaidMaid> {
     );
   }
 
-  String? convertDate(String? inputDate) {
-    if (inputDate != null) {
-      inputDate = addDay(inputDate);
-      final parts = inputDate.split('T');
-      if (parts.length >= 1) {
-        final datePart = parts[0];
-        return datePart;
-      }
-    }
-    return "";
-  }
+ String? convertDate(String? inputDate) {
+  if (inputDate != null) {
+    final parts = inputDate.split('T');
+    if (parts.length >= 1) {
+      final datePart = parts[0];
+      
+      // Additional processing to remove time part
+      final dateOnly = datePart.split(' ')[0];
 
-  String addDay(String date) {
-    DateTime myDate = DateTime.parse(date);
-    DateTime newDate = myDate.add(Duration(days: 1));
-    String formattedDate = newDate.toIso8601String();
-    return formattedDate;
+      return dateOnly;
+    }
   }
+  return "";
+}
+
+ 
 
   @override
   Widget build(BuildContext context) {

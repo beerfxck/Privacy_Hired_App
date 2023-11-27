@@ -79,16 +79,20 @@ class _EditBookingPageState extends State<EditBookingPage> {
     }
   }
 
-  String? convertDate(String? inputDate) {
-    if (inputDate != null) {
-      final parts = inputDate.split('T');
-      if (parts.length >= 1) {
-        final datePart = parts[0];
-        return datePart;
-      }
+ String? convertDate(String? inputDate) {
+  if (inputDate != null) {
+    final parts = inputDate.split('T');
+    if (parts.length >= 1) {
+      final datePart = parts[0];
+      
+      // Additional processing to remove time part
+      final dateOnly = datePart.split(' ')[0];
+
+      return dateOnly;
     }
-    return "";
   }
+  return "";
+}
 
   int calculateServiceCost(int selectHour) {
     if (resident[0].roomsize == null) {

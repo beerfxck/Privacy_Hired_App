@@ -92,32 +92,18 @@ class _BookingScheduleState extends State<BookingSchedule> {
   }
 
   String? convertDate(String? inputDate) {
-  try {
-    if (inputDate != null) {
-      inputDate = addDay(inputDate);
-      final parts = inputDate.split('T');
-      if (parts.length >= 1) {
-        final datePart = parts[0];
-        return datePart;
-      }
-    }
-  } catch (e) {
-    print('Error: $e');
-  }
-  return null;
-}
+  if (inputDate != null) {
+    final parts = inputDate.split('T');
+    if (parts.length >= 1) {
+      final datePart = parts[0];
+      
+      // Additional processing to remove time part
+      final dateOnly = datePart.split(' ')[0];
 
-String addDay(String date) {
-  try {
-    DateTime myDate = DateTime.parse(date);
-    DateTime newDate = myDate.add(Duration(days: 1));
-    // Use a different date format if you only want the date part
-    String formattedDate = "${newDate.year}-${newDate.month.toString().padLeft(2, '0')}-${newDate.day.toString().padLeft(2, '0')}";
-    return formattedDate;
-  } catch (e) {
-    print('Error: $e');
-    return date; // Return the original date in case of an error
+      return dateOnly;
+    }
   }
+  return "";
 }
 
   @override
