@@ -96,15 +96,19 @@ class _CancleInfoState extends State<CancleInfo> {
   }
 
   String? convertDate(String? inputDate) {
-    if (inputDate != null) {
-      final parts = inputDate.split('T');
-      if (parts.length >= 1) {
-        final datePart = parts[0];
-        return datePart;
-      }
+  if (inputDate != null) {
+    final parts = inputDate.split('T');
+    if (parts.length >= 1) {
+      final datePart = parts[0];
+      
+      // Additional processing to remove time part
+      final dateOnly = datePart.split(' ')[0];
+
+      return dateOnly;
     }
-    return "";
   }
+  return "";
+}
 
   @override
   Widget build(BuildContext context) {

@@ -80,7 +80,11 @@ class _HomePageState extends State<HiredMaidPage> {
       final parts = inputDate.split('T');
       if (parts.length >= 1) {
         final datePart = parts[0];
-        return datePart;
+
+        // Additional processing to remove time part
+        final dateOnly = datePart.split(' ')[0];
+
+        return dateOnly;
       }
     }
     return "";
