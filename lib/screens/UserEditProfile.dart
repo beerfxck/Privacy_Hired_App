@@ -36,8 +36,7 @@ class _EditUserPageState extends State<EditUserPage> {
     try {
       resident = [];
       idUser = await storageToken.read(key: 'id_user');
-      final response =
-          await dio.get(url_api + '/user/get-resident/' + idUser!);
+      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
 
       if (response.statusCode == 200) {
         final responseData = response.data;
@@ -66,29 +65,22 @@ class _EditUserPageState extends State<EditUserPage> {
     try {
       await getData();
 
-      final bool isUsernameEdited =
-          usernameController.text.isNotEmpty &&
-              usernameController.text != resident[0].username;
-      final bool isPasswordEdited =
-          passwordController.text.isNotEmpty &&
-              passwordController.text != resident[0].password;
-      final bool isFnameEdited =
-          fnameController.text.isNotEmpty &&
-              fnameController.text != resident[0].fname;
-      final bool isLnameEdited =
-          lnameController.text.isNotEmpty &&
-              lnameController.text != resident[0].lname;
-      final bool isPhoneEdited =
-          phoneController.text.isNotEmpty &&
-              phoneController.text != resident[0].phone;
+      final bool isUsernameEdited = usernameController.text.isNotEmpty &&
+          usernameController.text != resident[0].username;
+      final bool isPasswordEdited = passwordController.text.isNotEmpty &&
+          passwordController.text != resident[0].password;
+      final bool isFnameEdited = fnameController.text.isNotEmpty &&
+          fnameController.text != resident[0].fname;
+      final bool isLnameEdited = lnameController.text.isNotEmpty &&
+          lnameController.text != resident[0].lname;
+      final bool isPhoneEdited = phoneController.text.isNotEmpty &&
+          phoneController.text != resident[0].phone;
 
       final Map<String, dynamic> dataToUpdate = {
-        'username': isUsernameEdited
-            ? usernameController.text
-            : resident[0].username,
-        'password': isPasswordEdited
-            ? passwordController.text
-            : resident[0].password,
+        'username':
+            isUsernameEdited ? usernameController.text : resident[0].username,
+        'password':
+            isPasswordEdited ? passwordController.text : resident[0].password,
         'fname': isFnameEdited ? fnameController.text : resident[0].fname,
         'lname': isLnameEdited ? lnameController.text : resident[0].lname,
         'phone': isPhoneEdited ? phoneController.text : resident[0].phone,
@@ -116,10 +108,10 @@ class _EditUserPageState extends State<EditUserPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           content: Text(
-            "ยืนยันการแก้ไขข้อมูล",
+            "ต้องการแก้ไขข้อมูลหรือไม่",
             textAlign: TextAlign.center,
             style: GoogleFonts.kanit(
-              textStyle: TextStyle(color: Colors.black),
+              textStyle: TextStyle(color: Colors.green),
               fontSize: 17,
               fontWeight: FontWeight.w400,
             ),
@@ -133,12 +125,12 @@ class _EditUserPageState extends State<EditUserPage> {
                     Navigator.of(context).pop();
                   },
                   style: TextButton.styleFrom(
-                    primary: Colors.black,
+                    primary: Colors.green,
                   ),
                   child: Text(
                     "ยกเลิก",
                     style: GoogleFonts.kanit(
-                      textStyle: TextStyle(color: Colors.black),
+                      textStyle: TextStyle(color: Colors.red),
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                     ),
@@ -156,7 +148,7 @@ class _EditUserPageState extends State<EditUserPage> {
                   child: Text(
                     "ยืนยัน",
                     style: GoogleFonts.kanit(
-                      textStyle: TextStyle(color: Colors.red),
+                      textStyle: TextStyle(color: Colors.green),
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                     ),
@@ -203,7 +195,7 @@ class _EditUserPageState extends State<EditUserPage> {
               Text(
                 '${resident.isNotEmpty ? resident[0].roomnumber : ""}',
                 style: GoogleFonts.kanit(
-                  textStyle: TextStyle(color: Colors.black),
+                  textStyle: TextStyle(color: Colors.green),
                   fontSize: 22,
                   fontWeight: FontWeight.w400,
                 ),
@@ -230,7 +222,10 @@ class _EditUserPageState extends State<EditUserPage> {
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   child: Row(
                     children: [
-                      Icon(Icons.account_circle_outlined),
+                      Icon(
+                        Icons.account_circle_outlined,
+                        color: Colors.green,
+                      ),
                       SizedBox(width: 10),
                       Text(
                         '${resident.isNotEmpty ? resident[0].username : ""}',
@@ -264,7 +259,10 @@ class _EditUserPageState extends State<EditUserPage> {
                       fontSize: 16,
                       color: Colors.grey,
                     ),
-                    prefixIcon: Icon(Icons.lock_outlined),
+                    prefixIcon: Icon(
+                      Icons.lock_outlined,
+                      color: Colors.green,
+                    ),
                     suffixIcon: IconButton(
                       icon: Icon(
                           _obscureText
@@ -303,7 +301,10 @@ class _EditUserPageState extends State<EditUserPage> {
                         color: Colors.grey,
                       ),
                     ),
-                    prefixIcon: Icon(Icons.account_circle_outlined),
+                    prefixIcon: Icon(
+                      Icons.account_circle_outlined,
+                      color: Colors.green,
+                    ),
                   ),
                 ),
               ),
@@ -329,7 +330,10 @@ class _EditUserPageState extends State<EditUserPage> {
                         color: Colors.grey,
                       ),
                     ),
-                    prefixIcon: Icon(Icons.account_circle_outlined),
+                    prefixIcon: Icon(
+                      Icons.account_circle_outlined,
+                      color: Colors.green,
+                    ),
                   ),
                 ),
               ),
@@ -355,7 +359,10 @@ class _EditUserPageState extends State<EditUserPage> {
                         color: Colors.grey,
                       ),
                     ),
-                    prefixIcon: Icon(Icons.phone),
+                    prefixIcon: Icon(
+                      Icons.phone,
+                      color: Colors.green,
+                    ),
                   ),
                 ),
               ),
