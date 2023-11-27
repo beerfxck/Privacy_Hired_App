@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
 import 'package:privacy_maid_flutter/model/maidWork.dart';
 
@@ -21,6 +24,36 @@ class _ReportComponentsState extends State<ReportComponents> {
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
+  List<File> selectedImages = [];
+
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        selectedImages.add(File(pickedFile.path));
+      });
+    }
+  }
+
+  void _showFullImageDialog(File imageFile) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Image.file(
+              imageFile,
+              fit: BoxFit.contain,
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   void initState() {
@@ -78,7 +111,6 @@ class _ReportComponentsState extends State<ReportComponents> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -87,7 +119,7 @@ class _ReportComponentsState extends State<ReportComponents> {
         children: <Widget>[
           Container(
             width: 350,
-            height: 250,
+            height: 170,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.0),
@@ -120,7 +152,52 @@ class _ReportComponentsState extends State<ReportComponents> {
               color: Colors.grey[500],
             ),
           ),
-          SizedBox(height: 50),
+          SizedBox(height: 10),
+          if (selectedImages.isNotEmpty)
+            Row(
+              children: [
+                for (int i = 0; i < selectedImages.length; i++)
+                  GestureDetector(
+                    onTap: () {
+                      _showFullImageDialog(selectedImages[i]);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.file(
+                        selectedImages[i],
+                        height: 50,
+                        width: 50,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ElevatedButton(
+            onPressed: () async {
+              await _pickImage();
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Colors.green,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14.0),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 5.0,
+                horizontal: 10.0,
+              ),
+              child: Text(
+                'แนบรูปภาพ',
+                style: GoogleFonts.kanit(
+                  color: Colors.white,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
           ElevatedButton(
             onPressed: () {
               saveReportWork(context);
