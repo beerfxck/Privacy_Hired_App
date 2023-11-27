@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
 import 'package:privacy_maid_flutter/model/BookWork.dart';
 import 'package:privacy_maid_flutter/model/maidWork.dart';
@@ -168,7 +169,7 @@ class _WaitForPaidMaidState extends State<WaitForPaidMaid> {
                     child: Column(
                       children: [
                         ListTile(
-                          title: const Text(
+                          title: Text(
                             "รอชำระเงิน : ",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -202,7 +203,7 @@ class _WaitForPaidMaidState extends State<WaitForPaidMaid> {
                                 const SizedBox(width: 5),
                                 Text(
                                   "${convertDate(booking.bookingDate) ?? ""}",
-                                  style: TextStyle(
+                                  style: GoogleFonts.kanit(
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -217,7 +218,7 @@ class _WaitForPaidMaidState extends State<WaitForPaidMaid> {
                                 const SizedBox(width: 5),
                                 Text(
                                   "${booking.startWork ?? ""}",
-                                  style: TextStyle(
+                                  style: GoogleFonts.kanit(
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -235,7 +236,7 @@ class _WaitForPaidMaidState extends State<WaitForPaidMaid> {
                                 const SizedBox(width: 5),
                                 Text(
                                   "${booking.statusDescription ?? ""}",
-                                  style: TextStyle(
+                                  style: GoogleFonts.kanit(
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -255,8 +256,8 @@ class _WaitForPaidMaidState extends State<WaitForPaidMaid> {
                           ),
                           child: Text(
                             "รายละเอียด",
-                            style: TextStyle(
-                                fontSize: 18), // Increase the font size
+                            style: GoogleFonts.kanit(
+                                fontSize: 18), 
                           ),
                         ),
                       ],
@@ -277,7 +278,7 @@ Widget SupTextPaid(String text) {
     margin: EdgeInsets.symmetric(vertical: 4),
     child: Text(
       text,
-      style: TextStyle(
+      style: GoogleFonts.kanit(
         fontSize: 18,
         fontWeight: FontWeight.w400,
       ),

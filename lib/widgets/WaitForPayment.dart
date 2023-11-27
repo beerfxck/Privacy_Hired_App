@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/SuccessInfomation.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
 import 'package:privacy_maid_flutter/model/BookWork.dart';
@@ -124,9 +125,9 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                     child: Column(
                       children: [
                         ListTile(
-                          title: const Text(
+                          title: Text(
                             "รอชำระเงิน",
-                            style: TextStyle(
+                            style: GoogleFonts.kanit(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -158,7 +159,7 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                                 const SizedBox(width: 5),
                                 Text(
                                   "${convertDate(booking.bookingDate) ?? ""}",
-                                  style: TextStyle(
+                                  style: GoogleFonts.kanit(
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -173,7 +174,7 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                                 const SizedBox(width: 5),
                                 Text(
                                   "${booking.startWork ?? ""}",
-                                  style: TextStyle(
+                                  style: GoogleFonts.kanit(
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -184,14 +185,14 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                                 Container(
                                   padding: EdgeInsets.all(5),
                                   decoration: BoxDecoration(
-                                    color: Colors.green,
+                                    color: Colors.red,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
                                   "${booking.statusDescription ?? ""}",
-                                  style: TextStyle(
+                                  style: GoogleFonts.kanit(
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -221,9 +222,9 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Center(
-                                  child: const Text(
+                                  child: Text(
                                     "ดูรายละเอียด",
-                                    style: TextStyle(
+                                    style: GoogleFonts.kanit(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black54,
@@ -245,16 +246,16 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                                 width: 150,
                                 padding: EdgeInsets.symmetric(vertical: 12),
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 20, 196, 49),
+                                  color: Colors.red[700],
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Center(
-                                  child: const Text(
+                                  child: Text(
                                     "ชำระเงิน",
-                                    style: TextStyle(
+                                    style: GoogleFonts.kanit(
                                       fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black54,
+                                      //fontWeight: FontWeight.bold,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),

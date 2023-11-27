@@ -93,7 +93,7 @@ class _ReportPageState extends State<ReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 232, 241, 230),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         title: Text(
           'แจ้งปัญหา',
           style: GoogleFonts.kanit(
@@ -198,7 +198,6 @@ class _ReportPageState extends State<ReportPage> {
                               ),
                             ),
                           ),
-
                           ReportComponents(bookingId: widget.bookingId),
                           SizedBox(height: 20),
                         ],

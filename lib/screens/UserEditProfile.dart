@@ -17,7 +17,7 @@ class _EditUserPageState extends State<EditUserPage> {
   final dio = Dio();
   bool _obscureText = true;
   String? idUser;
-  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  static FlutterSecureStorage storageToken = FlutterSecureStorage();
   List<maidWork> resident = [];
 
   TextEditingController usernameController = TextEditingController();
@@ -36,7 +36,9 @@ class _EditUserPageState extends State<EditUserPage> {
     try {
       resident = [];
       idUser = await storageToken.read(key: 'id_user');
-      final response = await dio.get(url_api + '/user/get-resident/' + idUser!);
+      final response =
+          await dio.get(url_api + '/user/get-resident/' + idUser!);
+
       if (response.statusCode == 200) {
         final responseData = response.data;
         for (var element in responseData) {
@@ -64,22 +66,29 @@ class _EditUserPageState extends State<EditUserPage> {
     try {
       await getData();
 
-      final bool isUsernameEdited = usernameController.text.isNotEmpty &&
-          usernameController.text != resident[0].username;
-      final bool isPasswordEdited = passwordController.text.isNotEmpty &&
-          passwordController.text != resident[0].password;
-      final bool isFnameEdited = fnameController.text.isNotEmpty &&
-          fnameController.text != resident[0].fname;
-      final bool isLnameEdited = lnameController.text.isNotEmpty &&
-          lnameController.text != resident[0].lname;
-      final bool isPhoneEdited = phoneController.text.isNotEmpty &&
-          phoneController.text != resident[0].phone;
+      final bool isUsernameEdited =
+          usernameController.text.isNotEmpty &&
+              usernameController.text != resident[0].username;
+      final bool isPasswordEdited =
+          passwordController.text.isNotEmpty &&
+              passwordController.text != resident[0].password;
+      final bool isFnameEdited =
+          fnameController.text.isNotEmpty &&
+              fnameController.text != resident[0].fname;
+      final bool isLnameEdited =
+          lnameController.text.isNotEmpty &&
+              lnameController.text != resident[0].lname;
+      final bool isPhoneEdited =
+          phoneController.text.isNotEmpty &&
+              phoneController.text != resident[0].phone;
 
       final Map<String, dynamic> dataToUpdate = {
-        'username':
-            isUsernameEdited ? usernameController.text : resident[0].username,
-        'password':
-            isPasswordEdited ? passwordController.text : resident[0].password,
+        'username': isUsernameEdited
+            ? usernameController.text
+            : resident[0].username,
+        'password': isPasswordEdited
+            ? passwordController.text
+            : resident[0].password,
         'fname': isFnameEdited ? fnameController.text : resident[0].fname,
         'lname': isLnameEdited ? lnameController.text : resident[0].lname,
         'phone': isPhoneEdited ? phoneController.text : resident[0].phone,
@@ -101,214 +110,283 @@ class _EditUserPageState extends State<EditUserPage> {
     }
   }
 
+  void _showEditDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(
+            "ยืนยันการแก้ไขข้อมูล",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.kanit(
+              textStyle: TextStyle(color: Colors.black),
+              fontSize: 17,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                  ),
+                  child: Text(
+                    "ยกเลิก",
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color: Colors.black),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    editProfile(context);
+                    Navigator.of(context).pop();
+                    Navigator.pushNamed(context, '/BottomNavBar');
+                  },
+                  style: TextButton.styleFrom(
+                    primary: Colors.red,
+                  ),
+                  child: Text(
+                    "ยืนยัน",
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color: Colors.red),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
-        elevation: 0,
-        leading: Padding(
-          padding: EdgeInsets.only(left: 35.0),
-          child: Transform.scale(
-            scale: 3.5,
-            child: Image.asset('images/logo_maid.png'),
+        elevation: 5,
+        backgroundColor: Color.fromARGB(255, 9, 150, 63),
+        title: Text(
+          'แก้ไขโปรไฟล์',
+          style: GoogleFonts.kanit(
+            textStyle: TextStyle(color: Colors.white),
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/BottomNavBar');
-            },
-            icon: Icon(
-              Icons.home_rounded,
-              color: Colors.green,
-            ),
-          ),
-        ],
-        backgroundColor: Color.fromARGB(217, 255, 255, 255),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(0.0),
-          child: Column(children: [
-            SizedBox(
-              width: 120,
-              height: 120,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Image(image: AssetImage('images/logo_maid.png')),
+          child: Column(
+            children: [
+              SizedBox(
+                width: 120,
+                height: 120,
+                child: ClipRRect(
+                  child: Image(image: AssetImage('images/logo_maid.png')),
+                ),
               ),
-            ),
-            Text('${resident.isNotEmpty ? resident[0].roomnumber : ""}',
+              Text(
+                '${resident.isNotEmpty ? resident[0].roomnumber : ""}',
                 style: GoogleFonts.kanit(
-                    textStyle: TextStyle(color: Colors.black),
-                    fontSize: 22,
-                    fontWeight: FontWeight.w400)),
-            Text('ขนาดห้อง: ${resident.isNotEmpty ? resident[0].roomsize : ""}',
+                  textStyle: TextStyle(color: Colors.black),
+                  fontSize: 22,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              Text(
+                'ขนาดห้อง: ${resident.isNotEmpty ? resident[0].roomsize : ""}',
                 style: GoogleFonts.kanit(
                   textStyle: TextStyle(color: Colors.black54),
                   fontSize: 14,
-                )),
-            Divider(),
-            SizedBox(height: 10),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(
-                  color: Color.fromARGB(255, 197, 196, 196),
-                  width: 1.0,
                 ),
               ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                child: Row(
-                  children: [
-                    Icon(Icons.account_circle_outlined),
-                    SizedBox(width: 10),
-                    Text(
-                      '${resident.isNotEmpty ? resident[0].username : ""}',
+              Divider(),
+              SizedBox(height: 10),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                    color: Color.fromARGB(255, 197, 196, 196),
+                    width: 1.0,
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  child: Row(
+                    children: [
+                      Icon(Icons.account_circle_outlined),
+                      SizedBox(width: 10),
+                      Text(
+                        '${resident.isNotEmpty ? resident[0].username : ""}',
+                        style: GoogleFonts.kanit(
+                          fontSize: 18,
+                          color: Colors.grey[850],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                    color: Color.fromARGB(255, 197, 196, 196),
+                    width: 1.0,
+                  ),
+                ),
+                child: TextField(
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    border: InputBorder.none,
+                    labelText:
+                        '${resident.isNotEmpty ? resident[0].password : ""}',
+                    labelStyle: GoogleFonts.kanit(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                    prefixIcon: Icon(Icons.lock_outlined),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                          _obscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.grey),
+                      onPressed: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      },
+                    ),
+                  ),
+                  obscureText: _obscureText,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                    color: Color.fromARGB(255, 197, 196, 196),
+                    width: 1.0,
+                  ),
+                ),
+                child: TextField(
+                  controller: fnameController,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    border: InputBorder.none,
+                    label: Text(
+                      '${resident.isNotEmpty ? resident[0].fname : ""}',
                       style: GoogleFonts.kanit(
-                        fontSize: 18,
-                        color: Colors.black,
+                        fontSize: 16,
+                        color: Colors.grey,
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(
-                  color: Color.fromARGB(255, 197, 196, 196),
-                  width: 1.0,
-                ),
-              ),
-              child: TextField(
-                controller: passwordController,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  border: InputBorder.none,
-                  labelText:
-                      '${resident.isNotEmpty ? resident[0].password : ""}',
-                  labelStyle: GoogleFonts.kanit(
-                    fontSize: 16,
-                    color: Colors.grey,
-                  ),
-                  prefixIcon: Icon(Icons.lock_outlined),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                        _obscureText ? Icons.visibility_off : Icons.visibility),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
-                  ),
-                ),
-                obscureText: _obscureText,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(
-                  color: Color.fromARGB(255, 197, 196, 196),
-                  width: 1.0,
-                ),
-              ),
-              child: TextField(
-                controller: fnameController,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  border: InputBorder.none,
-                  label: Text('${resident.isNotEmpty ? resident[0].fname : ""}',
-                      style: GoogleFonts.kanit(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      )),
-                  prefixIcon: Icon(Icons.account_circle_outlined),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(
-                  color: Color.fromARGB(255, 197, 196, 196),
-                  width: 1.0,
-                ),
-              ),
-              child: TextField(
-                controller: lnameController,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  border: InputBorder.none,
-                  label: Text('${resident.isNotEmpty ? resident[0].lname : ""}',
-                      style: GoogleFonts.kanit(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      )),
-                  prefixIcon: Icon(Icons.account_circle_outlined),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(
-                  color: Color.fromARGB(255, 197, 196, 196),
-                  width: 1.0,
-                ),
-              ),
-              child: TextField(
-                controller: phoneController,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  border: InputBorder.none,
-                  label: Text('${resident.isNotEmpty ? resident[0].phone : ""}',
-                      style: GoogleFonts.kanit(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      )),
-                  prefixIcon: Icon(Icons.phone),
-                ),
-              ),
-            ),
-            SizedBox(height: 30),
-            Container(
-              width: 385,
-              height: 50,
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  editProfile(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 209, 15, 1),
-                  shape: StadiumBorder(),
-                  elevation: 10,
-                ),
-                icon: Icon(Icons.edit),
-                label: Text(
-                  'แก้ไขข้อมูลเสร็จสิ้น',
-                  style: GoogleFonts.kanit(
-                    textStyle: TextStyle(color: Colors.white),
-                    fontSize: 16,
+                    prefixIcon: Icon(Icons.account_circle_outlined),
                   ),
                 ),
               ),
-            ),
-          ]),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                    color: Color.fromARGB(255, 197, 196, 196),
+                    width: 1.0,
+                  ),
+                ),
+                child: TextField(
+                  controller: lnameController,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    border: InputBorder.none,
+                    label: Text(
+                      '${resident.isNotEmpty ? resident[0].lname : ""}',
+                      style: GoogleFonts.kanit(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    prefixIcon: Icon(Icons.account_circle_outlined),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                    color: Color.fromARGB(255, 197, 196, 196),
+                    width: 1.0,
+                  ),
+                ),
+                child: TextField(
+                  controller: phoneController,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    border: InputBorder.none,
+                    label: Text(
+                      '${resident.isNotEmpty ? resident[0].phone : ""}',
+                      style: GoogleFonts.kanit(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    prefixIcon: Icon(Icons.phone),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+              Container(
+                width: 385,
+                height: 50,
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    _showEditDialog();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 209, 15, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    elevation: 10,
+                  ),
+                  icon: Icon(Icons.edit),
+                  label: Text(
+                    'แก้ไขข้อมูลเสร็จสิ้น',
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color: Colors.white),
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

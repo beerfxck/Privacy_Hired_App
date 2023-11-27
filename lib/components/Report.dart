@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -25,6 +26,16 @@ class _ReportComponentsState extends State<ReportComponents> {
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   List<maidWork> resident = [];
   List<File> selectedImages = [];
+
+  String convertImageToBase64(File image) {
+    List<int> imageBytes = image.readAsBytesSync();
+    String base64Image = base64Encode(imageBytes);
+    return base64Image;
+  }
+
+  List<String> convertImagesToBase64() {
+    return selectedImages.map((image) => convertImageToBase64(image)).toList();
+  }
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
@@ -90,6 +101,7 @@ class _ReportComponentsState extends State<ReportComponents> {
         "id_user": idUser,
         "id_booking": widget.bookingId,
         "status_feedback": 9,
+        "images": convertImagesToBase64(), // Add base64-encoded images
       };
       print(maidWorkData);
       Response response =
@@ -103,6 +115,12 @@ class _ReportComponentsState extends State<ReportComponents> {
     } catch (e) {
       print("Error: $e");
     }
+  }
+
+  void _removeImage(int index) {
+    setState(() {
+      selectedImages.removeAt(index);
+    });
   }
 
   @override
@@ -145,26 +163,68 @@ class _ReportComponentsState extends State<ReportComponents> {
             ),
           ),
           SizedBox(height: 10),
-          if (selectedImages.isNotEmpty)
-            Row(
-              children: [
-                for (int i = 0; i < selectedImages.length; i++)
-                  GestureDetector(
-                    onTap: () {
-                      _showFullImageDialog(selectedImages[i]);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.file(
-                        selectedImages[i],
-                        height: 50,
-                        width: 50,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-              ],
+          Text(
+            'โปรดแนบรูปหลักฐานเพื่อแสดงแก่นิติบุคคล',
+            style: GoogleFonts.kanit(
+              fontSize: 16.0,
+              color: Colors.grey[500],
             ),
+          ),
+          SizedBox(height: 10),
+          if (selectedImages.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                children: [
+                  for (int i = 0; i < selectedImages.length; i++)
+                    Row(
+                      children: [
+                        Stack(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                _showFullImageDialog(selectedImages[i]);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    border: Border.all(
+                                      color: Color.fromARGB(255, 216, 216, 216),
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  child: Image.file(
+                                    selectedImages[i],
+                                    height: 100,
+                                    width: 100,
+                                    //fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                                onPressed: () {
+                                  _removeImage(i);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                ],
+              ),
+            ),
+          SizedBox(height: 10),
           Container(
             width: double.infinity,
             child: Padding(
@@ -185,8 +245,7 @@ class _ReportComponentsState extends State<ReportComponents> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
-                        mainAxisAlignment:
-                            MainAxisAlignment.center, 
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             Icons.camera_alt,
@@ -208,7 +267,7 @@ class _ReportComponentsState extends State<ReportComponents> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 5),
           ElevatedButton(
             onPressed: () {
               saveReportWork(context);

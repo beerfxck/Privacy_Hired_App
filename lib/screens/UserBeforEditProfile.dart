@@ -61,32 +61,23 @@ class _BeforEditState extends State<BeforEdit> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
-        elevation: 0,
-        leading: Padding(
-          padding: EdgeInsets.only(left: 35.0),
-          child: Transform.scale(
-            scale: 3.5,
-            child: Image.asset('images/logo_maid.png'),
+        elevation: 5,
+        backgroundColor:Color.fromARGB(255, 9, 150, 63),
+        title: Text(
+          'โปรไฟล์ของคุณ',
+          style: GoogleFonts.kanit(
+            textStyle: TextStyle(color: Colors.white),
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/BottomNavBar');
-            },
-            icon: Icon(
-              Icons.home_rounded,
-              color: Colors.green,
-            ),
-          ),
-        ],
-        backgroundColor: Color.fromARGB(217, 255, 255, 255),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -96,7 +87,7 @@ class _BeforEditState extends State<BeforEdit> {
               width: 120,
               height: 120,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
+                //borderRadius: BorderRadius.circular(100),
                 child: Image(image: AssetImage('images/logo_maid.png')),
               ),
             ),
@@ -112,12 +103,14 @@ class _BeforEditState extends State<BeforEdit> {
                 )),
             Divider(),
             SizedBox(height: 10),
+           
+            SizedBox(height: 10),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(
-                  color: Color.fromARGB(255, 197, 196, 196),
+                  color: Colors.grey,
                   width: 1.0,
                 ),
               ),
@@ -126,13 +119,14 @@ class _BeforEditState extends State<BeforEdit> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 15),
-                    child: Icon(Icons.account_circle_outlined),
+                    child: Icon(Icons.account_circle_outlined,
+                    color: Colors.green,),
                   ),
                   Text(
                     '${resident.isNotEmpty ? resident[0].username : ""}',
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Colors.grey[850],
                     ),
                   ),
                 ],
@@ -143,7 +137,7 @@ class _BeforEditState extends State<BeforEdit> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(
-                  color: Color.fromARGB(255, 197, 196, 196),
+                  color: Colors.grey,
                   width: 1.0,
                 ),
               ),
@@ -152,13 +146,14 @@ class _BeforEditState extends State<BeforEdit> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 15),
-                    child: Icon(Icons.lock_outlined),
+                    child: Icon(Icons.lock_outlined,
+                    color: Colors.green,),
                   ),
                   Text(
                     '${resident.isNotEmpty ? resident[0].password : ""}',
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Colors.grey[850],
                     ),
                   ),
                 ],
@@ -169,7 +164,7 @@ class _BeforEditState extends State<BeforEdit> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(
-                  color: Color.fromARGB(255, 197, 196, 196),
+                  color: Colors.grey,
                   width: 1.0,
                 ),
               ),
@@ -178,13 +173,14 @@ class _BeforEditState extends State<BeforEdit> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 15),
-                    child: Icon(Icons.account_circle_outlined),
+                    child: Icon(Icons.account_circle_outlined,
+                    color: Colors.green,),
                   ),
                   Text(
                     '${resident.isNotEmpty ? resident[0].fname : ""}',
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Colors.grey[850],
                     ),
                   ),
                 ],
@@ -195,7 +191,7 @@ class _BeforEditState extends State<BeforEdit> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(
-                  color: Color.fromARGB(255, 197, 196, 196),
+                  color: Colors.grey,
                   width: 1.0,
                 ),
               ),
@@ -204,13 +200,14 @@ class _BeforEditState extends State<BeforEdit> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 15),
-                    child: Icon(Icons.account_circle_outlined),
+                    child: Icon(Icons.account_circle_outlined,
+                    color: Colors.green,),
                   ),
                   Text(
                     '${resident.isNotEmpty ? resident[0].lname : ""}',
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Colors.grey[850],
                     ),
                   ),
                 ],
@@ -221,7 +218,7 @@ class _BeforEditState extends State<BeforEdit> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(
-                  color: Color.fromARGB(255, 197, 196, 196),
+                  color: Colors.grey,
                   width: 1.0,
                 ),
               ),
@@ -230,41 +227,49 @@ class _BeforEditState extends State<BeforEdit> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 15),
-                    child: Icon(Icons.phone),
+                    child: Icon(Icons.phone,
+                    color: Colors.green,),
                   ),
                   Text(
                     '${resident.isNotEmpty ? resident[0].phone : ""}',
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Colors.grey[850],
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 50),
             Container(
               width: 385,
               height: 50,
               margin: EdgeInsets.symmetric(horizontal: 10),
-              child: ElevatedButton.icon(
+              child: OutlinedButton.icon(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => EditUserPage()),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 209, 15, 1),
-                  shape: StadiumBorder(),
-                  elevation: 10,
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(
+                    color: Colors.red,
+                    width: 1.5,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
                 ),
-                icon: Icon(Icons.edit),
+                icon: Icon(
+                  Icons.edit,
+                  color: Colors.red,
+                ),
                 label: Text(
                   'แก้ไขข้อมูล',
                   style: GoogleFonts.kanit(
-                    textStyle: TextStyle(color: Colors.white),
-                    fontSize: 16,
+                    color: Colors.red,
+                    fontSize: 16.0,
                   ),
                 ),
               ),
