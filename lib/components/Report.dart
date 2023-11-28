@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
@@ -107,7 +108,14 @@ class _ReportComponentsState extends State<ReportComponents> {
       Response response =
           await dio.post(url_api + '/feedback/savefeed', data: maidWorkData);
       if (response.statusCode == 201) {
-        print("Maid work saved successfully");
+        Fluttertoast.showToast(
+            msg: "ส่งคำร้องเสร็จสิ้น",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.white,
+            textColor: Colors.black,
+            fontSize: 16.0);
         Navigator.pushNamed(context, '/BottomNavBar');
       } else {
         print("HTTP Error: ${response.statusCode}");

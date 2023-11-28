@@ -55,24 +55,8 @@ class _LoginPageState extends State<LoginPage> {
 
         if (userType == 'resident') {
           GotoHome();
-          Fluttertoast.showToast(
-              msg: "กรุณากรอกชื่อผู้ใช้หรือรหัสผ่านให้ถูกต้อง",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.white,
-              textColor: Colors.black,
-              fontSize: 16.0);
         } else if (userType == 'maid') {
           GotoMaidHome();
-          Fluttertoast.showToast(
-              msg: "กรุณากรอกชื่อผู้ใช้หรือรหัสผ่านให้ถูกต้อง",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.white,
-              textColor: Colors.black,
-              fontSize: 16.0);
         } else {
           // ตรวจสอบประเภทผู้ใช้ที่ไม่รู้จัก
           print('Unknown user type: $userType');

@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/domain.dart';
@@ -117,7 +118,14 @@ class _EditPageState extends State<EditPage> {
 
       if (response.statusCode == 201) {
         Navigator.pushNamed(context, '/MaidBottomNavBar');
-        print('success');
+        Fluttertoast.showToast(
+            msg: "แก้ไขเสร็จสิ้น",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.white,
+            textColor: Colors.black,
+            fontSize: 16.0);
       } else {
         print('Request failed with status: ${response.statusCode}');
       }

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:privacy_maid_flutter/components/Showprice.dart';
@@ -441,14 +442,28 @@ class _HomePageState extends State<HiredMaidPage> {
 
       if (response.statusCode == 201) {
         updateWork(context);
-        print("Maid work saved successfully");
+        Fluttertoast.showToast(
+            msg: "จองเสร็จสิ้น",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
         Navigator.pushNamed(context, '/BottomNavBar');
       } else {
         print("HTTP Error: ${response.statusCode}");
       }
     } catch (e) {
       print("Error: $e");
-      print("มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่");
+      Fluttertoast.showToast(
+          msg: "กรุณาใส่ข้อมูลให้ครบถ้วน",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          fontSize: 16.0);
     }
   }
 
@@ -579,7 +594,7 @@ class _HomePageState extends State<HiredMaidPage> {
                 },
                 id_worktimetype: widget.id_worktimetype,
               ),
-              SizedBox(height:15),
+              SizedBox(height: 15),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

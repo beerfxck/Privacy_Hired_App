@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:privacy_maid_flutter/components/Calendarforedit.dart';
@@ -486,7 +487,14 @@ class _EditBookingPageState extends State<EditBookingPage> {
 
       if (response.statusCode == 201) {
         updateWork(context);
-        print("Maid work saved successfully");
+        Fluttertoast.showToast(
+            msg: "แก้ไขเสร็จสิ้น",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.white,
+            textColor: Colors.black,
+            fontSize: 16.0);
         Navigator.pushNamed(context, '/BottomNavBar');
       } else {
         print("HTTP Error: ${response.statusCode}");

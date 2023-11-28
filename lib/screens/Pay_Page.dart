@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
@@ -39,7 +40,14 @@ class _PayPageState extends State<PayPage> {
       );
 
       if (response.statusCode == 201) {
-        print('success');
+        Fluttertoast.showToast(
+            msg: "ชำระเงินเสร็จสิ้น",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.white,
+            textColor: Colors.black,
+            fontSize: 16.0);
       } else {
         print('Request failed with status: ${response.statusCode}');
       }

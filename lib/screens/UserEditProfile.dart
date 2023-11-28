@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dio/dio.dart';
 
@@ -93,7 +94,6 @@ class _EditUserPageState extends State<EditUserPage> {
 
       if (response.statusCode == 201) {
         Navigator.pushNamed(context, '/BottomNavBar');
-        print('success');
       } else {
         print('Request failed with status: ${response.statusCode}');
       }
