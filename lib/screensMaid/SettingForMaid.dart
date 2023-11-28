@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/screens/Report_page.dart';
 
 import '../constant/domain.dart';
@@ -63,8 +64,8 @@ class _SettingsMaidPageState extends State<SettingsMaidPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Settings",
-            style: TextStyle(
+            "ตั้งค่า",
+            style: GoogleFonts.kanit(
               fontSize: 30,
               fontWeight: FontWeight.w500,
             ),
@@ -79,12 +80,13 @@ class _SettingsMaidPageState extends State<SettingsMaidPage> {
             ),
             title: Text(
               "${maid.isNotEmpty ? maid[0].fname : ""} ${maid.isNotEmpty ? maid[0].lname : ""}",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
+              style: GoogleFonts.kanit(
+                fontWeight: FontWeight.w500,
+                fontSize: 20,
               ),
             ),
-            subtitle: Text("${maid.isNotEmpty ? maid[0].typeDescription : ""}"),
+            subtitle: Text("${maid.isNotEmpty ? maid[0].typeDescription : ""}",
+            style: GoogleFonts.kanit(),),
           ),
           Divider(height: 50),
           ListTile(
@@ -108,15 +110,14 @@ class _SettingsMaidPageState extends State<SettingsMaidPage> {
             ),
             title: Text(
               "แก้ไขโปรไฟล์",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
+              style: GoogleFonts.kanit(
+                fontWeight: FontWeight.w400,
                 fontSize: 20,
               ),
             ),
             trailing: Icon(Icons.arrow_forward_outlined),
           ),
           SizedBox(height: 20),
-          Divider(height: 40),
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, '/login');
@@ -136,8 +137,8 @@ class _SettingsMaidPageState extends State<SettingsMaidPage> {
               ),
               title: Text(
                 "ออกจากระบบ",
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
+                style: GoogleFonts.kanit(
+                  fontWeight: FontWeight.w400,
                   fontSize: 20,
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/domain.dart';
 import '../model/BookWork.dart';
@@ -84,21 +85,19 @@ class _WorkCancleComponentState extends State<WorkCancleComponent> {
   }
 
   String? convertDate(String? inputDate) {
-  if (inputDate != null) {
-    final parts = inputDate.split('T');
-    if (parts.length >= 1) {
-      final datePart = parts[0];
-      
-      // Additional processing to remove time part
-      final dateOnly = datePart.split(' ')[0];
+    if (inputDate != null) {
+      final parts = inputDate.split('T');
+      if (parts.length >= 1) {
+        final datePart = parts[0];
 
-      return dateOnly;
+        // Additional processing to remove time part
+        final dateOnly = datePart.split(' ')[0];
+
+        return dateOnly;
+      }
     }
+    return "";
   }
-  return "";
-}
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -129,14 +128,14 @@ class _WorkCancleComponentState extends State<WorkCancleComponent> {
                     ListTile(
                       title: Text(
                         "เลขห้อง :  ${booking.roomnumber ?? ""}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: GoogleFonts.kanit(
+                            fontWeight: FontWeight.w500, fontSize: 18),
                       ),
                       trailing: CircleAvatar(
+                        backgroundColor: Colors.red[700],
                         radius: 25,
                         child: Icon(
-                          Icons.person,
+                          Icons.cancel,
                           color: Colors.white,
                         ),
                       ),
@@ -161,7 +160,7 @@ class _WorkCancleComponentState extends State<WorkCancleComponent> {
                             SizedBox(width: 5),
                             Text(
                               "${convertDate(booking.bookingDate) ?? ""}",
-                              style: TextStyle(
+                              style: GoogleFonts.kanit(
                                 color: Colors.black54,
                               ),
                             ),
@@ -176,7 +175,7 @@ class _WorkCancleComponentState extends State<WorkCancleComponent> {
                             SizedBox(width: 5),
                             Text(
                               "${booking.startWork ?? ""}",
-                              style: TextStyle(
+                              style: GoogleFonts.kanit(
                                 color: Colors.black54,
                               ),
                             ),
@@ -194,8 +193,8 @@ class _WorkCancleComponentState extends State<WorkCancleComponent> {
                             SizedBox(width: 5),
                             Text(
                               "${booking.statusDescription ?? ""}",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                              style: GoogleFonts.kanit(
+                                fontWeight: FontWeight.w500,
                                 color: Color.fromARGB(137, 231, 0, 0),
                               ),
                             ),

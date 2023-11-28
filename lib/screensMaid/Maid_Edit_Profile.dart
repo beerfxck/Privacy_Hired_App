@@ -131,26 +131,18 @@ class _EditPageState extends State<EditPage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
-        elevation: 0,
-        leading: Padding(
-          padding: EdgeInsets.only(left: 35.0),
-          child: Transform.scale(
-            scale: 3.5,
-            child: Image.asset('images/logo_maid.png'),
+        elevation: 5,
+        backgroundColor: Color.fromARGB(255, 9, 150, 63),
+        title: Text(
+          'แก้ไขโปรไฟล์',
+          style: GoogleFonts.kanit(
+            textStyle: TextStyle(color: Colors.white),
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/MaidBottomNavBar');
-            },
-            icon: Icon(
-              Icons.home_rounded,
-              color: Colors.green,
-            ),
-          ),
-        ],
-        backgroundColor: Color.fromARGB(217, 255, 255, 255),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -324,28 +316,30 @@ class _EditPageState extends State<EditPage> {
             ),
             SizedBox(height: 30),
             Container(
-              width: 385,
-              height: 50,
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  editMaidprofile(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 209, 15, 1),
-                  shape: StadiumBorder(),
-                  elevation: 10,
-                ),
-                icon: Icon(Icons.edit),
-                label: Text(
-                  'แก้ไขข้อมูลเสร็จสิ้น',
-                  style: GoogleFonts.kanit(
-                    textStyle: TextStyle(color: Colors.white),
-                    fontSize: 16,
+                width: 385,
+                height: 50,
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    editMaidprofile(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 209, 15, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    elevation: 10,
+                  ),
+                  icon: Icon(Icons.edit),
+                  label: Text(
+                    'แก้ไขข้อมูลเสร็จสิ้น',
+                    style: GoogleFonts.kanit(
+                      textStyle: TextStyle(color: Colors.white),
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ),
-            ),
           ]),
         ),
       ),

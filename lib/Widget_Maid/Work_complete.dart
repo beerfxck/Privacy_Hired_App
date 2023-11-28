@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
 import 'package:privacy_maid_flutter/model/BookWork.dart';
 import 'package:privacy_maid_flutter/model/maidWork.dart';
@@ -130,14 +131,16 @@ class _WorkCompleteComponentState extends State<WorkCompleteComponent> {
                       ListTile(
                         title: Text(
                           "เลขห้อง : ${booking.roomnumber ?? ""}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                          style: GoogleFonts.kanit(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18
                           ),
                         ),
                         trailing: CircleAvatar(
+                          backgroundColor: Colors.green,
                           radius: 25,
                           child: Icon(
-                            Icons.person,
+                            Icons.check,
                             color: Colors.white,
                           ),
                         ),
@@ -162,7 +165,7 @@ class _WorkCompleteComponentState extends State<WorkCompleteComponent> {
                               SizedBox(width: 5),
                               Text(
                                 "${convertDate(booking.bookingDate) ?? ""}",
-                                style: TextStyle(
+                                style: GoogleFonts.kanit(
                                   color: Colors.black54,
                                 ),
                               ),
@@ -177,7 +180,7 @@ class _WorkCompleteComponentState extends State<WorkCompleteComponent> {
                               SizedBox(width: 5),
                               Text(
                                 "${booking.startWork ?? ""}",
-                                style: TextStyle(
+                                style: GoogleFonts.kanit(
                                   color: Colors.black54,
                                 ),
                               ),
@@ -195,7 +198,7 @@ class _WorkCompleteComponentState extends State<WorkCompleteComponent> {
                               SizedBox(width: 5),
                               Text(
                                 "${booking.statusDescription ?? ""}",
-                                style: TextStyle(
+                                style: GoogleFonts.kanit(
                                   color: Colors.black54,
                                 ),
                               ),
@@ -217,20 +220,20 @@ class _WorkCompleteComponentState extends State<WorkCompleteComponent> {
                                 ),
                               );
                             },
-                            child: Container(
-                              width: 150,
-                              padding: EdgeInsets.symmetric(vertical: 12),
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 20, 196, 49),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "ดูรายละเอียด",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black54,
+                             child: Container(
+                                width: 350,
+                                padding: EdgeInsets.symmetric(vertical: 12),
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 177, 177, 177),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "รายละเอียด",
+                                    style: GoogleFonts.kanit(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white,
                                   ),
                                 ),
                               ),

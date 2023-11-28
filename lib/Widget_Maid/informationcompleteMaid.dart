@@ -106,35 +106,32 @@ class _InfoCompleteForMaidState extends State<InfoCompleteForMaid> {
     }
   }
 
-String? convertDate(String? inputDate) {
-  if (inputDate != null) {
-    final parts = inputDate.split('T');
-    if (parts.length >= 1) {
-      final datePart = parts[0];
-      
-      // Additional processing to remove time part
-      final dateOnly = datePart.split(' ')[0];
+  String? convertDate(String? inputDate) {
+    if (inputDate != null) {
+      final parts = inputDate.split('T');
+      if (parts.length >= 1) {
+        final datePart = parts[0];
 
-      return dateOnly;
+        // Additional processing to remove time part
+        final dateOnly = datePart.split(' ')[0];
+
+        return dateOnly;
+      }
     }
+    return "";
   }
-  return "";
-}
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(243, 255, 255, 255),
-        title: Padding(
-          padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
-          child: Text(
-            'รายละเอียดการจอง',
-            style: TextStyle(color: Colors.black),
-          ),
+        backgroundColor: Color.fromARGB(255, 9, 150, 63),
+        title: Text(
+          'คิวการทำความสะอาด',
+          style: GoogleFonts.kanit(color: Colors.white),
         ),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -159,11 +156,12 @@ String? convertDate(String? inputDate) {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              MainText('รายละเอียดการจอง'),
-              buildDivider(),
-
+              Center(
+                child: MainText('รายละเอียดการจอง'),
+              ),
+              //buildDivider(),
               //รายละเอียดวันที่ จำนวนชั่วโมง เวลาเริ่ม
-              SupText('วันที่จอง :' +
+              SupText('วันที่จอง : ' +
                   '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}'), //ใส่ตรงนี้
               SupText('เวลาเริ่มงาน : ' +
                   '${bookwork.isNotEmpty ? bookwork[0].startWork : ""}'), //ใส่ตรงนี้
@@ -173,13 +171,13 @@ String? convertDate(String? inputDate) {
 
               //รายละเอียดลูกช้านที่จง
               MainText('รายละเอียดทำความสะอาด'),
-              SupText('หมายเลขห้อง :' +
+              SupText('หมายเลขห้อง : ' +
                   '${bookwork.isNotEmpty ? bookwork[0].roomnumber : ""}'), //ใส่ตรงนี้
-              SupText('ขนาดห้อง :' +
+              SupText('ขนาดห้อง : ' +
                   '${bookwork.isNotEmpty ? bookwork[0].roomsize : ""}'), //ใส่ตรงนี้
-              SupText('ชื่อเจ้าของห้อง :' +
+              SupText('ชื่อเจ้าของห้อง : ' +
                   '${bookwork.isNotEmpty ? bookwork[0].fname : ""} ${bookwork.isNotEmpty ? bookwork[0].lname : ""}'), //ใส่ตรงนี้
-              SupText('เบอร์โทรศัพท์ :' +
+              SupText('เบอร์โทรศัพท์ : ' +
                   '${bookwork.isNotEmpty ? bookwork[0].phone : ""}'), //ใส่ตรงนี้
               buildDivider(),
 
@@ -187,21 +185,7 @@ String? convertDate(String? inputDate) {
               MainText('คำขอเพิ่มเติม'), //ใส่ตรงนี้
               RequireText(
                   '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}'), //ใส่ตรงนี้
-              buildDivider(),
-
-              TextButton(
-                onPressed: () {
-                  _showPaymentSlipDialog(context);
-                },
-                child: Text(
-                  'สลิปการชำระค่าบริการ',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue, // Customize the button color
-                  ),
-                ),
-              ),
+              //buildDivider(),
               // Container(
               //   margin: EdgeInsets.symmetric(vertical: 10),
               //   width: 10,
@@ -237,11 +221,28 @@ String? convertDate(String? inputDate) {
               //       : AssetImage(
               //           'assets/default_profile_image.png'), // Provide a default image
               // ),
-
-              SupText('ค่าบริการ :' +
-                  (bookwork.isNotEmpty
-                      ? bookwork[0].servicePrice.toString()
-                      : "")),
+              SizedBox(height: 10),
+              Center(
+                child: SupText('ค่าบริการ : ' +
+                    (bookwork.isNotEmpty
+                        ? bookwork[0].servicePrice.toString()
+                        : "")),
+              ),
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                    _showPaymentSlipDialog(context);
+                  },
+                  child: Text(
+                    'ตรวจสอบหลักฐานการชำระเงิน',
+                    style: GoogleFonts.kanit(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green, // Customize the button color
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),
@@ -284,7 +285,7 @@ String? convertDate(String? inputDate) {
       margin: EdgeInsets.symmetric(vertical: 4), // Adjust the vertical margin
       child: Text(
         text,
-        style: TextStyle(
+        style: GoogleFonts.kanit(
           fontSize: 18,
           fontWeight: FontWeight.w400,
         ),
@@ -297,9 +298,9 @@ String? convertDate(String? inputDate) {
       margin: EdgeInsets.symmetric(vertical: 8), // Adjust the vertical margin
       child: Text(
         text,
-        style: TextStyle(
+        style: GoogleFonts.kanit(
           fontSize: 20,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );
@@ -321,7 +322,7 @@ String? convertDate(String? inputDate) {
         padding: const EdgeInsets.only(left: 10),
         child: Text(
           text,
-          style: TextStyle(
+          style: GoogleFonts.kanit(
             fontSize: 18,
           ),
         ),

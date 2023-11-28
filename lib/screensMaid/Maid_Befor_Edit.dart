@@ -57,30 +57,22 @@ class _MaidBeforEditState extends State<MaidBeforEdit> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
-        elevation: 0,
-        leading: Padding(
-          padding: EdgeInsets.only(left: 35.0),
-          child: Transform.scale(
-            scale: 3.5,
-            child: Image.asset('images/logo_maid.png'),
+        elevation: 5,
+        backgroundColor: Color.fromARGB(255, 9, 150, 63),
+        title: Text(
+          'โปรไฟล์ของคุณ',
+          style: GoogleFonts.kanit(
+            textStyle: TextStyle(color: Colors.white),
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/MaidBottomNavBar');
-            },
-            icon: Icon(
-              Icons.home_rounded,
-              color: Colors.green,
-            ),
-          ),
-        ],
-        backgroundColor: Color.fromARGB(217, 255, 255, 255),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(0.0),
+          padding: EdgeInsets.all(5.0),
           child: Column(children: [
             SizedBox(
               width: 120,
@@ -119,7 +111,7 @@ class _MaidBeforEditState extends State<MaidBeforEdit> {
                     '${resident.isNotEmpty ? resident[0].username : ""}',
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Colors.grey[850],
                     ),
                   ),
                 ],
@@ -145,7 +137,7 @@ class _MaidBeforEditState extends State<MaidBeforEdit> {
                     '${resident.isNotEmpty ? resident[0].password : ""}',
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Colors.grey[850],
                     ),
                   ),
                 ],
@@ -171,7 +163,7 @@ class _MaidBeforEditState extends State<MaidBeforEdit> {
                     '${resident.isNotEmpty ? resident[0].fname : ""}',
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Colors.grey[850],
                     ),
                   ),
                 ],
@@ -197,7 +189,7 @@ class _MaidBeforEditState extends State<MaidBeforEdit> {
                     '${resident.isNotEmpty ? resident[0].lname : ""}',
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Colors.grey[850],
                     ),
                   ),
                 ],
@@ -223,7 +215,7 @@ class _MaidBeforEditState extends State<MaidBeforEdit> {
                     '${resident.isNotEmpty ? resident[0].address : ""}',
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Colors.grey[850],
                     ),
                   ),
                 ],
@@ -234,24 +226,31 @@ class _MaidBeforEditState extends State<MaidBeforEdit> {
               width: 385,
               height: 50,
               margin: EdgeInsets.symmetric(horizontal: 10),
-              child: ElevatedButton.icon(
+              child: OutlinedButton.icon(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => EditPage()),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 209, 15, 1),
-                  shape: StadiumBorder(),
-                  elevation: 10,
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(
+                    color: Colors.red,
+                    width: 1.5,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
                 ),
-                icon: Icon(Icons.edit),
+                icon: Icon(
+                  Icons.edit,
+                  color: Colors.red,
+                ),
                 label: Text(
                   'แก้ไขข้อมูล',
                   style: GoogleFonts.kanit(
-                    textStyle: TextStyle(color: Colors.white),
-                    fontSize: 16,
+                    color: Colors.red,
+                    fontSize: 16.0,
                   ),
                 ),
               ),

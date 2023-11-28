@@ -137,7 +137,7 @@ class _SettingsPageState extends State<SettingsPage> {
           //   ),
           //   trailing: Icon(Icons.arrow_forward_outlined),
           // ),
-          Divider(height: 40),
+          //Divider(height: 40),
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, '/login');
