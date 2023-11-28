@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(width: 10),
               Text(
-                "Login Failed",
+                "ไม่สามารถเข้าสู่ระบบได้",
                 style: TextStyle(
                   color: Colors.red,
                 ),
@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                 Navigator.pop(context);
               },
               child: Text(
-                "OK",
+                "ปิด",
                 style: TextStyle(
                   color: Colors.red,
                 ),
