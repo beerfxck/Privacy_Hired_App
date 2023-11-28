@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
 import 'package:privacy_maid_flutter/model/timeWork.dart';
 import 'package:privacy_maid_flutter/screens/Hiredmaid_page.dart';
@@ -148,7 +149,13 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text('จองคิวแม่บ้าน'),
+        title: Text('วันที่เลือกรับบริการ',
+          style: GoogleFonts.kanit(
+            textStyle: TextStyle(color: Colors.white),
+            fontSize: 18,
+          ),
+        ),
+        centerTitle : true,
       ),
       body: Column(
         children: [

@@ -115,7 +115,7 @@ class _MaidDetailState extends State<MaidDetail> {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -125,7 +125,7 @@ class _MaidDetailState extends State<MaidDetail> {
                               children: [
                                 Icon(
                                   Icons.star,
-                                  color: Colors.yellow,
+                                  color: Colors.yellow[600],
                                   size: 20,
                                 ),
                                 SizedBox(width: 5),

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,22 +51,24 @@ class _MaidDetailForHiredState extends State<MaidDetailForHired> {
   Widget build(BuildContext context) {
     return Column(
       children: maidWorklist.map((maidWork) {
-        return Container(
-          padding: EdgeInsets.all(30),
-          margin: EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 5,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Row(
+        return Row(
             children: <Widget>[
+              Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(0, 10, 17, 5),
+                      child: maidWork.profile != null
+                          ? Image.memory(
+                              base64Decode(maidWork.profile!),
+                              width: 100,
+                              height: 95,
+                            )
+                          : Icon(
+                              Icons.person,
+                              size: 48,
+                            ),
+                    ),
+                  ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +112,6 @@ class _MaidDetailForHiredState extends State<MaidDetailForHired> {
                 ),
               ),
             ],
-          ),
         );
       }).toList(),
     );

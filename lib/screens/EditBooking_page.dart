@@ -742,7 +742,7 @@ class _EditBookingPageState extends State<EditBookingPage> {
               ),
               SizedBox(height: 10),
               UserDetailForHired(),
-              MyWidget(selectHour: selectedHours),
+              Totalprice(selectHour: selectedHours),
             ],
           ),
         ),

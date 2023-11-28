@@ -117,7 +117,7 @@ class _UserDetailForHiredState extends State<UserDetailForHired> {
                         '${resident.isNotEmpty ? resident[0].roomnumber : ""} ',
                         style: GoogleFonts.kanit(
                           fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                           color: Colors.black,
                         ),
                       ),

@@ -9,16 +9,16 @@ import 'package:privacy_maid_flutter/components/Terms_of_service.dart';
 import '../constant/domain.dart';
 import '../model/maidWork.dart';
 
-class MyWidget extends StatefulWidget {
+class Totalprice extends StatefulWidget {
   final int selectHour;
 
-  MyWidget({Key? key, required this.selectHour}) : super(key: key);
+  Totalprice({Key? key, required this.selectHour}) : super(key: key);
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<Totalprice> createState() => _TotalpriceState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _TotalpriceState extends State<Totalprice> {
   final dio = Dio();
   String? idUser;
   int? sumprice;
@@ -60,11 +60,11 @@ class _MyWidgetState extends State<MyWidget> {
     if (roomsize == null) {
       return sumprice = 0;
     } else if (roomsize.contains("26.5 - 29.5 sq m")) {
-      return sumprice = (400 + (widget.selectHour)*60);
+      return sumprice = (400 + (widget.selectHour) * 60);
     } else if (roomsize.contains("34.5 sq m")) {
-      return sumprice = (500 + (widget.selectHour)*60);
+      return sumprice = (500 + (widget.selectHour) * 60);
     } else if (roomsize.contains("49.5 - 50.25 sq m")) {
-      return sumprice = (650 + (widget.selectHour)*60);
+      return sumprice = (650 + (widget.selectHour) * 60);
     } else {
       return 0;
     }
@@ -79,11 +79,14 @@ class _MyWidgetState extends State<MyWidget> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              'ค่าบริการ: ${calculateServiceCost(resident.isNotEmpty ? resident[0].roomsize : "")} บาท',
-              style: GoogleFonts.kanit(
-                fontSize: 18,
-                color: Colors.black,
+            Center(
+              child: Text(
+                'ค่าบริการ ${calculateServiceCost(resident.isNotEmpty ? resident[0].roomsize : "")} บาท',
+                style: GoogleFonts.kanit(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
             SizedBox(height: 10),
