@@ -267,7 +267,7 @@ class _InformationPageState extends State<InformationPage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 5), 
+                  padding: EdgeInsets.only(left: 5),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -312,15 +312,18 @@ class _InformationPageState extends State<InformationPage> {
                   ),
                 ),
               ),
+              SizedBox(height: 15),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Center(
                   child: Text(
-                    'ค่าบริการ : '
-                    '${bookwork.isNotEmpty ? bookwork[0].servicePrice : ""}',
+                    'ค่าบริการทั้งหมด : '
+                    '${bookwork.isNotEmpty ? bookwork[0].servicePrice : ""}'
+                    ' บาท',
                     style: GoogleFonts.kanit(
-                      textStyle: TextStyle(color: Colors.black),
-                      fontSize: 20,
+                      textStyle: TextStyle(color: Colors.black,),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500
                     ),
                   ),
                 ),
@@ -337,16 +340,16 @@ class _InformationPageState extends State<InformationPage> {
                         builder: (context) => EditBookingPage(
                             bookingId: widget.bookingId,
                             id_user: bookwork[0]
-                                .maidbooking)), // Replace EditBookingPage() with the actual widget/page for editing
+                                .maidbooking)), 
                   );
                 },
                 child: Container(
-                  width: 300,
+                  width: 400,
                   height: 40,
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   decoration: BoxDecoration(
-                    color: Colors.blue, // Choose a color for the Edit button
-                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.grey[500],
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   child: Center(
                     child: Text(
@@ -363,27 +366,28 @@ class _InformationPageState extends State<InformationPage> {
               SizedBox(
                 height: 10,
               ),
-              InkWell(
-                onTap: bookwork.isNotEmpty
+              OutlinedButton(
+                onPressed: bookwork.isNotEmpty
                     ? () {
-                        _showCancelDialog(); 
+                        _showCancelDialog();
                       }
                     : null,
-                child: Container(
-                  width: 300,
-                  height: 40,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(30),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Colors.red),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
                   ),
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                ),
+                child: Container(
+                  width: 400,
                   child: Center(
                     child: Text(
                       "ยกเลิกรับบริการ",
                       style: GoogleFonts.kanit(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        color: Colors.white,
+                        color: Colors.red,
                       ),
                     ),
                   ),
@@ -396,4 +400,3 @@ class _InformationPageState extends State<InformationPage> {
     );
   }
 }
-
