@@ -342,6 +342,7 @@ class _InformationPageState extends State<InformationPage> {
                             id_user: bookwork[0]
                                 .maidbooking)), 
                   );
+                };
                 },
                 child: Container(
                   width: 400,
