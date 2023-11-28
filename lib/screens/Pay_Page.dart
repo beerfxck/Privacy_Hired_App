@@ -30,6 +30,22 @@ class _PayPageState extends State<PayPage> {
 
   Future<void> updateSlip(BuildContext context) async {
     try {
+      // Validate data before sending the request
+      if (widget.idBooking == null || image == null) {
+        // Handle incomplete data
+        Fluttertoast.showToast(
+          msg: "กรุณาใส่ข้อมูลให้ครบถ้วน",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          fontSize: 16.0,
+        );
+        // You might want to show a dialog or toast to inform the user.
+        return;
+      }
+
       final response = await dio.post(
         url_api + '/books/update-slip',
         data: {
@@ -41,15 +57,30 @@ class _PayPageState extends State<PayPage> {
 
       if (response.statusCode == 201) {
         Fluttertoast.showToast(
-            msg: "ชำระเงินเสร็จสิ้น",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.white,
-            textColor: Colors.black,
-            fontSize: 16.0);
+          msg: "ชำระเงินเสร็จสิ้น",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          fontSize: 16.0,
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UserReview(idBooking: widget.idBooking),
+          ),
+        );
       } else {
-        print('Request failed with status: ${response.statusCode}');
+        Fluttertoast.showToast(
+          msg: "กรุณาแนบสลิป",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          fontSize: 16.0,
+        );
       }
     } catch (e) {
       print('Error: $e');
@@ -207,9 +238,7 @@ class _PayPageState extends State<PayPage> {
                   ),
                   SizedBox(height: 10),
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal:
-                            50), 
+                    padding: EdgeInsets.symmetric(horizontal: 50),
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: Colors.green, width: 1.5),
@@ -246,13 +275,6 @@ class _PayPageState extends State<PayPage> {
                     ),
                     onPressed: () {
                       updateSlip(context);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              UserReview(idBooking: widget.idBooking),
-                        ),
-                      );
                     },
                     child: Text(
                       'เสร็จสิ้น',

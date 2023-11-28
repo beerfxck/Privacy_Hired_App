@@ -95,35 +95,59 @@ class _ReportComponentsState extends State<ReportComponents> {
   }
 
   void saveReportWork(BuildContext context) async {
-    idUser = await storageToken.read(key: 'id_user');
-    try {
-      final Map<String, dynamic> maidWorkData = {
-        "feedback_description": _reportController.text,
-        "id_user": idUser,
-        "id_booking": widget.bookingId,
-        "status_feedback": 9,
-        "picture_report": convertImagesToBase64()[0], // Add base64-encoded images
-      };
-      print(maidWorkData);
-      Response response =
-          await dio.post(url_api + '/feedback/savefeed', data: maidWorkData);
-      if (response.statusCode == 201) {
-        Fluttertoast.showToast(
-            msg: "ส่งคำร้องเสร็จสิ้น",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.white,
-            textColor: Colors.black,
-            fontSize: 16.0);
-        Navigator.pushNamed(context, '/BottomNavBar');
-      } else {
-        print("HTTP Error: ${response.statusCode}");
-      }
-    } catch (e) {
-      print("Error: $e");
+  idUser = await storageToken.read(key: 'id_user');
+  try {
+    // Validate data before sending the request
+    if (_reportController.text.isEmpty || widget.bookingId == null || convertImagesToBase64().isEmpty) {
+      // Handle incomplete data
+      Fluttertoast.showToast(
+        msg: "กรุณาใส่ข้อมูลให้ครบถ้วน",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        fontSize: 16.0,
+      );
+      // You might want to show a dialog or toast to inform the user.
+      return;
     }
+
+    final Map<String, dynamic> maidWorkData = {
+      "feedback_description": _reportController.text,
+      "id_user": idUser,
+      "id_booking": widget.bookingId,
+      "status_feedback": 9,
+      "picture_report": convertImagesToBase64()[0], // Add base64-encoded images
+    };
+    print(maidWorkData);
+    Response response = await dio.post(url_api + '/feedback/savefeed', data: maidWorkData);
+    if (response.statusCode == 201) {
+      Fluttertoast.showToast(
+        msg: "ส่งคำร้องเสร็จสิ้น",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        fontSize: 16.0,
+      );
+      Navigator.pushNamed(context, '/BottomNavBar');
+    } else {
+      Fluttertoast.showToast(
+        msg: "กรุณาใส่ข้อมูลให้ครบ",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        fontSize: 16.0,
+      );
+    }
+  } catch (e) {
+    print("Error: $e");
   }
+}
 
   void _removeImage(int index) {
     setState(() {

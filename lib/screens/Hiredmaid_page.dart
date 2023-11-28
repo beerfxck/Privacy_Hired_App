@@ -419,53 +419,77 @@ class _HomePageState extends State<HiredMaidPage> {
 
   String? idUser;
   void saveMaidWork(BuildContext context) async {
-    idUser = await storageToken.read(key: 'id_user');
+  idUser = await storageToken.read(key: 'id_user');
 
-    try {
-      final Map<String, dynamic> maidWorkData = {
-        "booking_date": widget.workday != null ? widget.workday : "23023-10-30",
-        "work_hour": selectedHours,
-        "start_work": start_work,
-        "descriptmaid": _textController.text,
-        "service_price": calculateServiceCost(selectedHours),
-        "status": 1,
-        "maid_rating": 0,
-        "user_booking": idUser,
-        "maidbooking": widget.id_user,
-        "id_maidwork": widget.id_worktime
-      };
-
-      print(maidWorkData);
-
-      Response response =
-          await dio.post(url_api + '/books/save', data: maidWorkData);
-
-      if (response.statusCode == 201) {
-        updateWork(context);
-        Fluttertoast.showToast(
-            msg: "จองเสร็จสิ้น",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.black,
-            textColor: Colors.white,
-            fontSize: 16.0);
-        Navigator.pushNamed(context, '/BottomNavBar');
-      } else {
-        print("HTTP Error: ${response.statusCode}");
-      }
-    } catch (e) {
-      print("Error: $e");
+  try {
+    // Validate data before sending the request
+    if (widget.workday == null ||
+        selectedHours == null ||
+        start_work == null ||
+        _textController.text.isEmpty ||
+        widget.id_user == null ||
+        widget.id_worktime == null) {
+      // Handle incomplete data
       Fluttertoast.showToast(
-          msg: "กรุณาใส่ข้อมูลให้ครบถ้วน",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.white,
-          textColor: Colors.black,
-          fontSize: 16.0);
+        msg: "กรุณาใส่ข้อมูลให้ครบถ้วน",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        fontSize: 16.0,
+      );
+      // You might want to show a dialog or toast to inform the user.
+      return;
     }
+
+    final Map<String, dynamic> maidWorkData = {
+      "booking_date": widget.workday,
+      "work_hour": selectedHours,
+      "start_work": start_work,
+      "descriptmaid": _textController.text,
+      "service_price": calculateServiceCost(selectedHours),
+      "status": 1,
+      "maid_rating": 0,
+      "user_booking": idUser,
+      "maidbooking": widget.id_user,
+      "id_maidwork": widget.id_worktime
+    };
+
+    print(maidWorkData);
+
+    Response response =
+        await dio.post(url_api + '/books/save', data: maidWorkData);
+
+    if (response.statusCode == 201) {
+      updateWork(context);
+      Fluttertoast.showToast(
+        msg: "จองเสร็จสิ้น",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+      Navigator.pushNamed(context, '/BottomNavBar');
+    } else {
+      print("HTTP Error: ${response.statusCode}");
+    }
+  } catch (e) {
+    print("Error: $e");
+    Fluttertoast.showToast(
+      msg: "กรุณาใส่ข้อมูลให้ครบถ้วน",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.white,
+      textColor: Colors.black,
+      fontSize: 16.0,
+    );
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
