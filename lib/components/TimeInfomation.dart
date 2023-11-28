@@ -152,9 +152,10 @@ class _TimeInfomationState extends State<TimeInfomation> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}',
-                      style: TextStyle(
+                      style: GoogleFonts.kanit(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 36, 173, 41),
                       ),
                     ),
                   ),
@@ -162,9 +163,10 @@ class _TimeInfomationState extends State<TimeInfomation> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       '${bookwork.isNotEmpty ? bookwork[0].startWork : ""} ',
-                      style: TextStyle(
+                      style: GoogleFonts.kanit(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
+                        color: Color.fromARGB(255, 36, 173, 41),
                       ),
                     ),
                   ),
@@ -172,9 +174,10 @@ class _TimeInfomationState extends State<TimeInfomation> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       '${bookwork.isNotEmpty ? bookwork[0].workHour : ""} ชั่วโมง',
-                      style: TextStyle(
+                      style: GoogleFonts.kanit(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
+                        color: Color.fromARGB(255, 36, 173, 41),
                       ),
                     ),
                   ),

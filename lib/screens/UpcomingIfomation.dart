@@ -79,7 +79,6 @@ class _UpcomingInformationPageState extends State<UpcomingInformationPage> {
           bookwork.add(BookWork(
             descriptmaid: element["descriptmaid"],
             servicePrice: element["service_price"],
-          
           ));
         }
         setState(() {});
@@ -90,7 +89,6 @@ class _UpcomingInformationPageState extends State<UpcomingInformationPage> {
       print('Error: $e');
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -161,13 +159,13 @@ class _UpcomingInformationPageState extends State<UpcomingInformationPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(243, 255, 255, 255),
-        title: Padding(
-            padding: const EdgeInsets.fromLTRB(75, 0, 0, 0),
-            child: Text(
-              'การจองคิวของคุณ',
-              style: GoogleFonts.kanit(color: Colors.green),
-            )),
+        backgroundColor: Color.fromARGB(255, 9, 150, 63),
+        title: Text(
+          'การจองคิวของคุณ',
+          style: GoogleFonts.kanit(color: Colors.white),
+        ),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -204,16 +202,6 @@ class _UpcomingInformationPageState extends State<UpcomingInformationPage> {
               SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  thickness: 1,
-                  //height: 20,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
               MaiddetailForBooking(bookingId: widget.bookingId),
               SizedBox(
                 height: 10,
@@ -240,20 +228,13 @@ class _UpcomingInformationPageState extends State<UpcomingInformationPage> {
               SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  thickness: 1,
-                  //height: 20,
-                ),
-              ),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'คำขอเพิ่มเติม',
+                      ' คำขอเพิ่มเติม',
                       style: GoogleFonts.kanit(
                         textStyle: TextStyle(color: Colors.black),
                         fontSize: 20,
@@ -264,17 +245,29 @@ class _UpcomingInformationPageState extends State<UpcomingInformationPage> {
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 0.5,
-                        ),
                         color: Colors.white,
                       ),
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}',
-                        style: TextStyle(color: Colors.black),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Colors.black,
+                                width: 0.8,
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}',
+                            style: GoogleFonts.kanit(
+                                color: Colors.black, fontSize: 16),
+                          ),
+                        ),
                       ),
                     ),
                   ],

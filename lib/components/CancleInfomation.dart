@@ -114,18 +114,9 @@ class _CancleInfoState extends State<CancleInfo> {
   Widget build(BuildContext context) {
     if (bookwork.isEmpty) {
       return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(243, 255, 255, 255),
-          title: Padding(
-            padding: const EdgeInsets.fromLTRB(75, 0, 0, 0),
-            child: Text(
-              'รายละเอียด',
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-        ),
         body: Center(
-          child: Text('ไม่พบข้อมูลการจอง'),
+          child: Text('ไม่พบข้อมูลการจอง',
+          style: GoogleFonts.kanit(color: Colors.black),),
         ),
       );
     }
@@ -134,14 +125,13 @@ class _CancleInfoState extends State<CancleInfo> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(243, 255, 255, 255),
-        title: Padding(
-          padding: const EdgeInsets.fromLTRB(75, 0, 0, 0),
-          child: Text(
-            'รายละเอียด',
-            style: TextStyle(color: Colors.black),
-          ),
+        backgroundColor: Color.fromARGB(255, 9, 150, 63),
+        title: Text(
+          'การจองคิวของคุณ',
+          style: GoogleFonts.kanit(color: Colors.white),
         ),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -204,24 +194,36 @@ class _CancleInfoState extends State<CancleInfo> {
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 0.5,
-                        ),
                         color: Colors.white,
                       ),
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}',
-                        style: TextStyle(color: Colors.black),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Colors.black,
+                                width: 0.8,
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
+              SizedBox(height: 15,),
               Align(
-                alignment: Alignment.centerLeft,
+                alignment: Alignment.center,
                 child: Text(
                   'ค่าบริการ : ${booking.servicePrice?.toString() ?? ""}',
                   style: GoogleFonts.kanit(
@@ -230,6 +232,7 @@ class _CancleInfoState extends State<CancleInfo> {
                   ),
                 ),
               ),
+              SizedBox(height: 10,),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Center(

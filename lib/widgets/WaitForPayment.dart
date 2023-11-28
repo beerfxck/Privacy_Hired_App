@@ -229,7 +229,7 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    "ดูรายละเอียด",
+                                    "รายละเอียด",
                                     style: GoogleFonts.kanit(
                                       fontSize: 16,
                                       color: Colors.white,

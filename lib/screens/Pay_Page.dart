@@ -78,7 +78,7 @@ class _PayPageState extends State<PayPage> {
               child: Text(
                 'ถ่ายภาพ',
                 style: TextStyle(
-                  fontFamily: 'anupark',
+                  fontFamily: 'kanit',
                 ),
               ),
               onPressed: () {
@@ -90,7 +90,7 @@ class _PayPageState extends State<PayPage> {
               child: Text(
                 'เลือกภาพถ่าย',
                 style: TextStyle(
-                  fontFamily: 'anupark',
+                  fontFamily: 'kanit',
                 ),
               ),
               onPressed: () {
@@ -111,7 +111,7 @@ class _PayPageState extends State<PayPage> {
               title: Text(
                 'ถ่ายภาพ',
                 style: TextStyle(
-                  fontFamily: 'anupark',
+                  fontFamily: 'kanit',
                 ),
               ),
               onTap: () {
@@ -124,7 +124,7 @@ class _PayPageState extends State<PayPage> {
               title: Text(
                 'เลือกภาพถ่าย',
                 style: TextStyle(
-                  fontFamily: 'anupark',
+                  fontFamily: 'kanit',
                 ),
               ),
               onTap: () {
@@ -142,17 +142,13 @@ class _PayPageState extends State<PayPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 232, 241, 230),
+        backgroundColor: Color.fromARGB(255, 9, 150, 63),
         title: Text(
           'ชำระเงิน',
-          style: GoogleFonts.kanit(
-            textStyle: TextStyle(color: Colors.green),
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
+          style: GoogleFonts.kanit(color: Colors.white),
         ),
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.green),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Center(
         child: Padding(
@@ -172,6 +168,9 @@ class _PayPageState extends State<PayPage> {
                       fontSize: 20,
                     ),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Expanded(
                     flex: 2,
                     child: Center(
@@ -189,54 +188,69 @@ class _PayPageState extends State<PayPage> {
                               child: image == null
                                   ? Center(
                                       child: Text(
-                                      'no image selected',
+                                      'โปรดเลือกรูปภาพ',
                                     ))
                                   : Image.memory(base64Decode("${image}")),
                             ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green,
-                                shape: StadiumBorder(),
-                                elevation: 8,
-                              ),
-                              onPressed: () {
-                                _showImageSourceActionSheet(context);
-                              },
-                              child: Text(
-                                'อัปโหลดรูปภาพ',
-                                style: GoogleFonts.kanit(
-                                  textStyle: TextStyle(color: Colors.white),
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green,
-                                shape: StadiumBorder(),
-                                elevation: 8,
-                              ),
-                              onPressed: () {
-                                updateSlip(
-                                    context); 
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        UserReview(idBooking: widget.idBooking),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                'เสร็จสิ้น',
-                                style: GoogleFonts.kanit(
-                                  textStyle: TextStyle(color: Colors.white),
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
                           ],
                         ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal:
+                            50), 
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: Colors.green, width: 1.5),
+                        foregroundColor: Colors.green,
+                      ),
+                      onPressed: () {
+                        _showImageSourceActionSheet(context);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.upload,
+                            size: 24,
+                            color: Colors.green,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            'อัปโหลดรูปภาพ',
+                            style: GoogleFonts.kanit(
+                              textStyle: TextStyle(color: Colors.green),
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      elevation: 8,
+                      fixedSize: Size(295, 10),
+                    ),
+                    onPressed: () {
+                      updateSlip(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              UserReview(idBooking: widget.idBooking),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'เสร็จสิ้น',
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.white),
+                        fontSize: 16,
                       ),
                     ),
                   ),
