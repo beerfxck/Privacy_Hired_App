@@ -97,7 +97,7 @@ class _BookingPageState extends State<BookingPage> {
                 ),
               ),
               BookingSchedule(),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
             ],
           ),
         ),
