@@ -339,7 +339,8 @@ class _InformationPageState extends State<InformationPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            EditBookingPage(bookingId: widget.bookingId)), // Replace EditBookingPage() with the actual widget/page for editing
+                            EditBookingPage(bookingId: widget.bookingId,
+                            id_user: bookwork[0].maidbooking)), // Replace EditBookingPage() with the actual widget/page for editing
                   );
                 },
                 child: Container(

@@ -434,17 +434,10 @@ class _HomePageState extends State<HiredMaidPage> {
         "id_maidwork": widget.id_worktime
       };
 
-      // เพิ่มเงื่อนไขเช็คข้อมูลทุกช่องที่ต้องการ
-      if (maidWorkData.values.any((value) => value == null || value == "")) {
-        // แจ้งเตือนว่าข้อมูลไม่ครบ
-        print("กรุณาใส่ข้อมูลให้ครบ");
-        return;
-      }
-
       print(maidWorkData);
 
       Response response =
-          await dio.post(url_api + '/books/edit-book', data: maidWorkData);
+          await dio.post(url_api + '/books/save', data: maidWorkData);
 
       if (response.statusCode == 201) {
         updateWork(context);
@@ -454,9 +447,7 @@ class _HomePageState extends State<HiredMaidPage> {
         print("HTTP Error: ${response.statusCode}");
       }
     } catch (e) {
-      // จัดการข้อผิดพลาด
       print("Error: $e");
-      // แจ้งเตือนว่ามีข้อผิดพลาดเกิดขึ้น
       print("มีข้อผิดพลาดเกิดขึ้น กรุณาลองใหม่");
     }
   }

@@ -6,10 +6,11 @@ class BookWork {
   String? descriptmaid;
   int? servicePrice;
   String? paymentslip;
-  int? maidRating;
+  String? maidRating;
   int? status;
   int? userBooking;
   int? maidbooking;
+  int? idMaidwork;
   int? idUser;
   String? username;
   String? fname;
@@ -19,6 +20,7 @@ class BookWork {
   String? phone;
   String? roomnumber;
   String? roomsize;
+  String? maidSumrating;
   String? password;
   String? idCard;
   String? birthday;
@@ -40,6 +42,7 @@ class BookWork {
       this.status,
       this.userBooking,
       this.maidbooking,
+      this.idMaidwork,
       this.idUser,
       this.username,
       this.fname,
@@ -49,6 +52,7 @@ class BookWork {
       this.phone,
       this.roomnumber,
       this.roomsize,
+      this.maidSumrating,
       this.password,
       this.idCard,
       this.birthday,
@@ -70,6 +74,7 @@ class BookWork {
     status = json['status'];
     userBooking = json['user_booking'];
     maidbooking = json['maidbooking'];
+    idMaidwork = json['id_maidwork'];
     idUser = json['id_user'];
     username = json['username'];
     fname = json['fname'];
@@ -79,6 +84,7 @@ class BookWork {
     phone = json['phone'];
     roomnumber = json['roomnumber'];
     roomsize = json['roomsize'];
+    maidSumrating = json['maid_sumrating'];
     password = json['password'];
     idCard = json['id_card'];
     birthday = json['birthday'];
@@ -102,6 +108,7 @@ class BookWork {
     data['status'] = this.status;
     data['user_booking'] = this.userBooking;
     data['maidbooking'] = this.maidbooking;
+    data['id_maidwork'] = this.idMaidwork;
     data['id_user'] = this.idUser;
     data['username'] = this.username;
     data['fname'] = this.fname;
@@ -111,6 +118,7 @@ class BookWork {
     data['phone'] = this.phone;
     data['roomnumber'] = this.roomnumber;
     data['roomsize'] = this.roomsize;
+    data['maid_sumrating'] = this.maidSumrating;
     data['password'] = this.password;
     data['id_card'] = this.idCard;
     data['birthday'] = this.birthday;

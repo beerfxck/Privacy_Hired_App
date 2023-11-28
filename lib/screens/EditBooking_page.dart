@@ -79,20 +79,20 @@ class _EditBookingPageState extends State<EditBookingPage> {
     }
   }
 
- String? convertDate(String? inputDate) {
-  if (inputDate != null) {
-    final parts = inputDate.split('T');
-    if (parts.length >= 1) {
-      final datePart = parts[0];
-      
-      // Additional processing to remove time part
-      final dateOnly = datePart.split(' ')[0];
+  String? convertDate(String? inputDate) {
+    if (inputDate != null) {
+      final parts = inputDate.split('T');
+      if (parts.length >= 1) {
+        final datePart = parts[0];
 
-      return dateOnly;
+        // Additional processing to remove time part
+        final dateOnly = datePart.split(' ')[0];
+
+        return dateOnly;
+      }
     }
+    return "";
   }
-  return "";
-}
 
   int calculateServiceCost(int selectHour) {
     if (resident[0].roomsize == null) {
@@ -443,53 +443,58 @@ class _EditBookingPageState extends State<EditBookingPage> {
     idUser = await storageToken.read(key: 'id_user');
 
     try {
-      final Map<String, dynamic> maidWorkData = {
+      await getbookWork();
+
+      final bool bookingdateEdit = widget.workday != null &&
+          widget.workday!.isNotEmpty &&
+          widget.workday != bookwork[0].bookingDate;
+      final bool workhourEdit = selectedHours != null &&
+          selectedHours != 0 &&
+          selectedHours != bookwork[0].workHour;
+      final bool startworkEdit =
+          start_work.isNotEmpty && start_work != bookwork[0].startWork;
+      final bool descriptmaidEdit = _textController.text.isNotEmpty &&
+          _textController.text != bookwork[0].descriptmaid;
+      final int calculatedServiceCost = calculateServiceCost(selectedHours);
+      final bool servicepriceEdit = calculatedServiceCost != null &&
+          calculatedServiceCost != 0 &&
+          calculatedServiceCost != bookwork[0].servicePrice;
+
+      final bool id_maidworkEdit = widget.id_worktime != null &&
+          widget.id_worktime != 0 &&
+          widget.id_worktime != bookwork[0].idMaidwork;
+
+      final Map<String, dynamic> dataToUpdate = {
         "booking_id": widget.bookingId,
-        "booking_date": widget.workday != null ? widget.workday : "23023-10-30",
-        "work_hour": selectedHours,
-        "start_work": start_work,
-        "descriptmaid": _textController.text,
-        "service_price": calculateServiceCost(selectedHours),
-        "status": 1,
-        "maid_rating": 0,
-        "user_booking": idUser,
-        "maidbooking": widget.id_user,
-        "id_maidwork": widget.id_worktime
+        "booking_date":
+            bookingdateEdit ? widget.workday : bookwork[0].bookingDate,
+        "work_hour": workhourEdit ? selectedHours : bookwork[0].workHour,
+        "start_work": startworkEdit ? start_work : bookwork[0].startWork,
+        "descriptmaid":
+            descriptmaidEdit ? _textController.text : bookwork[0].descriptmaid,
+        "service_price": servicepriceEdit
+            ? calculateServiceCost(selectedHours)
+            : bookwork[0].servicePrice,
+        "id_maidwork":
+            id_maidworkEdit ? widget.id_worktime : bookwork[0].idMaidwork
       };
 
-      // Keep a copy of the original values
-      final Map<String, dynamic> originalMaidWorkData = {
-        "booking_id": widget.bookingId,
-        "booking_date": widget.workday != null ? widget.workday : "23023-10-30",
-        "work_hour": selectedHours,
-        "start_work": start_work,
-        "descriptmaid": _textController.text,
-        "service_price": calculateServiceCost(selectedHours),
-        "status": 1,
-        "maid_rating": 0,
-        "user_booking": idUser,
-        "maidbooking": widget.id_user,
-        "id_maidwork": widget.id_worktime
-      };
+      if (dataToUpdate.containsValue(true)) {
+        print("Changes were made. Sending updated data.");
+        print(dataToUpdate);
 
-      // Check if any value is different from the original
-      if (maidWorkData.values
-          .every((value) => originalMaidWorkData.containsValue(value))) {
-        print("No changes were made.");
-        return;
-      }
+        Response response =
+            await dio.post(url_api + '/books/edit-book', data: dataToUpdate);
 
-      print(maidWorkData);
-
-      Response response =
-          await dio.post(url_api + '/books/edit-book', data: maidWorkData);
-
-      if (response.statusCode == 201) {
-        updateWork(context);
-        print("Maid work saved successfully");
-        Navigator.pushNamed(context, '/BottomNavBar');
+        if (response.statusCode == 201) {
+          updateWork(context);
+          print("Maid work saved successfully");
+          Navigator.pushNamed(context, '/BottomNavBar');
+        } else {
+          print("HTTP Error: ${response.statusCode}");
+        }
       } else {
-        print("HTTP Error: ${response.statusCode}");
+        print("No changes were made.");
       }
     } catch (e) {
       print("Error: $e");
