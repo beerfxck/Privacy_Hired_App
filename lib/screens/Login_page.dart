@@ -49,7 +49,9 @@ class _LoginPageState extends State<LoginPage> {
         userType = response.data["type_name"];
         print(response);
         await storageToken.write(
-            key: 'id_user', value: response.data["id_user"].toString());
+          key: 'id_user',
+          value: response.data["id_user"].toString(),
+        );
 
         if (userType == 'resident') {
           GotoHome();
@@ -83,6 +85,12 @@ class _LoginPageState extends State<LoginPage> {
       if (e is DioError) {
         if (e.response != null) {
           print('DioError with response: ${e.response}');
+          // Check the response status and show an alert accordingly
+          if (e.response!.statusCode == 401) {
+            showLoginErrorDialog("ชื่อผู้ใช้หรือรหัสผ่านผิดพลาด");
+          } else {
+            showLoginErrorDialog("ชื่อผู้ใช้หรือรหัสผ่านผิดพลาด");
+          }
         } else {
           print('DioError without response');
         }
@@ -90,6 +98,50 @@ class _LoginPageState extends State<LoginPage> {
         print('Other exception occurred: $e');
       }
     }
+  }
+
+  void showLoginErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              Icon(
+                Icons.error,
+                color: Colors.red,
+              ),
+              SizedBox(width: 10),
+              Text(
+                "ไม่สามารถเข้าสู่ระบบได้",
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
+          content: Text(
+            message,
+            style: TextStyle(
+              color: Colors.red,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                "ปิด",
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   GotoHome() {

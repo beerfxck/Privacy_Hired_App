@@ -479,20 +479,18 @@ class _EditBookingPageState extends State<EditBookingPage> {
             id_maidworkEdit ? widget.id_worktime : bookwork[0].idMaidwork
       };
 
-      
+      print(dataToUpdate);
 
-        print(dataToUpdate);
+      Response response =
+          await dio.post(url_api + '/books/edit-book', data: dataToUpdate);
 
-        Response response =
-            await dio.post(url_api + '/books/edit-book', data: dataToUpdate);
-
-        if (response.statusCode == 201) {
-          updateWork(context);
-          print("Maid work saved successfully");
-          Navigator.pushNamed(context, '/BottomNavBar');
-        } else {
-          print("HTTP Error: ${response.statusCode}");
-        }
+      if (response.statusCode == 201) {
+        updateWork(context);
+        print("Maid work saved successfully");
+        Navigator.pushNamed(context, '/BottomNavBar');
+      } else {
+        print("HTTP Error: ${response.statusCode}");
+      }
     } catch (e) {
       print("Error: $e");
       print("An error occurred. Please try again.");
@@ -612,7 +610,7 @@ class _EditBookingPageState extends State<EditBookingPage> {
                   ),
                   icon: Icon(Icons.calendar_month),
                   label: Text(
-                    'จองเวลาทำความสะอาด',
+                    'จองเวลาทำความสะอาด ${bookwork.isNotEmpty ? convertDate(bookwork[0].bookingDate) : (widget.workday != null ? convertDate(widget.workday) : "")}',
                     style: GoogleFonts.kanit(
                       textStyle: TextStyle(color: Colors.white),
                       fontSize: 16,
@@ -643,7 +641,7 @@ class _EditBookingPageState extends State<EditBookingPage> {
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0, bottom: 8),
                         child: Text(
-                          'จำนวนชั่วโมง : ',
+                          'จำนวนชั่วโมง : ${bookwork.isNotEmpty ? bookwork[0].workHour : ""}',
                           style: GoogleFonts.kanit(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
