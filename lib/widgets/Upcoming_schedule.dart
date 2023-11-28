@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:privacy_maid_flutter/model/maidWork.dart';
 import 'package:privacy_maid_flutter/screens/HiredInfomation.dart';
@@ -132,10 +133,10 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                 child: Column(
                   children: [
                     ListTile(
-                      contentPadding: const EdgeInsets.only(top: 20, right: 17),
+                      contentPadding: EdgeInsets.only(top: 20, right: 17),
                       trailing: Text(
                         "${booking.fname != null ? 'ชื่อ: ${booking.fname}\nนามสกุล: ${booking.lname ?? ''}' : ''}",
-                        style: const TextStyle(
+                        style: GoogleFonts.kanit(
                           color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.w400,
@@ -187,7 +188,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                             const SizedBox(width: 5),
                             Text(
                               "${booking.startWork ?? ""}",
-                              style: const TextStyle(
+                              style: GoogleFonts.kanit(
                                 color: Colors.black54,
                                 fontSize: 14,
                               ),
@@ -206,7 +207,7 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                             const SizedBox(width: 5),
                             Text(
                               "${booking.statusDescription ?? ""}",
-                              style: const TextStyle(
+                              style: GoogleFonts.kanit(
                                 color: Colors.black54,
                                 fontSize: 14,
                               ),
@@ -255,18 +256,18 @@ class _UpcomingScheduleState extends State<UpcomingSchedule> {
                                 }
                               : null,
                           child: Container(
-                            width: 300,
+                            width: 350,
                             height: 40,
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             decoration: BoxDecoration(
                               color: Colors.green,
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: Center(
                               child: Text(
                                 "รายละเอียด",
-                                style: const TextStyle(
-                                  fontSize: 14,
+                                style: GoogleFonts.kanit(
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
                                 ),

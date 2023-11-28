@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/CancleInfomation.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
 import 'package:privacy_maid_flutter/model/BookWork.dart';
@@ -129,14 +130,16 @@ class _CancleState extends State<Cancle> {
                       ListTile(
                         title: Text(
                           "${booking.fname ?? ""} ${booking.lname ?? ""}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                          style: GoogleFonts.kanit(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
                           ),
                         ),
                         trailing: CircleAvatar(
+                          backgroundColor: Colors.red[700],
                           radius: 25,
                           child: Icon(
-                            Icons.person,
+                            Icons.cancel,
                             color: Colors.white,
                           ),
                         ),
@@ -144,7 +147,7 @@ class _CancleState extends State<Cancle> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Divider(
-                          color: Colors.black,
+                          color: Colors.black54,
                           thickness: 1,
                           height: 20,
                         ),
@@ -161,7 +164,7 @@ class _CancleState extends State<Cancle> {
                               SizedBox(width: 5),
                               Text(
                                 "${convertDate(booking.bookingDate) ?? ""}",
-                                style: TextStyle(
+                                style: GoogleFonts.kanit(
                                   color: Colors.black54,
                                 ),
                               ),
@@ -176,7 +179,7 @@ class _CancleState extends State<Cancle> {
                               SizedBox(width: 5),
                               Text(
                                 "${booking.startWork ?? ""}",
-                                style: TextStyle(
+                                style: GoogleFonts.kanit(
                                   color: Colors.black54,
                                 ),
                               ),
@@ -194,8 +197,8 @@ class _CancleState extends State<Cancle> {
                               SizedBox(width: 5),
                               Text(
                                 "ยกเลิกแล้ว",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                style: GoogleFonts.kanit(
+                                  fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(137, 231, 0, 0),
                                 ),
                               ),
@@ -217,19 +220,19 @@ class _CancleState extends State<Cancle> {
                               );
                             },
                             child: Container(
-                              width: 150,
+                              width: 350,
                               padding: EdgeInsets.symmetric(vertical: 12),
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 20, 196, 49),
+                                color: Color.fromARGB(255, 177, 177, 177),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
                                 child: Text(
                                   "ดูรายละเอียด",
-                                  style: TextStyle(
+                                  style: GoogleFonts.kanit(
                                     fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black54,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),

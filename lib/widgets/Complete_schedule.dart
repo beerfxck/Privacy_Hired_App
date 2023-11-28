@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/SuccessInfomation.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
 import 'package:privacy_maid_flutter/model/BookWork.dart';
@@ -133,14 +134,16 @@ class _CompleteScheduleState extends State<CompleteSchedule> {
                         ListTile(
                           title: Text(
                             "${booking.fname ?? ""} ${booking.lname ?? ""}",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                            style: GoogleFonts.kanit(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
                             ),
                           ),
                           trailing: CircleAvatar(
+                            backgroundColor : Color.fromARGB(255, 62, 170, 67),
                             radius: 25,
                             child: Icon(
-                              Icons.person,
+                              Icons.check,
                               color: Colors.white,
                             ),
                           ),
@@ -148,7 +151,7 @@ class _CompleteScheduleState extends State<CompleteSchedule> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: Divider(
-                            color: Colors.black,
+                            //color: Colors.black,
                             thickness: 1,
                             height: 20,
                           ),
@@ -165,8 +168,8 @@ class _CompleteScheduleState extends State<CompleteSchedule> {
                                 SizedBox(width: 5),
                                 Text(
                                   "${convertDate(booking.bookingDate) ?? ""}",
-                                  style: TextStyle(
-                                    color: Colors.black54,
+                                  style: GoogleFonts.kanit(
+                                    color: Colors.black,
                                   ),
                                 ),
                               ],
@@ -180,7 +183,7 @@ class _CompleteScheduleState extends State<CompleteSchedule> {
                                 SizedBox(width: 5),
                                 Text(
                                   "${booking.startWork ?? ""}",
-                                  style: TextStyle(
+                                  style: GoogleFonts.kanit(
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -198,7 +201,7 @@ class _CompleteScheduleState extends State<CompleteSchedule> {
                                 SizedBox(width: 5),
                                 Text(
                                   "${booking.statusDescription ?? ""}",
-                                  style: TextStyle(
+                                  style: GoogleFonts.kanit(
                                     color: Colors.black54,
                                   ),
                                 ),
@@ -224,16 +227,16 @@ class _CompleteScheduleState extends State<CompleteSchedule> {
                                 width: 150,
                                 padding: EdgeInsets.symmetric(vertical: 12),
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 20, 196, 49),
+                                  color: Color.fromARGB(255, 177, 177, 177),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Center(
                                   child: Text(
                                     "ดูรายละเอียด",
-                                    style: TextStyle(
+                                    style: GoogleFonts.kanit(
                                       fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black54,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -258,9 +261,9 @@ class _CompleteScheduleState extends State<CompleteSchedule> {
                                 child: Center(
                                   child: Text(
                                     "แจ้งปัญหา",
-                                    style: TextStyle(
+                                    style: GoogleFonts.kanit(
                                       fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black54,
                                     ),
                                   ),

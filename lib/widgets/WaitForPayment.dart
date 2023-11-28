@@ -130,15 +130,17 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                       children: [
                         ListTile(
                           title: Text(
-                            "รอชำระเงิน",
+                            "${booking.fname ?? ""} ${booking.lname ?? ""}",
                             style: GoogleFonts.kanit(
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
                             ),
                           ),
                           trailing: const CircleAvatar(
+                            backgroundColor: Colors.red,
                             radius: 25,
                             child: Icon(
-                              Icons.person,
+                              Icons.payments_sharp,
                               color: Colors.white,
                             ),
                           ),
@@ -222,7 +224,7 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                                 width: 150,
                                 padding: EdgeInsets.symmetric(vertical: 12),
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 20, 196, 49),
+                                  color: Color.fromARGB(255, 177, 177, 177),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Center(
@@ -230,8 +232,7 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
                                     "ดูรายละเอียด",
                                     style: GoogleFonts.kanit(
                                       fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black54,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -279,3 +280,4 @@ class _WaitForPaymentsState extends State<WaitForPayments> {
     );
   }
 }
+
