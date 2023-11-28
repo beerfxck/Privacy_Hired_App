@@ -24,8 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController = TextEditingController();
   bool isLoginEnabled = false;
   bool passToggle = true;
-  bool isChecked =
-      false;
+  bool isChecked = false;
 
   void checkLoginEnable() {
     setState(() {
@@ -50,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
         print(response);
         await storageToken.write(
           key: 'id_user',
-          value: response.data["id_user"].toString()
+          value: response.data["id_user"].toString(),
         );
 
         if (userType == 'resident') {
@@ -69,6 +68,12 @@ class _LoginPageState extends State<LoginPage> {
       if (e is DioError) {
         if (e.response != null) {
           print('DioError with response: ${e.response}');
+          // Check the response status and show an alert accordingly
+          if (e.response!.statusCode == 401) {
+            showLoginErrorDialog("ชื่อผู้ใช้หรือรหัสผ่านผิดพลาด");
+          } else {
+            showLoginErrorDialog("ชื่อผู้ใช้หรือรหัสผ่านผิดพลาด");
+          }
         } else {
           print('DioError without response');
         }
@@ -76,6 +81,50 @@ class _LoginPageState extends State<LoginPage> {
         print('Other exception occurred: $e');
       }
     }
+  }
+
+  void showLoginErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              Icon(
+                Icons.error,
+                color: Colors.red,
+              ),
+              SizedBox(width: 10),
+              Text(
+                "Login Failed",
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
+          content: Text(
+            message,
+            style: TextStyle(
+              color: Colors.red,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                "OK",
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   GotoHome() {
@@ -93,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return MaidBottomNavBar(); 
+          return MaidBottomNavBar();
         },
       ),
       (_) => false,
