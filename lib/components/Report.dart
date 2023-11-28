@@ -101,7 +101,7 @@ class _ReportComponentsState extends State<ReportComponents> {
         "id_user": idUser,
         "id_booking": widget.bookingId,
         "status_feedback": 9,
-        "images": convertImagesToBase64(), // Add base64-encoded images
+        "picture_report": convertImagesToBase64()[0], // Add base64-encoded images
       };
       print(maidWorkData);
       Response response =

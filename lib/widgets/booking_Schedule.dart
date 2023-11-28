@@ -107,7 +107,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
 
   @override
   Widget build(BuildContext context) {
-    return bookwork.length > 0
+    return bookwork.isNotEmpty
         ? Padding(
             padding: const EdgeInsets.fromLTRB(4, 5, 5, 9),
             child: Column(
@@ -136,7 +136,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                             contentPadding:
                                 const EdgeInsets.fromLTRB(4, 10, 18, 4),
                             trailing: Text(
-                              "${bookwork.isNotEmpty ? 'ชื่อ: ${bookwork[0].fname ?? ''}\nนามสกุล: ${bookwork[0].lname ?? ''}' : ''}",
+                              "ชื่อ: ${booking.fname ?? ''}\nนามสกุล: ${booking.lname ?? ''}",
                               style: GoogleFonts.kanit(
                                 color: Colors.black,
                                 fontSize: 20,
@@ -172,7 +172,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
-                                    '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}',
+                                    '${convertDate(booking.bookingDate) ?? ""}',
                                     style: GoogleFonts.kanit(
                                       color: Colors.black54,
                                       fontSize: 14,
@@ -188,7 +188,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
-                                    "${bookwork.isNotEmpty ? bookwork[0].startWork : ""}",
+                                    "${booking.startWork ?? ""}",
                                     style: GoogleFonts.kanit(
                                       color: Colors.black54,
                                       fontSize: 14,
@@ -207,7 +207,7 @@ class _BookingScheduleState extends State<BookingSchedule> {
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
-                                    "${bookwork.isNotEmpty ? bookwork[0].statusDescription : ""}",
+                                    "${booking.statusDescription ?? ""}",
                                     style: GoogleFonts.kanit(
                                       color: Colors.black54,
                                       fontSize: 14,
@@ -222,15 +222,15 @@ class _BookingScheduleState extends State<BookingSchedule> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               InkWell(
-                                onTap: bookwork.isNotEmpty
-                                    ? () {
-                                        Navigator.of(context)
-                                            .push(MaterialPageRoute(
-                                          builder: (context) => InformationPage(
-                                              bookingId: bookwork[0].bookingId),
-                                        ));
-                                      }
-                                    : null,
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => InformationPage(
+                                        bookingId: booking.bookingId,
+                                      ),
+                                    ),
+                                  );
+                                },
                                 child: Container(
                                   width: 320,
                                   height: 40,
@@ -266,11 +266,13 @@ class _BookingScheduleState extends State<BookingSchedule> {
             child: Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Center(
-                child: Text("ไม่มีรายการการจองคิว",
-                    style: GoogleFonts.kanit(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    )),
+                child: Text(
+                  "ไม่มีรายการการจองคิว",
+                  style: GoogleFonts.kanit(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                ),
               ),
             ),
           );

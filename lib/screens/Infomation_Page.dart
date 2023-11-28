@@ -267,7 +267,7 @@ class _InformationPageState extends State<InformationPage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 5), 
+                  padding: EdgeInsets.only(left: 5),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -330,15 +330,22 @@ class _InformationPageState extends State<InformationPage> {
               ),
               InkWell(
                 onTap: () {
-                  // Example of navigating to the EditBooking page:
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
+                  if (bookwork.isNotEmpty) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
                         builder: (context) => EditBookingPage(
-                            bookingId: widget.bookingId,
-                            id_user: bookwork[0]
-                                .maidbooking)), // Replace EditBookingPage() with the actual widget/page for editing
-                  );
+                          bookingId: widget.bookingId,
+                          id_user: bookwork[0].maidbooking,
+                        ),
+                      ),
+                    );
+                  } else {
+                    // Handle the case when bookwork is empty (optional)
+                    print(
+                        'bookwork is empty. Unable to navigate to EditBookingPage.');
+                    // You can show a message or perform other actions based on your requirements.
+                  }
                 },
                 child: Container(
                   width: 300,
@@ -366,7 +373,7 @@ class _InformationPageState extends State<InformationPage> {
               InkWell(
                 onTap: bookwork.isNotEmpty
                     ? () {
-                        _showCancelDialog(); 
+                        _showCancelDialog();
                       }
                     : null,
                 child: Container(
@@ -396,4 +403,3 @@ class _InformationPageState extends State<InformationPage> {
     );
   }
 }
-

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:privacy_maid_flutter/components/Calendarforedit.dart';
 import 'package:privacy_maid_flutter/components/Showprice.dart';
 import 'package:privacy_maid_flutter/components/Time.dart';
 import 'package:privacy_maid_flutter/constant/domain.dart';
@@ -10,7 +11,6 @@ import 'package:privacy_maid_flutter/model/BookWork.dart';
 import 'package:privacy_maid_flutter/model/maidWork.dart';
 import 'package:privacy_maid_flutter/model/timeWork.dart';
 import 'package:privacy_maid_flutter/components/Calendar.dart';
-
 import '../components/MaidDeatailForHired.dart';
 import '../components/SpecialRequired.dart';
 import '../components/Terms_of_service.dart';
@@ -479,8 +479,8 @@ class _EditBookingPageState extends State<EditBookingPage> {
             id_maidworkEdit ? widget.id_worktime : bookwork[0].idMaidwork
       };
 
-      if (dataToUpdate.containsValue(true)) {
-        print("Changes were made. Sending updated data.");
+      
+
         print(dataToUpdate);
 
         Response response =
@@ -493,9 +493,6 @@ class _EditBookingPageState extends State<EditBookingPage> {
         } else {
           print("HTTP Error: ${response.statusCode}");
         }
-      } else {
-        print("No changes were made.");
-      }
     } catch (e) {
       print("Error: $e");
       print("An error occurred. Please try again.");
@@ -578,7 +575,7 @@ class _EditBookingPageState extends State<EditBookingPage> {
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: Text(
-                          'วันที่ต้องการรับบริการ  ${widget.workday == null ? '' : convertDate(widget.workday)}',
+                          'วันที่ต้องการรับบริการ ${bookwork.isNotEmpty ? convertDate(bookwork[0].bookingDate) : (widget.workday != null ? convertDate(widget.workday) : "")}',
                           style: GoogleFonts.kanit(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
@@ -598,14 +595,14 @@ class _EditBookingPageState extends State<EditBookingPage> {
                     if (bookwork.isNotEmpty) {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => TableEventsExample(
-                              id_user: bookwork[0].maidbooking),
+                          builder: (context) => TableEventsForEditExample(
+                              id_user: bookwork[0].maidbooking,
+                              bookingId: widget.bookingId),
                         ),
                       );
                     } else {
                       print(
                           "bookwork is empty. Unable to retrieve maidbooking.");
-                      // Handle the case when bookwork is empty, e.g., show a message to the user
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -705,13 +702,7 @@ class _EditBookingPageState extends State<EditBookingPage> {
                 ],
               ),
               SizedBox(height: 10),
-              // TimeStartComponents(
-              //   onChanged: (data) => {start_work = data},
-              //   id_worktimetype: widget.id_worktimetype,
-              // ),
               SizedBox(height: 20),
-              // SpecialTextField(),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -742,7 +733,9 @@ class _EditBookingPageState extends State<EditBookingPage> {
                 child: TextField(
                   controller: _textController,
                   decoration: InputDecoration(
-                    hintText: 'เช่น เน้นความสะอาดห้องน้ำ, ห้องนอน ฯลฯ',
+                    hintText: bookwork.isNotEmpty
+                        ? '${bookwork[0].descriptmaid}'
+                        : '',
                     border: InputBorder.none,
                   ),
                 ),
