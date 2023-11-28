@@ -111,7 +111,7 @@ class _EditUserPageState extends State<EditUserPage> {
             "ต้องการแก้ไขข้อมูลหรือไม่",
             textAlign: TextAlign.center,
             style: GoogleFonts.kanit(
-              textStyle: TextStyle(color: Colors.green),
+              textStyle: TextStyle(color: Colors.black),
               fontSize: 17,
               fontWeight: FontWeight.w400,
             ),

@@ -56,47 +56,110 @@ class _UserDetailForHiredState extends State<UserDetailForHired> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'รายละเอียดทำความสะอาด',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+        SizedBox(height: 15),
+        Container(
+          margin: EdgeInsets.only(left: 5),
+          child: Text(
+            'รายละเอียดการทำความสะอาด',
+            style: GoogleFonts.kanit(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
-        SizedBox(height: 7),
-        ListView(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          children: [
-            Text(
-              'หมายเลขห้อง : ${resident.isNotEmpty ? resident[0].roomnumber : ""} ',
-              style: GoogleFonts.kanit(
-                textStyle: TextStyle(color: Colors.black),
-                fontSize: 18,
+        SizedBox(height: 5),
+        Container(
+          padding: EdgeInsets.all(5),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'หมายเลขห้อง :',
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.black),
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      'ขนาดห้อง :',
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.black),
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      'ชื่อเจ้าของห้อง :',
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.black),
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      'เบอร์โทรศัพท์ :',
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.black),
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Text(
-              'ขนาดห้อง : ${resident.isNotEmpty ? resident[0].roomsize : ""}',
-              style: GoogleFonts.kanit(
-                textStyle: TextStyle(color: Colors.black),
-                fontSize: 18,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '${resident.isNotEmpty ? resident[0].roomnumber : ""} ',
+                        style: GoogleFonts.kanit(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '${resident.isNotEmpty ? resident[0].roomsize : ""}',
+                        style: GoogleFonts.kanit(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '${resident.isNotEmpty ? resident[0].fname : ""} ${resident.isNotEmpty ? resident[0].lname : ""}',
+                        style: GoogleFonts.kanit(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '${resident.isNotEmpty ? resident[0].phone : ""}',
+                        style: GoogleFonts.kanit(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Text(
-              'ชื่อเจ้าของห้อง : ${resident.isNotEmpty ? resident[0].fname : ""} ${resident.isNotEmpty ? resident[0].lname : ""}',
-              style: GoogleFonts.kanit(
-                textStyle: TextStyle(color: Colors.black),
-                fontSize: 18,
-              ),
-            ),
-            Text(
-              'เบอร์โทรศัพท์ : ${resident.isNotEmpty ? resident[0].phone : ""}',
-              style: GoogleFonts.kanit(
-                textStyle: TextStyle(color: Colors.black),
-                fontSize: 18,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );

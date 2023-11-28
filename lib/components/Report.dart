@@ -229,7 +229,7 @@ class _ReportComponentsState extends State<ReportComponents> {
             width: double.infinity,
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+                  EdgeInsets.symmetric(vertical: 5.0, horizontal: 25.0),
               child: GestureDetector(
                 onTap: () async {
                   await _pickImage();

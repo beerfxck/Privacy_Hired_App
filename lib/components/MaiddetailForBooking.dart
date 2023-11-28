@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -75,6 +77,7 @@ class _MaiddetailForBookingState extends State<MaiddetailForBooking> {
             lname: element["lname"],
             phone: element["phone"],
             statusDescription: element["status_description"],
+            profile: element["profile"],
           ));
         }
         setState(() {});
@@ -92,48 +95,61 @@ class _MaiddetailForBookingState extends State<MaiddetailForBooking> {
       children: [
         Row(
           children: <Widget>[
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'ชื่อ นามสกุล : ',
-                    style: GoogleFonts.kanit(
-                      textStyle: TextStyle(color: Colors.black),
-                      fontSize: 16,
-                    ),
-                  ),
-                  Text(
-                    'เบอร์โทรศัพท์ :',
-                    style: GoogleFonts.kanit(
-                      textStyle: TextStyle(color: Colors.black),
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
+            Container(
+              margin: EdgeInsets.all(10.0),
+              width: 60,
+              height: 60,
+              child: CircleAvatar(
+                radius: 30,
+                backgroundImage:
+                    bookwork.isNotEmpty && bookwork[0].profile != null
+                        ? MemoryImage(base64Decode(bookwork[0].profile!))
+                        : null,
               ),
             ),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    '${bookwork.isNotEmpty ? bookwork[0].fname : ""} ${bookwork.isNotEmpty ? bookwork[0].lname : ""}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'ชื่อ นามสกุล : ',
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.black),
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '${bookwork.isNotEmpty ? bookwork[0].phone : ""}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                    Text(
+                      'เบอร์โทรศัพท์ :',
+                      style: GoogleFonts.kanit(
+                        textStyle: TextStyle(color: Colors.black),
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+
+            Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      '${bookwork.isNotEmpty ? bookwork[0].fname : ""} ${bookwork.isNotEmpty ? bookwork[0].lname : ""}',
+                      style: GoogleFonts.kanit(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Text(
+                      '${bookwork.isNotEmpty ? bookwork[0].phone : ""}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
           ],
         ),
       ],

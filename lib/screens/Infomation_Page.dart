@@ -197,13 +197,13 @@ class _InformationPageState extends State<InformationPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(243, 255, 255, 255),
-        title: Padding(
-            padding: const EdgeInsets.fromLTRB(75, 0, 0, 0),
-            child: Text(
-              'รายละเอียด',
-              style: TextStyle(color: Colors.black),
-            )),
+        backgroundColor: Color.fromARGB(255, 9, 150, 63),
+        title: Text(
+          'การจองของคุณ',
+          style: GoogleFonts.kanit(color: Colors.white),
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -226,25 +226,15 @@ class _InformationPageState extends State<InformationPage> {
           ),
           child: Column(
             children: <Widget>[
-              Align(
-                alignment: Alignment.centerLeft,
+              Container(
+                margin: EdgeInsets.only(top: 15),
                 child: Text(
-                  ' รายละเอียดการจอง',
+                  ' รายละเอียดการจองคิว',
                   style: GoogleFonts.kanit(
                     textStyle: TextStyle(color: Colors.black),
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  thickness: 1,
-                  //height: 20,
                 ),
               ),
               SizedBox(
@@ -258,62 +248,68 @@ class _InformationPageState extends State<InformationPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Divider(
                   thickness: 1,
-                  //height: 20,
                 ),
               ),
               DateForBook(bookingId: widget.bookingId),
               SizedBox(
-                height: 10,
+                height: 5,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Divider(
                   thickness: 1,
-                  //height: 20,
                 ),
               ),
               UserDetailForHired(),
               SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Divider(
-                  thickness: 1,
-                  //height: 20,
-                ),
-              ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'คำขอเพิ่มเติม',
-                      style: GoogleFonts.kanit(
-                        textStyle: TextStyle(color: Colors.black),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 0.5,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 5), 
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'คำขอเพิ่มเติม',
+                        style: GoogleFonts.kanit(
+                          textStyle: TextStyle(color: Colors.black),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
                         ),
-                        color: Colors.white,
                       ),
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}',
-                        style: TextStyle(color: Colors.black),
+                      SizedBox(height: 3),
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Colors.black,
+                                  width: 0.8,
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              '${bookwork.isNotEmpty ? bookwork[0].descriptmaid : ""}',
+                              style: GoogleFonts.kanit(
+                                  color: Colors.black, fontSize: 16),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Align(
@@ -338,9 +334,10 @@ class _InformationPageState extends State<InformationPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            EditBookingPage(bookingId: widget.bookingId,
-                            id_user: bookwork[0].maidbooking)), // Replace EditBookingPage() with the actual widget/page for editing
+                        builder: (context) => EditBookingPage(
+                            bookingId: widget.bookingId,
+                            id_user: bookwork[0]
+                                .maidbooking)), // Replace EditBookingPage() with the actual widget/page for editing
                   );
                 },
                 child: Container(
@@ -354,7 +351,7 @@ class _InformationPageState extends State<InformationPage> {
                   child: Center(
                     child: Text(
                       "แก้ไขข้อมูลการจอง",
-                      style: const TextStyle(
+                      style: GoogleFonts.kanit(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: Colors.white,
@@ -369,7 +366,7 @@ class _InformationPageState extends State<InformationPage> {
               InkWell(
                 onTap: bookwork.isNotEmpty
                     ? () {
-                        _showCancelDialog(); // Show the cancellation confirmation dialog
+                        _showCancelDialog(); 
                       }
                     : null,
                 child: Container(
@@ -383,7 +380,7 @@ class _InformationPageState extends State<InformationPage> {
                   child: Center(
                     child: Text(
                       "ยกเลิกรับบริการ",
-                      style: const TextStyle(
+                      style: GoogleFonts.kanit(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: Colors.white,
@@ -399,3 +396,4 @@ class _InformationPageState extends State<InformationPage> {
     );
   }
 }
+

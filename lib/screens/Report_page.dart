@@ -93,17 +93,17 @@ class _ReportPageState extends State<ReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: Color.fromARGB(255, 9, 150, 63),
         title: Text(
           'แจ้งปัญหา',
           style: GoogleFonts.kanit(
-            textStyle: TextStyle(color: Colors.green),
+            textStyle: TextStyle(color: Colors.white),
             fontSize: 18,
             fontWeight: FontWeight.w500,
           ),
         ),
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.green),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -111,7 +111,7 @@ class _ReportPageState extends State<ReportPage> {
             color: Colors.white,
           ),
           child: Padding(
-            padding: const EdgeInsets.only(top: 30.0, bottom: 20),
+            padding: const EdgeInsets.only(top: 30.0, bottom: 20,left: 5,right: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -149,7 +149,7 @@ class _ReportPageState extends State<ReportPage> {
                           SizedBox(height: 4),
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 30),
+                                vertical: 20, horizontal: 25),
                             child: Container(
                               width: 400,
                               height: 100,

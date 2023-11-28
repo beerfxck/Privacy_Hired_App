@@ -90,19 +90,19 @@ class _DateForBookState extends State<DateForBook> {
   }
 
   String? convertDate(String? inputDate) {
-  if (inputDate != null) {
-    final parts = inputDate.split('T');
-    if (parts.length >= 1) {
-      final datePart = parts[0];
-      
-      // Additional processing to remove time part
-      final dateOnly = datePart.split(' ')[0];
+    if (inputDate != null) {
+      final parts = inputDate.split('T');
+      if (parts.length >= 1) {
+        final datePart = parts[0];
 
-      return dateOnly;
+        // Additional processing to remove time part
+        final dateOnly = datePart.split(' ')[0];
+
+        return dateOnly;
+      }
     }
+    return "";
   }
-  return "";
-}
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +116,7 @@ class _DateForBookState extends State<DateForBook> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'วันที่จอง :',
+                    'วันที่ทำความสะอาด :',
                     style: GoogleFonts.kanit(
                       textStyle: TextStyle(color: Colors.black),
                       fontSize: 16,
@@ -140,42 +140,45 @@ class _DateForBookState extends State<DateForBook> {
               ),
             ),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '${convertDate(bookwork.isNotEmpty ? bookwork[0].bookingDate : "") ?? ""}',
+                        style: GoogleFonts.kanit(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromARGB(255, 36, 141, 39),
+                        ),
                       ),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      '${bookwork.isNotEmpty ? bookwork[0].startWork : ""} ',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '${bookwork.isNotEmpty ? bookwork[0].startWork : ""} ',
+                        style: GoogleFonts.kanit(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Color.fromARGB(255, 36, 141, 39),
+                        ),
                       ),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      '${bookwork.isNotEmpty ? bookwork[0].workHour : ""} ชั่วโมง',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '${bookwork.isNotEmpty ? bookwork[0].workHour : ""} ชั่วโมง',
+                        style: GoogleFonts.kanit(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Color.fromARGB(255, 36, 141, 39),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
           ],
         ),
       ),

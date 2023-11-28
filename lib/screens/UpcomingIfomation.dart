@@ -165,8 +165,8 @@ class _UpcomingInformationPageState extends State<UpcomingInformationPage> {
         title: Padding(
             padding: const EdgeInsets.fromLTRB(75, 0, 0, 0),
             child: Text(
-              'รายละเอียด',
-              style: TextStyle(color: Colors.black),
+              'การจองคิวของคุณ',
+              style: GoogleFonts.kanit(color: Colors.green),
             )),
       ),
       body: SingleChildScrollView(
