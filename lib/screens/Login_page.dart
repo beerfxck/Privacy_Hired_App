@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:privacy_maid_flutter/components/checkbox.dart';
 import 'package:privacy_maid_flutter/screens/Menubar.dart';
@@ -24,8 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController = TextEditingController();
   bool isLoginEnabled = false;
   bool passToggle = true;
-  bool isChecked =
-      false;
+  bool isChecked = false;
 
   void checkLoginEnable() {
     setState(() {
@@ -49,14 +49,28 @@ class _LoginPageState extends State<LoginPage> {
         userType = response.data["type_name"];
         print(response);
         await storageToken.write(
-          key: 'id_user',
-          value: response.data["id_user"].toString()
-        );
+            key: 'id_user', value: response.data["id_user"].toString());
 
         if (userType == 'resident') {
           GotoHome();
+          Fluttertoast.showToast(
+              msg: "กรุณากรอกชื่อผู้ใช้หรือรหัสผ่านให้ถูกต้อง",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.white,
+              textColor: Colors.black,
+              fontSize: 16.0);
         } else if (userType == 'maid') {
           GotoMaidHome();
+          Fluttertoast.showToast(
+              msg: "กรุณากรอกชื่อผู้ใช้หรือรหัสผ่านให้ถูกต้อง",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.white,
+              textColor: Colors.black,
+              fontSize: 16.0);
         } else {
           // ตรวจสอบประเภทผู้ใช้ที่ไม่รู้จัก
           print('Unknown user type: $userType');
@@ -93,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return MaidBottomNavBar(); 
+          return MaidBottomNavBar();
         },
       ),
       (_) => false,
